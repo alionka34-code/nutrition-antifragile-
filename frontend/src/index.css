@@ -1,0 +1,20 @@
+
+@font-face {
+    font-family: SFBold;
+    src: url("../src/assets/fonts/SF-Pro-Display-Bold.otf");
+  }
+
+@font-face {
+    font-family: SF;
+    src: url("../src/assets/fonts/SF-Pro-Display-Regular.otf");
+  }
+
+@import "tailwindcss";
+
+
+
+@theme{
+    --font-SFBold: SFBold, "sans-serif";
+    --font-SF: SF, "sans-serif";
+    
+}
