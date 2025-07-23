@@ -8,6 +8,15 @@
     font-family: SF;
     src: url("../src/assets/fonts/SF-Pro-Display-Regular.otf");
   }
+ 
+@font-face {
+    font-family: SFItalic;
+    src: url("../src/assets/fonts/SF-Pro-Text-RegularItalic.otf");
+  }
+  @font-face {
+    font-family: SFBoltItalic;
+    src: url("../src/assets/fonts/SF-Pro-Display-BoldItalic.otf");
+  }
 
 @import "tailwindcss";
 
@@ -16,5 +25,10 @@
 @theme{
     --font-SFBold: SFBold, "sans-serif";
     --font-SF: SF, "sans-serif";
+    --font-SFItalic: SFItalic, "sans-serif";
+    --font-SFBoltItalic: SFBoltItalic, "sans-serif";
+    --color-marron: #b8860b;
+    --color-beige1: #f5f1eb;
+    --color-beige2: #e8ddd4;
     
 }

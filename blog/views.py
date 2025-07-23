@@ -1,9 +1,12 @@
 import stripe
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, permissions
 from .models import Article
 from .models import Profile
+from .models import Comment
+from .serializers import CommentSerializer
 from .serializers import ArticleSerializer
+from .serializers import RegisterSerializer
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
 from rest_framework.serializers import ModelSerializer
@@ -15,6 +18,16 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAdminUser
+from django.contrib.auth.models import User
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer 
+from rest_framework.generics import RetrieveAPIView
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from .serializers import CustomTokenObtainPairSerializer
+
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -128,4 +141,65 @@ class StripeWebhookView(APIView):
 
         return HttpResponse(status=200)   
     
-    print("🔐 Clé Stripe :", settings.STRIPE_SECRET_KEY)
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer  # Crée un profil associé à l'utilisateur
+
+class LoginView(TokenObtainPairView):
+    serializer_class = TokenObtainPairSerializer
+
+
+class ArticleDetailView(RetrieveAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
+
+
+class CommentListCreateView(generics.ListCreateAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        article_id = self.kwargs['article_id']
+        return Comment.objects.filter(article_id=article_id)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user, article_id=self.kwargs['article_id'])
+
+class CommentDeleteView(generics.DestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAdminUser]  # Seuls les admins peuvent supprimer
+
+
+class CommentCreateAPIView(generics.CreateAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        article_id = self.kwargs['article_id']
+        serializer.save(user=self.request.user, article_id=article_id)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])  # Seuls les admins peuvent accéder
+def delete_comment(request, comment_id):
+    try:
+        comment = Comment.objects.get(id=comment_id)
+    except Comment.DoesNotExist:
+        return Response({"detail": "Commentaire non trouvé."}, status=status.HTTP_404_NOT_FOUND)
+
+    comment.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_status(request):
+    return Response({
+        "username": request.user.username,
+        "is_admin": request.user.is_staff  # ou is_superuser
+    })
