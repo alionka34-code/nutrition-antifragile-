@@ -18,10 +18,6 @@ import logging
 
 load_dotenv()
 
-logger = logging.getLogger(__name__)
-
-logger.warning(f"Database config: {DATABASES}")
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -137,6 +133,9 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+logger = logging.getLogger(__name__)
+logger.warning(f"Database config: {DATABASES}")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
