@@ -29,7 +29,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dev-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1','web-production-a7977.up.railway.app' '*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-production-a7977.up.railway.app', '*']
+
 
 
 # Application definition
@@ -67,6 +68,7 @@ CORS_ALLOW_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:8001",
     "http://127.0.0.1:8001",
+    "https://nutrition-antifragile.vercel.app"
 ]
 
 # Pour le développement, vous pouvez aussi ajouter :
@@ -198,6 +200,6 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
-CSRF_TRUSTED_ORIGINS = [f"https://{os.environ.get('ALLOWED_HOSTS')}"]
+CSRF_TRUSTED_ORIGINS = [ "https://web-production-a7977.up.railway.app", "https://nutrition-antifragile.vercel.app" ]
 
 
