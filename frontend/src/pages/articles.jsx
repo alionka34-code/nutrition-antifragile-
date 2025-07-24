@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { fetchArticles } from '../api'; 
 
 function Articles() {
     const [articles, setArticles] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetch('http://localhost:8000/api/articles/')
@@ -13,6 +14,15 @@ function Articles() {
             })
             .catch((error) => console.error('Erreur lors de la récupération des articles:', error));
     }, []);
+
+    useEffect(() => {
+      fetchArticles()
+      .then(setArticles)
+      .catch(err => setError(err.message));
+  }, []);
+
+  if (error) return <p>{error}</p>;
+
 
 
   return (
