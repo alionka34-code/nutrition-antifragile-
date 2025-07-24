@@ -9,12 +9,17 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+
 from datetime import timedelta
 from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
 import logging
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 load_dotenv()
 
@@ -51,8 +56,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
-    # 'cloudinary_storage', 
-    # 'cloudinary' # Temporairement désactivé
+    'cloudinary_storage'
+    'cloudinary' 
 ]
 
 MIDDLEWARE = [
@@ -186,9 +191,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_IMAGE_BACKEND = 'cloudinary'
 
-from datetime import timedelta
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'extraPlugins': ','.join([
+            'uploadimage',  # Activer l'upload direct
+        ]),
+    },
+}
+
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -211,3 +225,11 @@ STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 CSRF_TRUSTED_ORIGINS = [ "https://web-production-a7977.up.railway.app", "https://nutrition-antifragile.vercel.app/" ]
 
 
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

@@ -4,10 +4,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import CommentSection  from "../components/CommentSection";
 import { fetchArticleDetail } from "../utils/api";
 
-function convertMediaUrls(html) {
-  return html;
-}
-
 
 function ArticleDetail() {
   const { id } = useParams();
@@ -86,9 +82,9 @@ function ArticleDetail() {
           className="w-full max-h-50 md:max-h-100 object-cover mb-10"
         />
       )}
-      <div className="" dangerouslySetInnerHTML={{ __html: convertMediaUrls(article.excerpt) }} />
+      <div className="" dangerouslySetInnerHTML={{ __html: (article.excerpt) }} />
       
-      <div className="" dangerouslySetInnerHTML={{ __html: convertMediaUrls(article.content) }} />
+      <div className="" dangerouslySetInnerHTML={{ __html: (article.content) }} />
 
     </div>
     <CommentSection token={token} isAdmin={isAdmin} />
