@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../contexts/AuthContextDefinition";
 import "../styles/connexion-utils.css";
+import API_URL from "../utils/api"; // Assurez-vous que ce chemin est correct
 
 
 function Connexion() {
@@ -20,7 +21,7 @@ function Connexion() {
     const handleRegister = async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch("http://localhost:8000/api/register/", {
+        const response = await fetch(`${API_URL}/register/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -51,7 +52,7 @@ function Connexion() {
    const handleLogin = async (e) => {
   e.preventDefault();
   try {
-    const response = await fetch("http://localhost:8000/api/api/token/", {
+    const response = await fetch(`${API_URL}/token/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

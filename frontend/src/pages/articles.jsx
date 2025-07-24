@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchArticles } from '../api';
+import { fetchArticles } from '../utils/api';
 
 
 function Articles() {

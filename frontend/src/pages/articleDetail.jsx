@@ -1,7 +1,7 @@
 // src/pages/ArticleDetail.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import CommentSection from "../components/CommentSection";
+import CommentSection  from "../components/CommentSection";
 
 function convertMediaUrls(html) {
   return html.replace(/src="\/media\//g, 'src="http://localhost:8000/media/');
