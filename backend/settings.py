@@ -200,6 +200,6 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
-CSRF_TRUSTED_ORIGINS = [ "https://web-production-a7977.up.railway.app", "https://nutrition-antifragile.vercel.app" ]
+CSRF_TRUSTED_ORIGINS = [ "https://web-production-a7977.up.railway.app", "https://nutrition-antifragile.vercel.app/" ]
 
 
