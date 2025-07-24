@@ -4,8 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import CommentSection  from "../components/CommentSection";
 import { fetchArticleDetail } from "../utils/api";
 
+
+const MEDIA_URL = import.meta.env.VITE_MEDIA_URL 
 function convertMediaUrls(html) {
-  return html.replace(/src="\/media\//g, 'src="http://localhost:8000/media/');
+  return html.replace(/src="\/media\//g, `src="${MEDIA_URL}`);
 }
 
 function ArticleDetail() {
@@ -80,7 +82,7 @@ function ArticleDetail() {
      
       {article.image && (
         <img
-          src={`${article.image}`}
+          src={`${MEDIA_URL}${article.image.replace("/media/", "")}`}
           alt={article.title}
           className="w-full max-h-50 md:max-h-100 object-cover mb-10"
         />
