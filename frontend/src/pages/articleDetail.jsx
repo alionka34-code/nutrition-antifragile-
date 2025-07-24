@@ -5,10 +5,22 @@ import CommentSection  from "../components/CommentSection";
 import { fetchArticleDetail } from "../utils/api";
 
 
-const MEDIA_URL = import.meta.env.VITE_MEDIA_URL 
-function convertMediaUrls(html) {
-  return html.replace(/src="\/media\//g, `src="${MEDIA_URL}`);
+const MEDIA_URL = import.meta.env.VITE_MEDIA_URL || "http://localhost:8000/media/";
+
+function getImageUrl(imagePath) {
+  if (!imagePath) return null;
+  // Si l'URL commence déjà par http(s), on la retourne telle quelle
+  return imagePath.startsWith("http") ? imagePath : `${MEDIA_URL}${imagePath.replace(/^\/?media\//, "")}`;
 }
+
+function convertMediaUrls(html) {
+  if (!html) return "";
+  // Remplace les src="/media/..." par src="MEDIA_URL + chemin relatif"
+  return html.replace(/src="(\/media\/[^"]+)"/g, (match, path) => {
+    return `src="${getImageUrl(path)}"`;
+  });
+}
+
 
 function ArticleDetail() {
   const { id } = useParams();
@@ -82,7 +94,7 @@ function ArticleDetail() {
      
       {article.image && (
         <img
-          src={`${MEDIA_URL}${article.image.replace("/media/", "")}`}
+          src={getImageUrl(article.image)}
           alt={article.title}
           className="w-full max-h-50 md:max-h-100 object-cover mb-10"
         />
