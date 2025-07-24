@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CommentSection  from "../components/CommentSection";
 import { fetchArticleDetail } from "../utils/api";
-import { getImageUrl, convertMediaUrls } from "../utils/imageUtils";
+
+function convertMediaUrls(html) {
+  return html.replace(/src="\/media\//g, 'src="http://localhost:8000/media/');
+}
 
 
 function ArticleDetail() {
@@ -78,7 +81,7 @@ function ArticleDetail() {
      
       {article.image && (
         <img
-          src={getImageUrl(article.image)}
+          src={`${article.image}`}
           alt={article.title}
           className="w-full max-h-50 md:max-h-100 object-cover mb-10"
         />

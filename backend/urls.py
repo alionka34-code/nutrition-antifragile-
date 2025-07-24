@@ -33,5 +33,6 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),  # CKEditor URLs
 ]
 
-if settings.DEBUG:
+# Servir les fichiers media en développement
+if settings.DEBUG or True:  # Force le service des media en développement
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
