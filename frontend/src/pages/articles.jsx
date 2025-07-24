@@ -7,21 +7,17 @@ function Articles() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/articles/')
-            .then((response) => response.json())
-            .then((data) => {
-                setArticles(data);
+        fetch(`${import.meta.env.VITE_API_URL}/articles/`)
+            .then((response) => {
+                if (!response.ok) throw new Error("Erreur serveur");
+                return response.json();
             })
-            .catch((error) => console.error('Erreur lors de la récupération des articles:', error));
+            .then((data) => setArticles(data))
+            .catch((error) => setError(error.message));
     }, []);
 
-    useEffect(() => {
-      fetchArticles()
-      .then(setArticles)
-      .catch(err => setError(err.message));
-  }, []);
-
-  if (error) return <p>{error}</p>;
+    if (error) return <p>{error}</p>;
+    if (!articles.length) return <p>Chargement...</p>;
 
 
 
