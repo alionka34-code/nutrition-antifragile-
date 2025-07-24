@@ -53,3 +53,5 @@ export async function deleteComment(commentId, token) {
     return false;
   }
 }
+
+export default API_URL
