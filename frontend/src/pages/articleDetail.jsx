@@ -9,17 +9,19 @@ const MEDIA_URL = import.meta.env.VITE_MEDIA_URL || "http://localhost:8000/media
 
 function getImageUrl(imagePath) {
   if (!imagePath) return null;
-  // Si l'URL commence déjà par http(s), on la retourne telle quelle
-  return imagePath.startsWith("http") ? imagePath : `${MEDIA_URL}${imagePath.replace(/^\/?media\//, "")}`;
+
+  // Si c'est déjà une URL complète, on renvoie telle quelle
+  if (imagePath.startsWith("http")) {
+    return imagePath;
+  }
+
+  // On supprime le préfixe /media/ s'il existe pour éviter la concat erronée
+  const cleanPath = imagePath.replace(/^\/?media\/?/, "");
+
+  // On concatène avec MEDIA_URL qui doit finir par /
+  return `${MEDIA_URL}${cleanPath}`;
 }
 
-function convertMediaUrls(html) {
-  if (!html) return "";
-  // Remplace les src="/media/..." par src="MEDIA_URL + chemin relatif"
-  return html.replace(/src="(\/media\/[^"]+)"/g, (match, path) => {
-    return `src="${getImageUrl(path)}"`;
-  });
-}
 
 
 function ArticleDetail() {
