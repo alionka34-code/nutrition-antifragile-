@@ -1,0 +1,6 @@
+{
+  "env": {
+    "VITE_API_URL": "https://web-production-a7977.up.railway.app/api",
+    "VITE_MEDIA_URL": "https://web-production-a7977.up.railway.app/media/"
+  }
+}

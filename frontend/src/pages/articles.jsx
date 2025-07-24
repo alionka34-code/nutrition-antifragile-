@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchArticles } from '../utils/api';
+import { getImageUrl } from '../utils/imageUtils';
 
 
 function Articles() {
@@ -27,7 +28,7 @@ function Articles() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article) => (
           <Link to={`/articles/${article.id}`} key={article.id} className="bg-white shadow-lg rounded-lg border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow">
-            <img src={article.image} alt={article.title} className="w-full h-48 object-cover" />
+            <img src={getImageUrl(article.image)} alt={article.title} className="w-full h-48 object-cover" />
             <div className="p-4">
               <h2 className="text-xl font-SFBold">{article.title}</h2>
               <p className='font-SF text-gray-600'>{new Date(article.published_at).toLocaleDateString("fr-FR")}</p>

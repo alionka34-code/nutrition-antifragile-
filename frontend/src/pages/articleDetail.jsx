@@ -3,23 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CommentSection  from "../components/CommentSection";
 import { fetchArticleDetail } from "../utils/api";
-
-
-const MEDIA_URL = import.meta.env.VITE_MEDIA_URL || "http://localhost:8000/media/";
-
-function getImageUrl(imagePath) {
-  if (!imagePath) return null;
-  // Si l'URL commence déjà par http(s), on la retourne telle quelle
-  return imagePath.startsWith("http") ? imagePath : `${MEDIA_URL}${imagePath.replace(/^\/?media\//, "")}`;
-}
-
-function convertMediaUrls(html) {
-  if (!html) return "";
-  // Remplace les src="/media/..." par src="MEDIA_URL + chemin relatif"
-  return html.replace(/src="(\/media\/[^"]+)"/g, (match, path) => {
-    return `src="${getImageUrl(path)}"`;
-  });
-}
+import { getImageUrl, convertMediaUrls } from "../utils/imageUtils";
 
 
 function ArticleDetail() {
