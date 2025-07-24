@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchArticles } from '../api'; 
+import { fetchArticles } from '../api';
+
 
 function Articles() {
     const [articles, setArticles] = useState([]);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
+   useEffect(() => {
         fetchArticles()
-            .then((response) => {
-                if (!response.ok) throw new Error("Erreur serveur");
-                return response.json();
-            })
-            .then((data) => setArticles(data))
-            .catch((error) => setError(error.message));
+            .then(setArticles)
+            .catch(err => setError(err.message));
     }, []);
+    if (error) return <p>{error}</p>
 
-    if (error) return <p>{error}</p>;
-    if (!articles.length) return <p>Chargement...</p>;
+   
+
 
 
 
