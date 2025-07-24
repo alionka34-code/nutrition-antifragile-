@@ -25,7 +25,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework.generics import RetrieveAPIView
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
-from .serializers import CustomTokenObtainPairSerializer
+from django.db import connection
+from django.http import JsonResponse
 
 
 
@@ -203,3 +204,12 @@ def user_status(request):
         "username": request.user.username,
         "is_admin": request.user.is_staff  # ou is_superuser
     })
+
+def test_db(request):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+            one = cursor.fetchone()
+        return JsonResponse({"result": one})
+    except Exception as e:
+        return JsonResponse({"error": str(e)})

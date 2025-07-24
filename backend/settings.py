@@ -14,8 +14,15 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
+import logging
 
 load_dotenv()
+
+logger = logging.getLogger(__name__)
+
+logger.warning(f"Database config: {DATABASES}")
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

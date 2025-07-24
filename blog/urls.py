@@ -12,6 +12,7 @@ from .views import CommentCreateAPIView
 from . import views
 from.views import user_status
 from blog.views import CustomTokenObtainPairView
+from .views import test_db
 
 
 
@@ -30,6 +31,7 @@ urlpatterns = [
     path('api/articles/<int:pk>/comments/', CommentCreateAPIView.as_view(), name='comment-create'),
     path('api/comments/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
     path("user-status/", user_status, name="user-status"),
+    path('test-db/', views.test_db),  # Endpoint to test database connection
 
 ]
    
