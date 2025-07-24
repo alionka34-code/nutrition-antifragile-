@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dev-key')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # Temporairement True pour le développement local
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-production-a7977.up.railway.app', '*']
 

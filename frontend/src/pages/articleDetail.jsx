@@ -5,7 +5,7 @@ import CommentSection  from "../components/CommentSection";
 import { fetchArticleDetail } from "../utils/api";
 
 function convertMediaUrls(html) {
-  return html.replace(/src="\/media\//g, 'src="http://localhost:8000/media/');
+  return html;
 }
 
 
