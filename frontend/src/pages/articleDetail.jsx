@@ -2,44 +2,36 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CommentSection  from "../components/CommentSection";
+import { fetchArticleDetail } from "../utils/api";
 
 function convertMediaUrls(html) {
   return html.replace(/src="\/media\//g, 'src="http://localhost:8000/media/');
 }
 
 function ArticleDetail() {
-  const { id } = useParams(); // récupère l'id depuis l'URL
-  const navigate = useNavigate(); // ajout de la déclaration navigate
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
- useEffect(() => {
-    const fetchArticle = async () => {
+  useEffect(() => {
+    const loadArticle = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        const response = await fetch(`http://localhost:8000/api/articles/${id}/`, {
-          headers: {
-            "Content-Type": "application/json",
-            ...(token && { Authorization: `Bearer ${token}` }),
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Article non trouvé");
-        }
-
-        const data = await response.json();
+        const data = await fetchArticleDetail(id, token);
         setArticle(data);
-        setLoading(false);
       } catch (err) {
         setError(err.message);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchArticle();
+    loadArticle();
   }, [id]);
+
+
 
   // ✅ Gérer le clic du bouton d'abonnement (si présent)
   useEffect(() => {

@@ -8,6 +8,21 @@ export async function fetchArticles() {
   return await res.json();
 }
 
+export async function fetchArticleDetail(id, token = null) {
+  const response = await fetch(`${API_URL}/articles/${id}/`, {
+    headers: {
+      "Content-Type": "application/json",
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Article non trouvé");
+  }
+
+  return await response.json();
+}
+
 export async function fetchComments(articleId) {
   try {
     const res = await fetch(`${API_URL}/articles/${articleId}/comments/`);
