@@ -7,7 +7,7 @@ function Articles() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/articles/`)
+        fetchArticles()
             .then((response) => {
                 if (!response.ok) throw new Error("Erreur serveur");
                 return response.json();
