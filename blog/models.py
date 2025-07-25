@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Article(models.Model):
@@ -9,7 +10,7 @@ class Article(models.Model):
     content = RichTextUploadingField(help_text="Contenu de l'article avec abonnement")
     is_premium = models.BooleanField(default=True, help_text="l'article est il reserve aux abonnés ?")
     published_at = models.DateTimeField(auto_now_add=True, help_text="Date de publication de l'article")
-    image = models.ImageField(upload_to='articles_images/', null=True, blank=True)
+    image = CloudinaryField('image', null=True, blank=True)
 
     def __str__(self):
         return self.title

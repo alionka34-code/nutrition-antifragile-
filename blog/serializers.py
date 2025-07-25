@@ -7,6 +7,7 @@ from .models import Comment
 class ArticleSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField()
     is_subscribed = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Article
@@ -28,6 +29,11 @@ class ArticleSerializer(serializers.ModelSerializer):
         if not user.is_authenticated:
             return False
         return user.profile.is_subscribed
+    
+    def get_image(self, obj):
+        if obj.image:
+            return obj.image.url  # <-- toujours l’URL complète
+        return None
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)

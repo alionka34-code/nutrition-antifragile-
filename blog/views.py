@@ -28,6 +28,11 @@ from django.core.files.base import ContentFile
 from django.db import connection
 from django.http import JsonResponse
 from .serializers import CustomTokenObtainPairSerializer
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.views import View
+import cloudinary.uploader
 
 
 
@@ -214,3 +219,45 @@ def test_db(request):
         return JsonResponse({"result": one})
     except Exception as e:
         return JsonResponse({"error": str(e)})
+    
+@method_decorator(csrf_exempt, name='dispatch')
+class CKEditorImageUploadView(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            file = request.FILES.get('upload')
+            func_num = request.GET.get('CKEditorFuncNum')
+            if not file:
+                return HttpResponse(
+                    f"<script>window.parent.CKEDITOR.tools.callFunction({func_num}, '', 'Aucun fichier envoyé.');</script>"
+                )
+
+            # Upload vers Cloudinary
+            upload_result = cloudinary.uploader.upload(file, folder="ckeditor_uploads")
+            url = upload_result.get('secure_url')
+
+            # CKEditor veut un script JS qui appelle sa fonction
+            return HttpResponse(
+                f"<script>window.parent.CKEDITOR.tools.callFunction({func_num}, '{url}', '');</script>"
+            )
+        except Exception as e:
+            func_num = request.GET.get('CKEditorFuncNum', 1)
+            return HttpResponse(
+                f"<script>window.parent.CKEDITOR.tools.callFunction({func_num}, '', 'Erreur : {str(e)}');</script>"
+            )
+
+# === Fonction indépendante pour upload depuis CKEditor ou autre ===
+@csrf_exempt
+def upload_image(request):
+    if request.method == "POST" and request.FILES.get("upload"):
+        image = request.FILES["upload"]
+        try:
+            result = cloudinary.uploader.upload(image, folder="ckeditor_uploads")
+            url = result.get("secure_url")
+            return JsonResponse({
+                "uploaded": 1,
+                "fileName": image.name,
+                "url": url
+            })
+        except Exception as e:
+            return JsonResponse({"uploaded": 0, "error": {"message": str(e)}})
+    return JsonResponse({"uploaded": 0, "error": {"message": "No file uploaded"}})

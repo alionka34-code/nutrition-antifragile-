@@ -19,6 +19,7 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
 from django.conf import settings
 from django.conf.urls.static import static
+from blog.views import upload_image
 
 
 
@@ -31,6 +32,7 @@ urlpatterns = [
     # Route pour rafraîchir un token (optionnel)
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('ckeditor/', include('ckeditor_uploader.urls')),  # CKEditor URLs
+    path("api/upload-image/", upload_image, name="upload_image"),
 ]
 
 # Servir les fichiers media en développement
