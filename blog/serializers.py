@@ -58,6 +58,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Ajout des infos personnalisées
         token['username'] = user.username
+        token['is_staff'] = user.is_staff
 
         if hasattr(user, 'profile'):
             token['is_subscribed'] = user.profile.is_subscribed
