@@ -16,19 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)
+from rest_framework_simplejwt.views import TokenRefreshView
+from blog.views import CustomTokenObtainPairView, upload_image
 from django.conf import settings
 from django.conf.urls.static import static
-from blog.views import upload_image
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('blog.urls')),  # Include blog app URLs under the 'api/' path
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     # Route pour rafraîchir un token (optionnel)
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('ckeditor/', include('ckeditor_uploader.urls')),  # CKEditor URLs
