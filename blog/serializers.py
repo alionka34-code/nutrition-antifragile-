@@ -22,7 +22,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             if hasattr(request.user, 'profile') and request.user.profile.is_subscribed:
                 return obj.content
         
-        return '<div class="py-10 mt-10"><p class="text-marron text-center font-SFBold text-2xl md:text-4xl">🔒 La suite de l\'article est réservé aux abonnés.</p><button id="subscribe-block" class="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">ABONNEZ VOUS</button></div>'
+        return '<div class="py-10 mt-10"><h1 class="text-marron text-center font-SFBold">🔒 La suite de l\'article est réservé aux abonnés.</h1><button id="subscribe-block" class="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">ABONNEZ VOUS</button></div>'
 
     def get_is_subscribed(self, obj):
         user = self.context['request'].user
