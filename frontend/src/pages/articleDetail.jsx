@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CommentSection  from "../components/CommentSection";
 import { fetchArticleDetail } from "../utils/api";
+import  "../styles/ckText.css";
 
 
 function ArticleDetail() {
@@ -68,12 +69,12 @@ function ArticleDetail() {
   return (
     <>
     <header className=" text-center pt-10 bg-linear-to-t from-white to-gray-200">
-       <h1 className="text-5xl font-SFBold mb-4">{article.title}</h1>
+       <h1 className=" text-3xl mx-4 md:text-5xl md:mx-auto md:max-w-4xl font-SFBold mb-4">{article.title}</h1>
       <p className="text-sm text-gray-500 mb-6 font-SF">
         Publié le {new Date(article.published_at).toLocaleDateString("fr-FR")}
       </p>
     </header>
-    <div className=" mx-4 md:mx-auto md:max-w-6xl px-4 py-8">
+    <div className=" mx-4 md:mx-auto md:max-w-5xl px-4 py-8">
      
       {article.image && (
         <img
@@ -82,9 +83,9 @@ function ArticleDetail() {
           className="w-full max-h-50 md:max-h-100 object-cover mb-10"
         />
       )}
-      <div className="" dangerouslySetInnerHTML={{ __html: (article.excerpt) }} />
+      <div className="article-content" dangerouslySetInnerHTML={{ __html: (article.excerpt) }} />
       
-      <div className="" dangerouslySetInnerHTML={{ __html: (article.content) }} />
+      <div className="article-content" dangerouslySetInnerHTML={{ __html: (article.content) }} />
 
     </div>
     <CommentSection token={token} isAdmin={isAdmin} />
