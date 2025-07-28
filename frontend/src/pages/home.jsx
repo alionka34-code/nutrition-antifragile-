@@ -69,8 +69,9 @@ function Home() {
                 </div>
             </div>
         </div>
-        <h2 className='mt-8 text-center font-SFBold text-xl text-marron md:text-2xl'>De chasseur-cueilleur a victime de l'industrie: il est temps de reprendre le controle.</h2>
-         <div className='mt-10'>
+        <h2 className='mt-8 text-center font-SFBold text-2xl text-marron 
+        md:mx-auto md:max-w-5xl md:text-4xl'>De chasseur-cueilleur a victime de l'industrie: il est temps de reprendre le controle.</h2>
+         <div className='mt-10 md:mx-auto md:max-w-7xl'>
           <Swiper
           autoHeight={true}
           rewind={true}
@@ -84,8 +85,7 @@ function Home() {
           clickable: true,
         }}
         modules={[Autoplay, Pagination]}
-        className="mySwiper"
-      >
+        className="mySwiper">
         <SwiperSlide className='flex justify-center items-center'> <div className='border-marron border-2 rounded-2xl mx-4 md:mx-20 shadow-lg shadow-black'><p className='text-center font-SF text-2xl p-10'>"Nutrition Antifragile est un livre à la fois complet, accessible et passionnant, il réussit le pari de mêler riguer scientifique et clarté, sans jamais devenir trop technique. Les encadrés scientifiques rythment la lecture de manière inteliligente, apportant des éclairages utiles sans alourdir le propos.<br/>La partie sur les aliments à privilégier est particulièrement intéressante: on y découvre des produits souvent oubliés ou mal compris, comme le kombucha, le riz noir, le pain au levain ou encore le bouillon d'os.<br/> L'analyse est solide, bien documentée, et offre des recommandations à la fois concrètes, critiques et très pertinentes.<br/>C'est un ouvrage cohérent, bien ancré dans les préoccupations acctuelles autour de l'alimentation, que je recommande sans hésiter."</p>
             </div></SwiperSlide>
         <SwiperSlide><div className='border-marron border-2 rounded-2xl mx-4 md:mx-20 shadow-lg shadow-black'><p className='text-center font-SF text-2xl p-10'>"Des révélations qui ont enfin mis de la clarté sur tous mes échecs alimentaires passés. Je cherchais des solutions sans voir le vrai problème. “ Je portais des œillères”, comme le dit si justement l’auteure. Ce livre m’a offert une vraie prise de conscience.  Merci "</p>
