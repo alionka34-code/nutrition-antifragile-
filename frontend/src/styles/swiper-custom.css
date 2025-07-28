@@ -1,0 +1,9 @@
+.swiper-pagination-bullet {
+  background: #D3B897 !important; /* Marron clair */
+  opacity: 1 !important; /* Bien visible */
+}
+
+/* Point actif */
+.swiper-pagination-bullet-active {
+  background: #8B4513 !important; /* Marron foncé */
+}

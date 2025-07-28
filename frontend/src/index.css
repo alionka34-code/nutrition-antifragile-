@@ -1,3 +1,4 @@
+@import "tailwindcss";
 
 @font-face {
     font-family: SFBold;
@@ -18,7 +19,7 @@
     src: url("../src/assets/fonts/SF-Pro-Display-BoldItalic.otf");
   }
 
-@import "tailwindcss";
+
 
 
 
@@ -32,3 +33,4 @@
     --color-beige2: #e8ddd4;
     
 }
+

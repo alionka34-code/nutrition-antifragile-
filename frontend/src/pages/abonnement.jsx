@@ -37,12 +37,12 @@ function Abonnement() {
                          ? 'border-marron shadow-marron/30 bg-marron/5 scale-105 shadow-2xl' 
                          : 'border-gray-200 shadow-black/50 hover:border-marron/70 hover:scale-102'
                      }`}>
-                        <div className="absolute bottom-32 md:left-10">
+                        <div className="relative bottom-7">
                         <span className="font-SFBold text-white border-2 rounded-2xl py-1 px-4 bg-red-400 animate-pulse" >OFFRE DU MOMENT</span>
                     </div>
                     <h1 className="font-SFBold text-2xl">Abonnement annuel</h1>
                     <h2 className="font-SFBold text-2xl text-marron my-2">60€<span className='text-xl font-SF text-gray-500'>/an</span></h2>
-                    <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">-40% pour les 100 premiers abonnés</span>
+                    <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">-40% jusqu'au x Septembre</span>
                 </div>
                 </label>
             </div>

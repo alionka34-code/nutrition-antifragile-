@@ -1,6 +1,11 @@
 import React from 'react';
 import livre from '../assets/images/livre.png';
 import { Helmet } from "react-helmet";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "../styles/swiper-custom.css";
 
 function Livre() {
 
@@ -48,7 +53,7 @@ function Livre() {
             </div>
         </section>
         <section className="mt-20 py-10 bg-gradient-to-tr from-yellow-700 to-marron">
-            <h1 className="text-center font-SFBold text-white md:text-4xl text-2xl">Deux parties pour tout comprendre</h1>
+            <h1 className="text-center font-SFBold text-white md:text-4xl text-2xl mx-4">Deux parties pour tout comprendre</h1>
             <div className='flex flex-col md:flex-row  justify-center gap-20 mt-10 max-w-6xl md:mx-auto mx-4'>
                 <div className='border-4 border-marron p-10 rounded-2xl flex-1 '>
                     <h1 className="font-SFBold text-yellow-300 text-xl md:text-2xl ">PARTIE 1: CE QUI VOUS REND FAIBLE</h1>
@@ -93,8 +98,35 @@ function Livre() {
          
         </section>
         <section className='mt-10 md:max-w-6xl flex flex-col mx-auto'>
-            <h1 className='text-center font-SFBold  text-2xl md:text-6xl text-marron'>Vous respectez-vous assez pour bien vous nourrir?</h1>
-            <p className='text-center mt-4 font-SF text-xl md:text-4xl'>Rejoignez ceux qui ont choisi de reprendre le pouvoir sur leur assiette</p>
+            <h1 className='text-center font-SFBold  text-3xl md:text-6xl text-marron mx-4'>Vous respectez-vous assez pour bien vous nourrir?</h1>
+            <p className='text-center mt-4 font-SF text-2xl md:text-4x mx-4'>Rejoignez ceux qui ont choisi de reprendre le pouvoir sur leur assiette</p>
+             <div className='mt-10'>
+          <Swiper
+          autoHeight={true}
+          rewind={true}
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Autoplay, Pagination]}
+        className="mySwiper"
+      >
+        <SwiperSlide className='flex justify-center items-center'> <div className='border-marron border-2 rounded-2xl mx-4 md:mx-20 shadow-lg shadow-black'><p className='text-center font-SF text-2xl p-10'>"Nutrition Antifragile est un livre à la fois complet, accessible et passionnant, il réussit le pari de mêler riguer scientifique et clarté, sans jamais devenir trop technique. Les encadrés scientifiques rythment la lecture de manière inteliligente, apportant des éclairages utiles sans alourdir le propos.<br/>La partie sur les aliments à privilégier est particulièrement intéressante: on y découvre des produits souvent oubliés ou mal compris, comme le kombucha, le riz noir, le pain au levain ou encore le bouillon d'os.<br/> L'analyse est solide, bien documentée, et offre des recommandations à la fois concrètes, critiques et très pertinentes.<br/>C'est un ouvrage cohérent, bien ancré dans les préoccupations acctuelles autour de l'alimentation, que je recommande sans hésiter."</p>
+            </div></SwiperSlide>
+        <SwiperSlide><div className='border-marron border-2 rounded-2xl mx-4 md:mx-20 shadow-lg shadow-black'><p className='text-center font-SF text-2xl p-10'>"Des révélations qui ont enfin mis de la clarté sur tous mes échecs alimentaires passés. Je cherchais des solutions sans voir le vrai problème. “ Je portais des œillères”, comme le dit si justement l’auteure. Ce livre m’a offert une vraie prise de conscience.  Merci "</p>
+            </div></SwiperSlide>
+        <SwiperSlide><div className='border-marron border-2 rounded-2xl mx-4 md:mx-20 shadow-lg shadow-black'><p className='text-center font-SF text-2xl p-10'>"Avant de penser régime ou végétarisme, il faut remonter à la source de cette grande mascarade alimentaire. Le vrai commencement. Un point de départ fondamental dont personne ne parle, et pourtant indispensable pour tout comprendre. Ce livre révèle des vérités que beaucoup ignorent, non pas par négligence, mais parce qu’on les a soigneusement passées sous silence."</p>
+            </div></SwiperSlide>
+        <SwiperSlide><div className='border-marron border-2 rounded-2xl mx-4 md:mx-20 shadow-lg shadow-black'><p className='text-center font-SF text-2xl p-10' >"Un déclic immédiat. Ce livre ne donne pas des conseils en plus, il change complètement la façon de voir l’alimentation. "</p>
+        </div></SwiperSlide>
+         
+      </Swiper>
+      </div>
             <button className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">OUI, JE REPRENDS LE CONTROLE</button>
         
         </section>
