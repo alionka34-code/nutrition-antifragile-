@@ -19,6 +19,6 @@ stripe==12.3.0
 typing_extensions==4.14.0
 urllib3==2.5.0
 whitenoise==6.9.0
-gunicorn==21.2.0
+gunicorn
 cloudinary
 django-cloudinary-storage
