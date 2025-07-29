@@ -6,7 +6,7 @@ function Footer() {
     <footer className="bg-black py-6 mt-20">
       <div className="flex flex-col md:flex-row justify-center items-center my-10 md:mx-20 gap-10 md:gap-50">
         <div> 
-          <img src={EditionOeuvres} alt="Editions Oeuvres" className="w-80 h-50 md:w-200 md:h-50" />
+          <img src={EditionOeuvres} alt="Editions Oeuvres" className="w-60 h-30 md:w-100 md:h-40" />
           </div>
           <div className="px-10">
             <h1 className='text-white font-SFBold text-xl mb-4'>Informations éditoriales</h1>
