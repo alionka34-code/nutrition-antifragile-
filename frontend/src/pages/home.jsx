@@ -5,10 +5,26 @@ import alionka from '../assets/images/Alionka.png';
 import{ Helmet } from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Grid } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "../styles/swiper-custom.css";
+import avis1 from  '../assets/images/avis1.jpg'
+import avis2 from  '../assets/images/avis2.jpg'
+import avis3 from  '../assets/images/avis3.jpg'
+import avis4 from  '../assets/images/avis4.jpg'
+import avis5 from  '../assets/images/avis5.jpg'
+import avis6 from  '../assets/images/avis6.jpg'
+import avis7 from  '../assets/images/avis7.jpg'
+import avis8 from  '../assets/images/avis8.jpg'
+import avis9 from  '../assets/images/avis9.jpg'
+import avis10 from  '../assets/images/avis10.jpg'
+import avis11 from  '../assets/images/avis11.jpg'
+import avis12 from  '../assets/images/avis12.jpg'
+import avis13 from  '../assets/images/avis13.jpg'
+
+
+
 
 
 
@@ -84,6 +100,7 @@ function Home() {
         }}
         pagination={{
           clickable: true,
+          dynamicBullets: true,
         }}
         breakpoints={{
             768: {
@@ -295,6 +312,61 @@ function Home() {
                     </ul>
             </div>
             <button onClick= {handleSubscribeClick} className=" mt-10 block mx-auto  md:text-xl font-SFBold rounded-full text-white px-4 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:px-6">DEVENIR MEMBRE ANTIFRAGILE</button>
+            <div className=" mx-4 md:max-w-6xl md:mx-auto" >
+            <Swiper
+        rewind={true}
+        slidesPerView={1}
+        grid={{
+          rows: 2,
+        }}
+        spaceBetween={30}
+        pagination={{
+          clickable: true,
+          dynamicBullets: true,
+        }}
+         autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        breakpoints={{
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 20, // Tablette et grands écrans
+            }
+        }}
+        modules={[Grid, Pagination, Autoplay]}
+        className="mySwiper mt-10"
+      >
+        <SwiperSlide><img src={avis1} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis2} className="rounded-2xl" /></SwiperSlide>
+        <SwiperSlide><img src={avis3} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis4} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis5} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis6} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis7} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis8} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis9} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis10} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis11} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis12} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis13} className="rounded-2xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis1} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis2} className="rounded-2xl" /></SwiperSlide>
+        <SwiperSlide><img src={avis3} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis4} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis5} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis6} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis7} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis8} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis9} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis10} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis11} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis12} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis13} className="rounded-2xl"/></SwiperSlide>
+        
+      
+      </Swiper>
+      </div>
 
         </section>
        
