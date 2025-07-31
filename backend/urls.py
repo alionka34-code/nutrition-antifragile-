@@ -20,6 +20,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from blog.views import CustomTokenObtainPairView, upload_image
 from django.conf import settings
 from django.conf.urls.static import static
+from blog.views import StripeWebhookView
 
 
 
@@ -33,6 +34,7 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('ckeditor/', include('ckeditor_uploader.urls')),  # CKEditor URLs
     path("api/upload-image/", upload_image, name="upload_image"),
+    path('stripe/webhook/', StripeWebhookView.as_view(), name='stripe-webhook-direct'),  # Stripe webhook endpoint
 ]
 
 # Servir les fichiers media en développement

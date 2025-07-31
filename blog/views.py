@@ -4,6 +4,7 @@ from rest_framework import generics, permissions
 from .models import Article
 from .models import Profile
 from .models import Comment
+from.models import StripeWebhookLog
 from .serializers import CommentSerializer
 from .serializers import ArticleSerializer
 from .serializers import RegisterSerializer
@@ -33,8 +34,11 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
 import cloudinary.uploader
+import logging
+import json
 
 
+logger = logging.getLogger(__name__)
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -50,13 +54,21 @@ class CreateSubscriptionView(APIView):
                 metadata={"django_user_id": user.id}
             )
             
-            # ID du prix (Price ID) dans Stripe — à configurer dans ton dashboard Stripe
-            price_id = 'price_1RgU75FiDmUzPzGDH3QskApe'
+            # Sauvegarder le customer_id dans le profil
+            profile = Profile.objects.get(user=user)
+            profile.stripe_customer_id = customer.id
+            profile.save()
+            
+            # ID des prix dans Stripe
+            items = [
+                {"price": "price_1RgU75FiDmUzPzGDH3QskApe"},
+                {"price": "price_1RqhhnFiDmUzPzGDhaQz0nN3"}, 
+            ]
 
             # Créer un abonnement Stripe
             subscription = stripe.Subscription.create(
                 customer=customer.id,
-                items=[{"price": price_id}],
+                items=items,
                 payment_behavior='default_incomplete',
                 expand=['latest_invoice.payment_intent'],
             )
@@ -67,6 +79,7 @@ class CreateSubscriptionView(APIView):
             })
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class ArticleList(generics.ListAPIView):
@@ -102,20 +115,42 @@ class CreateCheckoutSession(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        domain_url = 'http://localhost:3000/'  # Ton frontend
+        user = request.user
+        domain_url = 'http://localhost:5173/'  # Frontend Vite
+        selected_plan = request.data.get("plan")  # "launch" ou "monthly"
+
+        price_map = {
+            "monthly": "price_1RgU75FiDmUzPzGDH3QskApe",
+            "launch": "price_1RqhhnFiDmUzPzGDhaQz0nN3"
+        }
 
         try:
+            # Vérifier si l'utilisateur a déjà un customer Stripe
+            profile = Profile.objects.get(user=user)
+            if profile.stripe_customer_id:
+                customer_id = profile.stripe_customer_id
+            else:
+                # Créer un nouveau customer si besoin
+                customer = stripe.Customer.create(
+                    email=user.email,
+                    metadata={"django_user_id": user.id}
+                )
+                profile.stripe_customer_id = customer.id
+                profile.save()
+                customer_id = customer.id
+
+            # Créer une session de checkout
             checkout_session = stripe.checkout.Session.create(
                 payment_method_types=['card'],
                 mode='subscription',
                 line_items=[{
-                    'price': 'price_1RgU75FiDmUzPzGDH3QskApe',  # Remplace avec ton Price ID Stripe
+                    'price': price_map.get(selected_plan),
                     'quantity': 1,
                 }],
-                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'cancel',
-                customer_email=request.user.email,
-                client_reference_id=str(request.user.id),
+                success_url=domain_url + 'subscription/success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + 'subscription/cancel',
+                customer=customer_id,  # Utiliser le customer déjà lié
+                client_reference_id=str(user.id),
             )
             return Response({'checkout_url': checkout_session.url})
         except Exception as e:
@@ -128,26 +163,60 @@ class StripeWebhookView(APIView):
         endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
 
         try:
-            event = stripe.Webhook.construct_event(
-                payload, sig_header, endpoint_secret
-            )
-        except (ValueError, stripe.error.SignatureVerificationError):
+            event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
+        except ValueError as e:
+            logger.error(f"Invalid payload: {e}")
             return HttpResponse(status=400)
+        except stripe.error.SignatureVerificationError as e:
+            logger.error(f"Invalid signature: {e}")
+            return HttpResponse(status=400)
+        except Exception as e:
+            logger.error(f"Unexpected error: {str(e)}")
+            return HttpResponse(status=500)
 
-        # 🎯 Ici, on cible l’événement “checkout.session.completed”
-        if event['type'] == 'checkout.session.completed':
-            session = event['data']['object']
-            client_reference_id = session.get('client_reference_id')  # l'ID utilisateur
-            if client_reference_id:
-                try:
-                    profile = Profile.objects.get(user__id=client_reference_id)
+        event_type = event.get('type', 'unknown')
+        logger.info(f"Stripe webhook received: {event_type}")
+
+        # --- Sauvegarde sécurisée du log ---
+        try:
+            from .models import StripeWebhookLog
+            StripeWebhookLog.objects.create(
+                event_type=event_type,
+                payload=json.dumps(event['data']['object'])
+            )
+        except Exception as e:
+            logger.warning(f"Could not save webhook log: {e}")
+
+        # --- Paiement réussi ---
+        if event_type == 'invoice.payment_succeeded':
+            customer_id = event['data']['object'].get('customer')
+            if not customer_id:
+                logger.warning("No customer_id in invoice.payment_succeeded event.")
+            else:
+                profile = Profile.objects.filter(stripe_customer_id=customer_id).first()
+                if profile:
                     profile.is_subscribed = True
                     profile.save()
-                except Profile.DoesNotExist:
-                    pass
+                    logger.info(f"Profile {profile.user.id} set to subscribed.")
+                else:
+                    logger.warning(f"No profile found for customer_id {customer_id}.")
 
-        return HttpResponse(status=200)   
-    
+        # --- Abonnement annulé / paiement échoué ---
+        elif event_type in ['customer.subscription.deleted', 'invoice.payment_failed']:
+            customer_id = event['data']['object'].get('customer')
+            if not customer_id:
+                logger.warning(f"No customer_id in {event_type} event.")
+            else:
+                profile = Profile.objects.filter(stripe_customer_id=customer_id).first()
+                if profile:
+                    profile.is_subscribed = False
+                    profile.save()
+                    logger.info(f"Profile {profile.user.id} unsubscribed.")
+                else:
+                    logger.warning(f"No profile found for customer_id {customer_id}.")
+
+        return HttpResponse(status=200)
+
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -209,6 +278,12 @@ def user_status(request):
     return Response({
         "username": request.user.username,
         "is_admin": request.user.is_staff  # ou is_superuser
+    })
+def subscription_status(request):
+    profile = Profile.objects.get(user=request.user)
+    return Response({
+        "is_subscribed": profile.is_subscribed,
+        "email": request.user.email,
     })
 
 def test_db(request):

@@ -9,6 +9,9 @@ import ContactForm from './pages/contact.jsx';
 import { AuthProvider } from './contexts/AuthContext';
 import Articles from './pages/articles.jsx';
 import ArticleDetail from './pages/articleDetail.jsx';
+import SubscriptionSuccess from './pages/SubscriptionSuccess';
+import SubscriptionCancel from './pages/SubscriptionCancel';
+
 
 
 
@@ -27,7 +30,9 @@ function App() {
               <Route path="/contact" element={<ContactForm />} />
               <Route path="/articles" element={<Articles />} />
               <Route path="/articles/:id" element={<ArticleDetail />} />
-        
+              <Route path="/subscription/success" element={<SubscriptionSuccess />} />
+              <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
+             
              
 
             </Routes>

@@ -1,10 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from "react-helmet";
-import Countdown from '../components/countdown';    
-
+import Countdown from '../components/countdown';   
 
 function Abonnement() {
     const [selectedPlan, setSelectedPlan] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    
+    const errorRef = useRef(null);
+
+    // Quand errorMessage change et n'est pas vide, on scroll vers lui
+    useEffect(() => {
+        if (errorMessage && errorRef.current) {
+            errorRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }, [errorMessage]);
+
+    
+
+   
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setErrorMessage("");  // Reset erreur à chaque soumission
+
+        if (!selectedPlan) {
+            setErrorMessage("Veuillez choisir un plan.");
+            return;
+        }
+
+        const token = localStorage.getItem("access_token");
+        if (!token) {
+            setErrorMessage("Vous devez être connecté pour vous abonner. Redirection vers la page de connexion...");
+            setTimeout(() => {
+                window.location.href = "/connexion";
+            }, 5000);
+            return;
+        }
+
+        try {
+            setLoading(true);
+
+            const res = await fetch("http://127.0.0.1:8000/api/create-checkout-session/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({ plan: selectedPlan }),
+            });
+
+            if (!res.ok) {
+                if (res.status === 401) {
+                    alert("Votre session a expiré. Veuillez vous reconnecter.");
+                    localStorage.removeItem("access_token");
+                    localStorage.removeItem("refresh_token");
+                    localStorage.removeItem("username");
+                    window.location.href = "/connexion";
+                    return;
+                }
+                throw new Error(`Erreur ${res.status}: ${res.statusText}`);
+            }
+
+            const data = await res.json();
+            console.log("Réponse de l'API:", data);
+            
+            if (data.checkout_url) {
+                window.location.href = data.checkout_url; // redirection Stripe
+            } else {
+                throw new Error("URL de checkout non reçue");
+            }
+        } catch (err) {
+            console.error("Erreur complète:", err);
+            alert(`Erreur lors de la création de la session de paiement: ${err.message}`);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <>
@@ -12,15 +83,23 @@ function Abonnement() {
             <title>Abonnement | Nutrition Antifragile</title>
             <meta name="description" content="Rejoignez notre communauté de membres antifragiles et reprenez le contrôle de votre alimentation avec nos formules d'abonnement." />
         </Helmet>
-        <header header className="bg-linear-to-t from-white to-gray-200">
+        <header className="bg-linear-to-t from-white to-gray-200">
             <h1 className="text-center text-6xl font-SFBold text-marron pt-10">Choisissez votre abonnement</h1>
             <p className="text-center text-lg text-gray-600 mt-2">Accédez à tout le contenu premium</p>
         </header>
-            <form className="pt-20">
-            <div className='bg-white lex flex-col border-4 rounded-2xl shadow-lg shadow-black/50 p-10 mx-4 md:mx-auto md:max-w-2xl border-marron'>
+            <form className="pt-20" onSubmit={handleSubmit}>
+            <div className='bg-white flex flex-col border-4 rounded-2xl shadow-lg shadow-black/50 p-10 mx-4 md:mx-auto md:max-w-2xl border-marron'>
             <h1 className='font-SFBold text-2xl text-center md:text-4xl text-marron'>Rejoignez plus de 1000 membres antifragiles</h1>
             <p className=" mt-4 text-center font-SF md:text-2xl text-xl">Qui reprennent le contrôle de leur alimentation, loin des dogmes et des manipulations de l'industrie</p>
              <h1 className="font-SFBold text-xl md:text-2xl my-8 text-center">Choisissez votre formule</h1>
+             {errorMessage && (
+                    <div ref={errorRef} className="mb-6 text-center text-red-700 bg-red-100 border border-red-400 rounded-2xl py-2 px-4 font-SF">
+                        {errorMessage}
+                    </div>
+                )}
+
+             
+             
             <div className='flex flex-col gap-10'>
                
                 <div>
@@ -92,19 +171,18 @@ function Abonnement() {
                 </li>
             </ul>
         </div>
-        <button className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl" type="submit">COMMENCER MON ABONNEMENT</button>
+        <button 
+            className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl" 
+            type="submit"
+            disabled={loading}
+        >
+            {loading ? "Redirection en cours..." : "COMMENCER MON ABONNEMENT"}
+        </button>
         <p className='mt-10 font-SF md:text-xl text-center'> ✅ Paiement sécurisé • ✅ Accès immédiat • ✅ Résiliation à tout moment</p>
 
         </div>
         
         </form>
-    
-        
-        
-        
-        
-        
-        
         </>
     );
 
