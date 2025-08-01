@@ -75,14 +75,16 @@ function ArticleDetail() {
       </p>
     </header>
     <div className=" mx-4 md:mx-auto md:max-w-5xl px-4 py-8">
-     
-      {article.image && (
+      <div className="overflow-hidden mx-auto md:max-w-5xl md:h-150">
+        {article.image && (
         <img
           src={`${article.image}`}
           alt={article.title}
-          className="w-full max-h-50 md:max-h-100 object-cover mb-10"
+          className="w-full h-full object-cover object-center"
         />
-      )}
+      )}</div>
+     
+      
       <div className="article-content" dangerouslySetInnerHTML={{ __html: (article.excerpt) }} />
       
       <div className="article-content" dangerouslySetInnerHTML={{ __html: (article.content) }} />
