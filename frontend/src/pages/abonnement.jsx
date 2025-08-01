@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from "react-helmet";
-import Countdown from '../components/countdown';   
+import Countdown from '../components/countdown'; 
+import { createCheckoutSession } from '../utils/api'; 
+  
 
 function Abonnement() {
     const [selectedPlan, setSelectedPlan] = useState('');
@@ -38,43 +40,20 @@ function Abonnement() {
         }
 
         try {
-            setLoading(true);
+    setLoading(true);
+    const data = await createCheckoutSession(selectedPlan, token);
+    if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+    } else {
+        throw new Error("URL de checkout non reçue");
+    }
+} catch (err) {
+    console.error("Erreur complète:", err);
+    alert(`Erreur lors de la création de la session de paiement: ${err.message}`);
+} finally {
+    setLoading(false);
+}
 
-            const res = await fetch("http://127.0.0.1:8000/api/create-checkout-session/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                },
-                body: JSON.stringify({ plan: selectedPlan }),
-            });
-
-            if (!res.ok) {
-                if (res.status === 401) {
-                    alert("Votre session a expiré. Veuillez vous reconnecter.");
-                    localStorage.removeItem("access_token");
-                    localStorage.removeItem("refresh_token");
-                    localStorage.removeItem("username");
-                    window.location.href = "/connexion";
-                    return;
-                }
-                throw new Error(`Erreur ${res.status}: ${res.statusText}`);
-            }
-
-            const data = await res.json();
-            console.log("Réponse de l'API:", data);
-            
-            if (data.checkout_url) {
-                window.location.href = data.checkout_url; // redirection Stripe
-            } else {
-                throw new Error("URL de checkout non reçue");
-            }
-        } catch (err) {
-            console.error("Erreur complète:", err);
-            alert(`Erreur lors de la création de la session de paiement: ${err.message}`);
-        } finally {
-            setLoading(false);
-        }
     };
 
     return (

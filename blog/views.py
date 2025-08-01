@@ -116,7 +116,7 @@ class CreateCheckoutSession(APIView):
 
     def post(self, request):
         user = request.user
-        domain_url = 'http://localhost:5173/'  # Frontend Vite
+        domain_url = settings.FRONTEND_URL  # Frontend Vite
         selected_plan = request.data.get("plan")  # "launch" ou "monthly"
 
         price_map = {

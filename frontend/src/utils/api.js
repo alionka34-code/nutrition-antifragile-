@@ -69,4 +69,22 @@ export async function deleteComment(commentId, token) {
   }
 }
 
+export async function createCheckoutSession(plan, token) {
+    const res = await fetch(`${API_URL}/create-checkout-session/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ plan }),
+    });
+
+    if (!res.ok) {
+        throw new Error(`Erreur ${res.status} : ${res.statusText}`);
+    }
+
+    return res.json();
+}
+
 export default API_URL
+

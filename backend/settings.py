@@ -146,3 +146,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173/")
+
