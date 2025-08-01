@@ -62,7 +62,7 @@ class CreateSubscriptionView(APIView):
             # ID des prix dans Stripe
             items = [
                 {"price": "price_1RqfRUBthRAmBImU3VDSFmui"},
-                {"price": "price_1RqfR3BthRAmBImUWP3ywgRC"}, 
+                {"price": "price_1RrJzWBthRAmBImUlq8k1UfL"}, 
             ]
 
             # Créer un abonnement Stripe
@@ -127,7 +127,7 @@ class CreateCheckoutSession(APIView):
 
         price_map = {
             "monthly": "price_1RqfRUBthRAmBImU3VDSFmui",
-            "launch": "price_1RqfR3BthRAmBImUWP3ywgRC"
+            "launch": "price_1RrJzWBthRAmBImUlq8k1UfL"
         }
 
         try:
