@@ -229,6 +229,7 @@ class LoginView(TokenObtainPairView):
 class ArticleDetailView(RetrieveAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = [AllowAny]
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
