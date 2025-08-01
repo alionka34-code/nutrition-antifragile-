@@ -119,12 +119,20 @@ class CreateCheckoutSession(APIView):
         domain_url = settings.FRONTEND_URL  # Frontend Vite
         selected_plan = request.data.get("plan")  # "launch" ou "monthly"
 
+        print("=== DEBUG STRIPE CHECKOUT ===")
+        print("Utilisateur :", user)
+        print("Plan sélectionné :", selected_plan)
+        print("Domain URL :", domain_url)
+
+
         price_map = {
             "monthly": "price_1RrIQwFiDmUzPzGDn0mTKU0P",
             "launch": "price_1RrIRyFiDmUzPzGDxIv2u2lQ"
         }
 
         try:
+            if selected_plan not in price_map:
+                raise ValueError(f"Plan invalide : {selected_plan}")
             # Vérifier si l'utilisateur a déjà un customer Stripe
             profile = Profile.objects.get(user=user)
             if profile.stripe_customer_id:
@@ -154,6 +162,8 @@ class CreateCheckoutSession(APIView):
             )
             return Response({'checkout_url': checkout_session.url})
         except Exception as e:
+            print("=== ERREUR STRIPE ===")
+            print(str(e))
             return Response({'error': str(e)}, status=400)
 
 class StripeWebhookView(APIView):
