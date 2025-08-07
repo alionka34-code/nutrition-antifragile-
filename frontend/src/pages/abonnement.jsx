@@ -102,10 +102,10 @@ function Abonnement() {
                     <h1 className="font-SFBold text-2xl">Abonnement annuel</h1>
                     <h2 className="font-SFBold text-2xl text-marron my-2">
                         <span className="text-gray-400 line-through text-xl mr-2">100€</span>
-                        60€<span className="text-xl font-SF text-gray-500">/an</span>
+                        70€<span className="text-xl font-SF text-gray-500">/an</span>
                         </h2>
                     
-                    <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">-40% jusqu'au 25 Septembre</span>
+                    <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">Tarif exclusif à vie</span>
                     <Countdown />
                 </div>
                 </label>

@@ -36,11 +36,47 @@ class ArticleSerializer(serializers.ModelSerializer):
         return None
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField(write_only=True, min_length=8)
 
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+    
+    def validate_username(self, value):
+        """Validation du nom d'utilisateur"""
+        if len(value) < 3:
+            raise serializers.ValidationError("Le nom d'utilisateur doit contenir au moins 3 caractères.")
+        
+        if not value.replace('_', '').isalnum():
+            raise serializers.ValidationError("Le nom d'utilisateur ne peut contenir que des lettres, chiffres et underscores.")
+        
+        if User.objects.filter(username__iexact=value).exists():
+            raise serializers.ValidationError("Ce nom d'utilisateur est déjà utilisé.")
+        
+        return value
+    
+    def validate_email(self, value):
+        """Validation de l'email"""
+        if User.objects.filter(email__iexact=value).exists():
+            raise serializers.ValidationError("Cette adresse email est déjà utilisée.")
+        
+        return value.lower()
+    
+    def validate_password(self, value):
+        """Validation du mot de passe"""
+        if len(value) < 8:
+            raise serializers.ValidationError("Le mot de passe doit contenir au moins 8 caractères.")
+        
+        if not any(c.islower() for c in value):
+            raise serializers.ValidationError("Le mot de passe doit contenir au moins une lettre minuscule.")
+        
+        if not any(c.isupper() for c in value):
+            raise serializers.ValidationError("Le mot de passe doit contenir au moins une lettre majuscule.")
+        
+        if not any(c.isdigit() for c in value):
+            raise serializers.ValidationError("Le mot de passe doit contenir au moins un chiffre.")
+        
+        return value
     
     def create(self, validated_data):
         user = User.objects.create_user(

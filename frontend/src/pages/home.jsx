@@ -1,5 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { fetchArticles } from '../utils/api';
 import livre from '../assets/images/livre.png';
 import alionka from '../assets/images/Alionka.png';
 import{ Helmet } from "react-helmet";
@@ -22,6 +24,9 @@ import avis10 from  '../assets/images/avis10.jpg'
 import avis11 from  '../assets/images/avis11.jpg'
 import avis12 from  '../assets/images/avis12.jpg'
 import avis13 from  '../assets/images/avis13.jpg'
+import avis14 from  '../assets/images/avis14.jpg'
+import avis15 from  '../assets/images/avis15.jpg'
+
 
 
 
@@ -44,6 +49,19 @@ function Home() {
     const handleBookClick = () => {
         navigate('/livre');
     };
+
+        const [articles, setArticles] = useState([]);
+        const [error, setError] = useState(null);
+    
+       useEffect(() => {
+            fetchArticles()
+                .then(data => {
+                    console.log('Articles data:', data);
+                    setArticles(data);
+                })
+                .catch(err => setError(err.message));
+        }, []);
+        if (error) return <p>{error}</p>
     return (
         <>
         <Helmet>
@@ -284,11 +302,11 @@ function Home() {
                 <p className="p-4 font-SF text-lg md:text-xl border-l-4 border-marron rounded-xl shadow-lg">Auteure<br/>redactrice scientifique specialisée en nutrition</p>
                 </div>
                 <div className='max-w-2xl mx-4 mt-8'>
-                    <p className="text-center font-SFBoltItalic text-xl mt-4 mx-4 md:text-2xl border-b-2 border-marron">"Entre recherches scientifiques et voyages au cœur des traditions alimentaires ancestrales, je vous transmets l'essence véritable de la nutrition."</p>
-                <p className="text-center mt-6 mx-4 font-SF text-lg md:text-xl">Diplômé d'un master en nutrition sportive, mon expérience en R&D agroalimentaire m'a ouvert les yeux sur les rouages de l'industrie. Mais c'est à travers mes recherches constantes et mes voyages dans les campagnes reculées d'Asie que j'ai découvert la véritable nutrition.</p>
-                <p className="text-center mt-6 mx-4 font-SF text-lg bg-gradient-to-tr from-yellow-700 to-marron text-white rounded-2xl p-4 md:text-xl">Au fin fond des campagnes cambodgiennes, j'ai compris que l'alimentation véritable est offerte par la terre, cultivée avec amour et cuisinée avec gratitude. Une prise de conscience qui a transformé ma vision de la nutrition.</p>
-                <p className="text-center mt-6 mx-4 font-SF text-lg md:text-xl">Aujourd'hui, animée par une soif profonde de transmettre cette sagesse nutritionnelle, je continue d'apprendre, de chercher et de dévoiler les vices de l'industrie agroalimentaire pour vous reconnecter à une nutrition qui honore votre biologie.</p>
-                <p className="text-center mt-6 mx-4 font-SFBold text-lg rounded-2xl p-4 border-2 border-marron md:text-xl">À travers mes analyses et mes découvertes, je vous guide vers une alimentation qui nourrit le corps et l’esprit.</p>
+                    <p className="text-center font-SFBoltItalic text-xl mt-4 mx-4 md:text-2xl border-b-2 border-marron">J'ai quitté les laboratoires de l'agro-industrie pour réapprendre à me nourrir comme un être humain.</p>
+                <p className="text-center mt-6 mx-4 font-SF text-lg md:text-xl">Diplômée d'un master en nutrition sportive, je pensais sincèrement pouvoir créer des produits bons pour la santé en R&D agroalimentaire.En réalité, j'ai vu de l'intérieur comment l'industrie manipule notre assiette. Prix de revient, durée de vie, marketing, packaging… en aucun cas la nutrition n'est prise en compte.</p>
+                <p className="text-center mt-6 mx-4 font-SF text-lg bg-gradient-to-tr from-yellow-700 to-marron text-white rounded-2xl p-4 md:text-xl">Je suis partie plusieurs mois dans les campagnes cambodgiennes, et me suis nourrie d'une simplicité déconcertante : riz, poisson séché, eau de coco, jus de canne, fruits gorgés de soleil. J'y ai puisé une énergie illimitée, une clarté mentale et un calme intérieur profond.</p>
+                <p className="text-center mt-6 mx-4 font-SF text-lg md:text-xl"> <span className ="font-SFBold" >J'ai compris la manipulation :</span> L'industrie a détruit notre attirance instinctive pour les produits bruts. Elle exploite nos circuits de récompense avec du faux sucre, du faux gras, du faux goût. Le corps crie alors famine en stockant des calories vides.</p>
+                <p className="text-center mt-6 mx-4 font-SFBold text-lg rounded-2xl p-4 border-2 border-marron md:text-xl">Aujourd'hui, animée par une soif de vérité et de transmission, je vous guide vers une alimentation qui nourrit le corps et l'esprit, loin des dogmes et des vices industriels.</p>
                 <button className=" mt-8 block mx-auto md:text-xl font-SFBold rounded-full text-white px-4 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300" onClick={handleLoginClick}>REJOIGNEZ LA COMMUNAUTE ANTIFRAGILE</button>
             </div>
                 
@@ -302,6 +320,45 @@ function Home() {
             <p className="text-center  font-SFBold md:text-lg text-marron border-2 rounded-2xl mx-4  md:max-w-100 md:block md:mx-auto">DEJA + DE 1000 MEMBRES ANTIFRAGILES</p>
             <h2 className="text-center font-SFBold
             text-marron mt-8 text-lg md:text-xl">0 FILTRE . 0 DOGME. 0 BULLSHIT</h2>
+             <div id="article" className="mx-4 mt-4 md:max-w-6xl md:mx-auto">
+      <Swiper
+        modules={[Pagination, Autoplay]}
+        spaceBetween={20}
+        slidesPerView={1}
+        rewind={true}
+        pagination={{ clickable: true,
+           dynamicBullets: true,
+         }}
+        autoplay={{ delay: 5000 }}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        className="pb-10"
+      >
+        {articles.map((article) => (
+          <SwiperSlide key={article.id}>
+            <Link
+              to={`/articles/${article.id}`}
+              className="bg-white shadow-lg rounded-lg border border-gray-300 overflow-hidden hover:shadow-xl transition-shadow block"
+            >
+              <img
+                src={article.image}
+                alt={article.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-SFBold">{article.title}</h2>
+                <p className="font-SF text-gray-600">
+                  {new Date(article.published_at).toLocaleDateString("fr-FR")}
+                </p>
+              </div>
+            </Link>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
             <div className='mt-10 bg-gradient-to-tr from-yellow-700 to-marron py-10 '>
                     <h1 className="text-center font-SFBold text-2xl text-yellow-300 md:text-5xl">CE QUE TU VAS RECEVOIR</h1>
                     <h2 className="text-center font-SFBold text-white text-lg mt-4 mx-4 md:text-xl">Chaque mardi à 8h dans ta boîte mail, un article pour</h2>
@@ -350,6 +407,8 @@ function Home() {
         <SwiperSlide><img src={avis11} className="rounded-2xl"/></SwiperSlide>
         <SwiperSlide><img src={avis12} className="rounded-2xl"/></SwiperSlide>
         <SwiperSlide><img src={avis13} className="rounded-2xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis14} className="rounded-2xl"/></SwiperSlide>
+          <SwiperSlide><img src={avis15} className="rounded-2xl"/></SwiperSlide>
          <SwiperSlide><img src={avis1} className="rounded-2xl"/></SwiperSlide>
         <SwiperSlide><img src={avis2} className="rounded-2xl" /></SwiperSlide>
         <SwiperSlide><img src={avis3} className="rounded-2xl"/></SwiperSlide>
@@ -363,6 +422,8 @@ function Home() {
         <SwiperSlide><img src={avis11} className="rounded-2xl"/></SwiperSlide>
         <SwiperSlide><img src={avis12} className="rounded-2xl"/></SwiperSlide>
         <SwiperSlide><img src={avis13} className="rounded-2xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis14} className="rounded-2xl"/></SwiperSlide>
+          <SwiperSlide><img src={avis15} className="rounded-2xl"/></SwiperSlide>
         
       
       </Swiper>

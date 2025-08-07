@@ -93,23 +93,6 @@ class ArticleList(generics.ListAPIView):
         context.update({"request": self.request})
         return context
 
-
-
-class RegisterSerializer(ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
-
-class RegisterView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]
-
-
 @permission_classes([IsAuthenticated])
 class CreateCheckoutSession(APIView):
     permission_classes = [IsAuthenticated]
@@ -230,7 +213,8 @@ class StripeWebhookView(APIView):
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = RegisterSerializer  # Crée un profil associé à l'utilisateur
+    serializer_class = RegisterSerializer
+    permission_classes = [AllowAny]
 
 class LoginView(TokenObtainPairView):
     serializer_class = TokenObtainPairSerializer
@@ -286,9 +270,13 @@ def delete_comment(request, comment_id):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_status(request):
+    # Récupérer ou créer le profil utilisateur
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    
     return Response({
         "username": request.user.username,
-        "is_admin": request.user.is_staff  # ou is_superuser
+        "is_admin": request.user.is_staff,
+        "is_subscribed": profile.is_subscribed
     })
 def subscription_status(request):
     profile = Profile.objects.get(user=request.user)

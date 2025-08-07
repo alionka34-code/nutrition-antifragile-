@@ -2,32 +2,87 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useContext } from 'react';
 import { Menu, X } from 'lucide-react';
 import { AuthContext } from "../contexts/AuthContextDefinition";
+import { useRef, useEffect } from "react";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const menuRef = useRef();
+  const userMenuRef = useRef();
   
   const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleUserMenu = () => setUserMenuOpen(!userMenuOpen);
   
   // Utilisation du contexte d'authentification
-  const { username, logout } = useContext(AuthContext); 
+  const { username, isSubscribed, logout } = useContext(AuthContext); 
   
   const handleLogout = () => {
     logout();
     navigate("/");
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, []);
+
   return (
     <nav className="w-full bg-gray-200 top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo ou titre */}
-        <div className="text-2xl font-bold font-SF">
+        <div className="text-2xl font-bold font-SF relative" ref={userMenuRef}>
           {username ? (
-            <span>{username} 👋</span>
+            <span 
+              className="cursor-pointer hover:text-yellow-600 flex items-center gap-2" 
+              onClick={toggleUserMenu}
+            >
+              {username} 👋
+              <span className={`px-2 py-1  text-xs rounded-full font-SFBold ${isSubscribed ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
+                {isSubscribed ? 'PREMIUM' : 'FREE'}
+              </span>
+            </span>
           ) : (
             <Link to="/connexion"></Link>
           )}
+          {userMenuOpen && username && (
+            <div className="absolute mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200">
+              {isSubscribed ? (
+                <a
+                  href="https://billing.stripe.com/p/login/7sYaEW2Rx2AQd0h5QQbZe00"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-2 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm"
+                >
+                  Gerer mon abonnement
+                </a>
+              ) : (
+                <Link
+                  to="/abonnement"
+                  className="block px-4 py-2 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm"
+                  onClick={() => setUserMenuOpen(false)}
+                >
+                  S'abonner
+                </Link>
+              )}
+            </div>
+          )}
+          
+          
+          
+          
         </div>
+       
 
         {/* Burger toujours visible */}
         <button
