@@ -4,6 +4,7 @@ import { AuthContext } from "./AuthContextDefinition";
 export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // Fonction pour récupérer le statut d'abonnement
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setUsername(data.username);
         setIsSubscribed(data.is_subscribed || false);
+        setIsAdmin(data.is_admin || false);
       }
     } catch (error) {
       console.error("Erreur lors de la récupération du statut:", error);
@@ -56,10 +58,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("refresh_token");
     setUsername(null);
     setIsSubscribed(false);
+    setIsAdmin(false);
   };
 
   return (
-    <AuthContext.Provider value={{ username, isSubscribed, loading, login, logout, fetchSubscriptionStatus }}>
+    <AuthContext.Provider value={{ username, isSubscribed, isAdmin, loading, login, logout, fetchSubscriptionStatus }}>
       {children}
     </AuthContext.Provider>
   );

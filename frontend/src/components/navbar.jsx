@@ -15,7 +15,7 @@ function Navbar() {
   const toggleUserMenu = () => setUserMenuOpen(!userMenuOpen);
   
   // Utilisation du contexte d'authentification
-  const { username, isSubscribed, logout } = useContext(AuthContext); 
+  const { username, isSubscribed, isAdmin, logout } = useContext(AuthContext); 
   
   const handleLogout = () => {
     logout();
@@ -48,9 +48,15 @@ function Navbar() {
               onClick={toggleUserMenu}
             >
               {username} 👋
-              <span className={`px-2 py-1  text-xs rounded-full font-SFBold ${isSubscribed ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
-                {isSubscribed ? 'PREMIUM' : 'FREE'}
-              </span>
+              {isAdmin ? (
+                <span className="px-2 py-1 text-xs rounded-full font-SFBold bg-red-500 text-white">
+                  ADMIN
+                </span>
+              ) : (
+                <span className={`px-2 py-1  text-xs rounded-full font-SFBold ${isSubscribed ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
+                  {isSubscribed ? 'PREMIUM' : 'FREE'}
+                </span>
+              )}
             </span>
           ) : (
             <Link to="/connexion"></Link>
