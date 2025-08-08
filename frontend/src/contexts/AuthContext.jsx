@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContextDefinition";
 
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+
 export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -16,7 +19,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/user-status/", {
+      const response = await fetch(`${API_URL}/user-status/`, {
         headers: {
           "Authorization": `Bearer ${token}`,
         },
@@ -27,6 +30,7 @@ export const AuthProvider = ({ children }) => {
         setUsername(data.username);
         setIsSubscribed(data.is_subscribed || false);
         setIsAdmin(data.is_admin || false);
+         
       }
     } catch (error) {
       console.error("Erreur lors de la récupération du statut:", error);
