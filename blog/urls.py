@@ -9,6 +9,7 @@ from .views import ArticleDetailView
 from .views import CommentListCreateView
 from .views import CommentDeleteView
 from .views import CommentCreateAPIView
+from .views import CommentReplyCreateView
 from . import views
 from.views import user_status
 from blog.views import CustomTokenObtainPairView
@@ -24,17 +25,14 @@ urlpatterns = [
     path('stripe/webhook/', StripeWebhookView.as_view(), name='stripe-webhook'),
     path('login/', LoginView.as_view(), name='login'),
     path('articles/<int:pk>/', ArticleDetailView.as_view(), name='article-detail'),
-    path('articles/<int:article_id>/comments/', CommentListCreateView.as_view(), name='comment-list-create'),
-    path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
-    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('articles/<int:article_id>/comments/', CommentListCreateView.as_view(), name='comment-list-create'),
-    path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
-    path('api/articles/<int:pk>/comments/', CommentCreateAPIView.as_view(), name='comment-create'),
-    path('api/comments/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
-    path("user-status/", user_status, name="user-status"),
-    path('test-db/', views.test_db),  # Endpoint to test database connection
-    path("ckeditor/upload/", CKEditorImageUploadView.as_view(), name="ckeditor_upload"),
 
+    # Comments
+    path('articles/<int:article_id>/comments/', CommentListCreateView.as_view(), name='comment-list-create'),
+    path('articles/<int:article_id>/comments/<int:comment_id>/reply/', CommentReplyCreateView.as_view(), name='comment-reply'),
+    path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
 
+    # Auth and misc
+    path('user-status/', user_status, name='user-status'),
+    path('test-db/', views.test_db),
+    path('ckeditor/upload/', CKEditorImageUploadView.as_view(), name='ckeditor_upload'),
 ]
-   

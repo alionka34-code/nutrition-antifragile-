@@ -53,6 +53,25 @@ export async function postComment(articleId, content, token) {
   }
 }
 
+// Ajouter: Poster une réponse à un commentaire (admins et utilisateurs inscrits)
+export async function postReply(articleId, parentCommentId, content, token) {
+  try {
+    const res = await fetch(`${API_URL}/articles/${articleId}/comments/${parentCommentId}/reply/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ content, article: articleId, parent_comment: parentCommentId }),
+    });
+    if (!res.ok) throw new Error("Erreur lors de l'envoi de la réponse");
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
 // Supprimer un commentaire
 export async function deleteComment(commentId, token) {
   try {

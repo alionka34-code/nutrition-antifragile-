@@ -236,10 +236,31 @@ class CommentListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         article_id = self.kwargs['article_id']
-        return Comment.objects.filter(article_id=article_id)
+        # Retourner seulement les commentaires racine, les réponses sont incluses via serializer
+        return Comment.objects.filter(article_id=article_id, parent_comment__isnull=True).order_by('created_at')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, article_id=self.kwargs['article_id'])
+
+class CommentReplyCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, article_id, comment_id):
+        content = request.data.get('content')
+        if not content or not str(content).strip():
+            return Response({"detail": "Contenu requis"}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            parent = Comment.objects.get(id=comment_id, article_id=article_id)
+        except Comment.DoesNotExist:
+            return Response({"detail": "Commentaire parent introuvable"}, status=status.HTTP_404_NOT_FOUND)
+        reply = Comment.objects.create(
+            article_id=article_id,
+            user=request.user,
+            content=content,
+            parent_comment=parent,
+        )
+        data = CommentSerializer(reply, context={'request': request}).data
+        return Response(data, status=status.HTTP_201_CREATED)
 
 class CommentDeleteView(generics.DestroyAPIView):
     queryset = Comment.objects.all()

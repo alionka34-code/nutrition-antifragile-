@@ -103,10 +103,17 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
     
+class RecursiveCommentSerializer(serializers.Serializer):
+    def to_representation(self, value):
+        serializer = CommentSerializer(value, context=self.context)
+        return serializer.data
+
 class CommentSerializer(serializers.ModelSerializer):
     user_username = serializers.CharField(source='user.username', read_only=True)
+    replies = RecursiveCommentSerializer(many=True, read_only=True)
+    parent_comment_username = serializers.CharField(source='parent_comment.user.username', read_only=True, default=None)
 
     class Meta:
         model = Comment
-        fields = ['id', 'article', 'user', 'user_username', 'content', 'created_at']
+        fields = ['id', 'article', 'user', 'user_username', 'content', 'created_at', 'parent_comment', 'parent_comment_username', 'replies']
         read_only_fields = ['user', 'created_at']
