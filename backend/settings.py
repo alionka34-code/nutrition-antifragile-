@@ -114,8 +114,13 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Full',
+        'height': 1000,
+        'width': '150%',
         'extraPlugins': ','.join(['uploadimage']),
-        'filebrowserUploadUrl': '/api/upload-image/',  # utilise notre route
+        'filebrowserUploadUrl': '/api/upload-image/',
+          # utilise notre route
+# ou autre skin
+
       
     },
 }

@@ -50,6 +50,36 @@ function ArticleDetail() {
     };
   }, [article, navigate]);
 
+  // Rendre toute la div du sommaire cliquable (redirige vers le lien interne)
+  useEffect(() => {
+    if (!article) return;
+
+    const onClick = (e) => {
+      // Cible un bloc d'item de sommaire contenant un lien d'ancre
+      const block = e.target.closest('.toc-container > div, .article-content div');
+      if (!block) return;
+      const a = block.querySelector('a[href^="#"]');
+      if (!a) return;
+
+      // Si on clique déjà sur le lien, laisser le comportement du lien
+      if (e.target.closest('a[href^="#"]')) return;
+
+      const href = a.getAttribute('href') || '';
+      if (!href.startsWith('#')) return;
+      const id = decodeURIComponent(href.slice(1));
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', `#${id}`);
+      }
+    };
+
+    const containers = document.querySelectorAll('.article-content');
+    containers.forEach((c) => c.addEventListener('click', onClick));
+    return () => containers.forEach((c) => c.removeEventListener('click', onClick));
+  }, [article]);
+
   if (loading) return <p className="text-center mt-10">Chargement...</p>;
   if (error) return <p className="text-red-500 text-center mt-10">{error}</p>;
 
