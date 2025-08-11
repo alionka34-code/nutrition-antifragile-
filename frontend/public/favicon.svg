@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Fond noir -->
+  <rect width="32" height="32" fill="#000000"/>
+  <!-- A majuscule jaune en gras et plus large -->
+  <text x="8" y="22" font-family="Impact, Arial Black, sans-serif" font-size="20" font-weight="900" font-stretch="expanded" fill="#fbbf24">A</text>
+  <!-- Point jaune -->
+  <circle cx="21" cy="18" r="2.5" fill="#fbbf24"/>
+</svg>
