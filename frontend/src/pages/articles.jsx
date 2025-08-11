@@ -23,9 +23,10 @@ function Articles() {
 
   return (
     <>
-    <header className=" text-center pt-10 bg-linear-to-t from-white to-gray-200"></header>
+    <header className=" text-center pt-10 bg-linear-to-t from-white to-gray-200">
+      <h1 className='font-SFBold text-marron text-2xl md:text-4xl '>Ici, la nutrition prend tout son sens.</h1> 
+      <p className="font-SF md:text-2xl text-lg mx-4 md:mx-auto md:max-w-5xl">Loin des fausses promesses et des étiquettes trompeuses, entrez dans le cercle de ceux qui  veulent comprendre, pas juste consommer.</p></header>
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-4xl text-marron font-SFBold mb-6">Tous les articles</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article) => (
           <Link to={`/articles/${article.id}`} key={article.id} className="bg-white shadow-lg rounded-lg border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow">
