@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchArticles } from '../utils/api';
 import livre from '../assets/images/livre.png';
-import alionka from '../assets/images/Alionka.png';
+import alionka from '../assets/images/alionka.jpg';
 import{ Helmet } from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -297,7 +297,7 @@ function Home() {
         
             <div className='flex flex-col mx-auto justify-center md:flex-row'>
                 <div className="text-center mt-8 mx-4 md:mt-10">
-                <img src= {alionka} alt="Alionka Houl" className="mx-auto mt-4 w-60 h-auto shadow-xl/50 rounded-2xl"/>
+                <img src= {alionka} alt="Alionka Houl" className="mx-auto mt-4 w-60 h-auto shadow-xl/50 rounded-4xl"/>
                 <h2 className="font-SFBold mt-4 text-marron text-xl md:text-2xl">Alionka</h2>
                 <p className="p-4 font-SF text-lg md:text-xl border-l-4 border-marron rounded-xl shadow-lg">Auteure<br/>redactrice scientifique specialisée en nutrition</p>
                 </div>

@@ -11,20 +11,19 @@ import Articles from './pages/articles.jsx';
 import ArticleDetail from './pages/articleDetail.jsx';
 import SubscriptionSuccess from './pages/SubscriptionSuccess';
 import SubscriptionCancel from './pages/SubscriptionCancel';
-
-
-
+import PasswordLost from './pages/PasswordLost.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
 
 function App() {
   return (
     <AuthProvider>
-      <div className="flex flex-col min-h-screen">
-        <Router>
+      <Router>
+        <div className="flex flex-col min-h-screen">
           <Navbar />
           <div className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/livre" element={<Livre />}/>
+              <Route path="/livre" element={<Livre />} />
               <Route path="/abonnement" element={<Abonnement />} />
               <Route path="/connexion" element={<Connexion />} />
               <Route path="/contact" element={<ContactForm />} />
@@ -32,17 +31,15 @@ function App() {
               <Route path="/articles/:id" element={<ArticleDetail />} />
               <Route path="/subscription/success" element={<SubscriptionSuccess />} />
               <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
-             
-             
-
+              <Route path="/password-lost" element={<PasswordLost />} />
+              <Route path="/reset-password/:uidb64/:token" element={<ResetPassword />} />
             </Routes>
           </div>
           <Footer />
-        </Router>
-      </div>
+        </div>
+      </Router>
     </AuthProvider>
   );
 }
-
 
 export default App;

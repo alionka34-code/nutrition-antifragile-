@@ -15,6 +15,8 @@ from.views import user_status
 from blog.views import CustomTokenObtainPairView
 from .views import test_db
 from blog.views import CKEditorImageUploadView
+from .views import PasswordResetRequestView
+from .views import PasswordResetConfirmView
 
 
 
@@ -35,4 +37,7 @@ urlpatterns = [
     path('user-status/', user_status, name='user-status'),
     path('test-db/', views.test_db),
     path('ckeditor/upload/', CKEditorImageUploadView.as_view(), name='ckeditor_upload'),
+    path('password-lost/', PasswordResetRequestView.as_view(), name='password-lost'),
+    path('password-reset-confirm/<str:uidb64>/<str:token>/', PasswordResetConfirmView.as_view(), name='password-reset-confirm'),
+    
 ]

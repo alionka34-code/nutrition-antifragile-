@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Helmet } from "react-helmet";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from "../contexts/AuthContextDefinition";
 import "../styles/connexion-utils.css";
-import API_URL from "../utils/api"; // Assurez-vous que ce chemin est correct
+import API_URL from "../utils/api";
+ // Assurez-vous que ce chemin est correct
 
 
 function Connexion() {
@@ -411,9 +412,9 @@ function Connexion() {
                         </div>
                         
                         <div className="w-full mb-4">
-                            <a href="#" className="text-sm text-gray-600 hover:text-marron transition-colors duration-300 SF-Bold">
+                            <Link to="/password-lost" className="text-sm text-gray-600 hover:text-marron transition-colors duration-300 SF-Bold">
                                 Mot de passe oublié ?
-                            </a>
+                            </Link>
                         </div>
                         
                         <button 

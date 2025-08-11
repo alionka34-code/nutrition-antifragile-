@@ -36,6 +36,10 @@ from django.views import View
 import cloudinary.uploader
 import logging
 import json
+from django.core.mail import send_mail
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import default_token_generator
 
 
 logger = logging.getLogger(__name__)
@@ -356,3 +360,74 @@ def upload_image(request):
         except Exception as e:
             return JsonResponse({"uploaded": 0, "error": {"message": str(e)}})
     return JsonResponse({"uploaded": 0, "error": {"message": "No file uploaded"}})
+
+class PasswordResetRequestView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        if not email:
+            return Response({'error': 'Email est requis.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            # Pour des raisons de sécurité, nous ne révélons pas si l'email existe ou non
+            return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
+
+        try:
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            reset_link = f"{settings.FRONTEND_URL}/reset-password/{uid}/{token}"
+
+            send_mail(
+                'Réinitialisation de mot de passe',
+                f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
+            
+            logger.info(f"Password reset email sent to {email}")
+            return Response({'message': 'Email de réinitialisation envoyé avec succès.'}, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            logger.error(f"Error sending password reset email: {str(e)}")
+            return Response({'error': 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class PasswordResetConfirmView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, uidb64, token, *args, **kwargs):
+        try:
+            # Décoder l'UID
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            return Response({'error': 'Lien de réinitialisation invalide.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Vérifier le token
+        if not default_token_generator.check_token(user, token):
+            return Response({'error': 'Lien de réinitialisation expiré ou invalide.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Récupérer le nouveau mot de passe
+        password = request.data.get('password')
+        if not password:
+            return Response({'error': 'Mot de passe requis.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Valider la longueur du mot de passe
+        if len(password) < 6:
+            return Response({'error': 'Le mot de passe doit contenir au moins 6 caractères.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Mettre à jour le mot de passe
+            user.set_password(password)
+            user.save()
+            
+            logger.info(f"Password reset successful for user {user.email}")
+            return Response({'message': 'Mot de passe réinitialisé avec succès. Vous pouvez maintenant vous connecter.'}, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            logger.error(f"Error resetting password: {str(e)}")
+            return Response({'error': 'Erreur lors de la réinitialisation. Veuillez réessayer.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
