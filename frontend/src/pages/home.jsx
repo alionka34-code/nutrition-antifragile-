@@ -70,11 +70,11 @@ function Home() {
         </Helmet>
         <header className="px-4 bg-linear-to-t from-white to-gray-200">
             <div className={`text-center transition-transform duration-1500 ease-out ${visible ? 'translate-y-0' : 'translate-y-50'}`}>
-                <h2 className="font-SF text-gray-600">ALIONKA HOUL - REDACTRICE SCIENTIFIQUE INDEPENDANTE SPECIALISE EN NUTRITION</h2>
+                <h2 className="font-SF text-gray-600">ALIONKA HOUL - REDACTRICE SCIENTIFIQUE INDEPENDANTE SPECIALISÉE EN NUTRITION</h2>
                 
             
                 <h1 className={` text-center text-5xl font-SFBold transition-transform duration-1500 ease-out md:text-8xl ${visible ? 'translate-y-0' : 'translate-y-10'}`}>NUTRITION<br/>ANTIFRAGILE</h1>
-                <p className="text-center text-gray-600 text-xl font-SF md:text-2xl">Reprenez le pouvoir sur votre assiette dans un monde qui vous empoisonne</p>
+                <p className="text-center text-gray-600 text-xl font-SF md:text-2xl">Reprendre le pouvoir sur votre assiette dans un monde qui vous empoisonne</p>
             <p className="text-xl font-SFBold  text-center mt-8 shadow-lg border-marron border-l-4 rounded-l-xl p-10 mx-auto md:text-2xl max-w-4xl">Vos grands-parents n'avaient pas besoin de nutritionniste pour etre en forme. Vous, vous passez 10 minutes a decrypter l'etiquette d'un yaourt.</p>
             <button onClick ={handleBookClick}className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">DECOUVRIR LE LIVRE</button>
             </div>
@@ -297,7 +297,7 @@ function Home() {
         
             <div className='flex flex-col mx-auto justify-center md:flex-row'>
                 <div className="text-center mt-8 mx-4 md:mt-10">
-                <img src= {alionka} alt="Alionka Houl" className="mx-auto mt-4 w-60 h-auto shadow-xl/50 rounded-4xl"/>
+                <img src= {alionka} alt="Alionka Houl" className="mx-auto h-auto mt-4 max-w-80 md:max-h-100 shadow-xl/50 rounded-2xl"/>
                 <h2 className="font-SFBold mt-4 text-marron text-xl md:text-2xl">Alionka</h2>
                 <p className="p-4 font-SF text-lg md:text-xl border-l-4 border-marron rounded-xl shadow-lg">Auteure<br/>redactrice scientifique specialisée en nutrition</p>
                 </div>

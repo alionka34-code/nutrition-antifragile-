@@ -27,7 +27,7 @@ def send_welcome_email(sender, instance, created, **kwargs):
         ssl._create_default_https_context = ssl._create_unverified_context
         
         subject = "Bienvenue sur Nutrition Antifragile"
-        message = f"Bonjour {instance.username},\n\nMerci de vous être inscrit sur Nutrition Antifragile !\n\nNous sommes ravis de vous accueillir dans notre communauté dédiée à la nutrition et au bien-être.\n\nCordialement,\nL'équipe Nutrition Antifragile"
+        message = f"Bonjour {instance.username},\n\nTon inscription est confirmée !\n\nTu peux désormais lire une sélection d’articles et surtout, rejoindre la discussion.\n\nChaque lecteur compte : tes commentaires, tes questions et ton regard font partie de la richesse du contenu.\n\nCommencer la lecture: [Accéder aux articles].\n\n Bienvenue parmi ceux qui veulent comprendre, pas juste consommer.\n\nA bientôt,\n\nAlionka"
         from_email = settings.DEFAULT_FROM_EMAIL
         recipient_list = [instance.email]
         
