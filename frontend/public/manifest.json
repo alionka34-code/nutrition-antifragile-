@@ -1,0 +1,41 @@
+{
+  "name": "Nutrition Antifragile",
+  "short_name": "Nutrition Antifragile",
+  "description": "Vos grands-parents n'avaient pas besoin de nutritionniste pour être en forme",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "521x478",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#fbbf24",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}
