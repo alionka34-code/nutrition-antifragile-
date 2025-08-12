@@ -194,7 +194,60 @@ class StripeWebhookView(APIView):
                 if profile:
                     profile.is_subscribed = True
                     profile.save()
-                    logger.info(f"Profile {profile.user.id} set to subscribed.")
+                    logger.info(f"Profile {profile.user.id} set to subscribed (invoice.payment_succeeded).")
+                else:
+                    logger.warning(f"No profile found for customer_id {customer_id}.")
+
+        # --- Checkout session completed (paiements uniques et abonnements) ---
+        elif event_type == 'checkout.session.completed':
+            session = event['data']['object']
+            customer_id = session.get('customer')
+            customer_email = session.get('customer_details', {}).get('email')
+            
+            logger.info(f"Checkout completed - customer_id: {customer_id}, email: {customer_email}")
+            
+            if customer_id:
+                # Chercher par customer_id d'abord
+                profile = Profile.objects.filter(stripe_customer_id=customer_id).first()
+                if profile:
+                    profile.is_subscribed = True
+                    profile.save()
+                    logger.info(f"Profile {profile.user.id} set to subscribed via customer_id (checkout.session.completed).")
+                elif customer_email:
+                    # Si pas trouvé par customer_id, chercher par email
+                    try:
+                        user = User.objects.get(email=customer_email)
+                        profile, created = Profile.objects.get_or_create(user=user)
+                        profile.stripe_customer_id = customer_id
+                        profile.is_subscribed = True
+                        profile.save()
+                        logger.info(f"Profile {profile.user.id} set to subscribed via email (checkout.session.completed).")
+                    except User.DoesNotExist:
+                        logger.warning(f"No user found for email {customer_email}.")
+                else:
+                    logger.warning("No customer_id or email in checkout.session.completed event.")
+            elif customer_email:
+                # Fallback si pas de customer_id
+                try:
+                    user = User.objects.get(email=customer_email)
+                    profile, created = Profile.objects.get_or_create(user=user)
+                    profile.is_subscribed = True
+                    profile.save()
+                    logger.info(f"Profile {profile.user.id} set to subscribed via email only (checkout.session.completed).")
+                except User.DoesNotExist:
+                    logger.warning(f"No user found for email {customer_email}.")
+
+        # --- Payment intent succeeded (pour les paiements directs) ---
+        elif event_type == 'payment_intent.succeeded':
+            payment_intent = event['data']['object']
+            customer_id = payment_intent.get('customer')
+            
+            if customer_id:
+                profile = Profile.objects.filter(stripe_customer_id=customer_id).first()
+                if profile:
+                    profile.is_subscribed = True
+                    profile.save()
+                    logger.info(f"Profile {profile.user.id} set to subscribed (payment_intent.succeeded).")
                 else:
                     logger.warning(f"No profile found for customer_id {customer_id}.")
 
