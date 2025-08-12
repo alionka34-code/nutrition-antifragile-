@@ -1,163 +1,197 @@
-import stripe
-from django.shortcuts import render
-from rest_framework import generics, permissions
-from .models import Article
-from .models import Profile
-from .models import Comment
-from.models import StripeWebhookLog
-from .serializers import CommentSerializer
-from .serializers import ArticleSerializer
-from .serializers import RegisterSerializer
-from django.contrib.auth.models import User
-from rest_framework.permissions import AllowAny
-from rest_framework.serializers import ModelSerializer
-from django.conf import settings
-from django.http import HttpResponse
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.permissions import IsAdminUser
-from django.contrib.auth.models import User
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer 
-from rest_framework.generics import RetrieveAPIView
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-from django.db import connection
-from django.http import JsonResponse
-from .serializers import CustomTokenObtainPairSerializer
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
-from django.views import View
-import cloudinary.uploader
 import logging
 import json
+
+import stripe
+import cloudinary.uploader
+from urllib.parse import urlparse
+
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.db import connection
+from django.http import HttpResponse, JsonResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.views import View
+
+from rest_framework import generics, permissions, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.permissions import (
+    IsAuthenticated,
+    AllowAny,
+    IsAuthenticatedOrReadOnly,
+    IsAdminUser,
+)
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 
+from .models import Article, Profile, Comment, StripeWebhookLog
+from .serializers import (
+    ArticleSerializer,
+    CommentSerializer,
+    RegisterSerializer,
+    CustomTokenObtainPairSerializer,
+)
 
 logger = logging.getLogger(__name__)
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+
+def _frontend_base_url(request):
+    """Resolve the frontend base URL.
+    - Prefer FRONTEND_URL from settings.
+    - In DEBUG, prefer request Origin/Referer (useful for local dev: localhost:5173).
+    - Always return with a trailing slash.
+    """
+    frontend_env = (getattr(settings, 'FRONTEND_URL', '') or '').strip().rstrip('/')
+    origin = (request.META.get('HTTP_ORIGIN') or '').strip().rstrip('/')
+    referer = (request.META.get('HTTP_REFERER') or '').strip()
+
+    chosen = frontend_env
+    if getattr(settings, 'DEBUG', False):
+        if origin:
+            chosen = origin
+        elif referer:
+            p = urlparse(referer)
+            if p.scheme and p.netloc:
+                chosen = f"{p.scheme}://{p.netloc}"
+    else:
+        # In production, if Origin matches FRONTEND_URL host, keep Origin (keeps right scheme/port)
+        if origin and frontend_env:
+            try:
+                o = urlparse(origin if '://' in origin else f'https://{origin}')
+                e = urlparse(frontend_env if '://' in frontend_env else f'https://{frontend_env}')
+                if o.netloc == e.netloc:
+                    chosen = origin
+            except Exception:
+                pass
+
+    base = (chosen or frontend_env).rstrip('/') + '/'
+    return base
+
+
+# =============================
+# Abonnement - Stripe
+# =============================
 class CreateSubscriptionView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         user = request.user
         try:
-            # Créer un client Stripe lié à l'email utilisateur
             customer = stripe.Customer.create(
                 email=user.email,
-                metadata={"django_user_id": user.id}
+                metadata={"django_user_id": user.id},
             )
-            
-            # Sauvegarder le customer_id dans le profil
-            profile = Profile.objects.get(user=user)
+            profile, _ = Profile.objects.get_or_create(user=user)
             profile.stripe_customer_id = customer.id
             profile.save()
-            
-            # ID des prix dans Stripe
+
             items = [
-                {"price": "price_1RqfRUBthRAmBImU3VDSFmui"},
-                {"price": "price_1RrJzWBthRAmBImUlq8k1UfL"}, 
+                {"price": "price_1RvKWDFiDmUzPzGDPVF2FHzQ"},  # launch
+                {"price": "price_1RvKWVFiDmUzPzGDhSX4Hpe5"},  # monthly
             ]
 
-            # Créer un abonnement Stripe
             subscription = stripe.Subscription.create(
                 customer=customer.id,
                 items=items,
                 payment_behavior='default_incomplete',
                 expand=['latest_invoice.payment_intent'],
             )
-            
-            return Response({
-                "subscription_id": subscription.id,
-                "client_secret": subscription.latest_invoice.payment_intent.client_secret
-            })
+
+            return Response(
+                {
+                    "subscription_id": subscription.id,
+                    "client_secret": subscription.latest_invoice.payment_intent.client_secret,
+                }
+            )
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-class ArticleList(generics.ListAPIView):
-    queryset = Article.objects.all().order_by('-published_at')
-    serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-
-    def get_serializer_context(self):
-        # On passe le request au serializer pour qu’il sache si l’utilisateur est abonné ou pas
-        context = super().get_serializer_context()
-        context.update({"request": self.request})
-        return context
-
-@permission_classes([IsAuthenticated])
 class CreateCheckoutSession(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         user = request.user
-        domain_url = settings.FRONTEND_URL  # Frontend Vite
+        # Utiliser une base URL front fiable (local en DEBUG, sinon FRONTEND_URL)
+        base_url = _frontend_base_url(request)
         selected_plan = request.data.get("plan")  # "launch" ou "monthly"
 
-        print("=== DEBUG STRIPE CHECKOUT ===")
-        print("Utilisateur :", user)
-        print("Plan sélectionné :", selected_plan)
-        print("Domain URL :", domain_url)
-
+        logger.info("=== DEBUG STRIPE CHECKOUT ===")
+        logger.info(f"Utilisateur: {user}")
+        logger.info(f"Plan sélectionné: {selected_plan}")
+        logger.info(f"Base URL: {base_url}")
 
         price_map = {
-            "monthly": "price_1RqfRUBthRAmBImU3VDSFmui",
-            "launch": "price_1RrJzWBthRAmBImUlq8k1UfL"
+            "monthly": "price_1RvKWVFiDmUzPzGDhSX4Hpe5",
+            "launch": "price_1RvKWDFiDmUzPzGDPVF2FHzQ",
         }
 
         try:
             if selected_plan not in price_map:
                 raise ValueError(f"Plan invalide : {selected_plan}")
-            # Vérifier si l'utilisateur a déjà un customer Stripe
-            profile = Profile.objects.get(user=user)
+
+            profile, _ = Profile.objects.get_or_create(user=user)
+
+            # Vérifier/Créer le customer Stripe
+            customer_id = None
             if profile.stripe_customer_id:
-                customer_id = profile.stripe_customer_id
-            else:
-                # Créer un nouveau customer si besoin
+                try:
+                    stripe.Customer.retrieve(profile.stripe_customer_id)
+                    customer_id = profile.stripe_customer_id
+                    logger.info(f"Customer existant trouvé: {customer_id}")
+                except stripe.error.InvalidRequestError:
+                    logger.warning(
+                        f"Customer {profile.stripe_customer_id} introuvable. Création d'un nouveau."
+                    )
+                    profile.stripe_customer_id = None
+
+            if not customer_id:
                 customer = stripe.Customer.create(
                     email=user.email,
-                    metadata={"django_user_id": user.id}
+                    metadata={"django_user_id": user.id},
                 )
                 profile.stripe_customer_id = customer.id
                 profile.save()
                 customer_id = customer.id
+                logger.info(f"Nouveau customer créé: {customer_id}")
 
-            # Créer une session de checkout
             checkout_session = stripe.checkout.Session.create(
                 payment_method_types=['card'],
                 mode='subscription',
                 line_items=[{
-                    'price': price_map.get(selected_plan),
+                    'price': price_map[selected_plan],
                     'quantity': 1,
                 }],
-                success_url=domain_url + 'subscription/success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'subscription/cancel',
-                customer=customer_id,  # Utiliser le customer déjà lié
+                success_url=f"{base_url}subscription/success?session_id={{CHECKOUT_SESSION_ID}}",
+                cancel_url=f"{base_url}subscription/cancel",
+                customer=customer_id,
                 client_reference_id=str(user.id),
             )
             return Response({'checkout_url': checkout_session.url})
         except Exception as e:
-            print("=== ERREUR STRIPE ===")
-            print(str(e))
+            logger.exception("Erreur Stripe lors de la création de la session de checkout")
             return Response({'error': str(e)}, status=400)
 
+
+@method_decorator(csrf_exempt, name='dispatch')
 class StripeWebhookView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
     def post(self, request):
         payload = request.body
         sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
-        endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
+        endpoint_secret = (getattr(settings, 'STRIPE_WEBHOOK_SECRET', '') or '').strip()
 
         try:
             event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -174,17 +208,16 @@ class StripeWebhookView(APIView):
         event_type = event.get('type', 'unknown')
         logger.info(f"Stripe webhook received: {event_type}")
 
-        # --- Sauvegarde sécurisée du log ---
+        # Log du webhook (payload JSONField -> dict)
         try:
-            from .models import StripeWebhookLog
             StripeWebhookLog.objects.create(
                 event_type=event_type,
-                payload=json.dumps(event['data']['object'])
+                payload=event['data']['object'],
             )
         except Exception as e:
             logger.warning(f"Could not save webhook log: {e}")
 
-        # --- Paiement réussi ---
+        # invoice.payment_succeeded -> abonnement actif
         if event_type == 'invoice.payment_succeeded':
             customer_id = event['data']['object'].get('customer')
             if not customer_id:
@@ -198,50 +231,49 @@ class StripeWebhookView(APIView):
                 else:
                     logger.warning(f"No profile found for customer_id {customer_id}.")
 
-        # --- Checkout session completed (paiements uniques et abonnements) ---
-        elif event_type == 'checkout.session.completed':
+        # checkout.session.* -> activer abonnement
+        elif event_type in ['checkout.session.completed', 'checkout.session.async_payment_succeeded']:
             session = event['data']['object']
             customer_id = session.get('customer')
             customer_email = session.get('customer_details', {}).get('email')
-            
-            logger.info(f"Checkout completed - customer_id: {customer_id}, email: {customer_email}")
-            
+            client_ref = session.get('client_reference_id')
+
+            logger.info(
+                f"Checkout completed - customer_id: {customer_id}, email: {customer_email}, client_ref: {client_ref}"
+            )
+
+            profile = None
             if customer_id:
-                # Chercher par customer_id d'abord
                 profile = Profile.objects.filter(stripe_customer_id=customer_id).first()
-                if profile:
-                    profile.is_subscribed = True
-                    profile.save()
-                    logger.info(f"Profile {profile.user.id} set to subscribed via customer_id (checkout.session.completed).")
-                elif customer_email:
-                    # Si pas trouvé par customer_id, chercher par email
-                    try:
-                        user = User.objects.get(email=customer_email)
-                        profile, created = Profile.objects.get_or_create(user=user)
-                        profile.stripe_customer_id = customer_id
-                        profile.is_subscribed = True
-                        profile.save()
-                        logger.info(f"Profile {profile.user.id} set to subscribed via email (checkout.session.completed).")
-                    except User.DoesNotExist:
-                        logger.warning(f"No user found for email {customer_email}.")
-                else:
-                    logger.warning("No customer_id or email in checkout.session.completed event.")
-            elif customer_email:
-                # Fallback si pas de customer_id
+            if not profile and customer_email:
                 try:
                     user = User.objects.get(email=customer_email)
-                    profile, created = Profile.objects.get_or_create(user=user)
-                    profile.is_subscribed = True
-                    profile.save()
-                    logger.info(f"Profile {profile.user.id} set to subscribed via email only (checkout.session.completed).")
+                    profile, _ = Profile.objects.get_or_create(user=user)
+                    if customer_id and not profile.stripe_customer_id:
+                        profile.stripe_customer_id = customer_id
                 except User.DoesNotExist:
                     logger.warning(f"No user found for email {customer_email}.")
+            if not profile and client_ref:
+                try:
+                    user = User.objects.get(id=int(client_ref))
+                    profile, _ = Profile.objects.get_or_create(user=user)
+                    if customer_id and not profile.stripe_customer_id:
+                        profile.stripe_customer_id = customer_id
+                except Exception as e:
+                    logger.warning(f"No user found for client_reference_id {client_ref}: {e}")
 
-        # --- Payment intent succeeded (pour les paiements directs) ---
+            if profile:
+                profile.is_subscribed = True
+                profile.save()
+                logger.info(f"Profile {profile.user.id} set to subscribed (checkout session).")
+            else:
+                logger.warning("Unable to resolve profile in checkout session webhook.")
+
+        # payment_intent.succeeded -> paiements directs
         elif event_type == 'payment_intent.succeeded':
             payment_intent = event['data']['object']
             customer_id = payment_intent.get('customer')
-            
+
             if customer_id:
                 profile = Profile.objects.filter(stripe_customer_id=customer_id).first()
                 if profile:
@@ -251,7 +283,24 @@ class StripeWebhookView(APIView):
                 else:
                     logger.warning(f"No profile found for customer_id {customer_id}.")
 
-        # --- Abonnement annulé / paiement échoué ---
+        # customer.subscription.* -> synchronisation statut
+        elif event_type in ['customer.subscription.created', 'customer.subscription.updated']:
+            sub = event['data']['object']
+            customer_id = sub.get('customer')
+            status_sub = sub.get('status')  # active, trialing, past_due, canceled, unpaid, incomplete, incomplete_expired
+            profile = Profile.objects.filter(stripe_customer_id=customer_id).first()
+            if profile:
+                should_be_active = status_sub in ['active', 'trialing']
+                old = profile.is_subscribed
+                profile.is_subscribed = should_be_active
+                profile.save()
+                logger.info(
+                    f"Subscription {status_sub} for profile {profile.user.id}. is_subscribed {old} -> {profile.is_subscribed}"
+                )
+            else:
+                logger.warning(f"No profile found for customer_id {customer_id} (subscription {status_sub}).")
+
+        # Désabonnement / échec paiement
         elif event_type in ['customer.subscription.deleted', 'invoice.payment_failed']:
             customer_id = event['data']['object'].get('customer')
             if not customer_id:
@@ -268,13 +317,47 @@ class StripeWebhookView(APIView):
         return HttpResponse(status=200)
 
 
-class RegisterView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]
+class VerifyCheckoutSessionView(APIView):
+    permission_classes = [IsAuthenticated]
 
-class LoginView(TokenObtainPairView):
-    serializer_class = TokenObtainPairSerializer
+    def post(self, request):
+        session_id = request.data.get('session_id') or request.query_params.get('session_id')
+        if not session_id:
+            return Response({'error': 'session_id requis'}, status=400)
+        try:
+            session = stripe.checkout.Session.retrieve(session_id)
+            customer_id = session.get('customer')
+            payment_status = session.get('payment_status')  # paid / unpaid
+            s_status = session.get('status')  # complete / open
+            mode = session.get('mode')  # subscription / payment
+
+            profile, _ = Profile.objects.get_or_create(user=request.user)
+            if customer_id and not profile.stripe_customer_id:
+                profile.stripe_customer_id = customer_id
+
+            should_activate = (payment_status == 'paid' and s_status == 'complete') or mode == 'subscription'
+            if should_activate:
+                profile.is_subscribed = True
+                profile.save()
+                return Response({'ok': True, 'is_subscribed': True})
+            else:
+                return Response({'ok': False, 'is_subscribed': profile.is_subscribed, 'session_status': s_status, 'payment_status': payment_status})
+        except Exception as e:
+            return Response({'error': str(e)}, status=400)
+
+
+# =============================
+# Articles
+# =============================
+class ArticleList(generics.ListAPIView):
+    queryset = Article.objects.all().order_by('-published_at')
+    serializer_class = ArticleSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
 
 
 class ArticleDetailView(RetrieveAPIView):
@@ -283,21 +366,39 @@ class ArticleDetailView(RetrieveAPIView):
     permission_classes = [AllowAny]
 
 
+# =============================
+# Auth
+# =============================
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = [AllowAny]
+
+
+class LoginView(TokenObtainPairView):
+    serializer_class = TokenObtainPairSerializer
+
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
 
+# =============================
+# Commentaires
+# =============================
 class CommentListCreateView(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         article_id = self.kwargs['article_id']
-        # Retourner seulement les commentaires racine, les réponses sont incluses via serializer
-        return Comment.objects.filter(article_id=article_id, parent_comment__isnull=True).order_by('created_at')
+        return Comment.objects.filter(
+            article_id=article_id, parent_comment__isnull=True
+        ).order_by('created_at')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, article_id=self.kwargs['article_id'])
+
 
 class CommentReplyCreateView(APIView):
     permission_classes = [IsAuthenticated]
@@ -319,10 +420,11 @@ class CommentReplyCreateView(APIView):
         data = CommentSerializer(reply, context={'request': request}).data
         return Response(data, status=status.HTTP_201_CREATED)
 
+
 class CommentDeleteView(generics.DestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [permissions.IsAdminUser]  # Seuls les admins peuvent supprimer
+    permission_classes = [permissions.IsAdminUser]
 
 
 class CommentCreateAPIView(generics.CreateAPIView):
@@ -335,7 +437,7 @@ class CommentCreateAPIView(generics.CreateAPIView):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAdminUser])  # Seuls les admins peuvent accéder
+@permission_classes([IsAdminUser])
 def delete_comment(request, comment_id):
     try:
         comment = Comment.objects.get(id=comment_id)
@@ -345,23 +447,28 @@ def delete_comment(request, comment_id):
     comment.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+# =============================
+# User status / util
+# =============================
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_status(request):
-    # Récupérer ou créer le profil utilisateur
-    profile, created = Profile.objects.get_or_create(user=request.user)
-    
+    profile, _ = Profile.objects.get_or_create(user=request.user)
     return Response({
         "username": request.user.username,
         "is_admin": request.user.is_staff,
-        "is_subscribed": profile.is_subscribed
+        "is_subscribed": profile.is_subscribed,
     })
+
+
 def subscription_status(request):
     profile = Profile.objects.get(user=request.user)
     return Response({
         "is_subscribed": profile.is_subscribed,
         "email": request.user.email,
     })
+
 
 def test_db(request):
     try:
@@ -371,7 +478,11 @@ def test_db(request):
         return JsonResponse({"result": one})
     except Exception as e:
         return JsonResponse({"error": str(e)})
-    
+
+
+# =============================
+# CKEditor upload (Cloudinary)
+# =============================
 @method_decorator(csrf_exempt, name='dispatch')
 class CKEditorImageUploadView(View):
     def post(self, request, *args, **kwargs):
@@ -383,11 +494,9 @@ class CKEditorImageUploadView(View):
                     f"<script>window.parent.CKEDITOR.tools.callFunction({func_num}, '', 'Aucun fichier envoyé.');</script>"
                 )
 
-            # Upload vers Cloudinary
             upload_result = cloudinary.uploader.upload(file, folder="ckeditor_uploads")
             url = upload_result.get('secure_url')
 
-            # CKEditor veut un script JS qui appelle sa fonction
             return HttpResponse(
                 f"<script>window.parent.CKEDITOR.tools.callFunction({func_num}, '{url}', '');</script>"
             )
@@ -397,7 +506,7 @@ class CKEditorImageUploadView(View):
                 f"<script>window.parent.CKEDITOR.tools.callFunction({func_num}, '', 'Erreur : {str(e)}');</script>"
             )
 
-# === Fonction indépendante pour upload depuis CKEditor ou autre ===
+
 @csrf_exempt
 def upload_image(request):
     if request.method == "POST" and request.FILES.get("upload"):
@@ -414,6 +523,10 @@ def upload_image(request):
             return JsonResponse({"uploaded": 0, "error": {"message": str(e)}})
     return JsonResponse({"uploaded": 0, "error": {"message": "No file uploaded"}})
 
+
+# =============================
+# Password reset
+# =============================
 class PasswordResetRequestView(APIView):
     permission_classes = [AllowAny]
 
@@ -425,13 +538,13 @@ class PasswordResetRequestView(APIView):
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
-            # Pour des raisons de sécurité, nous ne révélons pas si l'email existe ou non
             return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
 
         try:
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            reset_link = f"{settings.FRONTEND_URL}/reset-password/{uid}/{token}"
+            base_url = _frontend_base_url(request)
+            reset_link = f"{base_url}reset-password/{uid}/{token}"
 
             send_mail(
                 'Réinitialisation de mot de passe',
@@ -440,13 +553,13 @@ class PasswordResetRequestView(APIView):
                 [email],
                 fail_silently=False,
             )
-            
+
             logger.info(f"Password reset email sent to {email}")
             return Response({'message': 'Email de réinitialisation envoyé avec succès.'}, status=status.HTTP_200_OK)
-            
+
         except Exception as e:
             logger.error(f"Error sending password reset email: {str(e)}")
-            return Response({'error': 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': "Erreur lors de l'envoi de l'email. Veuillez réessayer plus tard."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class PasswordResetConfirmView(APIView):
@@ -454,33 +567,25 @@ class PasswordResetConfirmView(APIView):
 
     def post(self, request, uidb64, token, *args, **kwargs):
         try:
-            # Décoder l'UID
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             return Response({'error': 'Lien de réinitialisation invalide.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Vérifier le token
         if not default_token_generator.check_token(user, token):
             return Response({'error': 'Lien de réinitialisation expiré ou invalide.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Récupérer le nouveau mot de passe
         password = request.data.get('password')
         if not password:
             return Response({'error': 'Mot de passe requis.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Valider la longueur du mot de passe
         if len(password) < 6:
             return Response({'error': 'Le mot de passe doit contenir au moins 6 caractères.'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            # Mettre à jour le mot de passe
             user.set_password(password)
             user.save()
-            
             logger.info(f"Password reset successful for user {user.email}")
             return Response({'message': 'Mot de passe réinitialisé avec succès. Vous pouvez maintenant vous connecter.'}, status=status.HTTP_200_OK)
-            
         except Exception as e:
             logger.error(f"Error resetting password: {str(e)}")
             return Response({'error': 'Erreur lors de la réinitialisation. Veuillez réessayer.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
