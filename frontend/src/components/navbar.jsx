@@ -39,7 +39,7 @@ function Navbar() {
 
   return (
     <nav className="w-full bg-gray-200 top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+      <div className="flex md:mr-10 justify-between items-center md:mx-20 px-6 py-4">
         {/* Logo ou titre */}
         <div className="text-2xl font-bold font-SF relative" ref={userMenuRef}>
           {username ? (
@@ -101,28 +101,28 @@ function Navbar() {
 
       {/* Menu déroulant commun mobile + desktop */}
       {isOpen && (
-        <ul className="flex flex-col items-start justify-center md:items-center md:flex-row gap-4 px-6 pb-6 bg-gray-200">
-          <li className="text-lg md:text-xl font-SF hover:text-yellow-600">
+        <ul className="flex flex-col items-start justify-center md:items-center md:flex-row md:gap-15 gap-4 px-6 pb-6 bg-gray-200">
+          <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/" onClick={toggleMenu}>Accueil</Link>
           </li>
-          <li className="text-lg md:text-xl font-SF hover:text-yellow-600">
+          <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/livre" onClick={toggleMenu}>Livre</Link>
           </li>
-          <li className="text-lg md:text-xl font-SF hover:text-yellow-600">
+          <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/articles" onClick={toggleMenu}>Articles</Link>
           </li>
-          <li className="text-lg md:text-xl font-SF hover:text-yellow-600">
+          <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/abonnement" onClick={toggleMenu}>Abonnement</Link>
           </li>
-          <li className="text-lg md:text-xl font-SF hover:text-yellow-600">
+          <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/contact" onClick={toggleMenu}>Contact</Link>
           </li>
           {username ? (
-            <li className="text-lg md:text-xl font-SF hover:text-yellow-600 cursor-pointer" onClick={() => { toggleMenu(); handleLogout(); }}>
+            <li className="text-lg md:text-2xl font-SF hover:text-yellow-600 cursor-pointer" onClick={() => { toggleMenu(); handleLogout(); }}>
               Déconnexion
             </li>
           ) : (
-            <li className="text-lg md:text-xl font-SF hover:text-yellow-600">
+            <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
               <Link to="/connexion" onClick={toggleMenu}>Connexion</Link>
             </li>
           )}

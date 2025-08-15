@@ -16,7 +16,7 @@ function Livre() {
             <meta name="description" content="Découvrez le livre 'Nutrition Antifragile' d'Alionka Houl, une exploration de la nutrition moderne et des pièges de l'industrie alimentaire." />
         </Helmet>
         <header className="px-4 bg-linear-to-t from-white to-gray-200 ">
-                <h1 className="text-center text-2xl md:text-4xl font-SFBold max-w-4xl block mx-auto">Ce n’est pas un livre de régimes ni de recettes.  <br/>C’est le pourquoi du comment. Décortiqué, dérangeant, mais nécessaire. Vous méritez de savoir ce qu’on vous cache depuis 50 ans.</h1>
+                <h1 className="text-center text-2xl md:text-4xl font-SFBold max-w-6xl block mx-auto">Ce n’est pas un livre de régimes ni de recettes.  <br/>C’est le pourquoi du comment. Décortiqué, dérangeant, mais nécessaire. Vous méritez de savoir ce qu’on vous cache depuis 50 ans.</h1>
                 <div className="flex flex-col md:flex-row md:gap-20 mt-10 max-w-5xl  mx-auto">
                     <div className="flex justify-center">
                         <img src = {livre} alt="Livre Nutrition Antifragile" className="  md:w-200 md:h-auto w-auto h-100 shadow-xl/50 mt-8" />

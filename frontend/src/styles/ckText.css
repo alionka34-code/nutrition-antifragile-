@@ -1,19 +1,52 @@
+/* Base font: San Francisco on Apple devices (-apple-system), with sensible fallbacks */
+.article-content {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Use bold weight for titles and emphasized text */
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6,
+.article-content strong,
+.article-content b {
+  font-weight: 700;
+}
+
+/* Ensure headings inherit the same family (for consistency) */
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+  font-family: inherit;
+}
+
 .article-content h1 {
-  font-size: 2.5rem; 
+  font-size: 3rem; 
 }
 
 .article-content h2 {
-  font-size: 2rem; 
+  font-size: 2.5rem; 
   
 }
 
 .article-content h3 {
-  font-size: 1.5rem; 
+  font-size: 2rem; 
 
 }
 
 .article-content p {
-  font-size: 1rem; 
+  font-size: 1.5rem; 
 
 }
 

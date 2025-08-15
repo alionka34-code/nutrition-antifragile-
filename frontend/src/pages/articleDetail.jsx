@@ -99,13 +99,13 @@ function ArticleDetail() {
   return (
     <>
     <header className=" text-center pt-10 bg-linear-to-t from-white to-gray-200">
-       <h1 className=" text-3xl mx-4 md:text-5xl md:mx-auto md:max-w-4xl font-SFBold mb-4">{article.title}</h1>
-      <p className="text-sm text-gray-500 mb-6 font-SF">
+       <h1 className=" text-3xl mx-4 md:text-6xl md:mx-auto md:max-w-6xl font-SFBold mb-4 text-marron">{article.title}</h1>
+      <p className="text-m text-gray-500 mb-6 font-SF">
         Publié le {new Date(article.published_at).toLocaleDateString("fr-FR")}
       </p>
     </header>
-    <div className=" mx-4 md:mx-auto md:max-w-5xl px-4 py-8">
-      <div className="overflow-hidden mx-auto md:max-w-5xl md:h-150">
+    <div className="md:mx-40 m-4">
+      <div className="overflow-hidden md:w-full md:h-200">
         {article.image && (
         <img
           src={`${article.image}`}

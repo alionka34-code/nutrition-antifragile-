@@ -34,7 +34,7 @@ function ContactForm() {
        
     </header>
     <main>
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl  mx-4 md:mx-auto p-6 font-SFBold bg-white rounded-2xl shadow-xl space-y-10 border-2 border-marron">
+      <form onSubmit={handleSubmit(onSubmit)} className="max-w-3xl  mx-4 md:mx-auto p-6 font-SFBold bg-white rounded-2xl shadow-xl space-y-10 border-2 border-marron">
       <h2 className="text-4xl font-SFBold text-center text-marron">Envoyez nous un message</h2>
 
 
@@ -82,7 +82,7 @@ function ContactForm() {
       {isSubmitSuccessful && (
         <p className="text-green-600 text-center">Message envoyé avec succès !</p>
       )}
-      <h1 className="text-center font-SFBold text-lg">Rejoignez la communauté antifragile sur mes reséaux sociaux qui comptent déjà plus de 20 000 abonnés :</h1>
+      <h1 className="text-center font-SFBold text-lg">Rejoignez la communauté antifragile sur mes reséaux sociaux qui comptent déjà plus de 60 000 abonnés :</h1>
         <div className="flex justify-center">
             <a href="https://www.tiktok.com/@nut_antifragile" target="_blank" rel="noopener noreferrer" className="mx-2">
             <img src={tiktok} alt="TikTok" className="w-10 h-10" />

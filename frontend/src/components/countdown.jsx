@@ -57,13 +57,11 @@ function Countdown() {
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col">
               <span
-                className={`md:text-4xl text-2xl font-SFBold text-white transition-transform duration-300 ${
-                  pulse ? "scale-125" : "scale-100"
-                }`}
+                className={`md:text-4xl text-xl font-SFBold text-white transition-transform duration-300`}
               >
                 {String(item.value).padStart(2, "0")}
               </span>
-              <span className="text-yellow-300">{item.label}</span>
+              <span className="text-yellow-300 text-sm md:text-xl">{item.label}</span>
             </div>
           ))}
         </div>

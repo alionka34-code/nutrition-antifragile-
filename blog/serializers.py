@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Article
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Comment 
 
@@ -88,6 +89,25 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        """
+        Allow case-insensitive login by resolving the provided username
+        using an iexact lookup, then passing the canonical username to
+        the parent validator (which calls authenticate).
+        """
+        username_field = self.username_field
+        provided = attrs.get(username_field)
+        if isinstance(provided, str) and provided:
+            UserModel = get_user_model()
+            try:
+                user_obj = UserModel.objects.get(**{f"{username_field}__iexact": provided})
+                # Replace with the exact stored username so authenticate succeeds
+                attrs[username_field] = getattr(user_obj, username_field)
+            except UserModel.DoesNotExist:
+                # Fall back to provided value; parent will raise the usual error
+                pass
+        return super().validate(attrs)
+
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)

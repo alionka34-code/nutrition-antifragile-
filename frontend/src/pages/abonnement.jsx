@@ -2,6 +2,27 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from "react-helmet";
 import Countdown from '../components/countdown'; 
 import { createCheckoutSession } from '../utils/api'; 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Grid } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "../styles/swiper-custom.css";
+import avis1 from  '../assets/images/avis1.jpg'
+import avis2 from  '../assets/images/avis2.jpg'
+import avis3 from  '../assets/images/avis3.jpg'
+import avis4 from  '../assets/images/avis4.jpg'
+import avis5 from  '../assets/images/avis5.jpg'
+import avis6 from  '../assets/images/avis6.jpg'
+import avis7 from  '../assets/images/avis7.jpg'
+import avis8 from  '../assets/images/avis8.jpg'
+import avis9 from  '../assets/images/avis9.jpg'
+import avis10 from  '../assets/images/avis10.jpg'
+import avis11 from  '../assets/images/avis11.jpg'
+import avis12 from  '../assets/images/avis12.jpg'
+import avis13 from  '../assets/images/avis13.jpg'
+import avis14 from  '../assets/images/avis14.jpg'
+import avis15 from  '../assets/images/avis15.jpg'
+
   
 
 function Abonnement() {
@@ -67,7 +88,7 @@ function Abonnement() {
             <p className="text-center text-lg text-gray-600 mt-2">Accédez à tout le contenu premium</p>
         </header>
             <form className="pt-20" onSubmit={handleSubmit}>
-            <div className='bg-white flex flex-col border-4 rounded-2xl shadow-lg shadow-black/50 p-10 mx-4 md:mx-auto md:max-w-2xl border-marron'>
+            <div className='bg-white flex flex-col border-4 rounded-2xl shadow-lg shadow-black/50 p-10 mx-4 md:mx-auto md:max-w-4xl border-marron'>
             <h1 className='font-SFBold text-2xl text-center md:text-4xl text-marron'>Rejoignez plus de 1000 membres antifragiles</h1>
             <p className=" mt-4 text-center font-SF md:text-2xl text-xl">Qui reprennent le contrôle de leur alimentation, loin des dogmes et des manipulations de l'industrie</p>
              <h1 className="font-SFBold text-xl md:text-2xl my-8 text-center">Choisissez votre formule</h1>
@@ -96,6 +117,17 @@ function Abonnement() {
                          ? 'border-marron shadow-marron/30 bg-marron/5 scale-105 shadow-2xl' 
                          : 'border-gray-200 shadow-black/50 hover:border-marron/70 hover:scale-102'
                      }`}>
+                        {/* Check badge when selected */}
+                        {selectedPlan === 'launch' && (
+                          <span
+                            className="absolute top-3 right-3 w-6 h-6 md:w-7 md:h-7 rounded-full bg-marron text-white flex items-center justify-center shadow"
+                            aria-label="Plan sélectionné"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.5 7.5a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L8.5 12.086l6.793-6.793a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          </span>
+                        )}
                         <div className="relative bottom-7">
                         <span className="font-SFBold text-white border-2 rounded-2xl py-1 px-4 bg-red-400 animate-pulse" >OFFRE DU MOMENT</span>
                     </div>
@@ -126,6 +158,17 @@ function Abonnement() {
                          ? 'border-marron shadow-marron/30 bg-marron/5 scale-105 shadow-2xl' 
                          : 'border-gray-200 shadow-black/50 hover:border-marron/70 hover:scale-102'
                      }`}>
+                        {/* Check badge when selected */}
+                        {selectedPlan === 'monthly' && (
+                          <span
+                            className="absolute top-3 right-3 w-6 h-6 md:w-7 md:h-7 rounded-full bg-marron text-white flex items-center justify-center shadow"
+                            aria-label="Plan sélectionné"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.5 7.5a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L8.5 12.086l6.793-6.793a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          </span>
+                        )}
                     <h1 className="font-SFBold text-2xl">Abonnement mensuel</h1>
                     <h2 className="font-SFBold text-2xl text-marron my-2">10€<span className='text-xl font-SF text-gray-500'>/mois</span></h2>
                     <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">Flexibilité maximale</span>
@@ -162,6 +205,65 @@ function Abonnement() {
         </div>
         
         </form>
+         <div className=" mx-4 md:max-w-7xl md:mx-auto" >
+            <Swiper
+        rewind={true}
+        slidesPerView={1}
+        grid={{
+          rows: 2,
+        }}
+        spaceBetween={40}
+        pagination={{
+          clickable: true,
+          dynamicBullets: true,
+        }}
+         autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        breakpoints={{
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 20, // Tablette et grands écrans
+            }
+        }}
+        modules={[Grid, Pagination, Autoplay]}
+        className="mySwiper mt-10"
+      >
+        <SwiperSlide><img src={avis1} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis2} className="rounded-2xl" /></SwiperSlide>
+        <SwiperSlide><img src={avis3} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis4} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis5} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis6} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis7} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis8} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis9} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis10} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis11} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis12} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis13} className="rounded-2xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis14} className="rounded-2xl"/></SwiperSlide>
+          <SwiperSlide><img src={avis15} className="rounded-2xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis1} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis2} className="rounded-2xl" /></SwiperSlide>
+        <SwiperSlide><img src={avis3} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis4} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis5} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis6} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis7} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis8} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis9} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis10} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis11} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis12} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis13} className="rounded-2xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis14} className="rounded-2xl"/></SwiperSlide>
+          <SwiperSlide><img src={avis15} className="rounded-2xl"/></SwiperSlide>
+        
+      
+      </Swiper>
+      </div>
         </>
     );
 
