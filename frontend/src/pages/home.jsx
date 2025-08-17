@@ -129,7 +129,7 @@ function Home() {
        
         modules={[Autoplay, Pagination]}
         className="mySwiper ">
-            <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-sm p-5'>"Nutrition Antifragile est un livre à la fois complet, accessible et passionnant, il réussit le pari de mêler riguer scientifique et clarté, sans jamais devenir trop technique. Les encadrés scientifiques rythment la lecture de manière inteliligente, apportant des éclairages utiles sans alourdir le propos.<br/>La partie sur les aliments à privilégier est particulièrement intéressante: on y découvre des produits souvent oubliés ou mal compris, comme le kombucha, le riz noir, le pain au levain ou encore le bouillon d'os.<br/> L'analyse est solide, bien documentée, et offre des recommandations à la fois concrètes, critiques et très pertinentes.<br/>C'est un ouvrage cohérent, bien ancré dans les préoccupations acctuelles autour de l'alimentation, que je recommande sans hésiter."
+            <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-m p-5'>"Nutrition Antifragile est un livre à la fois complet, accessible et passionnant, il réussit le pari de mêler riguer scientifique et clarté, sans jamais devenir trop technique. Les encadrés scientifiques rythment la lecture de manière inteliligente, apportant des éclairages utiles sans alourdir le propos.<br/>La partie sur les aliments à privilégier est particulièrement intéressante: on y découvre des produits souvent oubliés ou mal compris, comme le kombucha, le riz noir, le pain au levain ou encore le bouillon d'os.<br/> L'analyse est solide, bien documentée, et offre des recommandations à la fois concrètes, critiques et très pertinentes.<br/>C'est un ouvrage cohérent, bien ancré dans les préoccupations acctuelles autour de l'alimentation, que je recommande sans hésiter."
            <div class="grid place-items-center py-5">
   <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
         fill="currentColor" class="w-6 h-6 text-yellow-300 ">
@@ -158,7 +158,7 @@ function Home() {
       </svg></span></div>
 </div></p>
      </div></SwiperSlide>
-     <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-sm p-5'>Des révélations qui ont enfin mis de la clarté sur tous mes échecs alimentaires passés. Je cherchais des solutions sans voir le vrai problème. “ Je portais des œillères”, comme le dit si justement l’auteure. Ce livre m’a offert une vraie prise de conscience.  Merci
+     <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-m p-5'>Des révélations qui ont enfin mis de la clarté sur tous mes échecs alimentaires passés. Je cherchais des solutions sans voir le vrai problème. “ Je portais des œillères”, comme le dit si justement l’auteure. Ce livre m’a offert une vraie prise de conscience.  Merci
            <div class="grid place-items-center py-5">
   <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
         fill="currentColor" class="w-6 h-6 text-yellow-300 ">
@@ -186,7 +186,7 @@ function Home() {
 </div></p>
      
             </div></SwiperSlide>
-            <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-sm p-5'>
+            <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-m p-5'>
                 Avant de penser régime ou végétarisme, il faut remonter à la source de cette grande mascarade alimentaire. Le vrai commencement. Un point de départ fondamental dont personne ne parle, et pourtant indispensable pour tout comprendre. Ce livre révèle des vérités que beaucoup ignorent, non pas par négligence, mais parce qu’on les a soigneusement passées sous silence.
            <div class="grid place-items-center py-5">
   <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -215,7 +215,7 @@ function Home() {
 </div></p>
      
             </div></SwiperSlide>
-            <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-sm p-5'>Un déclic immédiat. Ce livre ne donne pas des conseils en plus, il change complètement la façon de voir l’alimentation. 
+            <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-m p-5'>Un déclic immédiat. Ce livre ne donne pas des conseils en plus, il change complètement la façon de voir l’alimentation. 
            <div class="grid place-items-center py-5">
   <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
         fill="currentColor" class="w-6 h-6 text-yellow-300 ">
@@ -242,7 +242,7 @@ function Home() {
 </div></p>
      
             </div></SwiperSlide>
-            <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-sm p-5'>Nutrition Antifragile est un livre vraiment complet, accessible et passionnant. Je l’ai dévoré en 2 jours. Les encadrés scientifiques permettent de creuser sans jamais devenir trop technique. J’ai découvert des produits souvent oublié comme le bouillon d’os. Une mine d’or d’infos sans filtre, que je recommande sans hésiter.
+            <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-2xl mx-4'><p className='text-center font-SF text-m p-5'>Nutrition Antifragile est un livre vraiment complet, accessible et passionnant. Je l’ai dévoré en 2 jours. Les encadrés scientifiques permettent de creuser sans jamais devenir trop technique. J’ai découvert des produits souvent oublié comme le bouillon d’os. Une mine d’or d’infos sans filtre, que je recommande sans hésiter.
            <div class="grid place-items-center py-5">
   <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
         fill="currentColor" class="w-6 h-6 text-yellow-300 ">

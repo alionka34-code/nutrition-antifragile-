@@ -46,7 +46,7 @@
 }
 
 .article-content p {
-  font-size: 1.5rem; 
+  font-size: 1.25rem; 
 
 }
 
@@ -58,6 +58,13 @@
 
 .article-content li {
   margin-bottom: 0.5rem;
+}
+
+.article-content strong {
+  font-size: 1.5rem;
+}
+.article-content em {
+  font-size: 1.25rem;
 }
 
 @media (max-width: 768px) {
@@ -73,6 +80,12 @@
   .article-content p {
     font-size: 1rem;
   }
+  .article-content strong {
+  font-size: 1.25rem;
+}
+.article-content em {
+  font-size: 1rem;
+}
 }
 
 /* === Sommaire (TOC) : changement de fond au survol ===
@@ -82,6 +95,7 @@
   transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
   will-change: transform, box-shadow;
   cursor: pointer;
+  
 }
 .article-content .toc-container > div:hover {
   background-color: #f5f1eb !important; /* override inline */
