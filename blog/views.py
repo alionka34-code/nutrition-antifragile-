@@ -243,7 +243,7 @@ class StripeWebhookView(APIView):
         sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
         endpoint_secret = (getattr(settings, 'STRIPE_WEBHOOK_SECRET', '') or '').strip()
 
-        try:
+        try:     
             event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
         except ValueError as e:
             logger.error(f"Invalid payload: {e}")
@@ -258,7 +258,7 @@ class StripeWebhookView(APIView):
         event_type = event.get('type', 'unknown')
         logger.info(f"Stripe webhook received: {event_type}")
 
-        # Log du webhook (payload JSONField -> dict)
+        # Log du webhook
         try:
             StripeWebhookLog.objects.create(
                 event_type=event_type,
@@ -267,45 +267,52 @@ class StripeWebhookView(APIView):
         except Exception as e:
             logger.warning(f"Could not save webhook log: {e}")
 
-        # invoice.payment_succeeded -> abonnement actif
-        if event_type == 'invoice.payment_succeeded':
-            invoice = event['data']['object']
-            customer_id = invoice.get('customer')
-            sub_id = invoice.get('subscription')
-            should_be_active = True
-            if sub_id:
+        obj = event['data']['object']
+        customer_id = obj.get('customer')
+        metadata = obj.get('metadata') or {}
+
+        # --- Désabonnement / échec paiement ---
+        if event_type in ['customer.subscription.deleted', 'invoice.payment_failed']:
+            if not customer_id and obj.get('id'):
                 try:
-                    sub = stripe.Subscription.retrieve(sub_id)
-                    status_sub = sub.get('status')
-                    cancel_at_period_end = bool(sub.get('cancel_at_period_end'))
-                    should_be_active = (status_sub in ['active', 'trialing']) and not cancel_at_period_end
-                    logger.info(
-                        f"invoice.payment_succeeded -> subscription {sub_id} status={status_sub} cancel_at_period_end={cancel_at_period_end} -> should_be_active={should_be_active}"
-                    )
-                except Exception as e:
-                    logger.warning(f"Could not retrieve subscription {sub_id} on invoice.payment_succeeded: {e}")
-            if not customer_id:
-                logger.warning("No customer_id in invoice.payment_succeeded event.")
-            else:
-                profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=invoice.get('metadata') or {})
+                    sub = stripe.Subscription.retrieve(obj.get('id'))
+                    customer_id = sub.get('customer')
+                    metadata = metadata or sub.get('metadata') or {}
+                except Exception:
+                    pass
+            if customer_id:
+                profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=metadata)
                 if profile:
                     old = profile.is_subscribed
-                    profile.is_subscribed = should_be_active
+                    profile.is_subscribed = False
                     profile.save()
-                    logger.info(f"Profile {profile.user.id} set to {profile.is_subscribed} (invoice.payment_succeeded). was {old}")
+                    logger.info(f"Profile {profile.user.id} unsubscribed. was {old}")
                 else:
-                    logger.warning(f"No profile found for customer_id {customer_id}.")
+                    logger.warning(f"No profile resolved for customer_id {customer_id} on {event_type}.")
 
-        # checkout.session.* -> activer abonnement
+        # --- Subscription updated / created ---
+        elif event_type in ['customer.subscription.updated', 'customer.subscription.created']:
+            sub = obj
+            status_sub = sub.get('status')
+            cancel_at_period_end = bool(sub.get('cancel_at_period_end'))
+            profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=metadata)
+            if profile:
+                should_be_active = (status_sub in ['active', 'trialing']) and not cancel_at_period_end
+                old = profile.is_subscribed
+                profile.is_subscribed = should_be_active
+                profile.save()
+                logger.info(
+                    f"Subscription {status_sub} (cancel_at_period_end={cancel_at_period_end}) for profile {profile.user.id}. is_subscribed {old} -> {profile.is_subscribed}"
+                )
+            else:
+                logger.warning(f"No profile resolved for customer_id {customer_id} (subscription {status_sub}).")
+
+        # --- Checkout session succeeded ---
         elif event_type in ['checkout.session.completed', 'checkout.session.async_payment_succeeded']:
-            session = event['data']['object']
+            session = obj
             customer_id = session.get('customer')
             customer_email = session.get('customer_details', {}).get('email')
             client_ref = session.get('client_reference_id')
-
-            logger.info(
-                f"Checkout completed - customer_id: {customer_id}, email: {customer_email}, client_ref: {client_ref}"
-            )
 
             profile = None
             if customer_id:
@@ -334,81 +341,29 @@ class StripeWebhookView(APIView):
             else:
                 logger.warning("Unable to resolve profile in checkout session webhook.")
 
-        # payment_intent.succeeded -> paiements directs
-        elif event_type == 'payment_intent.succeeded':
-            pi = event['data']['object']
-            customer_id = pi.get('customer')
-            # Try to infer subscription from related invoice
-            should_be_active = False
-            invoice_id = pi.get('invoice')
-            if invoice_id:
+        # --- Invoice / Payment intent ---
+        elif event_type == 'invoice.payment_succeeded':
+            invoice = obj
+            customer_id = invoice.get('customer')
+            sub_id = invoice.get('subscription')
+            should_be_active = True
+            if sub_id:
                 try:
-                    inv = stripe.Invoice.retrieve(invoice_id)
-                    sub_id = inv.get('subscription')
-                    if sub_id:
-                        sub = stripe.Subscription.retrieve(sub_id)
-                        status_sub = sub.get('status')
-                        cancel_at_period_end = bool(sub.get('cancel_at_period_end'))
-                        should_be_active = (status_sub in ['active', 'trialing']) and not cancel_at_period_end
-                        logger.info(
-                            f"payment_intent.succeeded -> subscription {sub_id} status={status_sub} cancel_at_period_end={cancel_at_period_end} -> should_be_active={should_be_active}"
-                        )
+                    sub = stripe.Subscription.retrieve(sub_id)
+                    status_sub = sub.get('status')
+                    cancel_at_period_end = bool(sub.get('cancel_at_period_end'))
+                    should_be_active = (status_sub in ['active', 'trialing']) and not cancel_at_period_end
                 except Exception as e:
-                    logger.warning(f"Could not resolve subscription from payment_intent invoice: {e}")
-            if customer_id and should_be_active:
-                profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=pi.get('metadata') or {})
+                    logger.warning(f"Could not retrieve subscription {sub_id} on invoice.payment_succeeded: {e}")
+            if customer_id:
+                profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=invoice.get('metadata') or {})
                 if profile:
                     old = profile.is_subscribed
-                    profile.is_subscribed = True
+                    profile.is_subscribed = should_be_active
                     profile.save()
-                    logger.info(f"Profile {profile.user.id} set to subscribed (payment_intent.succeeded). was {old}")
+                    logger.info(f"Profile {profile.user.id} set to {profile.is_subscribed} (invoice.payment_succeeded). was {old}")
                 else:
                     logger.warning(f"No profile found for customer_id {customer_id}.")
-
-        # customer.subscription.* -> synchronisation statut
-        elif event_type in ['customer.subscription.created', 'customer.subscription.updated']:
-            sub = event['data']['object']
-            customer_id = sub.get('customer')
-            status_sub = sub.get('status')  # active, trialing, past_due, canceled, unpaid, incomplete, incomplete_expired
-            cancel_at_period_end = bool(sub.get('cancel_at_period_end'))
-            metadata = sub.get('metadata') or {}
-            profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=metadata)
-            if profile:
-                # Enlever l'accès immédiatement si résiliation programmée
-                should_be_active = (status_sub in ['active', 'trialing']) and not cancel_at_period_end
-                old = profile.is_subscribed
-                profile.is_subscribed = should_be_active
-                profile.save()
-                logger.info(
-                    f"Subscription {status_sub} (cancel_at_period_end={cancel_at_period_end}) for profile {profile.user.id}. is_subscribed {old} -> {profile.is_subscribed}"
-                )
-            else:
-                logger.warning(f"No profile resolved for customer_id {customer_id} (subscription {status_sub}).")
-
-        # Désabonnement / échec paiement
-        elif event_type in ['customer.subscription.deleted', 'invoice.payment_failed']:
-            obj = event['data']['object']
-            customer_id = obj.get('customer')
-            metadata = obj.get('metadata') or {}
-            if not customer_id and obj.get('id'):
-                # Try retrieve subscription to get customer
-                try:
-                    sub = stripe.Subscription.retrieve(obj.get('id'))
-                    customer_id = customer_id or sub.get('customer')
-                    metadata = metadata or sub.get('metadata') or {}
-                except Exception:
-                    pass
-            if not customer_id:
-                logger.warning(f"No customer_id in {event_type} event.")
-            else:
-                profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=metadata)
-                if profile:
-                    old = profile.is_subscribed
-                    profile.is_subscribed = False
-                    profile.save()
-                    logger.info(f"Profile {profile.user.id} unsubscribed. was {old}")
-                else:
-                    logger.warning(f"No profile resolved for customer_id {customer_id} on {event_type}.")
 
         return HttpResponse(status=200)
 
