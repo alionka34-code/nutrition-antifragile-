@@ -180,8 +180,8 @@ function Abonnement() {
             <h1 className='font-SFBold text-center  text-2xl md:text-4xl mb-4'>Ce que vous obtenez</h1>
             <ul className='pl-6 text-lg md:text-xl font-SF mr-4'>
                 <li className='mb-6'>
-                    <strong className='text-marron font-SFBold'>✓ 4 articles exclusifs par mois</strong>
-                    <br/>Une analyse independante, sourcee et sans filtre.
+                    <strong className='text-marron font-SFBold'>✓ 3 articles exclusifs par mois</strong>
+                    <br/>Une analyse independante, sourcée et sans filtre.
                 </li>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ Communauté privée</strong>

@@ -249,11 +249,29 @@ function Connexion() {
         </Helmet>
         <header className="bg-gradient-to-t from-white to-gray-200">
             <h1 className="text-center text-4xl md:text-6xl font-SFBold">CONNEXION</h1>
-            <p className="text-center text-lg md:text-xl text-gray-500 mt-2 font-SF">Accédez à votre espace personnel et découvrez les secrets d'une nutrition antifragile</p>
+            <p className="text-center text-lg md:text-xl text-gray-500 mt-2 font-SF mx-4">Accédez à votre espace personnel et découvrez les secrets d'une nutrition antifragile</p>
         </header>
         
+        {/* Info block for mobile (shown above the auth container) */}
+        <div className="md:hidden mx-4 mt-6 text-center">
+           
+            <p className="text-center font-SF text-base mb-2">
+                Rejoignez notre communauté et accédez aux contenus gratuits
+            </p>
+            <p className="font-SF"><span className="text-green-600 text-lg">✓ </span>Recevez chaque mardi un extrait de notre analyse exclusive directement par e‑mail</p>
+            <p className="font-SF"><span className="text-green-600 text-lg">✓ </span>Commentez les articles et échangez avec d'autres lecteurs engagés</p>
+            <p className="flex items-center justify-center font-SFBoltItalic mt-4 text-sm text-marron">
+                <span className="mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-black">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>
+                </span>
+                L'accès complet aux articles est réservé aux membres ayant un abonnement
+            </p>
+        </div>
+
         <div className="flex items-center justify-center p-4 pt-10">
-            <div className="bg-white rounded-3xl shadow-2xl relative overflow-hidden w-full max-w-4xl min-h-[600px] flex flex-col md:flex-row border-1 border-marron">
+            <div className="bg-white rounded-3xl shadow-2xl relative overflow-hidden w-full max-w-6xl min-h-[600px] flex flex-col md:flex-row border-1 border-marron">
                 
                 {/* Formulaire d'inscription */}
                 <div className={`absolute md:absolute top-0 left-0 h-full w-full md:w-1/2 flex items-center justify-center transition-all duration-700 ease-in-out ${
