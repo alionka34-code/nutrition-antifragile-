@@ -155,18 +155,4 @@ MEDIA_URL = '/media/'
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173/")
 
 
-# Configuration email Gmail (plus fiable que OVH)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = os.getenv('GMAIL_EMAIL')  # Votre email Gmail
-EMAIL_HOST_PASSWORD = os.getenv('GMAIL_APP_PASSWORD')  # Mot de passe d'application Gmail
-DEFAULT_FROM_EMAIL = os.getenv('GMAIL_EMAIL')
-
-# Pour debug : afficher aussi dans la console en mode développement
-if DEBUG:
-    import logging
-    logging.basicConfig(level=logging.INFO)
-
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY")

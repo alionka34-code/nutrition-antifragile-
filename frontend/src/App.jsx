@@ -13,6 +13,10 @@ import SubscriptionSuccess from './pages/SubscriptionSuccess';
 import SubscriptionCancel from './pages/SubscriptionCancel';
 import PasswordLost from './pages/PasswordLost.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
+import MentionLegale  from './pages/MentionLegale.jsx';
+import CGV from './pages/CGV.jsx';
+import CGU from './pages/CGU.jsx';
+import RGPD from './pages/RGPD.jsx';
 
 function App() {
   return (
@@ -33,6 +37,11 @@ function App() {
               <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
               <Route path="/password-lost" element={<PasswordLost />} />
               <Route path="/reset-password/:uidb64/:token" element={<ResetPassword />} />
+              <Route path="/mentions-legales" element={<MentionLegale />} />
+              <Route path="/cgv" element={<CGV />} />
+              <Route path="/cgu" element={<CGU />} />
+              <Route path="/rgpd" element={<RGPD />} />
+              
             </Routes>
           </div>
           <Footer />
