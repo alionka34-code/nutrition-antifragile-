@@ -58,11 +58,9 @@
 
 .article-content li {
   margin-bottom: 0.5rem;
+  font-size: 1.25rem;
 }
 
-.article-content strong {
-  font-size: 1.5rem;
-}
 .article-content em {
   font-size: 1.25rem;
 }
@@ -80,12 +78,14 @@
   .article-content p {
     font-size: 1rem;
   }
-  .article-content strong {
-  font-size: 1.25rem;
-}
-.article-content em {
+  .article-content em {
   font-size: 1rem;
 }
+.article-content li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
 }
 
 /* === Sommaire (TOC) : changement de fond au survol ===
