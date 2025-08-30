@@ -29,12 +29,13 @@ function ContactForm() {
   return (
     <>
     <header className='bg-gradient-to-t from-white to-gray-200 mb-10'>
-        <div className="flex flex-col mx-auto max-w-4xl"><h1 className="md:text-6xl text-4l text-center text-marron font-SFBold">CONTACTEZ-NOUS</h1>
+        <div className="flex flex-col mx-auto max-w-4xl"><h1 className="md:text-6xl text-4xl text-center text-marron font-SFBold">CONTACTEZ-NOUS</h1>
         <p className="md:text-xl text-center font-SF text-gray-600 m-2 ">Que vous ayez des questions sur le livre, que vous souhaitiez partager votre expérience ou que vous cherchiez des conseils personnalisés, n'hésitez pas à nous écrire.</p></div>
        
     </header>
     <main>
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-3xl  mx-4 md:mx-auto p-6 font-SFBold bg-white rounded-2xl shadow-xl space-y-10 border-2 border-marron">
+      <div className='flex flex-col md:flex-row justify-center items-center border-3 border-marron rounded-4xl mx-4 md:mx-auto md:max-w-6xl md:px-20 md:py-10 text-center my-10 gap-10  shadow-xl'>
+        <form onSubmit={handleSubmit(onSubmit)} className="mx-4 p-6 font-SFBold  space-y-10  ">
       <h2 className="text-4xl font-SFBold text-center text-marron">Envoyez nous un message</h2>
 
 
@@ -91,7 +92,28 @@ function ContactForm() {
             <img src={instagram} alt="Instagram" className="w-10 h-10" />
             </a>
         </div>    
+        
     </form>
+  <div className='border-0 md:border-3 md:border-marron rounded-4xl p-6 max-w-sm h-fit mx-10 md:mx-auto md:shadow-xl mb-10'>
+      <script async
+
+src="https://js.stripe.com/v3/buy-button.js">
+
+</script>
+
+<stripe-buy-button
+
+buy-button-id="buy_btn_1S1n1ABthRAmBImUOeE0dzv0"
+
+publishable-key="pk_live_51RqKy7BthRAmBImU2KV37i8gu6iRV9wk44IqENdZcsC28HIwGrRm0L4K4QvrD76a2AyHC19bs76hcEY5tij2Iosf00M86EKP4s"
+
+>
+
+</stripe-buy-button>
+    </div>
+      </div>
+      
+   
     </main>
     </>
   );
