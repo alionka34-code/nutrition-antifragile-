@@ -83,15 +83,15 @@ function Abonnement() {
             <title>Abonnement | Nutrition Antifragile</title>
             <meta name="description" content="Rejoignez notre communauté de membres antifragiles et reprenez le contrôle de votre alimentation avec nos formules d'abonnement." />
         </Helmet>
-        <header className="bg-linear-to-t from-white to-gray-200">
-            <h1 className="text-center text-6xl font-SFBold text-marron pt-10">Choisissez votre abonnement</h1>
-            <p className="text-center text-lg text-gray-600 mt-2">Accédez à tout le contenu premium</p>
+        <header >
+            <h1 className="text-center text-6xl font-SFBold text-marron pt-10 ">Choisissez votre abonnement</h1>
+            <p className="text-center text-lg text-gray-600 mt-2  dark:text-white">Accédez à tout le contenu premium</p>
         </header>
             <form className="pt-20" onSubmit={handleSubmit}>
-            <div className='bg-white flex flex-col border-4 rounded-2xl shadow-lg shadow-black/50 p-10 mx-4 md:mx-auto md:max-w-4xl border-marron'>
+            <div className='bg-white  dark:bg-neutral-800   flex flex-col border-4 rounded-4xl shadow-lg shadow-black/50 p-10 mx-4 md:mx-auto md:max-w-4xl border-marron'>
             <h1 className='font-SFBold text-2xl text-center md:text-4xl text-marron'>Rejoignez plus de 1000 membres antifragiles</h1>
-            <p className=" mt-4 text-center font-SF md:text-2xl text-xl">Qui reprennent le contrôle de leur alimentation, loin des dogmes et des manipulations de l'industrie</p>
-             <h1 className="font-SFBold text-xl md:text-2xl my-8 text-center">Choisissez votre formule</h1>
+            <p className=" mt-4 text-center font-SF md:text-2xl text-xl  dark:text-white">Qui reprennent le contrôle de leur alimentation, loin des dogmes et des manipulations de l'industrie</p>
+             <h1 className="font-SFBold text-xl md:text-2xl my-8 text-center  dark:text-white">Choisissez votre formule</h1>
              {errorMessage && (
                     <div ref={errorRef} className="mb-6 text-center text-red-700 bg-red-100 border border-red-400 rounded-2xl py-2 px-4 font-SF">
                         {errorMessage}
@@ -131,7 +131,7 @@ function Abonnement() {
                         <div className="relative bottom-7">
                         <span className="font-SFBold text-white border-2 rounded-2xl py-1 px-4 bg-red-400 animate-pulse" >OFFRE DU MOMENT</span>
                     </div>
-                    <h1 className="font-SFBold text-2xl">Abonnement annuel</h1>
+                    <h1 className="font-SFBold text-2xl  dark:text-white">Abonnement annuel</h1>
                     <h2 className="font-SFBold text-2xl text-marron my-2">
                         <span className="text-gray-400 line-through text-xl mr-2">100€</span>
                         70€<span className="text-xl font-SF text-gray-500">/an</span>
@@ -169,7 +169,7 @@ function Abonnement() {
                             </svg>
                           </span>
                         )}
-                    <h1 className="font-SFBold text-2xl">Abonnement mensuel</h1>
+                    <h1 className="font-SFBold text-2xl  dark:text-white">Abonnement mensuel</h1>
                     <h2 className="font-SFBold text-2xl text-marron my-2">10€<span className='text-xl font-SF text-gray-500'>/mois</span></h2>
                     <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">Flexibilité maximale</span>
                 </div>
@@ -177,19 +177,19 @@ function Abonnement() {
             </div>      
             </div>
             <div className='mt-10 border-2 border-marron rounded-2xl p-4 shadow-lg shadow-black/50'>
-            <h1 className='font-SFBold text-center  text-2xl md:text-4xl mb-4'>Ce que vous obtenez</h1>
+            <h1 className='font-SFBold text-center  text-2xl md:text-4xl mb-4  dark:text-white'>Ce que vous obtenez</h1>
             <ul className='pl-6 text-lg md:text-xl font-SF mr-4'>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ 3 articles exclusifs par mois</strong>
-                    <br/>Une analyse independante, sourcée et sans filtre.
+                    <br/><span className='dark: text-white'>Une analyse independante, sourcée et sans filtre.</span>
                 </li>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ Communauté privée</strong>
-                    <br/>Un cercle de lecteurs qui veulent reprendre le contrôle de leur santé.
+                    <br/><span className='dark: text-white'>Un cercle de lecteurs qui veulent reprendre le contrôle de leur santé.</span>
                 </li>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ Accès illimité</strong>
-                    <br/>Tous les contenus passés et à venir, à vie tant que vous êtes membre.
+                    <br/><span className='dark: text-white'>Tous les contenus passés et à venir, à vie tant que vous êtes membre.</span>
                 </li>
             </ul>
         </div>
@@ -200,7 +200,7 @@ function Abonnement() {
         >
             {loading ? "Redirection en cours..." : "COMMENCER MON ABONNEMENT"}
         </button>
-        <p className='mt-10 font-SF md:text-xl text-center'> ✅ Paiement sécurisé • ✅ Accès immédiat • ✅ Résiliation à tout moment</p>
+        <p className='mt-10 font-SF md:text-xl text-center dark: text-white'> ✅ Paiement sécurisé • ✅ Accès immédiat • ✅ Résiliation à tout moment</p>
 
         </div>
         

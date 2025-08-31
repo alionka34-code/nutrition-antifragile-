@@ -98,9 +98,9 @@ function ArticleDetail() {
 
   return (
     <>
-    <header className=" text-center pt-10 bg-linear-to-t from-white to-gray-200">
+    <header className=" text-center pt-10">
        <h1 className=" text-3xl mx-4 md:text-6xl md:mx-auto md:max-w-6xl font-SFBold mb-4 text-marron">{article.title}</h1>
-      <p className="text-m text-gray-500 mb-6 font-SF">
+      <p className="text-m text-gray-500 mb-6 font-SF dark:text-white">
         Publié le {new Date(article.published_at).toLocaleDateString("fr-FR")}
       </p>
     </header>
@@ -115,9 +115,9 @@ function ArticleDetail() {
       )}</div>
      
       
-      <div className="article-content" dangerouslySetInnerHTML={{ __html: (article.excerpt) }} />
+      <div className="article-content dark:text-white" dangerouslySetInnerHTML={{ __html: (article.excerpt) }} />
       
-      <div className="article-content" dangerouslySetInnerHTML={{ __html: (article.content) }} />
+      <div className="article-content  dark:text-white" dangerouslySetInnerHTML={{ __html: (article.content) }} />
 
     </div>
     <CommentSection token={token} isAdmin={isAdmin} />

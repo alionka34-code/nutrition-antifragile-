@@ -11,6 +11,18 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#fbbf24" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Set theme class before CSS loads to prevent FOUC
+      (function() {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var dark = stored ? stored === 'dark' : prefers;
+          if (dark) document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) { /* no-op */ }
+      })();
+    </script>
     <link rel="stylesheet" href="/src/index.css" />
     <title>Nutrition Antifragile</title>
   </head>

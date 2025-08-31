@@ -247,22 +247,22 @@ function Connexion() {
             <title>Connexion | Nutrition Antifragile</title>
             <meta name="description" content="Connectez-vous à votre compte Nutrition Antifragile pour accéder à des ressources exclusives et rejoindre notre communauté." />
         </Helmet>
-        <header className="bg-gradient-to-t from-white to-gray-200">
-            <h1 className="text-center text-4xl md:text-6xl font-SFBold">CONNEXION</h1>
-            <p className="text-center text-lg md:text-xl text-gray-500 mt-2 font-SF mx-4">Accédez à votre espace personnel et découvrez les secrets d'une nutrition antifragile</p>
+        <header>
+            <h1 className="text-center text-4xl md:text-6xl font-SFBold text-marron">CONNEXION</h1>
+            <p className="text-center text-lg md:text-xl text-gray-500 mt-2 font-SF mx-4 dark:text-white">Accédez à votre espace personnel et découvrez les secrets d'une nutrition antifragile</p>
         </header>
         
         {/* Info block for mobile (shown above the auth container) */}
         <div className="md:hidden mx-4 mt-6 text-center">
            
-            <p className="text-center font-SF text-base mb-2">
+            <p className="text-center font-SF text-base mb-2 dark:text-white">
                 Rejoignez notre communauté et accédez aux contenus gratuits
             </p>
-            <p className="font-SF"><span className="text-green-600 text-lg">✓ </span>Recevez chaque mardi un extrait de notre analyse exclusive directement par e‑mail</p>
-            <p className="font-SF"><span className="text-green-600 text-lg">✓ </span>Commentez les articles et échangez avec d'autres lecteurs engagés</p>
+            <p className="font-SF  dark:text-white"><span className="text-green-600 text-lg">✓ </span>Recevez chaque mardi un extrait de notre analyse exclusive directement par e‑mail</p>
+            <p className="font-SF  dark:text-white"><span className="text-green-600 text-lg">✓ </span>Commentez les articles et échangez avec d'autres lecteurs engagés</p>
             <p className="flex items-center justify-center font-SFBoltItalic mt-4 text-sm text-marron">
                 <span className="mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-black  dark:text-white">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
                     </svg>
                 </span>
@@ -271,14 +271,14 @@ function Connexion() {
         </div>
 
         <div className="flex items-center justify-center p-4 pt-10">
-            <div className="bg-white rounded-3xl shadow-2xl relative overflow-hidden w-full max-w-6xl min-h-[600px] flex flex-col md:flex-row border-1 border-marron">
+            <div className="bg-white  dark:bg-neutral-800 rounded-4xl shadow-2xl relative overflow-hidden w-full max-w-6xl min-h-[600px] flex flex-col md:flex-row border-1 border-marron">
                 
                 {/* Formulaire d'inscription */}
                 <div className={`absolute md:absolute top-0 left-0 h-full w-full md:w-1/2 flex items-center justify-center transition-all duration-700 ease-in-out ${
                     isRegistering ? 'translate-y-0 md:translate-y-0 md:translate-x-full opacity-100 z-20' : '-translate-y-full md:translate-y-0 md:opacity-0 opacity-0 z-0'
                 }`}>
                     <form onSubmit={handleRegister} className="flex flex-col items-center justify-center p-8 md:p-12 text-center w-full max-w-md">
-                        <h1 className="font-SFBold text-2xl md:text-3xl mb-6 tracking-tight">Inscrivez-vous ici</h1>
+                        <h1 className="font-SFBold text-2xl md:text-3xl mb-6 tracking-tight  dark:text-white">Inscrivez-vous ici</h1>
                         
                         {/* Messages de statut */}
                         {successMessage && (
@@ -384,8 +384,8 @@ function Connexion() {
                     isRegistering ? 'translate-y-full md:translate-y-0 md:translate-x-full opacity-0 z-0' : 'translate-y-0 md:translate-y-0 md:translate-x-0 opacity-100 z-20'
                 }`}>
                     <form onSubmit={handleLogin} className="flex flex-col items-center justify-center p-8 md:p-12 text-center w-full max-w-md">
-                        <h1 className="font-SFBold text-2xl md:text-3xl mb-6 tracking-tight">Se connecter</h1>
-                        <p className="pb-4 font-SF text-lg">Déjà membre ? Connectez-vous à votre espace</p>
+                        <h1 className="font-SFBold text-2xl md:text-3xl mb-6 tracking-tight  dark:text-white">Se connecter</h1>
+                        <p className="pb-4 font-SF text-lg  dark:text-white">Déjà membre ? Connectez-vous à votre espace</p>
                         
                         {/* Message de succès d'inscription */}
                         {successMessage && !isRegistering && (
@@ -430,7 +430,7 @@ function Connexion() {
                         </div>
                         
                         <div className="w-full mb-4">
-                            <Link to="/password-lost" className="text-sm text-gray-600 hover:text-marron transition-colors duration-300 SF-Bold">
+                            <Link to="/password-lost" className="text-sm text-gray-600 hover:text-marron transition-colors duration-300 SF-Bold  dark:text-white">
                                 Mot de passe oublié ?
                             </Link>
                         </div>
@@ -464,7 +464,7 @@ function Connexion() {
                         <div className={`absolute top-0 left-0 w-1/2 h-full flex flex-col items-center justify-center px-10 text-center text-white transition-transform duration-700 ease-in-out ${
                             isRegistering ? 'translate-x-0' : '-translate-x-5'
                         }`}>
-                            <h1 className="font-SFBold text-4xl mb-4 text-shadow-lg">Déjà membre ?</h1>
+                            <h1 className="font-SFBold text-4xl mb-4 text-shadow-lg ">Déjà membre ?</h1>
                             <p className="text-lg mb-8 text-shadow-md leading-relaxed">
                                 Connectez-vous avec vos informations personnelles
                             </p>
@@ -473,7 +473,7 @@ function Connexion() {
                                     setIsRegistering(false);
                                     clearMessages();
                                 }}
-                                className="bg-transparent border-2 border-white text-white font-bold py-3 px-16 rounded-full hover:bg-white/20 transition-all duration-300 hover:tracking-widest active:scale-95 focus:outline-none relative"
+                                className="bg-transparent border-2 border-white text-white font-bold py-3 px-16 rounded-full hover:bg-white/20 transition-all duration-300 hover:tracking-widest active:scale-95 focus:outline-none relative "
                             >
                                 Se connecter
                                 <i className="fa-solid fa-arrow-left absolute left-12 top-1/2 transform -translate-y-1/2 opacity-100 transition-all duration-300"></i>

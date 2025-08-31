@@ -144,12 +144,12 @@ const CommentSection = ({ token, isAdmin }) => {
 
   // Élément de réponse récursif (multi-niveau)
   const ReplyItem = ({ reply, depth = 1 }) => (
-    <div className={`mt-3 p-3 rounded-xl border-l-4 border-marron bg-gray-50 ${depth > 0 ? 'ml-8' : ''}`}>
+    <div className={`mt-3 p-3 rounded-4xl border-l-4 border-marron bg-gray-50 dark:bg-neutral-700 ${depth > 0 ? 'ml-8' : ''}`}>
       <div className="flex justify-between">
         <p className="font-SFBold text-marron text-lg">
           {reply.user_username}
           {reply.parent_comment_username && (
-            <span className="text-gray-600 text-sm"> → {reply.parent_comment_username}</span>
+            <span className="text-gray-600 text-sm dark:text-white "> → {reply.parent_comment_username}</span>
           )}
         </p>
         <div className="flex gap-2">
@@ -171,7 +171,7 @@ const CommentSection = ({ token, isAdmin }) => {
           )}
         </div>
       </div>
-      <p className="text-lg">{reply.content}</p>
+      <p className="text-lg  dark:text-white">{reply.content}</p>
 
       {/* Formulaire de réponse pour cette réponse */}
       {replyingTo === reply.id && token && (
@@ -212,7 +212,7 @@ const CommentSection = ({ token, isAdmin }) => {
 
   return (
     <div className="flex flex-col mt-10 mx-4 md:max-w-6xl md:mx-auto">
-      <h3 className="text-4xl font-SFBold mb-4">Commentaires</h3>
+      <h3 className="text-4xl font-SFBold mb-4 text-marron">Commentaires</h3>
 
       {loading ? (
         <p>Chargement...</p>
@@ -222,7 +222,7 @@ const CommentSection = ({ token, isAdmin }) => {
         <>
           <ul className="mb-4 space-y-5">
             {comments.map((comment) => (
-              <li key={comment.id} className="bg-gray-100 font-SF text-xl p-3 rounded-xl shadow-lg">
+              <li key={comment.id} className="bg-gray-100 font-SF text-xl p-5 rounded-4xl shadow-lg dark:bg-neutral-800 dark:border-neutral-500">
                 <div className="flex justify-between">
                   <p className="font-SFBold text-marron text-2xl">{comment.user_username}</p>
                   <div className="flex gap-2">
@@ -244,7 +244,7 @@ const CommentSection = ({ token, isAdmin }) => {
                     )}
                   </div>
                 </div>
-                <p>{comment.content}</p>
+                <p className=' dark:text-white'>{comment.content}</p>
 
                 {/* Formulaire de réponse pour un commentaire de 1er niveau */}
                 {replyingTo === comment.id && token && (
@@ -290,7 +290,7 @@ const CommentSection = ({ token, isAdmin }) => {
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Écrivez un commentaire..."
-                className="w-full border rounded-2xl p-2"
+                className="w-full border rounded-4xl p-2  dark:text-white"
                 rows="3"
               />
               <button
@@ -302,7 +302,7 @@ const CommentSection = ({ token, isAdmin }) => {
             </form>
           ) : (
             <div>
-              <p className="text-gray-500 font-SFBoltItalic">Connectez-vous pour commenter</p>
+              <p className="text-gray-500 font-SFBoltItalic  dark:text-white">Connectez-vous pour commenter</p>
               <button
                 onClick={() => (window.location.href = '/connexion')}
                 className="mt-2 px-4 py-2 bg-marron text-white font-SFBold text-xl rounded-4xl hover:bg-black"

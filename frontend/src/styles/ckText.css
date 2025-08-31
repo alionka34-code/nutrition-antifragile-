@@ -95,11 +95,15 @@
   transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
   will-change: transform, box-shadow;
   cursor: pointer;
+  /* Override inline background like style="background:#eeeeee; ..." */
+  background-color: transparent !important;
+  border-color: #e8ddd4 !important;
   
 }
 .article-content .toc-container > div:hover {
-  background-color: #f5f1eb !important; /* override inline */
-  border-color: #b8860b !important;      /* override inline */
+  background-color: #b8860b !important; /* marron */
+  color: #ffffff !important;            /* ensure readability */
+  border-color: #b8860b !important;      /* match border */
   transform: translateY(-1px) scale(1.02);
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
@@ -117,9 +121,13 @@
   transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
   will-change: transform, box-shadow;
   cursor: pointer;
+  /* Override inline background on generic TOC-like blocks */
+  background-color: transparent !important;
+  border-color: #e8ddd4 !important;
 }
 .article-content div:has(> a[href^="#"]):hover {
-  background-color: #f5f1eb  !important;
+  background-color: #b8860b !important; /* marron */
+  color: #ffffff !important;            /* ensure readability */
   border-color: #b8860b !important;
   transform: translateY(-1px) scale(1.02);
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
@@ -142,7 +150,7 @@
 .article-content .special-container.toc {
   border: 1px solid #e8ddd4;
   border-radius: 12px;
-  background: #fff;
+  background: transparent;
   padding: 12px;
   margin: 16px 0;
 }

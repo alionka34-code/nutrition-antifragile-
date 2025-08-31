@@ -28,9 +28,9 @@ function ContactForm() {
 
   return (
     <>
-    <header className='bg-gradient-to-t from-white to-gray-200 mb-10'>
+    <header>
         <div className="flex flex-col mx-auto max-w-4xl"><h1 className="md:text-6xl text-4xl text-center text-marron font-SFBold">CONTACTEZ-NOUS</h1>
-        <p className="md:text-xl text-center font-SF text-gray-600 m-2 ">Que vous ayez des questions sur le livre, que vous souhaitiez partager votre expérience ou que vous cherchiez des conseils personnalisés, n'hésitez pas à nous écrire.</p></div>
+        <p className="md:text-xl text-center font-SF text-gray-600 m-2 dark:text-white">Que vous ayez des questions sur le livre, que vous souhaitiez partager votre expérience ou que vous cherchiez des conseils personnalisés, n'hésitez pas à nous écrire.</p></div>
        
     </header>
     <main>
@@ -39,7 +39,7 @@ function ContactForm() {
       <h2 className="text-4xl font-SFBold text-center text-marron">Envoyez nous un message</h2>
 
 
-      <label className='font-SFBold text-lg'>Votre nom 
+      <label className='font-SFBold text-lg dark:text-white'>Votre nom 
         <input
         type="text"
         placeholder="Entrez votre nom"
@@ -48,7 +48,7 @@ function ContactForm() {
       /> {errors.name && <p className="text-red-500">Ce champ est requis</p>}
      </label>
 
-     <label className='font-SFBold text-lg'>Votre email
+     <label className='font-SFBold text-lg dark:text-white'>Votre email
       <input
         type="email"
         placeholder="votre@email.com"
@@ -58,7 +58,7 @@ function ContactForm() {
       {errors.email && <p className="text-red-500">Ce champ est requis</p>}
      </label>
 
-     <label className='font-SFBold text-lg'>Sujet  
+     <label className='font-SFBold text-lg dark:text-white'>Sujet  
       <input 
         type="text"
         placeholder="Objet du message"
@@ -67,7 +67,7 @@ function ContactForm() {
         {errors.objet && <p className="text-red-500">Ce champ est requis</p>}
      </label>   
 
-     <label className='font-SFBold text-lg'>Votre message
+     <label className='font-SFBold text-lg dark:text-white'>Votre message
       <textarea
         placeholder="De quoi souhaitez-vous parler ?"
         {...register('message', { required: true })}
@@ -83,7 +83,7 @@ function ContactForm() {
       {isSubmitSuccessful && (
         <p className="text-green-600 text-center">Message envoyé avec succès !</p>
       )}
-      <h1 className="text-center font-SFBold text-lg">Rejoignez la communauté antifragile sur mes reséaux sociaux qui comptent déjà plus de 60 000 abonnés :</h1>
+      <h1 className="text-center font-SFBold text-lg dark:text-white">Rejoignez la communauté antifragile sur mes reséaux sociaux qui comptent déjà plus de 60 000 abonnés :</h1>
         <div className="flex justify-center">
             <a href="https://www.tiktok.com/@nut_antifragile" target="_blank" rel="noopener noreferrer" className="mx-2">
             <img src={tiktok} alt="TikTok" className="w-10 h-10" />

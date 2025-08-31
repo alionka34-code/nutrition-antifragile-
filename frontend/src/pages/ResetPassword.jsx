@@ -29,8 +29,8 @@ function ResetPassword() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Réinitialiser le mot de passe</h2>
+    <div className="border-2 border-marron rounded-4xl mx-4 md:mx-auto md:max-w-3xl p-6 my-10">
+      <h2 className="text-2xl font-semibold mb-4 text-center text-marron">Réinitialiser le mot de passe</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <input
@@ -58,7 +58,7 @@ function ResetPassword() {
         </div>
         <button
           type="submit"
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+          className="w-full bg-marron text-white py-2 rounded hover:bg-green-700"
         >
           Réinitialiser
         </button>

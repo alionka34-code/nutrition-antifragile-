@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useContext } from 'react';
 import { Menu, X } from 'lucide-react';
+import DarkModeSwitch from './DarkModeSwitch.jsx';
 import { AuthContext } from "../contexts/AuthContextDefinition";
 import { useRef, useEffect } from "react";
 
@@ -38,13 +39,13 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full bg-gray-200 top-0 left-0 z-50">
+    <nav className="w-full top-0 left-0 z-50 mx-auto">
       <div className="flex md:mr-10 justify-between items-center md:mx-20 px-6 py-4">
         {/* Logo ou titre */}
         <div className="text-2xl font-bold font-SF relative" ref={userMenuRef}>
           {username ? (
             <span 
-              className="cursor-pointer hover:text-yellow-600 flex items-center gap-2" 
+              className="cursor-pointer hover:text-yellow-600 flex items-center gap-2 dark:text-gray-300" 
               onClick={toggleUserMenu}
             >
               {username} 👋
@@ -68,7 +69,7 @@ function Navbar() {
                   href="https://billing.stripe.com/p/login/7sYaEW2Rx2AQd0h5QQbZe00"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-2 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm"
+                  className="block px-4 py-2 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm dark:text-black"
                 >
                   Gerer mon abonnement
                 </a>
@@ -90,18 +91,21 @@ function Navbar() {
         </div>
        
 
-        {/* Burger toujours visible */}
-        <button
-          onClick={toggleMenu}
-          className="text-black focus:outline-none"
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        <div className="flex items-center gap-4">
+          <DarkModeSwitch portal={false} />
+          {/* Burger toujours visible */}
+          <button
+            onClick={toggleMenu}
+            className="text-black focus:outline-none  dark:text-white"
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* Menu déroulant commun mobile + desktop */}
       {isOpen && (
-        <ul className="flex flex-col items-start justify-center md:items-center md:flex-row md:gap-15 gap-4 px-6 pb-6 bg-gray-200">
+        <ul className="flex flex-col items-start justify-center md:items-center md:flex-row md:gap-15 gap-4 px-6 pb-6  dark:text-white">
           <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/" onClick={toggleMenu}>Accueil</Link>
           </li>

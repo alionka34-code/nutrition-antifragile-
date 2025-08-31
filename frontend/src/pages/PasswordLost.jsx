@@ -32,12 +32,12 @@ function PasswordLost() {
 
   return (
     <>
-    <div className='bg-linear-to-t from-white to-gray-200'>
+    <div className="border-2 border-marron rounded-4xl mx-4 md:mx-auto md:max-w-5xl p-6 my-10">
       
     <h1 className='font-SFBold text-4xl text-marron text-center pt-8'>MOT DE PASSE OUBLIÉ</h1>
-    <p className='font-SF text-2xl text-center pt-4 max-w-5xl mx-auto'>Après avoir envoyé ce formulaire vous recevrez un email avec un lien vers une page vous permettant de réinitialiser votre mot de passe.</p>
+    <p className='font-SF text-2xl text-center pt-4 max-w-5xl mx-auto dark:text-white'>Après avoir envoyé ce formulaire vous recevrez un email avec un lien vers une page vous permettant de réinitialiser votre mot de passe.</p>
       <form className="mt-8 text-center" onSubmit={handleSubmit(onSubmit)}>
-        <p className="font-SF text-xl">Veuillez inserer votre adresse email</p>
+        <p className="font-SF text-xl dark:text-white">Veuillez inserer votre adresse email</p>
         <input
           type="email"
           placeholder="Votre email" 

@@ -3,10 +3,10 @@ import React from "react";
 function RGPD(){
     return(
         <>
-        <header className="bg-linear-to-t from-white to-gray-200">
-            <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10">Politique de confidentialité et RGPD</h1>
+        <header>
+            <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Politique de confidentialité et RGPD</h1>
         </header>
-        <div className="md:mx-40 mx-4 py-8">
+        <div className="md:mx-40 mx-4 py-8  dark:text-white">
             <h1 className="text-2xl font-SFBold mb-4">Collecte et utilisation des données personnelles</h1>
             <p className="font-SF mb-4">Nous collectons des données personnelles telles que votre nom, adresse e-mail, et informations de paiement lorsque vous vous inscrivez à un abonnement ou contactez notre service client. Ces données sont utilisées pour gérer votre compte, traiter vos paiements, et améliorer nos services.</p>
             <h1 className="text-2xl font-SFBold mt-8 mb-4">Partage des données</h1>

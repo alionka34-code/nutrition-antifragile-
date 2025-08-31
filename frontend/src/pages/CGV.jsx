@@ -3,10 +3,10 @@ import React from "react";
 function cgv(){
 return(
     <>
-    <header className="bg-linear-to-t from-white to-gray-200">
-        <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10">Conditions générales de vente</h1>
+    <header>
+        <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Conditions générales de vente</h1>
     </header>
-    <div className="md:mx-40 mx-4 py-8">
+    <div className="md:mx-40 mx-4 py-8  dark:text-white">
         <p className="font-SF mb-4">Les présentes CGV régissent la vente des abonnements et ebooks sur **\[Nom de ton site]**, sous-site de **Éditions Œuvre**.</p>
         <h1 className="text-2xl font-SFBold mb-4">1.Produits concernés</h1>
         <p className="font-SF mb-4">Abonnements mensuels ou annuels<br/>Ebooks numériques<br/>Liens redirigeant vers Amazon.fr (vente gérée par Amazon)</p>

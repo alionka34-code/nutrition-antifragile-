@@ -3,11 +3,11 @@ import React from "react";
 function CGU(){
     return(
         <>
-        <header className="bg-linear-to-t from-white to-gray-200">
-            <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10">Conditions générales d'utilisation</h1>
+        <header >
+            <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Conditions générales d'utilisation</h1>
         </header>
         
-        <div className="md:mx-40 mx-4 py-8">
+        <div className="md:mx-40 mx-4 py-8  dark:text-white">
         <p className="font-SF mb-4">Les présentes CGU régissent l’utilisation du sous-site (nom de ton site), intégré au réseau éditorial de Éditions Œuvre — Symbiose Audiovisuelle.</p>
         <h1 className="text-2xl font-SFBold mb-4">1. Licence d'utilisation</h1>
         <p className="font-SF mb-4">L’accès aux contenus payants, ebooks ou articles est accordé sous licence personnelle, non exclusive et non transférable. Toute redistribution ou diffusion non autorisée est interdite.</p>
