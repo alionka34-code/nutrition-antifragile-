@@ -189,7 +189,7 @@ function Abonnement() {
                 </li>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ Accès illimité</strong>
-                    <br/><span className='dark: text-white'>Tous les contenus passés et à venir, à vie tant que vous êtes membre.</span>
+                    <br/><span className='dark:text-white'>Tous les contenus passés et à venir, à vie tant que vous êtes membre.</span>
                 </li>
             </ul>
         </div>
