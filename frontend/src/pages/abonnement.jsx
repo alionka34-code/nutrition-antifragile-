@@ -181,11 +181,11 @@ function Abonnement() {
             <ul className='pl-6 text-lg md:text-xl font-SF mr-4'>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ 3 articles exclusifs par mois</strong>
-                    <br/><span className='dark: text-white'>Une analyse independante, sourcée et sans filtre.</span>
+                    <br/><span className='dark:text-white'>Une analyse independante, sourcée et sans filtre.</span>
                 </li>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ Communauté privée</strong>
-                    <br/><span className='dark: text-white'>Un cercle de lecteurs qui veulent reprendre le contrôle de leur santé.</span>
+                    <br/><span className='dark:text-white'>Un cercle de lecteurs qui veulent reprendre le contrôle de leur santé.</span>
                 </li>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ Accès illimité</strong>
@@ -200,7 +200,7 @@ function Abonnement() {
         >
             {loading ? "Redirection en cours..." : "COMMENCER MON ABONNEMENT"}
         </button>
-        <p className='mt-10 font-SF md:text-xl text-center dark: text-white'> ✅ Paiement sécurisé • ✅ Accès immédiat • ✅ Résiliation à tout moment</p>
+        <p className='mt-10 font-SF md:text-xl text-center dark:text-white'> ✅ Paiement sécurisé • ✅ Accès immédiat • ✅ Résiliation à tout moment</p>
 
         </div>
         
