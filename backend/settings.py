@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dev-key')
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-production-a7977.up.railway.app', '*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'antifragilewebsite-production.up.railway.app', '*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -139,8 +139,8 @@ SIMPLE_JWT = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://web-production-a7977.up.railway.app",
-    "https://nutrition-antifragile.vercel.app"
+    "https://antifragilewebsite-production.up.railway.app",
+    "https://antifragilewebsite.vercel.app"
 ]
 
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
@@ -152,7 +152,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 
 
-FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173/")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 
 
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
