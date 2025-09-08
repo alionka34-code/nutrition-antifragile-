@@ -1,8 +1,14 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 function CGU(){
     return(
         <>
+        <Helmet>
+  <title>Conditions générales d'utilisations| Nutrition Antifragile</title>
+  <meta name="description" content="Lisez les conditions générales d'utilisation de Nutrition Antifragile pour comprendre vos droits et responsabilités en tant qu'utilisateur." />
+</Helmet>
+
         <header >
             <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Conditions générales d'utilisation</h1>
         </header>

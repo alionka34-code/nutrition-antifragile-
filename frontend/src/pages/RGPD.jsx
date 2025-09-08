@@ -1,8 +1,16 @@
 import React from "react";
-
+import { Helmet } from "react-helmet";
 function RGPD(){
     return(
         <>
+        <Helmet>
+  <title>Politique de confidentialité / RGPD | Nutrition Antifragile</title>
+  <meta 
+    name="description" 
+    content="Découvrez la politique de confidentialité de Nutrition Antifragile et comment nous protégeons vos données personnelles conformément au RGPD." 
+  />
+</Helmet>
+
         <header>
             <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Politique de confidentialité et RGPD</h1>
         </header>

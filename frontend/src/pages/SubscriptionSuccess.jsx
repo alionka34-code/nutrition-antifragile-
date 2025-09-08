@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from "../contexts/AuthContextDefinition";
 import { Link } from 'react-router-dom';
 import API_URL from '../utils/api';
+import { Helmet } from "react-helmet";
 
 export default function SubscriptionSuccess() {
   const { username, fetchSubscriptionStatus } = useContext(AuthContext);
@@ -38,6 +39,14 @@ export default function SubscriptionSuccess() {
 
   return (
     <>
+    <Helmet>
+  <title>Abonnement effectué | Nutrition Antifragile</title>
+  <meta 
+    name="description" 
+    content="Félicitations ! Votre abonnement à Nutrition Antifragile a été effectué avec succès. Accédez dès maintenant à tous nos contenus et ressources exclusives." 
+  />
+</Helmet>
+
     <header></header>
     <div className="border-2 border-marron rounded-2xl mx-4 md:mx-auto md:max-w-5xl p-6 text-center my-10">
       <h1 className = "font-SFBold text-marron text-4xl md:text-6xl">PAIEMENT REUSSI ! 🎉</h1>

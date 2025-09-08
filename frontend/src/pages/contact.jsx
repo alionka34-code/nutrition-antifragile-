@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import emailjs from 'emailjs-com';
 import tiktok from '../assets/images/tiktok.png';
 import instagram from '../assets/images/instagram.png';
+import { Helmet } from 'react-helmet';
 
 
 function ContactForm() {
@@ -28,6 +29,10 @@ function ContactForm() {
 
   return (
     <>
+    <Helmet>
+        <title>Contactez-nous | Nutrition Antifragile - Nutrition et Bien-être</title>
+        <meta name="description" content="Contactez l'équipe de Nutrition Antifragile pour toute question ou suggestion sur la nutrition et le bien-être. Nous sommes là pour vous accompagner et échanger avec vous." />
+    </Helmet>
     <header>
         <div className="flex flex-col mx-auto max-w-4xl"><h1 className="md:text-6xl text-4xl text-center text-marron font-SFBold">CONTACTEZ-NOUS</h1>
         <p className="md:text-xl text-center font-SF text-gray-600 m-2 dark:text-white">Que vous ayez des questions sur le livre, que vous souhaitiez partager votre expérience ou que vous cherchiez des conseils personnalisés, n'hésitez pas à nous écrire.</p></div>

@@ -1,10 +1,16 @@
 import React from  "react";
+import { Helmet } from "react-helmet";
 
 
 function MentionLegale() {
 
     return(
         <>
+        <Helmet>
+  <title>Mentions légales | Nutrition Antifragile</title>
+  <meta name="description" content="Mentions légales de Nutrition Antifragile, informations légales et contact." />
+</Helmet>
+
         <header>
             <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Mentions Légales</h1>
         </header>

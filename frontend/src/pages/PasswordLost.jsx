@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import API_URL from "../utils/api";
+import { Helmet } from "react-helmet";
 
 function PasswordLost() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -32,6 +33,14 @@ function PasswordLost() {
 
   return (
     <>
+    <Helmet>
+  <title>Mot de passe oublié | Nutrition Antifragile</title>
+  <meta 
+    name="description" 
+    content="Réinitialisez votre mot de passe pour accéder à votre compte Nutrition Antifragile et continuer à profiter de nos contenus et ressources exclusives." 
+  />
+</Helmet>
+
     <div className="border-2 border-marron rounded-4xl mx-4 md:mx-auto md:max-w-5xl p-6 my-10">
       
     <h1 className='font-SFBold text-4xl text-marron text-center pt-8'>MOT DE PASSE OUBLIÉ</h1>

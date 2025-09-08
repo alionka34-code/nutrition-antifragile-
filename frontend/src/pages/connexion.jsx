@@ -244,8 +244,8 @@ function Connexion() {
     return (
         <>
         <Helmet>
-            <title>Connexion | Nutrition Antifragile</title>
-            <meta name="description" content="Connectez-vous à votre compte Nutrition Antifragile pour accéder à des ressources exclusives et rejoindre notre communauté." />
+            <title>Connexion à votre compte | Nutrition Antifragile</title>
+            <meta name="description" content="Connectez-vous à votre compte Nutrition Antifragile pour accéder à vos articles exclusifs, ressources et avantages réservés aux membres.." />
         </Helmet>
         <header>
             <h1 className="text-center text-4xl md:text-6xl font-SFBold text-marron">CONNEXION</h1>

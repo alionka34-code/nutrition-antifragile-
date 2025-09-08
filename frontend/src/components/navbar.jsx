@@ -76,11 +76,22 @@ function Navbar() {
               ) : (
                 <Link
                   to="/abonnement"
-                  className="block px-4 py-2 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm"
+                  className="block px-4 py-2 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm  dark:text-black"
                   onClick={() => setUserMenuOpen(false)}
                 >
                   S'abonner
                 </Link>
+              )}
+              {/* Lien admin visible uniquement pour les admins */}
+              {isAdmin && (
+                <a
+                  href="https://antifragilewebsite-production.up.railway.app/admin/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-2 mt-1 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm dark:text-black"
+                >
+                  Espace admin
+                </a>
               )}
             </div>
           )}

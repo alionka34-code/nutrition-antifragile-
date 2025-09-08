@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import CommentSection  from "../components/CommentSection";
 import { fetchArticleDetail } from "../utils/api";
 import  "../styles/ckText.css";
+import { Helmet } from "react-helmet";
 
 
 function ArticleDetail() {
@@ -98,6 +99,30 @@ function ArticleDetail() {
 
   return (
     <>
+    <Helmet>
+  <title>{`${article.title} | Nutrition Antifragile`}</title>
+  <meta 
+    name="description" 
+    content={
+      article.excerpt 
+        ? `${article.excerpt.replace(/<[^>]+>/g, '').split(' ').slice(0, 25).join(' ')}...` 
+        : `Lisez "${article.title}" sur Nutrition Antifragile : découvrez des conseils pratiques pour une santé durable et une alimentation consciente.`
+    } 
+  />
+
+  {/* Open Graph pour réseaux sociaux */}
+  <meta property="og:title" content={`${article.title} | Nutrition Antifragile`} />
+  <meta 
+    property="og:description" 
+    content={article.excerpt 
+      ? article.excerpt.replace(/<[^>]+>/g, '').slice(0, 160) 
+      : "Un article exclusif sur Nutrition Antifragile."} 
+  />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={`https://alionka-houl.eo.symbiose-audiovisuelle.fr/articles/${article.slug}`} />
+  <meta property="og:image" content={article.image || "https://alionka-houl.eo.symbiose-audiovisuelle.fr/images/default.jpg"} />
+</Helmet>
+
     <header className=" text-center pt-10">
        <h1 className=" text-3xl mx-4 md:text-6xl md:mx-auto md:max-w-6xl font-SFBold mb-4 text-marron">{article.title}</h1>
       <p className="text-m text-gray-500 mb-6 font-SF dark:text-white">

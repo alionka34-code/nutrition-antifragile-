@@ -65,26 +65,28 @@ function Home() {
     return (
         <>
         <Helmet>
-            <title>Accueil | Nutrition Antifragile</title>
-            <meta name="description" content="Bienvenue sur Nutrition Antifragile : découvrez une nouvelle approche de la santé durable. Rejoignez notre communauté et accédez à des ressources exclusives pour renforcer votre corps et votre esprit." />
+            <title>Nutrition Antifragile | Santé durable & bien-être</title>
+            <meta name="description" content="Découvrez Nutrition Antifragile : des conseils et ressources pour une santé durable et un corps antifragile." />
         </Helmet>
         <header className="px-4">
             <div className={`text-center transition-transform duration-1500 ease-out ${visible ? 'translate-y-0' : 'translate-y-50'}`}>
-                <h2 className="font-SF text-gray-600 dark:text-white">ALIONKA HOUL - REDACTRICE SCIENTIFIQUE INDEPENDANTE SPECIALISÉE EN NUTRITION</h2>
+                <h1 className="font-SF text-gray-600 dark:text-white">ALIONKA HOUL - REDACTRICE SCIENTIFIQUE INDEPENDANTE SPECIALISÉE EN NUTRITION</h1>
+                  
                 
             
-                <h1 className={`dark: text-marron text-center text-5xl font-SFBold transition-transform duration-1500 ease-out md:text-8xl ${visible ? 'translate-y-0' : 'translate-y-10'}`}>NUTRITION<br/>ANTIFRAGILE</h1>
-                <p className="text-center text-gray-600 dark:text-white text-xl font-SF md:text-2xl">Reprendre le pouvoir sur votre assiette dans un monde qui vous empoisonne</p>
+                <h2 className={`dark: text-marron text-center text-5xl font-SFBold transition-transform duration-1500 ease-out md:text-8xl ${visible ? 'translate-y-0' : 'translate-y-10'}`}>NUTRITION<br/>ANTIFRAGILE</h2>
+                <p className="text-center text-gray-600 dark:text-white text-xl font-SF md:text-2xl mb-10">Reprendre le pouvoir sur votre assiette dans un monde qui vous empoisonne</p>
+                <img src = {livre} alt="Livre Nutrition Antifragile" className=" w-80 md:w-100 h-auto  shadow-xl/50 mx-auto md:hidden " />
             <p className="text-xl font-SFBold  text-center mt-8 shadow-lg border-marron border-l-4 rounded-4xl p-10 mx-auto md:text-2xl max-w-4xl dark:text-white">Vos grands-parents n'avaient pas besoin de nutritionniste pour etre en forme. Vous, vous passez 10 minutes a decrypter l'etiquette d'un yaourt.</p>
             <button onClick ={handleBookClick}className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">DECOUVRIR LE LIVRE</button>
             </div>
                 
 
         </header>
-        <section className="mt-20">
-            <div className='flex flex-col md:flex-row gap-10 md:gap-30 justify-center text-center'>
+        <section className="mt-10 md:mt-20">
+            <div className='flex flex-col md:flex-row md:gap-30 justify-center text-center'>
                 <div>
-                    <img src = {livre} alt="Livre Nutrition Antifragile" className=" w-80 md:w-100 h-auto  shadow-xl/50 mx-auto" />
+                    <img src = {livre} alt="Livre Nutrition Antifragile" className=" w-80 md:w-100 h-auto  shadow-xl/50 mx-auto hidden md:block" />
                 </div>
                 <div className='md:max-w-2xl mx-4 py-10'>
                     <h1 className='font-SFBold text-marron text-2xl md:text-4xl'>La pilule rouge de l'alimentation</h1>

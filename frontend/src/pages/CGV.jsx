@@ -1,8 +1,16 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 function cgv(){
 return(
     <>
+    <Helmet>
+  <title>Conditions générales de vente | Nutrition Antifragile</title>
+  <meta 
+    name="description" 
+    content="Consultez les conditions générales de vente de Nutrition Antifragile pour connaître vos droits, obligations et les modalités de nos services et abonnements." 
+  />
+</Helmet>
     <header>
         <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Conditions générales de vente</h1>
     </header>

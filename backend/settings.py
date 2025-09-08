@@ -140,7 +140,7 @@ SIMPLE_JWT = {
 
 CSRF_TRUSTED_ORIGINS = [
     "https://antifragilewebsite-production.up.railway.app",
-    "https://antifragilewebsite.vercel.app"
+    "https://alionka-houl.eo.symbiose-audiovisuelle.fr/"
 ]
 
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')

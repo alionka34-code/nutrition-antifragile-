@@ -12,8 +12,8 @@ function Livre() {
     return (
         <>
         <Helmet>
-            <title>Livre | Nutrition Antifragile </title>
-            <meta name="description" content="Découvrez le livre 'Nutrition Antifragile' d'Alionka Houl, une exploration de la nutrition moderne et des pièges de l'industrie alimentaire." />
+            <title>Livre Nutrition Antifragile | Santé durable et alimentation consciente </title>
+            <meta name="description" content="Découvrez le livre 'Nutrition Antifragile' d'Alionka Houl : une approche innovante de la santé durable, pour comprendre les pièges de l'industrie alimentaire et renforcer votre bien-être."  />
         </Helmet>
         <header className="px-4">
                 <h1 className="text-center text-2xl md:text-4xl font-SFBold max-w-6xl block mx-auto text-marron">Ce n’est pas un livre de régimes ni de recettes.  <br/>C’est le pourquoi du comment. Décortiqué, dérangeant, mais nécessaire. Vous méritez de savoir ce qu’on vous cache depuis 50 ans.</h1>

@@ -80,8 +80,8 @@ function Abonnement() {
     return (
         <>
         <Helmet>
-            <title>Abonnement | Nutrition Antifragile</title>
-            <meta name="description" content="Rejoignez notre communauté de membres antifragiles et reprenez le contrôle de votre alimentation avec nos formules d'abonnement." />
+            <title>Abonnement Nutrition Antifragile | Santé durable & alimentation pratique</title>
+            <meta name="description" content="Rejoignez la communauté Nutrition Antifragile et accédez à des contenus exclusifs pour améliorer votre santé durable et maîtriser votre alimentation au quotidien." />
         </Helmet>
         <header >
             <h1 className="text-center text-6xl font-SFBold text-marron pt-10 ">Choisissez votre abonnement</h1>

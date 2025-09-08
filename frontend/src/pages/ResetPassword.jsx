@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import API_URL from '../utils/api';
+import { Helmet } from "react-helmet";
 
 function ResetPassword() {
   const { uidb64, token } = useParams();
@@ -29,6 +30,16 @@ function ResetPassword() {
   };
 
   return (
+    <>
+    <Helmet>
+  <title>Réinitialisation du mot de passe | Nutrition Antifragile</title>
+  <meta 
+    name="description" 
+    content="Réinitialisez votre mot de passe pour accéder à votre compte Nutrition Antifragile et continuer à profiter de nos contenus et ressources exclusives." 
+  />
+</Helmet>
+
+
     <div className="border-2 border-marron rounded-4xl mx-4 md:mx-auto md:max-w-3xl p-6 my-10">
       <h2 className="text-2xl font-semibold mb-4 text-center text-marron">Réinitialiser le mot de passe</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -65,6 +76,7 @@ function ResetPassword() {
       </form>
       {message && <p className="mt-4 text-center">{message}</p>}
     </div>
+    </>
   );
 }
 
