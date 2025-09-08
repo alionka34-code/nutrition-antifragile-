@@ -61,7 +61,7 @@ function Livre() {
                     <div className="flex flex-col gap-6 mt-6">
                         <div className=' border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50'>
                         <h1 className="font-SFBold text-white text-lg md:text-xl">Chapitre 1: Evolution de l'alimentation</h1>
-                        <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">De chasseurs-cueilleurs à victimes de l'industrie : comment nous avons perdu notre instinct alimentaire ancestral.</p>
+                        <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">De chasseurs-cueilleurs à victimes de l'industrie : comment nous avons perdu notre instinct alimentaire.</p>
                     </div>
                     <div className=" border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50">
                         <h1 className="font-SFBold text-white text-lg md:text-xl">Chapitre 2: On vous ment depuis le début</h1>
@@ -84,7 +84,7 @@ function Livre() {
                             <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">Corps-Esprit-Énergie : les fondements oubliés d'une alimentation antifragile et naturelle.</p>
                         </div>
                         <div className=" border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50">
-                            <h1 className="font-SFBold text-white text-lg md:text-xl">Chapitre 5 : Aliments à privilégier Œufs, abats, fromages au lait cru</h1>
+                            <h1 className="font-SFBold text-white text-lg md:text-xl">Chapitre 5 : Aliments à privilégier</h1>
                             <p className="mt-2 font-SF text-gray-200 text-base md:text-lg"> redécouvrir les vrais aliments diabolisés par l'industrie.</p>
                         </div>
                         <div className=" border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50">
@@ -123,7 +123,7 @@ function Livre() {
                    
                     modules={[Autoplay, Pagination]}
                     className="mySwiper ">
-                        <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-sm p-5  dark:text-white'>"Nutrition Antifragile est un livre à la fois complet, accessible et passionnant, il réussit le pari de mêler riguer scientifique et clarté, sans jamais devenir trop technique. Les encadrés scientifiques rythment la lecture de manière inteliligente, apportant des éclairages utiles sans alourdir le propos.<br/>La partie sur les aliments à privilégier est particulièrement intéressante: on y découvre des produits souvent oubliés ou mal compris, comme le kombucha, le riz noir, le pain au levain ou encore le bouillon d'os.<br/> L'analyse est solide, bien documentée, et offre des recommandations à la fois concrètes, critiques et très pertinentes.<br/>C'est un ouvrage cohérent, bien ancré dans les préoccupations acctuelles autour de l'alimentation, que je recommande sans hésiter."
+                        <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-lg p-5  dark:text-white'>"Nutrition Antifragile est un livre à la fois complet, accessible et passionnant, il réussit le pari de mêler riguer scientifique et clarté, sans jamais devenir trop technique. Les encadrés scientifiques rythment la lecture de manière inteliligente, apportant des éclairages utiles sans alourdir le propos.<br/>La partie sur les aliments à privilégier est particulièrement intéressante: on y découvre des produits souvent oubliés ou mal compris, comme le kombucha, le riz noir, le pain au levain ou encore le bouillon d'os.<br/> L'analyse est solide, bien documentée, et offre des recommandations à la fois concrètes, critiques et très pertinentes.<br/>C'est un ouvrage cohérent, bien ancré dans les préoccupations acctuelles autour de l'alimentation, que je recommande sans hésiter."
                        <div class="grid place-items-center py-5">
               <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     fill="currentColor" class="w-6 h-6 text-yellow-300 ">
@@ -153,7 +153,7 @@ function Livre() {
                   </svg></span></div>
             </div></p>
                  </div></SwiperSlide>
-                 <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-sm p-5  dark:text-white'>Des révélations qui ont enfin mis de la clarté sur tous mes échecs alimentaires passés. Je cherchais des solutions sans voir le vrai problème. “ Je portais des œillères”, comme le dit si justement l’auteure. Ce livre m’a offert une vraie prise de conscience.  Merci
+                 <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-lg p-5  dark:text-white'>Des révélations qui ont enfin mis de la clarté sur tous mes échecs alimentaires passés. Je cherchais des solutions sans voir le vrai problème. “ Je portais des œillères”, comme le dit si justement l’auteure. Ce livre m’a offert une vraie prise de conscience.  Merci
                        <div class="grid place-items-center py-5">
               <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     fill="currentColor" class="w-6 h-6 text-yellow-300 ">
@@ -184,7 +184,7 @@ function Livre() {
             </div></p>
                  
                         </div></SwiperSlide>
-                        <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-sm p-5  dark:text-white'>
+                        <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-lg p-5  dark:text-white'>
                             Avant de penser régime ou végétarisme, il faut remonter à la source de cette grande mascarade alimentaire. Le vrai commencement. Un point de départ fondamental dont personne ne parle, et pourtant indispensable pour tout comprendre. Ce livre révèle des vérités que beaucoup ignorent, non pas par négligence, mais parce qu’on les a soigneusement passées sous silence.
                        <div class="grid place-items-center py-5">
               <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -216,7 +216,7 @@ function Livre() {
             </div></p>
                  
                         </div></SwiperSlide>
-                        <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-sm p-5  dark:text-white'>Un déclic immédiat. Ce livre ne donne pas des conseils en plus, il change complètement la façon de voir l’alimentation. 
+                        <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-lg p-5  dark:text-white'>Un déclic immédiat. Ce livre ne donne pas des conseils en plus, il change complètement la façon de voir l’alimentation. 
                        <div class="grid place-items-center py-5">
               <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     fill="currentColor" class="w-6 h-6 text-yellow-300 ">
@@ -247,7 +247,7 @@ function Livre() {
             </div></p>
                  
                         </div></SwiperSlide>
-                        <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-sm p-5  dark:text-white'>Nutrition Antifragile est un livre vraiment complet, accessible et passionnant. Je l’ai dévoré en 2 jours. Les encadrés scientifiques permettent de creuser sans jamais devenir trop technique. J’ai découvert des produits souvent oublié comme le bouillon d’os. Une mine d’or d’infos sans filtre, que je recommande sans hésiter.
+                        <SwiperSlide className='flex justify-center items-center'> <div className='bg-gray-200 rounded-4xl mx-4 dark:bg-neutral-800'><p className='text-center font-SF text-lg p-5  dark:text-white'>Nutrition Antifragile est un livre vraiment complet, accessible et passionnant. Je l’ai dévoré en 2 jours. Les encadrés scientifiques permettent de creuser sans jamais devenir trop technique. J’ai découvert des produits souvent oublié comme le bouillon d’os. Une mine d’or d’infos sans filtre, que je recommande sans hésiter.
                        <div class="grid place-items-center py-5">
               <div class="inline-flex items-center"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                     fill="currentColor" class="w-6 h-6 text-yellow-300 ">
