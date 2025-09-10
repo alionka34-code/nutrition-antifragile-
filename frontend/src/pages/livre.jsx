@@ -25,7 +25,7 @@ function Livre() {
                          <p className="text-center text-xl md:text-2xl font-SF mt-8 shadow-lg border-marron border-l-4 rounded-4xl p-10  dark:text-white">Le seul livre qui relie votre assiette à votre âme, et qui expose les racines mentales et industrielles de la dépendance alimentaire.</p>
                          <p className="text-center text-xl 
                          shadow-lg border-marron border-r-4 rounded-4xl p-10 md:text-2xl font-SF mt-8  dark:text-white">Vos grands-parents n’avaient pas besoin de nutritionniste pour être en pleine santé. Vous, vous passez 10 minutes à décrypter l’étiquette d’un yaourt..</p>
-                         <button className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">ACHETER LE LIVRE</button>
+                         <button onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">ACHETER LE LIVRE</button>
                     </div> 
                 </div>
         </header>
@@ -284,7 +284,7 @@ function Livre() {
                   </Swiper>
                   </div>
             
-            <button className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">OUI, JE REPRENDS LE CONTROLE</button>
+            <button onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">OUI, JE REPRENDS LE CONTROLE</button>
         
         </section>
            

@@ -78,7 +78,7 @@ function Home() {
                 <p className="text-center text-gray-600 dark:text-white text-xl font-SF md:text-2xl mb-10">Reprendre le pouvoir sur votre assiette dans un monde qui vous empoisonne</p>
                 <img src = {livre} alt="Livre Nutrition Antifragile" className=" w-80 md:w-100 h-auto  shadow-xl/50 mx-auto md:hidden " />
             <p className="text-xl font-SFBold  text-center mt-8 shadow-lg border-marron border-l-4 rounded-4xl p-10 mx-auto md:text-2xl max-w-4xl dark:text-white">Vos grands-parents n'avaient pas besoin de nutritionniste pour etre en forme. Vous, vous passez 10 minutes a decrypter l'etiquette d'un yaourt.</p>
-            <button onClick ={handleBookClick}className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">DECOUVRIR LE LIVRE</button>
+            <button onClick = {() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">DECOUVRIR LE LIVRE</button>
             </div>
                 
 
@@ -287,7 +287,7 @@ function Home() {
       </Swiper>
       </div>
 
-        <button className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-2xl">ACHETER LE LIVRE</button>
+        <button onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-2xl">ACHETER LE LIVRE</button>
         </section>
         <section className ="mt-20">
             <h1 className='text-center font-SFBold text-4xl md:text-8xl dark:text-white'>L'AUTEURE</h1>
