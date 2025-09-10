@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alionka-houl.eo.symbiose-audiovisuelle.fr/sitemap.xml
