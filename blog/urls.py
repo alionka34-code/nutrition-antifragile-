@@ -27,7 +27,7 @@ urlpatterns = [
     path('create-checkout-session/', CreateCheckoutSession.as_view(), name='create-checkout-session'),
     path('stripe/webhook/', StripeWebhookView.as_view(), name='stripe-webhook'),
     path('login/', LoginView.as_view(), name='login'),
-    path('articles/<int:pk>/', ArticleDetailView.as_view(), name='article-detail'),
+    path('articles/<slug:slug>/', ArticleDetailView.as_view(), name='article-detail'),
 
     # Comments
     path('articles/<int:article_id>/comments/', CommentListCreateView.as_view(), name='comment-list-create'),

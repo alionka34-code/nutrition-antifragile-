@@ -4,7 +4,7 @@ import json
 import stripe
 import cloudinary.uploader
 from urllib.parse import urlparse
-
+from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
@@ -16,6 +16,7 @@ from django.views import View
 
 from rest_framework import generics, permissions, status
 from rest_framework.decorators import api_view, permission_classes
+
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import (
     IsAuthenticated,
@@ -412,10 +413,41 @@ class ArticleList(generics.ListAPIView):
 
 
 class ArticleDetailView(RetrieveAPIView):
-    queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = [AllowAny]
 
+    def get_object(self):
+        """Support both slug (preferred) and numeric id in the URL.
+
+        Behaviour:
+        - Try to resolve by slug first (most common, e.g. "mon-article").
+        - If not found and the passed value is all digits, try to resolve by pk.
+        - Raise Http404 if no object matches.
+        """
+        lookup = self.kwargs.get('slug') or self.kwargs.get('pk')
+        if not lookup:
+            from django.http import Http404
+            raise Http404("Article non trouvé")
+
+        # Try slug lookup first
+        try:
+            obj = Article.objects.get(slug=lookup)
+            return obj
+        except Article.DoesNotExist:
+            # If lookup looks like an integer, try pk
+            if str(lookup).isdigit():
+                try:
+                    return Article.objects.get(pk=int(lookup))
+                except Article.DoesNotExist:
+                    from django.http import Http404
+                    raise Http404("Article non trouvé")
+            from django.http import Http404
+            raise Http404("Article non trouvé")
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
 
 # =============================
 # Auth

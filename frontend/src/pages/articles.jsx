@@ -34,7 +34,7 @@ function Articles() {
     <div className="mx-4 md:mx-40 py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {articles.map((article) => (
-          <Link to={`/articles/${article.id}`} key={article.id} className="bg-white shadow-lg rounded-[10%] border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow  dark:bg-neutral-800 dark:border-neutral-500 w-full">
+          <Link to={`/articles/${article.slug}`} key={article.id} className="bg-white shadow-lg rounded-[10%] border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow  dark:bg-neutral-800 dark:border-neutral-500 w-full">
             <img src={article.image} alt={article.title} className=" w-full h-60 md:h-80 object-cover" />
             <div className="p-4">
               <h2 className="text-xl font-SFBold  dark:text-marron">{article.title}</h2>

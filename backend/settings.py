@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dev-key')
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'antifragilewebsite-production.up.railway.app', '*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-production-a7977.up.railway.app', '*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -139,8 +139,9 @@ SIMPLE_JWT = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://web-production-a7977.up.railway.app",
     "https://antifragilewebsite-production.up.railway.app",
-    "https://alionka-houl.eo.symbiose-audiovisuelle.fr/"
+    "https://alionka-houl.eo.symbiose-audiovisuelle.fr",
 ]
 
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
@@ -152,7 +153,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 
 
-FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173/")
 
 
-BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
+# Configuration email Gmail (plus fiable que OVH)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = os.getenv('GMAIL_EMAIL')  # Votre email Gmail
+EMAIL_HOST_PASSWORD = os.getenv('GMAIL_APP_PASSWORD')  # Mot de passe d'application Gmail
+DEFAULT_FROM_EMAIL = os.getenv('GMAIL_EMAIL')
+
+# Pour debug : afficher aussi dans la console en mode développement
+if DEBUG:
+    import logging
+    logging.basicConfig(level=logging.INFO)
+

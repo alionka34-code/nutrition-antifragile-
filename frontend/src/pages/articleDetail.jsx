@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 
 
 function ArticleDetail() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -18,7 +18,7 @@ function ArticleDetail() {
     const loadArticle = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        const data = await fetchArticleDetail(id, token);
+        const data = await fetchArticleDetail(slug, token);
         setArticle(data);
       } catch (err) {
         setError(err.message);
@@ -28,7 +28,7 @@ function ArticleDetail() {
     };
 
     loadArticle();
-  }, [id]);
+  }, [slug]);
 
 
 

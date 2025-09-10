@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from cloudinary.models import CloudinaryField
+from django.utils.text import slugify
 
 # Create your models here.
 class Article(models.Model):
@@ -11,6 +12,31 @@ class Article(models.Model):
     is_premium = models.BooleanField(default=True, help_text="l'article est il reserve aux abonnés ?")
     published_at = models.DateTimeField(auto_now_add=True, help_text="Date de publication de l'article")
     image = CloudinaryField('image', null=True, blank=True)
+    slug = models.SlugField(max_length=201, unique=True, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        # Normaliser/valider le slug fourni ou générer à partir du titre
+        if self.slug:
+            candidate = slugify(self.slug)[:200]
+        elif self.title:
+            candidate = slugify(self.title)[:200]
+        else:
+            candidate = None
+
+        if candidate:
+            slug_base = candidate
+            slug = slug_base
+            counter = 1
+            # Exclure l'instance courante lors de la vérification d'unicité
+            while Article.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                # Réduire slug_base si nécessaire pour ajouter le suffixe
+                max_base_len = 200 - (len(str(counter)) + 1)
+                slug = f"{slug_base[:max_base_len]}-{counter}"
+                counter += 1
+            self.slug = slug
+
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return self.title

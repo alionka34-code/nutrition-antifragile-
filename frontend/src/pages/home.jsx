@@ -337,7 +337,7 @@ function Home() {
         {articles.map((article) => (
           <SwiperSlide key={article.id}>
             <Link
-              to={`/articles/${article.id}`}
+              to={`/articles/${article.slug}`}
               className="bg-white shadow-lg rounded-4xl border border-gray-300 overflow-hidden hover:shadow-xl transition-shadow block my-10 dark:bg-neutral-800 dark:border-neutral-500"
             >
               <img
