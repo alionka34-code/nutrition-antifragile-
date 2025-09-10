@@ -148,6 +148,10 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
+# Brevo (Sendinblue) API key, safe getter and small cleanup to avoid AttributeError
+_raw_brevo = os.getenv('BREVO_API_KEY')
+BREVO_API_KEY = (_raw_brevo.strip().lstrip('= ') if isinstance(_raw_brevo, str) else None)
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
