@@ -615,6 +615,7 @@ class PasswordResetRequestView(APIView):
 
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
+        logger.info(f"Password reset request for: {email}")  # Debug log temporaire
         if not email:
             return Response({'error': 'Email est requis.'}, status=status.HTTP_400_BAD_REQUEST)
 
