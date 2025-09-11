@@ -17,7 +17,7 @@ import MentionLegale  from './pages/MentionLegale.jsx';
 import CGV from './pages/CGV.jsx';
 import CGU from './pages/CGU.jsx';
 import RGPD from './pages/RGPD.jsx';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
