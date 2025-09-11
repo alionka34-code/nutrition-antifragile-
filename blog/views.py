@@ -634,15 +634,22 @@ class PasswordResetRequestView(APIView):
                 f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
                 settings.DEFAULT_FROM_EMAIL,
                 [email],
-                fail_silently=False,
+                # En production, on préfère ne pas faire échouer la requête
+                # si l'envoi d'e-mail rencontre un problème de configuration.
+                fail_silently=True,
             )
 
-            logger.info(f"Password reset email sent to {email}")
-            return Response({'message': 'Email de réinitialisation envoyé avec succès.'}, status=status.HTTP_200_OK)
+            logger.info(f"Password reset email attempted to {email}")
+            # Par sécurité, on répond toujours 200 (même si l'envoi échoue),
+            # pour éviter de divulguer l'existence d'un compte et ne pas
+            # bloquer l'UX côté client.
+            return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
 
         except Exception as e:
-            logger.error(f"Error sending password reset email: {str(e)}")
-            return Response({'error': "Erreur lors de l'envoi de l'email. Veuillez réessayer plus tard."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            # Même en cas d'exception inattendue, ne pas retourner 500 afin
+            # d'éviter des erreurs CORS côté navigateur. On journalise l'erreur.
+            logger.error(f"Error during password reset flow: {str(e)}")
+            return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
 
 
 class PasswordResetConfirmView(APIView):

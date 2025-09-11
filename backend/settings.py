@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dev-key')
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-production-a7977.up.railway.app', 'antifragilewebsite-production.up.railway.app', '*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'antifragilewebsite-production.up.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -139,7 +139,6 @@ SIMPLE_JWT = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://web-production-a7977.up.railway.app",
     "https://antifragilewebsite-production.up.railway.app",
     "https://alionka-houl.eo.symbiose-audiovisuelle.fr",
 ]
