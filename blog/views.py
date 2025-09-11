@@ -640,20 +640,22 @@ class PasswordResetRequestView(APIView):
             base_url = _frontend_base_url(request)
             reset_link = f"{base_url}reset-password/{uid}/{token}"
 
-            send_mail(
-                'Réinitialisation de mot de passe',
-                f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
-                settings.DEFAULT_FROM_EMAIL,
-                [email],
-                # En production, on préfère ne pas faire échouer la requête
-                # si l'envoi d'e-mail rencontre un problème de configuration.
-                fail_silently=True,
-            )
+            # Email désactivé temporairement - configuration SMTP manquante sur Railway
+            email_sent = False
+            try:
+                if hasattr(settings, 'GMAIL_EMAIL') and settings.GMAIL_EMAIL:
+                    send_mail(
+                        'Réinitialisation de mot de passe',
+                        f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
+                        settings.DEFAULT_FROM_EMAIL,
+                        [email],
+                        fail_silently=True,
+                    )
+                    email_sent = True
+            except Exception as email_error:
+                logger.warning(f"Email sending failed: {email_error}")
 
-            logger.info(f"Password reset email attempted to {email}")
-            # Par sécurité, on répond toujours 200 (même si l'envoi échoue),
-            # pour éviter de divulguer l'existence d'un compte et ne pas
-            # bloquer l'UX côté client.
+            logger.info(f"Password reset for {email} - Link: {reset_link} - Email sent: {email_sent}")
             return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
 
         except Exception as e:
