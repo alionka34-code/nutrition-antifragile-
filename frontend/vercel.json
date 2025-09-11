@@ -3,6 +3,13 @@
     "VITE_API_URL": "https://web-production-a7977.up.railway.app/api",
     "VITE_MEDIA_URL": "https://web-production-a7977.up.railway.app/media/"
   },
+  "redirects": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://web-production-a7977.up.railway.app/sitemap.xml",
+      "permanent": true
+    }
+  ],
    "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]
