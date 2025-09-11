@@ -640,10 +640,10 @@ class PasswordResetRequestView(APIView):
             base_url = _frontend_base_url(request)
             reset_link = f"{base_url}reset-password/{uid}/{token}"
 
-            # Email désactivé temporairement - configuration SMTP manquante sur Railway
+            # Tentative d'envoi d'email avec gestion d'erreur robuste
             email_sent = False
             try:
-                if hasattr(settings, 'GMAIL_EMAIL') and settings.GMAIL_EMAIL:
+                if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
                     send_mail(
                         'Réinitialisation de mot de passe',
                         f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
@@ -652,6 +652,8 @@ class PasswordResetRequestView(APIView):
                         fail_silently=True,
                     )
                     email_sent = True
+                else:
+                    logger.warning("Email configuration missing - EMAIL_HOST_USER or EMAIL_HOST_PASSWORD not set")
             except Exception as email_error:
                 logger.warning(f"Email sending failed: {email_error}")
 
