@@ -643,19 +643,19 @@ class PasswordResetRequestView(APIView):
             # Tentative d'envoi d'email avec gestion d'erreur robuste
             email_sent = False
             try:
-                if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
-                    send_mail(
-                        'Réinitialisation de mot de passe',
-                        f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
-                        settings.DEFAULT_FROM_EMAIL,
-                        [email],
-                        fail_silently=True,
-                    )
-                    email_sent = True
-                else:
-                    logger.warning("Email configuration missing - EMAIL_HOST_USER or EMAIL_HOST_PASSWORD not set")
-            except Exception as email_error:
-                logger.warning(f"Email sending failed: {email_error}")
+                send_mail(
+                    'Réinitialisation de mot de passe',
+                    f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
+                    settings.DEFAULT_FROM_EMAIL,
+                    [email],
+                    fail_silently=False,  # on veut attraper l'exception
+                )
+                email_sent = True
+            except Exception as e:
+                email_sent = False
+                logger.warning(f"Email sending failed: {e}")
+
+            
 
             logger.info(f"Password reset for {email} - Link: {reset_link} - Email sent: {email_sent}")
             return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
