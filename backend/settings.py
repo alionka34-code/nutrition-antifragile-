@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
@@ -188,6 +190,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 
+# Configuration du site pour les sitemaps
+SITE_ID = 1
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173/")
 
