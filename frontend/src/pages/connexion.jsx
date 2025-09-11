@@ -488,7 +488,7 @@ function Connexion() {
                             <p className="text-center font-SF text-lg mb-4 text-shadow-md leading-relaxed">
                                 Rejoignez notre communauté et accédez aux contenus gratuits               
                             </p>
-                            <p className="font-SF mb-2"><span className="text-green-600 text-xl">✓ </span>Recevez chaque mardi un extrait de notre analyse exclusive directement par e‑mail</p>
+                            <p className="font-SF mb-2"><span className="text-green-600 text-xl">✓ </span>Recevez 3 articles par mois</p>
                             <p className="font-SF my-2"><span className="text-green-600 text-xl">✓ </span>Commentez les articles et échangez avec d'autres lecteurs engagés</p>
                             <p className="flex items-center font-SFBoltItalic my-8"><span><svg
                             xmlns="http://www.w3.org/2000/svg"
