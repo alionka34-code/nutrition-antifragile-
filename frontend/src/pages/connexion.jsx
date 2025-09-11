@@ -258,7 +258,7 @@ function Connexion() {
             <p className="text-center font-SF text-base mb-2 dark:text-white">
                 Rejoignez notre communauté et accédez aux contenus gratuits
             </p>
-            <p className="font-SF  dark:text-white"><span className="text-green-600 text-lg">✓ </span>Recevez chaque mardi un extrait de notre analyse exclusive directement par e‑mail</p>
+            <p className="font-SF  dark:text-white"><span className="text-green-600 text-lg">✓ </span>Recevez 3 articles par mois</p>
             <p className="font-SF  dark:text-white"><span className="text-green-600 text-lg">✓ </span>Commentez les articles et échangez avec d'autres lecteurs engagés</p>
             <p className="flex items-center justify-center font-SFBoltItalic mt-4 text-sm text-marron">
                 <span className="mr-2">
