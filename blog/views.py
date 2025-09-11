@@ -13,6 +13,8 @@ from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
+import brevo_python
+from brevo_python.rest import ApiException
 
 from rest_framework import generics, permissions, status
 from rest_framework.decorators import api_view, permission_classes
@@ -621,6 +623,38 @@ def upload_image(request):
 # Password reset
 # =============================
 
+def send_reset_email_brevo(to_email, reset_link):
+    """
+    Envoie l'email de réinitialisation via Brevo.
+    """
+    from brevo_python import Configuration, ApiClient, TransactionalEmailsApi
+    from brevo_python.models import SendSmtpEmail, SendSmtpEmailSender, SendSmtpEmailTo
+    
+    configuration = Configuration()
+    configuration.api_key['api-key'] = settings.BREVO_API_KEY
+    
+    api_instance = TransactionalEmailsApi(ApiClient(configuration))
+    
+    send_smtp_email = SendSmtpEmail(
+        sender=SendSmtpEmailSender(name="Mon Site", email=settings.DEFAULT_FROM_EMAIL),
+        to=[SendSmtpEmailTo(email=to_email)],
+        subject="Réinitialisation de mot de passe",
+        html_content=f"""
+            <p>Bonjour,</p>
+            <p>Cliquez sur ce lien pour réinitialiser votre mot de passe :</p>
+            <a href="{reset_link}">{reset_link}</a>
+            <p>Si vous n'avez pas demandé cette réinitialisation, ignorez cet email.</p>
+        """
+    )
+
+    try:
+        api_instance.send_transac_email(send_smtp_email)
+        return True
+    except ApiException as e:
+        logger.warning(f"Email sending failed via Brevo: {e}")
+        return False
+
+
 class PasswordResetRequestView(APIView):
     permission_classes = [AllowAny]
 
@@ -632,7 +666,7 @@ class PasswordResetRequestView(APIView):
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
-            # Pour des raisons de sécurité, nous ne révélons pas si l'email existe ou non
+            # Toujours renvoyer un 200 pour ne pas révéler si l'email existe
             return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
 
         try:
@@ -640,17 +674,11 @@ class PasswordResetRequestView(APIView):
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             reset_link = f"{settings.FRONTEND_URL}/reset-password/{uid}/{token}"
 
-            send_mail(
-                'Réinitialisation de mot de passe',
-                f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
-                settings.DEFAULT_FROM_EMAIL,
-                [email],
-                fail_silently=False,
-            )
-            
-            logger.info(f"Password reset email sent to {email}")
-            return Response({'message': 'Email de réinitialisation envoyé avec succès.'}, status=status.HTTP_200_OK)
-            
+            email_sent = send_reset_email_brevo(email, reset_link)
+
+            logger.info(f"Password reset email sent to {email} via Brevo: {email_sent}")
+            return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
+
         except Exception as e:
             logger.error(f"Error sending password reset email: {str(e)}")
             return Response({'error': 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -683,3 +711,4 @@ class PasswordResetConfirmView(APIView):
         except Exception as e:
             logger.error(f"Error resetting password: {str(e)}")
             return Response({'error': 'Erreur lors de la réinitialisation. Veuillez réessayer.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+

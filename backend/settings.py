@@ -50,8 +50,12 @@ CORS_ALLOWED_ORIGINS = [
     "https://alionka-houl.eo.symbiose-audiovisuelle.fr",
     "http://localhost:3000",
     "http://localhost:5173",  # Vite dev server
+    "http://localhost:5174",  # Vite dev server alt
+    "http://localhost:5175",  # Vite dev server alt 2
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
+    "http://127.0.0.1:5175",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -196,7 +200,7 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.getenv('GMAIL_EMAIL')  # Votre email Gmail
 EMAIL_HOST_PASSWORD = os.getenv('GMAIL_APP_PASSWORD')  # Mot de passe d'application Gmail
-DEFAULT_FROM_EMAIL = os.getenv('GMAIL_EMAIL')
+DEFAULT_FROM_EMAIL = 'alionka@symbiose-audiovisuelle.fr'  # Email expéditeur Brevo
 
 # Pour debug : afficher aussi dans la console en mode développement
 if DEBUG:
