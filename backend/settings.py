@@ -140,7 +140,6 @@ SIMPLE_JWT = {
 
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-a7977.up.railway.app",
-    "https://antifragilewebsite-production.up.railway.app",
     "https://alionka-houl.eo.symbiose-audiovisuelle.fr",
 ]
 
