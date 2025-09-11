@@ -563,6 +563,16 @@ def test_db(request):
         return JsonResponse({"error": str(e)})
 
 
+def debug_version(request):
+    """Debug temporaire pour vérifier le déploiement"""
+    import datetime
+    return JsonResponse({
+        "timestamp": datetime.datetime.now().isoformat(),
+        "commit": "1209fdf - debug log added",
+        "api_working": True
+    })
+
+
 # =============================
 # CKEditor upload (Cloudinary)
 # =============================

@@ -39,6 +39,7 @@ urlpatterns = [
     path('test-db/', views.test_db),
     path('ckeditor/upload/', CKEditorImageUploadView.as_view(), name='ckeditor_upload'),
     path('password-lost/', PasswordResetRequestView.as_view(), name='password-lost'),
+    path('debug-version/', views.debug_version, name='debug-version'),  # Debug temporaire
     path('password-reset-confirm/<str:uidb64>/<str:token>/', PasswordResetConfirmView.as_view(), name='password-reset-confirm'),
     path('verify-checkout-session/', VerifyCheckoutSessionView.as_view(), name='verify-checkout-session'),
 ]
