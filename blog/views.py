@@ -620,51 +620,40 @@ def upload_image(request):
 # =============================
 # Password reset
 # =============================
+
 class PasswordResetRequestView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
-        logger.info(f"Password reset request for: {email}")  # Debug log temporaire
         if not email:
             return Response({'error': 'Email est requis.'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
+            # Pour des raisons de sécurité, nous ne révélons pas si l'email existe ou non
             return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
 
         try:
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            base_url = _frontend_base_url(request)
-            reset_link = f"{base_url}reset-password/{uid}/{token}"
+            reset_link = f"{settings.FRONTEND_URL}/reset-password/{uid}/{token}"
 
-            # Tentative d'envoi d'email avec gestion d'erreur robuste
-            email_sent = False
-            try:
-                send_mail(
-                    'Réinitialisation de mot de passe',
-                    f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
-                    settings.DEFAULT_FROM_EMAIL,
-                    [email],
-                    fail_silently=False,  # on veut attraper l'exception
-                )
-                email_sent = True
-            except Exception as e:
-                email_sent = False
-                logger.warning(f"Email sending failed: {e}")
-
+            send_mail(
+                'Réinitialisation de mot de passe',
+                f'Cliquez sur ce lien pour réinitialiser votre mot de passe: {reset_link}',
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
             
-
-            logger.info(f"Password reset for {email} - Link: {reset_link} - Email sent: {email_sent}")
-            return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
-
+            logger.info(f"Password reset email sent to {email}")
+            return Response({'message': 'Email de réinitialisation envoyé avec succès.'}, status=status.HTTP_200_OK)
+            
         except Exception as e:
-            # Même en cas d'exception inattendue, ne pas retourner 500 afin
-            # d'éviter des erreurs CORS côté navigateur. On journalise l'erreur.
-            logger.error(f"Error during password reset flow: {str(e)}")
-            return Response({'message': 'Si cette adresse email existe, vous recevrez un email de réinitialisation.'}, status=status.HTTP_200_OK)
+            logger.error(f"Error sending password reset email: {str(e)}")
+            return Response({'error': 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class PasswordResetConfirmView(APIView):

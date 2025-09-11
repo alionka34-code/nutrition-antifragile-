@@ -8,8 +8,7 @@ function PasswordLost() {
   const [message, setMessage] = useState('');
 
   const onSubmit = async (data) => {
-    try {
-      console.log('Using API URL:', API_URL); // Debug temporaire
+    try { 
       const response = await fetch(`${API_URL}/password-lost/`, {
         method: 'POST',
         headers: {

@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'https://antifragilewebsite-production.up.railway.app/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://web-production-a7977.up.railway.app/api';
 
 export async function fetchArticles() {
   const res = await fetch(`${API_URL}/articles/`);
