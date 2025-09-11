@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dev-key')
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-production-a7977.up.railway.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-production-a7977.up.railway.app', 'alionka-houl.eo.symbiose-audiovisuelle.fr']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
