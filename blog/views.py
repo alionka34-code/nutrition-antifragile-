@@ -82,7 +82,8 @@ def check_expired_subscriptions():
                             should_remain_subscribed = True
                             logger.info(f"Profile {profile.user.id} - Active but will cancel at period end ({current_period_end})")
                         else:
-                            logger.info(f"Profile {profile.user.id} - Active but period already ended")
+                            should_remain_subscribed = False
+                            logger.info(f"Profile {profile.user.id} - Active but canceled immediately (no valid period end)")
                     else:
                         should_remain_subscribed = True
                         logger.info(f"Profile {profile.user.id} - Active subscription")
@@ -392,8 +393,9 @@ class StripeWebhookView(APIView):
                         should_be_premium = True
                         reason = f"Active but will cancel at period end ({current_period_end})"
                     else:
+                        # Si pas de current_period_end OU période expirée = annulation immédiate
                         should_be_premium = False
-                        reason = "Active but period already ended"
+                        reason = "Active but canceled immediately (no valid period end)"
                 else:
                     should_be_premium = True
                     reason = "Active subscription"
