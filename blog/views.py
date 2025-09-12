@@ -48,75 +48,6 @@ logger = logging.getLogger(__name__)
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
-def check_expired_subscriptions():
-    """
-    Vérifie les abonnements expirés et met à jour le statut des utilisateurs
-    Cette fonction peut être appelée périodiquement via une tâche cron
-    """
-    import time
-    now_timestamp = int(time.time())
-    
-    # Récupère tous les profils abonnés
-    subscribed_profiles = Profile.objects.filter(is_subscribed=True, stripe_customer_id__isnull=False)
-    
-    for profile in subscribed_profiles:
-        try:
-            # Récupère les abonnements du client
-            subscriptions = stripe.Subscription.list(
-                customer=profile.stripe_customer_id,
-                status='all',  # Inclut tous les statuts
-                limit=10
-            )
-            
-            should_remain_subscribed = False
-            
-            for subscription in subscriptions.data:
-                status = subscription.status
-                cancel_at_period_end = subscription.cancel_at_period_end
-                current_period_end = getattr(subscription, 'current_period_end', None)
-                
-                # Même logique que le webhook
-                if status == 'active':
-                    if cancel_at_period_end:
-                        if current_period_end and current_period_end > now_timestamp:
-                            should_remain_subscribed = True
-                            logger.info(f"Profile {profile.user.id} - Active but will cancel at period end ({current_period_end})")
-                        else:
-                            should_remain_subscribed = False
-                            logger.info(f"Profile {profile.user.id} - Active but canceled immediately (no valid period end)")
-                    else:
-                        should_remain_subscribed = True
-                        logger.info(f"Profile {profile.user.id} - Active subscription")
-                        
-                elif status == 'trialing':
-                    should_remain_subscribed = True
-                    logger.info(f"Profile {profile.user.id} - Trial period")
-                    
-                elif status == 'canceled':
-                    if current_period_end and current_period_end > now_timestamp:
-                        should_remain_subscribed = True
-                        logger.info(f"Profile {profile.user.id} - Canceled but valid until {current_period_end}")
-                    else:
-                        logger.info(f"Profile {profile.user.id} - Canceled and expired")
-                else:
-                    logger.info(f"Profile {profile.user.id} - Status {status} not active")
-                        
-            if not should_remain_subscribed and profile.is_subscribed:
-                profile.is_subscribed = False
-                profile.save()
-                logger.info(f"Profile {profile.user.id} subscription expired - set to FREE")
-                
-        except stripe.error.InvalidRequestError as e:
-            if "No such customer" in str(e):
-                logger.warning(f"Customer {profile.stripe_customer_id} no longer exists in Stripe - setting profile {profile.user.id} to FREE")
-                profile.is_subscribed = False
-                profile.save()
-            else:
-                logger.error(f"Stripe error for profile {profile.user.id}: {e}")
-        except Exception as e:
-            logger.error(f"Error checking subscription for profile {profile.user.id}: {e}")
-
-
 def _frontend_base_url(request):
     """Resolve the frontend base URL.
     - Prefer FRONTEND_URL from settings.
@@ -196,23 +127,6 @@ def _resolve_profile_from_stripe(customer_id=None, metadata=None):
 # =============================
 # Abonnement - Stripe
 # =============================
-
-class CheckExpiredSubscriptionsView(APIView):
-    """
-    Vue pour vérifier manuellement les abonnements expirés
-    Accessible uniquement aux admins
-    """
-    permission_classes = [IsAdminUser]
-    
-    def post(self, request):
-        try:
-            check_expired_subscriptions()
-            return Response({"message": "Vérification des abonnements expirés terminée"}, status=200)
-        except Exception as e:
-            logger.error(f"Error in manual subscription check: {e}")
-            return Response({"error": str(e)}, status=500)
-
-
 class CreateSubscriptionView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -228,8 +142,8 @@ class CreateSubscriptionView(APIView):
             profile.save()
 
             items = [
-                {"price": "price_1RvKWDFiDmUzPzGDPVF2FHzQ"},  # launch
-                {"price": "price_1RvKWVFiDmUzPzGDhSX4Hpe5"},  # monthly
+                {"price": "price_1RqfR3BthRAmBImUWP3ywgRC"},  # launch
+                {"price": "price_1RqfRUBthRAmBImU3VDSFmui"},  # monthly
             ]
 
             subscription = stripe.Subscription.create(
@@ -264,8 +178,8 @@ class CreateCheckoutSession(APIView):
         logger.info(f"Base URL: {base_url}")
 
         price_map = {
-            "monthly": "price_1RvKWVFiDmUzPzGDhSX4Hpe5",
-            "launch": "price_1RvKWDFiDmUzPzGDPVF2FHzQ",
+            "monthly": "price_1RqfRUBthRAmBImU3VDSFmui",
+            "launch": "price_1RqfR3BthRAmBImUWP3ywgRC",
         }
 
         try:
@@ -359,93 +273,43 @@ class StripeWebhookView(APIView):
         customer_id = obj.get('customer')
         metadata = obj.get('metadata') or {}
 
-        logger.info(f"Processing webhook {event_type} for customer {customer_id}")
+        # --- Désabonnement / échec paiement ---
+        if event_type in ['customer.subscription.deleted', 'invoice.payment_failed']:
+            if not customer_id and obj.get('id'):
+                try:
+                    sub = stripe.Subscription.retrieve(obj.get('id'))
+                    customer_id = sub.get('customer')
+                    metadata = metadata or sub.get('metadata') or {}
+                except Exception:
+                    pass
+            if customer_id:
+                profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=metadata)
+                if profile:
+                    old = profile.is_subscribed
+                    profile.is_subscribed = False
+                    profile.save()
+                    logger.info(f"Profile {profile.user.id} unsubscribed. was {old}")
+                else:
+                    logger.warning(f"No profile resolved for customer_id {customer_id} on {event_type}.")
 
-        # === GESTION DES ABONNEMENTS ===
-        if event_type in ['customer.subscription.created', 'customer.subscription.updated', 'customer.subscription.deleted']:
-            subscription = obj
-            status = subscription.get('status')
-            cancel_at_period_end = subscription.get('cancel_at_period_end', False)
-            current_period_end = subscription.get('current_period_end')
-            canceled_at = subscription.get('canceled_at')
-            
-            logger.info(f"Subscription details - Status: {status}, Cancel at period end: {cancel_at_period_end}, Current period end: {current_period_end}, Canceled at: {canceled_at}")
-            
+        # --- Subscription updated / created ---
+        elif event_type in ['customer.subscription.updated', 'customer.subscription.created']:
+            sub = obj
+            status_sub = sub.get('status')
+            cancel_at_period_end = bool(sub.get('cancel_at_period_end'))
             profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=metadata)
-            if not profile:
-                logger.warning(f"No profile found for customer {customer_id}")
-                return HttpResponse(status=200)
-            
-            import time
-            now_timestamp = int(time.time())
-            should_be_premium = False
-            reason = ""
-            
-            # === CAS 1: ABONNEMENT SUPPRIMÉ ===
-            if event_type == 'customer.subscription.deleted':
-                should_be_premium = False
-                reason = "Subscription deleted"
-                
-            # === CAS 2: ABONNEMENT ACTIF ===
-            elif status == 'active':
-                if cancel_at_period_end:
-                    if current_period_end and current_period_end > now_timestamp:
-                        should_be_premium = True
-                        reason = f"Active but will cancel at period end ({current_period_end})"
-                    else:
-                        # Si pas de current_period_end OU période expirée = annulation immédiate
-                        should_be_premium = False
-                        reason = "Active but canceled immediately (no valid period end)"
-                else:
-                    should_be_premium = True
-                    reason = "Active subscription"
-                    
-            # === CAS 3: PÉRIODE D'ESSAI ===
-            elif status == 'trialing':
-                should_be_premium = True
-                reason = "Trial period"
-                
-            # === CAS 4: ABONNEMENT ANNULÉ ===
-            elif status == 'canceled':
-                if current_period_end and current_period_end > now_timestamp:
-                    should_be_premium = True
-                    reason = f"Canceled but valid until {current_period_end}"
-                else:
-                    should_be_premium = False
-                    reason = "Canceled and expired"
-                    
-            # === CAS 5: AUTRES STATUTS (incomplete, unpaid, etc.) ===
+            if profile:
+                should_be_active = (status_sub in ['active', 'trialing']) and not cancel_at_period_end
+                old = profile.is_subscribed
+                profile.is_subscribed = should_be_active
+                profile.save()
+                logger.info(
+                    f"Subscription {status_sub} (cancel_at_period_end={cancel_at_period_end}) for profile {profile.user.id}. is_subscribed {old} -> {profile.is_subscribed}"
+                )
             else:
-                should_be_premium = False
-                reason = f"Status {status} - not active"
-            
-            # Mise à jour du profil
-            old_status = profile.is_subscribed
-            profile.is_subscribed = should_be_premium
-            profile.save()
-            
-            logger.info(f"Profile {profile.user.id} ({profile.user.email}): {old_status} -> {should_be_premium} | Reason: {reason}")
-            
-        # === GESTION DES PAIEMENTS ===
-        elif event_type == 'invoice.payment_failed':
-            # Échec de paiement - désactiver immédiatement
-            profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=metadata)
-            if profile:
-                old_status = profile.is_subscribed
-                profile.is_subscribed = False
-                profile.save()
-                logger.info(f"Profile {profile.user.id} - Payment failed: {old_status} -> False")
-                
-        elif event_type == 'invoice.payment_succeeded':
-            # Paiement réussi - activer l'abonnement
-            profile = _resolve_profile_from_stripe(customer_id=customer_id, metadata=metadata)
-            if profile:
-                old_status = profile.is_subscribed
-                profile.is_subscribed = True
-                profile.save()
-                logger.info(f"Profile {profile.user.id} - Payment succeeded: {old_status} -> True")
+                logger.warning(f"No profile resolved for customer_id {customer_id} (subscription {status_sub}).")
 
-        # === GESTION DES CHECKOUT ===
+        # --- Checkout session succeeded ---
         elif event_type in ['checkout.session.completed', 'checkout.session.async_payment_succeeded']:
             session = obj
             customer_id = session.get('customer')

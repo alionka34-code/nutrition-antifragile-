@@ -18,7 +18,6 @@ from blog.views import CKEditorImageUploadView
 from .views import PasswordResetRequestView
 from .views import PasswordResetConfirmView
 from .views import VerifyCheckoutSessionView
-from .views import CheckExpiredSubscriptionsView
 
 
 
@@ -43,5 +42,4 @@ urlpatterns = [
     path('debug-version/', views.debug_version, name='debug-version'),  # Debug temporaire
     path('password-reset-confirm/<str:uidb64>/<str:token>/', PasswordResetConfirmView.as_view(), name='password-reset-confirm'),
     path('verify-checkout-session/', VerifyCheckoutSessionView.as_view(), name='verify-checkout-session'),
-    path('check-expired-subscriptions/', CheckExpiredSubscriptionsView.as_view(), name='check-expired-subscriptions'),
 ]
