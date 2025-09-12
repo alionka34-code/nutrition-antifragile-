@@ -227,8 +227,8 @@ function Connexion() {
     }
 
     const data = await response.json();
-    localStorage.setItem("access_token", data.access);
-    localStorage.setItem("refresh_token", data.refresh);
+    sessionStorage.setItem("access_token", data.access);
+    sessionStorage.setItem("refresh_token", data.refresh);
     login(loginUsername); // MAJ du contexte
     
     // Redirection immédiate sans message

@@ -66,7 +66,7 @@ function Navbar() {
             <div className="absolute mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200">
               {isSubscribed ? (
                 <a
-                  href="https://billing.stripe.com/p/login/test_7sY5kDflLe3C0C47xu7Vm00"
+                  href="https://billing.stripe.com/p/login/7sYaEW2Rx2AQd0h5QQbZe00"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block px-4 py-2 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm dark:text-black"

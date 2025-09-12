@@ -1,7 +1,7 @@
 import jwt_decode from "jwt-decode";
 
 function getUserFromToken() {
-  const token = localStorage.getItem("access_token");
+  const token = sessionStorage.getItem("access_token");
   if (!token) return null;
 
   try {

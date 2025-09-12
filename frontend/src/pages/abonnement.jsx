@@ -51,7 +51,7 @@ function Abonnement() {
             return;
         }
 
-        const token = localStorage.getItem("access_token");
+        const token = sessionStorage.getItem("access_token");
         if (!token) {
             setErrorMessage("Vous devez être connecté pour vous abonner. Redirection vers la page de connexion...");
             setTimeout(() => {

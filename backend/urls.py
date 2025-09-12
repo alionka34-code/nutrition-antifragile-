@@ -43,6 +43,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),  # CKEditor URLs
     path("api/upload-image/", upload_image, name="upload_image"),
     path('stripe/webhook/', StripeWebhookView.as_view(), name='stripe-webhook-direct'),  # Stripe webhook endpoint
+    path('webhook/stripe/', StripeWebhookView.as_view(), name='stripe-webhook-alt'),  # Alternative URL for webhooks
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 

@@ -12,7 +12,7 @@ export default function SubscriptionSuccess() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get('session_id');
-    const token = localStorage.getItem('access_token');
+    const token = sessionStorage.getItem('access_token');
 
     if (!sessionId || !token) return;
 

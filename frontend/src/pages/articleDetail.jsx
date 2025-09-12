@@ -17,7 +17,7 @@ function ArticleDetail() {
   useEffect(() => {
     const loadArticle = async () => {
       try {
-        const token = localStorage.getItem("access_token");
+        const token = sessionStorage.getItem("access_token");
         const data = await fetchArticleDetail(slug, token);
         setArticle(data);
       } catch (err) {
@@ -84,7 +84,7 @@ function ArticleDetail() {
   if (loading) return <p className="text-center mt-10">Chargement...</p>;
   if (error) return <p className="text-red-500 text-center mt-10">{error}</p>;
 
-  const token = localStorage.getItem("access_token");
+  const token = sessionStorage.getItem("access_token");
 
 // Décodage du token pour savoir si l'utilisateur est admin
   let isAdmin = false;

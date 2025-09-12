@@ -25,7 +25,7 @@ urlpatterns = [
     path('articles/', ArticleList.as_view(), name='article-list'),
     path('register/', RegisterView.as_view(), name='register'),
     path('create-checkout-session/', CreateCheckoutSession.as_view(), name='create-checkout-session'),
-    path('stripe/webhook/', StripeWebhookView.as_view(), name='stripe-webhook'),
+    path('webhook/stripe/', StripeWebhookView.as_view(), name='stripe-webhook'),
     path('login/', LoginView.as_view(), name='login'),
     path('articles/<slug:slug>/', ArticleDetailView.as_view(), name='article-detail'),
 
