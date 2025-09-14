@@ -35,6 +35,33 @@ from django.contrib.auth.models import User
 
 class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)
+    
+    # Ajouter is_subscribed dans la liste des colonnes affichées
+    list_display = BaseUserAdmin.list_display + ('is_subscribed_status',)
+    
+    # Permettre de filtrer par statut d'abonnement
+    list_filter = BaseUserAdmin.list_filter + ('profile__is_subscribed',)
+    
+    # Optimiser les requêtes en utilisant select_related pour éviter les requêtes N+1
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        return queryset.select_related('profile')
+    
+    def is_subscribed_status(self, obj):
+        """Affiche le statut d'abonnement de l'utilisateur"""
+        try:
+            profile = obj.profile
+            if profile.is_subscribed:
+                return "✅ Abonné"
+            else:
+                return "❌ Non abonné"
+        except Profile.DoesNotExist:
+            # Créer automatiquement un profil si il n'existe pas
+            Profile.objects.create(user=obj, is_subscribed=False)
+            return "⚠️ Profil créé"
+    
+    is_subscribed_status.short_description = "Statut d'abonnement"
+    is_subscribed_status.admin_order_field = 'profile__is_subscribed'
 
 # Dé-enregistre l'ancien UserAdmin puis enregistre le nouveau
 admin.site.unregister(User)
