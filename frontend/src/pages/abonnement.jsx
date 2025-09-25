@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from "react-helmet";
-import Countdown from '../components/countdown'; 
 import { createCheckoutSession } from '../utils/api'; 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Grid } from "swiper/modules";
@@ -133,12 +132,10 @@ function Abonnement() {
                     </div>
                     <h1 className="font-SFBold text-2xl  dark:text-white">Abonnement annuel</h1>
                     <h2 className="font-SFBold text-2xl text-marron my-2">
-                        <span className="text-gray-400 line-through text-xl mr-2">100€</span>
-                        70€<span className="text-xl font-SF text-gray-500">/an</span>
+                        100€<span className="text-xl font-SF text-gray-500">/an</span>
                         </h2>
                     
                     <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">Tarif exclusif à vie</span>
-                    <Countdown />
                 </div>
                 </label>
             </div>

@@ -146,7 +146,7 @@ class CreateSubscriptionView(APIView):
             profile.save()
 
             items = [
-                {"price": "price_1RrJzWBthRAmBImUlq8k1UfL"},  # launch
+                {"price": "price_1SBM9uBthRAmBImUcQ2fcEOb"},  # launch
                 {"price": "price_1RqfRUBthRAmBImU3VDSFmui"},  # monthly
             ]
 
@@ -184,7 +184,7 @@ class CreateCheckoutSession(APIView):
 
         price_map = {
             "monthly": "price_1RqfRUBthRAmBImU3VDSFmui",
-            "launch": "price_1RrJzWBthRAmBImUlq8k1UfL",
+            "launch": "price_1SBM9uBthRAmBImUcQ2fcEOb",
         }
 
         try:
