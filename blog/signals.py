@@ -34,7 +34,7 @@ def send_welcome_email(sender, instance, created, **kwargs):
 
 
 
-
+"""
 @receiver(post_save, sender=Article)
 def send_new_article_email(sender, instance, created, **kwargs):
     if created:  
@@ -51,3 +51,4 @@ def send_new_article_email(sender, instance, created, **kwargs):
                     "ARTICLE_URL": article_url
                 }
             )
+"""
