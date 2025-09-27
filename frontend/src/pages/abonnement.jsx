@@ -135,7 +135,7 @@ function Abonnement() {
                         100€<span className="text-xl font-SF text-gray-500">/an</span>
                         </h2>
                     
-                    <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">Tarif exclusif à vie</span>
+                    <div className="font-SF md:text-lg text-marron border-2 rounded-4xl py-1 px-2 md:w-80">Économisez 17% (soit 2 mois gratuits !)</div>
                 </div>
                 </label>
             </div>
