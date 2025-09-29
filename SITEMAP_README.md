@@ -38,9 +38,8 @@ http://127.0.0.1:8000/sitemap.xml
 
 ### En production
 ```
-# ⚠️  ATTENTION: Vérifier la configuration DNS
-# Le domaine alionka-houl.eo.symbiose-audiovisuelle.fr pointe actuellement vers Vercel
-# URL Django/Railway: [À déterminer - vérifier le dashboard Railway]
+# Frontend Vercel: https://alionka-houl.eo.symbiose-audiovisuelle.fr/sitemap.xml (redirects to backend)
+# Backend Django/Railway: https://web-production-a7977.up.railway.app/sitemap.xml
 https://alionka-houl.eo.symbiose-audiovisuelle.fr/sitemap.xml
 ```
 
