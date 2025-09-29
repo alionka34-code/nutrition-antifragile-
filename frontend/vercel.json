@@ -12,10 +12,5 @@
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
-  ],
-  "functions": {
-    "src/pages/articles/[slug].jsx": {
-      "maxDuration": 30
-    }
-  }
+  ]
 }
