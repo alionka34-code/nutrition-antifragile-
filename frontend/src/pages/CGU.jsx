@@ -14,16 +14,18 @@ function CGU(){
         </header>
         
         <div className="md:mx-40 mx-4 py-8  dark:text-white">
-        <p className="font-SF mb-4">Les présentes CGU régissent l’utilisation du sous-site (nom de ton site), intégré au réseau éditorial de Éditions Œuvre — Symbiose Audiovisuelle.</p>
-        <h1 className="text-2xl font-SFBold mb-4">1. Licence d'utilisation</h1>
-        <p className="font-SF mb-4">L’accès aux contenus payants, ebooks ou articles est accordé sous licence personnelle, non exclusive et non transférable. Toute redistribution ou diffusion non autorisée est interdite.</p>
-        <h1 className="text-2xl font-SFBold mb-4">2. Abonnements</h1>
-        <p className="font-SF mb-4">Les abonnements mensuels ou annuels permettent un accès illimité aux contenus pendant la période souscrite. La résiliation peut être effectuée à tout moment via votre espace client.</p>
-        <h1 className="text-2xl font-SFBold mb-4">3. Liens Amazon</h1>
-        <p className="font-SF mb-4">Certains liens renvoient vers Amazon.fr. Les transactions sont alors soumises aux CGV d’Amazon.</p>
-        <h1 className="text-2xl font-SFBold mb-4">4. Responsabilité</h1>
-        <p className="font-SF mb-4">L’auteure et Symbiose Audiovisuelle déclinent toute responsabilité en cas d’interruption du site ou d’erreurs dans les contenus.</p>
-
+        <h1 className="text-2xl font-SFBold mb-4">Article 1: Objet</h1>
+        <p className="font-SF mb-4">Les présentes CGU ont pour objet de définir les modalités d’accès et d’utilisation du site https://alionka-houl.eo.symbiose-audiovisuelle.fr.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 2: Acces au site</h1>
+        <p className="font-SF mb-4">L’accès au site est libre. Certaines parties du site (blog premium) sont réservées aux abonnés disposant d’un compte actif.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 3: Compte utilisateur</h1>
+        <p className="font-SF mb-4">La création d’un compte nécessite la fourniture d’informations exactes. L’utilisateur s’engage à garder confidentiels ses identifiants.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 4: Contenu utilisateur</h1>
+        <p className="font-SF mb-4">Les utilisateurs peuvent commenter les articles du blog. Symbiose Audiovisuelle se réserve le droit de modérer ou supprimer tout contenu contraire à la loi, à ses statuts, à l’éthique ou aux présentes CGU.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 5: Propriété intellectuelle</h1>
+        <p className="font-SF mb-4">L’ensemble du contenu du site (textes, images, vidéos) est protégé par le droit d’auteur et demeure la propriété exclusive de Symbiose Audiovisuelle, sauf mention contraire.Toute reproduction non autorisée est interdite.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 6: Responsabilité</h1>
+        <p className="font-SF mb-4">Symbiose Audiovisuelle n’est pas responsable en cas d’interruption du site, de bug, ou de force majeure.</p>
         </div>
         </>
     );

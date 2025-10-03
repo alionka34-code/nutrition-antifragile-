@@ -15,19 +15,24 @@ return(
         <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Conditions générales de vente</h1>
     </header>
     <div className="md:mx-40 mx-4 py-8  dark:text-white">
-        <p className="font-SF mb-4">Les présentes CGV régissent la vente des abonnements et ebooks sur **\[Nom de ton site]**, sous-site de **Éditions Œuvre**.</p>
-        <h1 className="text-2xl font-SFBold mb-4">1.Produits concernés</h1>
-        <p className="font-SF mb-4">Abonnements mensuels ou annuels<br/>Ebooks numériques<br/>Liens redirigeant vers Amazon.fr (vente gérée par Amazon)</p>
-        <h1 className="text-2xl font-SFBold mb-4">2. Prix et paiement</h1>
-        <p className="font-SF mb-4">Les prix sont indiqués en euros, toutes taxes comprises (TTC).<br/>Le paiement s'effectue via Stripe pour les abonnements <br/>Pour les achats via Amazon, les conditions de paiement d'Amazon s'appliquent.</p>
-        <h1 className="text-2xl font-SFBold mb-4">3. Rétractation</h1>
-        <p className="font-SF mb-4">Conformément à l’article L221-28 du Code de la consommation, le droit de rétractation ne s’applique pas aux contenus numériques livrés immédiatement après achat.</p>
-        <h1 className="text-2xl font-SFBold mb-4">4.Résiliation des abonnements</h1>
-        <p className="font-SF mb-4">Conformément à l'article L215-1-1 du Code de la consommation, les abonnements peuvent être résiliés à tout moment en ligne via votre espace client ou par simple demande écrite avant reconduction.</p>
-        <h1 className="text-2xl font-SFBold  mb-4">Propriété intellectuelle</h1>
-        <p className="font-SF mb-4">Tous les contenus (ebooks, articles, publications) sont protégés par le droit d’auteur. Toute reproduction ou diffusion non autorisée est interdite.</p>
-        <h1 className="text-2xl font-SFBold mb-4">6.Litiges</h1>
-        <p className="font-SF mb-4">Les présentes CGV sont soumises au droit français. En cas de litige, le tribunal compétent sera celui du ressort du siège social de Symbiose Audiovisuelle.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 1 : Objet</h1>
+        <p className="font-SF mb-4">Les présentes CGV régissent les conditions d’abonnement au blog premium proposé par Symbiose Audiovisuelle.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 2 : Abonnements</h1>
+        <p className="font-SF mb-4">Formules disponibles :</p>
+        <li className="font-SF mb-2">Gratuit</li>
+        <li className="font-SF mb-2">Payant mensuel</li>
+        <li className="font-SF mb-2">Payant annuel</li>
+        <p className="font-SF mb-4">L’abonnement payant ouvre droit à l’accès complet au contenu premium.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 3 : Prix et paiement</h1>
+        <p className="font-SF mb-4">Les prix sont indiqués en euros toutes taxes comprises (TTC).Le paiement est géré de manière sécurisée via **Stripe**. Aucune donnée bancaire n’est conservée par Symbiose Audiovisuelle.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 4: Durée et résiliation</h1>
+        <li className="font-SF mb-2">L’abonnement est reconduit automatiquement (mensuel ou annuel).</li>
+        <li className="font-SF mb-2">L’utilisateur peut résilier à tout moment depuis son compte.</li>
+        <li className="font-SF mb-2">Aucun remboursement n’est effectué pour une période déjà entamée.</li>
+        <h1 className="text-2xl font-SFBold mb-4">Article 5: Droit de  rétractation</h1>
+        <p className="font-SF mb-4">Conformément à l’article L221-28 du Code de la consommation, le droit de rétractation ne s’applique pas aux contenus numériques fournis immédiatement après l’achat. En validant son abonnement, l’utilisateur accepte expressément de renoncer à ce droit.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 6: Service client</h1>
+        <p className="font-SF mb-4">Toute demande ou réclamation peut être adressée à : rgpd@symbiose-audiovisuelle.fr</p>
 
 
     </div>
