@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from .models import Profile
 from .models import Article
 from django.conf import settings
-from django.core.mail import send_mail
 from .utils.brevo_email import send_brevo_email
 import threading
 
@@ -34,21 +33,20 @@ def send_welcome_email(sender, instance, created, **kwargs):
 
 
 
-def send_emails_for_article(article):
-    article_url = f"{settings.FRONTEND_URL}articles/{article.id}"
-    for user in User.objects.all():
-        send_brevo_email(
-            to_email=user.email,
-            to_name=user.username,
-            template_id=4,
-            params={
-                "USERNAME": user.username,
-                "ARTICLE_TITLE": article.title,
-                "ARTICLE_URL": article_url
-            }
-        )
 
 @receiver(post_save, sender=Article)
 def send_new_article_email(sender, instance, created, **kwargs):
-    if created:
-        threading.Thread(target=send_emails_for_article, args=(instance,)).start()
+    if created:  
+        article_url = f"{settings.FRONTEND_URL}articles/{instance.id}"
+        # si nouvel article
+        for user in User.objects.all():
+            send_brevo_email(
+                to_email=user.email,
+                to_name=user.username,
+                template_id=4,  # ID du template "Nouvel article"
+                params={
+                    "USERNAME": user.username,
+                    "ARTICLE_TITLE": instance.title,
+                    "ARTICLE_URL": article_url
+                }
+            )
