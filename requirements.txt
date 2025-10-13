@@ -8,6 +8,7 @@ Django==5.2.3
 django-ckeditor==6.7.3
 django-cloudinary-storage==0.3.0
 django-cors-headers==4.7.0
+django-import-export
 django-js-asset==3.1.2
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
