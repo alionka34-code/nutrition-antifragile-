@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import Article
 from .models import Profile
 from .models import StripeWebhookLog
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 import json
 
 @admin.register(Article)
@@ -30,10 +34,14 @@ class StripeWebhookLogAdmin(admin.ModelAdmin):
 class ProfileInline(admin.StackedInline):
     model = Profile
 
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
+class UserResource(resources.ModelResource):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'profile__is_subscribed')
+        export_order = ('id', 'username', 'email', 'first_name', 'last_name', 'profile__is_subscribed')
 
-class UserAdmin(BaseUserAdmin):
+class UserAdmin(ImportExportModelAdmin, BaseUserAdmin):
+    resource_class = UserResource
     inlines = (ProfileInline,)
     
     # Ajouter is_subscribed dans la liste des colonnes affichées

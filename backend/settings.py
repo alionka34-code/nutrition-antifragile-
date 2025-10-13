@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'cloudinary_storage',
     'cloudinary',
-    'blog',  # Assurez-vous que le nom de l'application est correct
+    'blog',
+    'import_export'  
 ]
 
 MIDDLEWARE = [

@@ -6,7 +6,6 @@ from .models import Article
 from django.conf import settings
 from django.core.mail import send_mail
 from .utils.brevo_email import send_brevo_email
-import threading
 
   # pas de slash supplémentaire
 @receiver(post_save, sender=User)
@@ -48,7 +47,3 @@ def send_emails_for_article(article):
             }
         )
 
-@receiver(post_save, sender=Article)
-def send_new_article_email(sender, instance, created, **kwargs):
-    if created:
-        threading.Thread(target=send_emails_for_article, args=(instance,)).start()
