@@ -31,19 +31,3 @@ def send_welcome_email(sender, instance, created, **kwargs):
             params={"USERNAME": instance.username}
         )
 
-
-
-def send_emails_for_article(article):
-    article_url = f"{settings.FRONTEND_URL}articles/{article.id}"
-    for user in User.objects.all():
-        send_brevo_email(
-            to_email=user.email,
-            to_name=user.username,
-            template_id=4,
-            params={
-                "USERNAME": user.username,
-                "ARTICLE_TITLE": article.title,
-                "ARTICLE_URL": article_url
-            }
-        )
-
