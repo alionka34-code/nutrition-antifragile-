@@ -13,6 +13,7 @@ class Article(models.Model):
     published_at = models.DateTimeField(auto_now_add=True, help_text="Date de publication de l'article")
     image = CloudinaryField('image', null=True, blank=True)
     slug = models.SlugField(max_length=201, unique=True, blank=True, null=True)
+    notified = models.BooleanField(default=False, help_text="Champ legacy - non utilisé")
 
     def save(self, *args, **kwargs):
         # Normaliser/valider le slug fourni ou générer à partir du titre
