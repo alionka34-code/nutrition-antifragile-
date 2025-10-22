@@ -9,4 +9,3 @@ class BlogConfig(AppConfig):
         import blog.signals 
 
 
-    

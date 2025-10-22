@@ -9,6 +9,7 @@ import ContactForm from './pages/contact.jsx';
 import { AuthProvider } from './contexts/AuthContext';
 import Articles from './pages/articles.jsx';
 import ArticleDetail from './pages/articleDetail.jsx';
+import VideoDetail from './pages/videoDetail.jsx';  
 import SubscriptionSuccess from './pages/SubscriptionSuccess';
 import SubscriptionCancel from './pages/SubscriptionCancel';
 import PasswordLost from './pages/PasswordLost.jsx';
@@ -34,6 +35,7 @@ function App() {
               <Route path="/contact" element={<ContactForm />} />
               <Route path="/articles" element={<Articles />} />
               <Route path="/articles/:slug" element={<ArticleDetail />} />
+              <Route path="/videos/:slug" element={<VideoDetail />} />
               <Route path="/subscription/success" element={<SubscriptionSuccess />} />
               <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
               <Route path="/password-lost" element={<PasswordLost />} />

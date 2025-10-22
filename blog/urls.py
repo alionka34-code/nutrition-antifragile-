@@ -18,10 +18,14 @@ from blog.views import CKEditorImageUploadView
 from .views import PasswordResetRequestView
 from .views import PasswordResetConfirmView
 from .views import VerifyCheckoutSessionView
+from .views import VideoListView, VideoDetailView
+from .views import VideoCommentListCreateView, VideoCommentReplyCreateView, VideoCommentDeleteView
+from .views import combined_content_list
 
 
 
 urlpatterns = [
+    path('content/', combined_content_list, name='combined-content-list'),
     path('articles/', ArticleList.as_view(), name='article-list'),
     path('register/', RegisterView.as_view(), name='register'),
     path('create-checkout-session/', CreateCheckoutSession.as_view(), name='create-checkout-session'),
@@ -33,6 +37,11 @@ urlpatterns = [
     path('articles/<int:article_id>/comments/', CommentListCreateView.as_view(), name='comment-list-create'),
     path('articles/<int:article_id>/comments/<int:comment_id>/reply/', CommentReplyCreateView.as_view(), name='comment-reply'),
     path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
+    
+    # Video Comments
+    path('videos/<int:video_id>/comments/', VideoCommentListCreateView.as_view(), name='video-comment-list-create'),
+    path('videos/<int:video_id>/comments/<int:comment_id>/reply/', VideoCommentReplyCreateView.as_view(), name='video-comment-reply'),
+    path('video-comments/<int:pk>/delete/', VideoCommentDeleteView.as_view(), name='video-comment-delete'),
 
     # Auth and misc
     path('user-status/', user_status, name='user-status'),
@@ -42,4 +51,7 @@ urlpatterns = [
     path('debug-version/', views.debug_version, name='debug-version'),  # Debug temporaire
     path('password-reset-confirm/<str:uidb64>/<str:token>/', PasswordResetConfirmView.as_view(), name='password-reset-confirm'),
     path('verify-checkout-session/', VerifyCheckoutSessionView.as_view(), name='verify-checkout-session'),
+    path('videos/', views.VideoListView.as_view(), name='video-list'),
+    path('video/<slug:slug>/', VideoDetailView.as_view(), name="video-detail"),  # Liste des vidéos
+    path('validate-video-token/', views.validate_video_token, name='validate-video-token')  # Validation des tokens vidéo
 ]

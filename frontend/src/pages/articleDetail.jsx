@@ -145,7 +145,7 @@ function ArticleDetail() {
       <div className="article-content  dark:text-white" dangerouslySetInnerHTML={{ __html: (article.content) }} />
 
     </div>
-    <CommentSection token={token} isAdmin={isAdmin} />
+    {article && <CommentSection token={token} isAdmin={isAdmin} articleId={article.id} />}
     </>
   );
 }

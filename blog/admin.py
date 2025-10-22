@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Article
 from .models import Profile
 from .models import StripeWebhookLog
+from .models import Video
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from import_export import resources
@@ -30,6 +31,12 @@ class StripeWebhookLogAdmin(admin.ModelAdmin):
             text = str(obj.payload)
         return (text or '')[:120] + ('…' if text and len(text) > 120 else '')
 
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_premium', 'bunny_id', 'published_at')
+    list_filter = ('is_premium', 'published_at')
+    search_fields = ('title', 'bunny_id')
+    
 
 class ProfileInline(admin.StackedInline):
     model = Profile

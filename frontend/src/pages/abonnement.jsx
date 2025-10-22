@@ -177,16 +177,16 @@ function Abonnement() {
             <h1 className='font-SFBold text-center  text-2xl md:text-4xl mb-4  dark:text-white'>Ce que vous obtenez</h1>
             <ul className='pl-6 text-lg md:text-xl font-SF mr-4'>
                 <li className='mb-6'>
-                    <strong className='text-marron font-SFBold'>✓ 3 articles exclusifs par mois</strong>
-                    <br/><span className='dark:text-white'>Une analyse independante, sourcée et sans filtre.</span>
+                    <strong className='text-marron font-SFBold'>✓ Accès illimité</strong>
+                    <br/><span className='dark:text-white'>Consultez l’ensemble des articles et vidéos, passés et à venir, sans aucune restriction tant que vous êtes membre.</span>
+                </li>
+                <li className='mb-6'>
+                    <strong className='text-marron font-SFBold'>✓ Analyses indépendantes et sourcées</strong>
+                    <br/><span className='dark:text-white'>Des contenus rigoureux, sans filtre ni influence commerciale, pour comprendre les enjeux réels de l’alimentation et de la santé moderne.</span>
                 </li>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ Communauté privée</strong>
-                    <br/><span className='dark:text-white'>Un cercle de lecteurs qui veulent reprendre le contrôle de leur santé.</span>
-                </li>
-                <li className='mb-6'>
-                    <strong className='text-marron font-SFBold'>✓ Accès illimité</strong>
-                    <br/><span className='dark:text-white'>Tous les contenus passés et à venir, à vie tant que vous êtes membre.</span>
+                    <br/><span className='dark:text-white'>Rejoignez un cercle de lecteurs engagés qui veulent reprendre le contrôle de leur santé, échanger, et approfondir leurs connaissances.</span>
                 </li>
             </ul>
         </div>

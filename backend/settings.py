@@ -187,6 +187,9 @@ STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 _raw_brevo = os.getenv('BREVO_API_KEY')
 BREVO_API_KEY = (_raw_brevo.strip().lstrip('= ') if isinstance(_raw_brevo, str) else None)
 
+# Bunny.net security key for video tokens
+BUNNY_SECURITY_KEY = os.getenv('BUNNY_SECURITY_KEY', 'bunny-video-security-key-2024')
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'

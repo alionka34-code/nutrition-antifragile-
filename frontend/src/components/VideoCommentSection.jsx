@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { fetchComments, postComment, deleteComment, postReply } from '../utils/api';
+import { fetchVideoComments, postVideoComment, deleteVideoComment, postVideoReply } from '../utils/api';
 
-const CommentSection = ({ token, isAdmin, articleId }) => {
+const VideoCommentSection = ({ token, isAdmin, videoId }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [replyingTo, setReplyingTo] = useState(null); // ID du commentaire en cours de réponse
-  const [replyContent, setReplyContent] = useState(''); // Contenu de la réponse
+  const [replyingTo, setReplyingTo] = useState(null);
+  const [replyContent, setReplyContent] = useState('');
 
   // Récupération des commentaires au chargement
   useEffect(() => {
-    if (!articleId) return;
+    if (!videoId) return;
     
     async function loadComments() {
       setLoading(true);
       try {
-        const data = await fetchComments(articleId);
+        const data = await fetchVideoComments(videoId);
         setComments(data);
       } catch (err) {
         setError(err.message);
@@ -25,7 +25,7 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
       }
     }
     loadComments();
-  }, [articleId]);
+  }, [videoId]);
 
   // Publication d'un nouveau commentaire
   const handleSubmit = async (e) => {
@@ -33,7 +33,7 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
     if (!newComment.trim()) return;
 
     try {
-      const addedComment = await postComment(articleId, newComment, token);
+      const addedComment = await postVideoComment(videoId, newComment, token);
       if (!addedComment) throw new Error("Erreur lors de l'envoi du commentaire");
       setComments([...comments, addedComment]);
       setNewComment('');
@@ -42,10 +42,10 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
     }
   };
 
-  // Suppression d'un commentaire (supporte les réponses imbriquées)
+  // Suppression d'un commentaire
   const handleDelete = async (commentId) => {
     if (!window.confirm("Supprimer ce commentaire ?")) return;
-    const success = await deleteComment(commentId, token);
+    const success = await deleteVideoComment(commentId, token);
     if (success) {
       setComments((prev) => {
         const topFiltered = prev.filter((c) => c.id !== commentId);
@@ -79,28 +79,22 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
     });
   };
 
-  const replaceNode = (nodes, matchId, newNode) => {
-    return (nodes || []).map((n) => {
-      if (n.id === matchId) {
-        // Préserver d'éventuelles sous-réponses optimistes si non renvoyées par le backend
-        const preservedReplies = n.replies || [];
-        return { ...newNode, replies: newNode.replies ?? preservedReplies };
-      }
-      if (n.replies && n.replies.length) {
-        return { ...n, replies: replaceNode(n.replies, matchId, newNode) };
-      }
-      return n;
-    });
+  const removeNode = (nodes, nodeId) => {
+    return (nodes || [])
+      .filter((n) => n.id !== nodeId)
+      .map((n) => ({
+        ...n,
+        replies: n.replies ? removeNode(n.replies, nodeId) : [],
+      }));
   };
 
-  const removeNode = (nodes, matchId) => {
+  const replaceNode = (nodes, nodeId, newNode) => {
     return (nodes || []).map((n) => {
-      let replies = n.replies || [];
-      // Supprimer si enfant direct
-      replies = replies.filter((r) => r.id !== matchId);
-      // Propager récursivement
-      replies = replies.length ? removeNode(replies, matchId) : replies;
-      return { ...n, replies };
+      if (n.id === nodeId) return newNode;
+      if (n.replies && n.replies.length) {
+        return { ...n, replies: replaceNode(n.replies, nodeId, newNode) };
+      }
+      return n;
     });
   };
 
@@ -127,7 +121,7 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
     setReplyingTo(null);
 
     try {
-      const created = await postReply(articleId, parentCommentId, optimisticReply.content, token);
+      const created = await postVideoReply(videoId, parentCommentId, optimisticReply.content, token);
       if (!created) throw new Error("Erreur lors de l'envoi de la réponse");
       // Remplacer le noeud temporaire par la vraie réponse
       setComments((prev) => replaceNode(prev, tempId, created));
@@ -317,5 +311,4 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
   );
 };
 
-export default CommentSection;
-
+export default VideoCommentSection;

@@ -3,7 +3,7 @@ from .models import Article
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Comment 
+from .models import Comment, Video, VideoComment
 
 class ArticleSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField()
@@ -89,6 +89,18 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # Ajouter des informations personnalisées au token
+        token['is_staff'] = user.is_staff
+        # Utiliser le profil utilisateur pour is_subscribed
+        try:
+            token['is_subscribed'] = user.profile.is_subscribed
+        except:
+            token['is_subscribed'] = False
+        return token
+        
     def validate(self, attrs):
         """
         Allow case-insensitive login by resolving the provided username
@@ -137,3 +149,62 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ['id', 'article', 'user', 'user_username', 'content', 'created_at', 'parent_comment', 'parent_comment_username', 'replies']
         read_only_fields = ['user', 'created_at']
+
+class VideoSerializer(serializers.ModelSerializer):
+    security_token = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Video
+        fields = ['id', 'title', 'description', 'is_premium', 'published_at', 'slug', 'bunny_id', 'thumbnail', 'security_token', 'image']
+    
+    def get_image(self, obj):
+        if obj.image:
+            return obj.image.url  # Retourne l'URL complète Cloudinary
+        return None
+    
+    def get_security_token(self, obj):
+        """Génère un token sécurisé pour l'accès à la vidéo"""
+        request = self.context.get('request')
+        
+        # Vérifier si l'utilisateur est authentifié et autorisé
+        if not request or not request.user.is_authenticated:
+            return None
+            
+        # Vérifier si l'utilisateur est admin ou abonné
+        is_admin = request.user.is_staff
+        is_subscribed = hasattr(request.user, 'profile') and request.user.profile.is_subscribed
+        
+        if not (is_admin or is_subscribed):
+            return None
+        
+        # Générer un token temporaire basé sur l'utilisateur et l'ID de la vidéo
+        import hashlib
+        import time
+        
+        # Token valide pour 1 heure (3600 secondes)
+        expiry = int(time.time()) + 3600
+        
+        # Créer une signature avec les données de l'utilisateur et la vidéo
+        data = f"{request.user.id}:{obj.bunny_id}:{expiry}"
+        
+        # Utiliser une clé secrète (vous devriez la stocker dans les settings Django)
+        from django.conf import settings
+        secret_key = getattr(settings, 'BUNNY_SECURITY_KEY', 'your-secret-key-here')
+        
+        signature = hashlib.sha256(f"{data}:{secret_key}".encode()).hexdigest()
+        
+        return f"{expiry}.{signature}"
+
+class VideoCommentSerializer(serializers.ModelSerializer):
+    user_username = serializers.CharField(source='user.username', read_only=True)
+    replies = serializers.SerializerMethodField()
+
+    class Meta:
+        model = VideoComment
+        fields = ['id', 'content', 'published_at', 'user_username', 'parent_comment', 'replies']
+
+    def get_replies(self, obj):
+        if obj.replies.exists():
+            return VideoCommentSerializer(obj.replies.all(), many=True).data
+        return []

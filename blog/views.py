@@ -35,12 +35,14 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 
-from .models import Article, Profile, Comment, StripeWebhookLog
+from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment
 from .serializers import (
     ArticleSerializer,
     CommentSerializer,
     RegisterSerializer,
     CustomTokenObtainPairSerializer,
+    VideoSerializer,
+    VideoCommentSerializer,
 )
 
 logger = logging.getLogger(__name__)
@@ -518,8 +520,75 @@ class ArticleDetailView(RetrieveAPIView):
         context.update({"request": self.request})
         return context
 
+#============================
+# Videos
+#=============================
+
+class VideoListView(generics.ListAPIView):
+    queryset = Video.objects.all().order_by("-published_at")
+    serializer_class = VideoSerializer
+    permission_classes = [AllowAny]
+
+    def get_serializer_context(self):
+         context = super().get_serializer_context()
+         context.update({"request": self.request})
+         return context
+
+class VideoDetailView(RetrieveAPIView):
+    queryset = Video.objects.all()
+    serializer_class = VideoSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'slug'
 
 # =============================
+# Combined Content (Articles + Videos)
+# =============================
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def combined_content_list(request):
+    """
+    Vue API qui combine articles et vidéos triés par date de publication
+    """
+    # Récupérer tous les articles
+    articles = Article.objects.all()
+    videos = Video.objects.all()
+    
+    # Créer une liste combinée avec un type pour chaque élément
+    content_list = []
+    
+    # Ajouter les articles
+    for article in articles:
+        content_list.append({
+            'id': article.id,
+            'title': article.title,
+            'slug': article.slug,
+            'published_at': article.published_at,
+            'is_premium': article.is_premium,
+            'type': 'article',
+            'image': article.image.url if article.image else None,
+            'excerpt': article.excerpt,
+        })
+    
+    # Ajouter les vidéos
+    for video in videos:
+        content_list.append({
+            'id': video.id,
+            'title': video.title,
+            'slug': video.slug,
+            'published_at': video.published_at,
+            'is_premium': video.is_premium,
+            'type': 'video',
+            'image': video.image.url if video.image else None,
+            'description': video.description,
+            'bunny_id': video.bunny_id,
+        })
+    
+    # Trier par date de publication (du plus récent au plus ancien)
+    content_list.sort(key=lambda x: x['published_at'], reverse=True)
+    
+    return Response(content_list)
+
+#  ============================
 # Auth
 # =============================
 
@@ -608,6 +677,66 @@ def delete_comment(request, comment_id):
 
     comment.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# =============================
+# Video Comments
+# =============================
+class VideoCommentListCreateView(generics.ListCreateAPIView):
+    serializer_class = VideoCommentSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        video_id = self.kwargs["video_id"]
+        return VideoComment.objects.filter(
+            video_id=video_id, parent_comment__isnull=True
+        ).order_by("published_at")
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user, video_id=self.kwargs["video_id"])
+
+
+class VideoCommentReplyCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, video_id, comment_id):
+        content = request.data.get("content")
+        if not content or not str(content).strip():
+            return Response(
+                {"detail": "Contenu requis"}, status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            parent = VideoComment.objects.get(id=comment_id, video_id=video_id)
+        except VideoComment.DoesNotExist:
+            return Response(
+                {"detail": "Commentaire parent non trouvé"},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        reply = VideoComment.objects.create(
+            video_id=video_id,
+            user=request.user,
+            content=content,
+            parent_comment=parent,
+        )
+        
+        serializer = VideoCommentSerializer(reply)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class VideoCommentDeleteView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def delete(self, request, pk):
+        try:
+            comment = VideoComment.objects.get(id=pk)
+        except VideoComment.DoesNotExist:
+            return Response(
+                {"detail": "Commentaire non trouvé."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # =============================
@@ -830,3 +959,55 @@ class PasswordResetConfirmView(APIView):
                 {"error": "Erreur lors de la réinitialisation. Veuillez réessayer."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def validate_video_token(request):
+    """Valide un token de sécurité pour l'accès aux vidéos"""
+    try:
+        token = request.data.get('token')
+        video_id = request.data.get('video_id')
+        
+        if not token or not video_id:
+            return Response({'valid': False, 'error': 'Token et video_id requis'}, 
+                          status=status.HTTP_400_BAD_REQUEST)
+        
+        # Séparer expiry et signature
+        try:
+            expiry_str, signature = token.split('.', 1)
+            expiry = int(expiry_str)
+        except (ValueError, IndexError):
+            return Response({'valid': False, 'error': 'Format de token invalide'}, 
+                          status=status.HTTP_400_BAD_REQUEST)
+        
+        # Vérifier l'expiration
+        import time
+        if time.time() > expiry:
+            return Response({'valid': False, 'error': 'Token expiré'}, 
+                          status=status.HTTP_401_UNAUTHORIZED)
+        
+        # Récupérer la vidéo
+        try:
+            video = Video.objects.get(id=video_id)
+        except Video.DoesNotExist:
+            return Response({'valid': False, 'error': 'Vidéo non trouvée'}, 
+                          status=status.HTTP_404_NOT_FOUND)
+        
+        # Vérifier la signature pour l'utilisateur actuel (si authentifié)
+        if request.user.is_authenticated:
+            import hashlib
+            user_id = request.user.id
+            data = f"{user_id}:{video.bunny_id}:{expiry}"
+            secret_key = settings.BUNNY_SECURITY_KEY
+            expected_signature = hashlib.sha256(f"{data}:{secret_key}".encode()).hexdigest()
+            
+            if signature == expected_signature:
+                return Response({'valid': True})
+        
+        return Response({'valid': False, 'error': 'Token invalide'}, 
+                      status=status.HTTP_401_UNAUTHORIZED)
+        
+    except Exception as e:
+        logger.error(f"Error validating video token: {str(e)}")
+        return Response({'valid': False, 'error': 'Erreur de validation'}, 
+                      status=status.HTTP_500_INTERNAL_SERVER_ERROR)
