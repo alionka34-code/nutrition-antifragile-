@@ -13,8 +13,14 @@ from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
-import brevo_python
-from brevo_python.rest import ApiException
+
+try:
+    import sib_api_v3_sdk
+    from sib_api_v3_sdk.rest import ApiException
+    BREVO_SDK_AVAILABLE = True
+except ImportError:
+    print("⚠️ Warning: sib_api_v3_sdk not available in views.py")
+    BREVO_SDK_AVAILABLE = False
 
 from rest_framework import generics, permissions, status
 from rest_framework.decorators import api_view, permission_classes
@@ -838,8 +844,12 @@ def send_reset_email_brevo(to_email, reset_link):
     """
     Envoie l'email de réinitialisation via Brevo.
     """
-    from brevo_python import Configuration, ApiClient, TransactionalEmailsApi
-    from brevo_python.models import SendSmtpEmail, SendSmtpEmailSender, SendSmtpEmailTo
+    if not BREVO_SDK_AVAILABLE:
+        print("⚠️ Brevo SDK not available, cannot send reset email")
+        return False
+        
+    from sib_api_v3_sdk import Configuration, ApiClient, TransactionalEmailsApi
+    from sib_api_v3_sdk.models import SendSmtpEmail, SendSmtpEmailSender, SendSmtpEmailTo
 
     configuration = Configuration()
     configuration.api_key["api-key"] = settings.BREVO_API_KEY
