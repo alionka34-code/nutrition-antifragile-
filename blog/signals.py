@@ -6,8 +6,14 @@ from .models import Article
 from django.conf import settings
 from django.core.mail import send_mail
 from .utils.brevo_email import send_brevo_email
-import sib_api_v3_sdk
-from sib_api_v3_sdk.rest import ApiException
+
+try:
+    import sib_api_v3_sdk
+    from sib_api_v3_sdk.rest import ApiException
+    BREVO_SDK_AVAILABLE = True
+except ImportError:
+    print("⚠️ Warning: sib_api_v3_sdk not available. Brevo contact sync will be disabled.")
+    BREVO_SDK_AVAILABLE = False
 
 
   # pas de slash supplémentaire
@@ -40,6 +46,10 @@ def add_user_to_brevo(sender, instance, created, **kwargs):
     """
     Ajoute automatiquement chaque nouvel utilisateur à Brevo lors de son inscription.
     """
+    if not BREVO_SDK_AVAILABLE:
+        print("⚠️ Brevo SDK not available, skipping contact sync")
+        return
+        
     if created and instance.email:
         configuration = sib_api_v3_sdk.Configuration()
         configuration.api_key['api-key'] = settings.BREVO_API_KEY
@@ -52,7 +62,7 @@ def add_user_to_brevo(sender, instance, created, **kwargs):
                 "FIRSTNAME": instance.first_name or "",
                 "LASTNAME": instance.last_name or "",
             },
-            list_ids=[1]  # 🟡 Remplace 1 par l’ID de ta liste Brevo
+            list_ids=[1]  # 🟡 Remplace 1 par l'ID de ta liste Brevo
         )
 
         try:

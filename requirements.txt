@@ -1,5 +1,5 @@
 asgiref==3.8.1
-brevo-python
+sib-api-v3-sdk
 certifi==2025.6.15
 charset-normalizer==3.4.2
 cloudinary==1.44.1
