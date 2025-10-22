@@ -56,7 +56,6 @@ function Home() {
        useEffect(() => {
             fetchArticles()
                 .then(data => {
-                    console.log('Articles data:', data);
                     setArticles(data);
                 })
                 .catch(err => setError(err.message));
