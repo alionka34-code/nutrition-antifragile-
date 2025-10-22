@@ -46,27 +46,40 @@ def add_user_to_brevo(sender, instance, created, **kwargs):
     """
     Ajoute automatiquement chaque nouvel utilisateur à Brevo lors de son inscription.
     """
+    print(f"🔄 Signal add_user_to_brevo déclenché - User: {instance.username}, Created: {created}")
+    
     if not BREVO_SDK_AVAILABLE:
         print("⚠️ Brevo SDK not available, skipping contact sync")
         return
         
-    if created and instance.email:
+    if not created:
+        print("⚠️ User not newly created, skipping Brevo sync")
+        return
+        
+    if not instance.email:
+        print("⚠️ User has no email, skipping Brevo sync")
+        return
+        
+    print(f"📧 Tentative d'ajout de {instance.email} à Brevo...")
+    
+    try:
         configuration = sib_api_v3_sdk.Configuration()
         configuration.api_key['api-key'] = settings.BREVO_API_KEY
 
         api_instance = sib_api_v3_sdk.ContactsApi(sib_api_v3_sdk.ApiClient(configuration))
-        
+
         contact = sib_api_v3_sdk.CreateContact(
             email=instance.email,
             attributes={
                 "FIRSTNAME": instance.first_name or "",
                 "LASTNAME": instance.last_name or "",
             },
-            list_ids=[1]  # 🟡 Remplace 1 par l'ID de ta liste Brevo
+            list_ids=[6]  # 🔁 Remplace 1 par ton vrai ID de liste Brevo
         )
 
-        try:
-            api_instance.create_contact(contact)
-            print(f"✅ {instance.email} ajouté à Brevo avec succès.")
-        except ApiException as e:
-            print(f"⚠️ Erreur lors de l'ajout à Brevo pour {instance.email}: {e}")
+        api_instance.create_contact(contact)
+        print(f"✅ {instance.email} ajouté à Brevo avec succès.")
+    except ApiException as e:
+        print(f"⚠️ Erreur lors de l'ajout à Brevo pour {instance.email}: {e}")
+    except Exception as e:
+        print(f"❌ Erreur inattendue lors de l'ajout à Brevo: {e}")
