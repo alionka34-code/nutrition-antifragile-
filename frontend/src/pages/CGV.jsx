@@ -16,25 +16,23 @@ return(
     </header>
     <div className="md:mx-40 mx-4 py-8  dark:text-white">
         <h1 className="text-2xl font-SFBold mb-4">Article 1 : Objet</h1>
-        <p className="font-SF mb-4">Les présentes CGV régissent les conditions d’abonnement au blog premium proposé par Symbiose Audiovisuelle.</p>
+        <p className="font-SF mb-4">Les présentes conditions générales de vente (CGV) ont pour objet de définir les modalités d’abonnement au  <strong>blog premium</strong> proposé par <strong>Symbiose Audiovisuelle — SIREN 891 180 093</strong>.<br/><br/> Toute souscription à un abonnement implique l’acceptation pleine et entière des présentes CGV, CGU, consultables à tout moment sur le site https://alionka-houl.eo.symbiose-audiovisuelle.fr.<br/><br/>Avant tout règlement, l’utilisateur confirme avoir lu et accepté les Conditions générales de vente et les Conditions générales d’utilisation. <br/>En validant son abonnement, il reconnaît également vouloir accéder immédiatement au contenu numérique et renonce expressément à son droit de rétractation, conformément à l’article L221-28 du Code de la consommation.</p>
         <h1 className="text-2xl font-SFBold mb-4">Article 2 : Abonnements</h1>
-        <p className="font-SF mb-4">Formules disponibles :</p>
-        <li className="font-SF mb-2">Gratuit</li>
+        <p className="font-SF mb-4">FPlusieurs formules d'abonnement sont proposées :</p>
+        <li className="font-SF mb-2">Gratuit: accès partiel au contenu du site/blog ;</li>
         <li className="font-SF mb-2">Payant mensuel</li>
         <li className="font-SF mb-2">Payant annuel</li>
-        <p className="font-SF mb-4">L’abonnement payant ouvre droit à l’accès complet au contenu premium.</p>
+        <p className="font-SF mb-4">L’abonnement payant donne accès à l’intégralité du contenu premium tant que le compte de l’utilisateur demeure actif.</p>
         <h1 className="text-2xl font-SFBold mb-4">Article 3 : Prix et paiement</h1>
-        <p className="font-SF mb-4">Les prix sont indiqués en euros toutes taxes comprises (TTC).Le paiement est géré de manière sécurisée via **Stripe**. Aucune donnée bancaire n’est conservée par Symbiose Audiovisuelle.</p>
-        <h1 className="text-2xl font-SFBold mb-4">Article 4: Durée et résiliation</h1>
-        <li className="font-SF mb-2">L’abonnement est reconduit automatiquement (mensuel ou annuel).</li>
-        <li className="font-SF mb-2">L’utilisateur peut résilier à tout moment depuis son compte.</li>
-        <li className="font-SF mb-2">Aucun remboursement n’est effectué pour une période déjà entamée.</li>
+        <p className="font-SF mb-4">Les prix sont indiqués en euros toutes taxes comprises (TTC).Le paiement est sécurisé et effectué exclusivement via la plateforme <strong>Stripe</strong>. Aucune donnée bancaire n’est stockée ni conservée par <strong>Symbiose Audiovisuelle</strong>. Toute modification tarifaire ultérieure ne s’appliquera qu’aux abonnements souscrits après son entrée en vigueur.</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 4: Durée, reconduction et résiliation</h1>
+        <p className="font-SF mb-4">Les abonnements mensuels et annuels sont reconduits automatiquement à leur échéance. L’utilisateur peut résilier à tout moment depuis son espace personnel. La résiliation prend effet à la fin de la période en cours. Aucun remboursement n’est effectué pour une période déjà entamée.</p>
         <h1 className="text-2xl font-SFBold mb-4">Article 5: Droit de  rétractation</h1>
-        <p className="font-SF mb-4">Conformément à l’article L221-28 du Code de la consommation, le droit de rétractation ne s’applique pas aux contenus numériques fournis immédiatement après l’achat. En validant son abonnement, l’utilisateur accepte expressément de renoncer à ce droit.</p>
+        <p className="font-SF mb-4">Conformément à l’article L221-28 du Code de la consommation, le droit de rétractation ne s’applique pas aux contenus numériques fournis immédiatement après paiement. En validant son abonnement, l’utilisateur accepte expressément de renoncer à ce droit.</p>
         <h1 className="text-2xl font-SFBold mb-4">Article 6: Service client</h1>
-        <p className="font-SF mb-4">Toute demande ou réclamation peut être adressée à : rgpd@symbiose-audiovisuelle.fr</p>
-
-
+        <p className="font-SF mb-4">Toute demande, question ou réclamation peut être adressée via le formulaire de contact :https://www.symbiose-audiovisuelle.fr/contacts</p>
+        <h1 className="text-2xl font-SFBold mb-4">Article 7: Daroit applicable et juridiction compétente</h1>
+        <p className="font-SF mb-4">Les présentes conditions générales de vente sont régies par le droit français.En cas de litige et après tentative de résolution amiable, les tribunaux de Montpellier (France) seront seuls compétents.</p>
     </div>
     </>
 
