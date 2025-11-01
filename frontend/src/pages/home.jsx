@@ -79,7 +79,8 @@ function Home() {
                 <img src = {livre} alt="Livre Nutrition Antifragile" className=" w-80 md:w-100 h-auto  shadow-xl/50 mx-auto md:hidden " />
             <p className="text-xl font-SFBold  text-center mt-8 shadow-lg border-marron border-l-4 rounded-4xl p-10 mx-auto md:text-2xl max-w-4xl dark:text-white">Vos grands-parents n'avaient pas besoin de nutritionniste pour être en forme. Vous, vous passez 10 minutes a décrypter l'étiquette d'un yaourt.</p>
             <button onClick = {() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">DECOUVRIR LE LIVRE</button>
-            </div>
+                <button onClick={() => window.location.href="/assets/Extrait.pdf"} className="mt-4 block mx-auto text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">LIRE L’EXTRAIT</button>
+</div>
                 
 
         </header>
