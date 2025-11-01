@@ -31,7 +31,7 @@ return(
         <p className="font-SF mb-4">Conformément à l’article L221-28 du Code de la consommation, le droit de rétractation ne s’applique pas aux contenus numériques fournis immédiatement après paiement. En validant son abonnement, l’utilisateur accepte expressément de renoncer à ce droit.</p>
         <h1 className="text-2xl font-SFBold mb-4">Article 6: Service client</h1>
         <p className="font-SF mb-4">Toute demande, question ou réclamation peut être adressée via le formulaire de contact :https://www.symbiose-audiovisuelle.fr/contacts</p>
-        <h1 className="text-2xl font-SFBold mb-4">Article 7: Daroit applicable et juridiction compétente</h1>
+        <h1 className="text-2xl font-SFBold mb-4">Article 7: Droit applicable et juridiction compétente</h1>
         <p className="font-SF mb-4">Les présentes conditions générales de vente sont régies par le droit français.En cas de litige et après tentative de résolution amiable, les tribunaux de Montpellier (France) seront seuls compétents.</p>
     </div>
     </>
