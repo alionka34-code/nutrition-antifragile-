@@ -3,8 +3,8 @@ import React from 'react';
 function SectionPrice() {
     return (
         <section className="mx-4 md:mx-auto md:max-w-[1400px] my-20">
-            <h2 className='font-SFBold text-4xl text-center'>Comment on travail <span className='text-marron'>ensemble ?</span>🤝</h2>
-            <p className='font-SF text-2xl text-gray-600 dark:text-gray-300 mt-4 text-center'>3 formules, du simple au complet. Toutes incluent des résultats mesurables.</p>
+            <h2 className='font-SFBold text-4xl text-center'>Comment on travaille <span className='text-marron'>ensemble ?</span>🤝</h2>
+            <p className='font-SF text-2xl text-gray-600 dark:text-gray-300 mt-4 text-center'>3 formules selon vos besoins.Toutes incluent des résultats mesurables.</p>
             <div className='flex flex-col md:flex-row mt-20 gap-10 md:items-stretch'>
                 <div className='flex-1 p-8 rounded-3xl flex flex-col bg-degrade shadow-2xl'>
                     <div className=' flex justify-center my-4'>
@@ -40,8 +40,7 @@ function SectionPrice() {
                         <div className="bg-degrade-marron inline-block items-center justify-center rounded-2xl px-3 py-1 mt-2"><p className='text-center font-SF text-white'>offre de lancement</p></div>
                     </div>
                     <div className='my-10 space-y-2 font-SF text-xl flex-grow'>
-                        <p><span className="text-marron">✓ </span><span className="font-SFBold">1h de conférence interactive</span> pour comprendre porquoi vos équipes ont des baisses d'énergie</p>
-                        <p><span className="text-marron">✓ </span> 3 actions simples<span className='font-SFBold'> à appliquer dès demain</span></p>
+                        <p><span className="text-marron">✓ </span><span className="font-SFBold">1h de conférence interactive</span></p>
                         <p><span className="text-marron">✓ </span>Q&R incluse</p>
                         <p><span className="text-marron">✓ </span>Mini-guide PDF récapitulatif</p>
                          <p><span className="text-marron">✓ </span>Présentiel ou visio (partout en France)</p>
@@ -93,11 +92,9 @@ function SectionPrice() {
                     </div>
                     <div className='my-10 space-y-2 text-white font-SF text-xl flex-grow'>
                         <p><span className="text-marron">✓ </span><span className='font-SFBold'>1h30: </span>conférence + atelier pratique pour passer de la théorie à l'action</p>
-                        <p><span className="text-marron">✓ </span><span className='font-SFBold'>Atelier décryptage:</span> analyse d'étiquettes réelles, identification des pièges marketing </p>
-                        <p><span className="text-marron">✓ </span>Jeux interactifs et défis nutrition pour favoriser l'engagment</p>
+                        <p><span className="text-marron">✓ </span><span className='font-SFBold'>Atelier décryptage & défis nutrition :</span> analyse d'étiquettes réelles, identification des pièges marketing </p>
                         <p><span className="text-marron">✓ </span>Q&R incluse</p>
                         <p><span className="text-marron">✓ </span>Mini-guide PDF récapitulatif</p>
-                         <p><span className="text-marron">✓ </span><span className='font-SFBold'>Webinaire de suivi </span>à J+30 offert pour prolonger la dynamique</p>
                         <p className='text-gray-600 dark:text-gray-300 font-SF text-xl mt-6'><span className='font-SFBold'>Pourquoi ce format marche :</span> L'atelier pratique DOUBLE l'adoption des bonnes habitudes. Vos équipes ne repartent pas avec de la théorie, mais avec des réflexes ancrés.</p>
                     </div>
                     <div className="text-center mt-auto">
@@ -146,9 +143,7 @@ function SectionPrice() {
                     <div className='my-10 space-y-2 font-SF text-xl flex-grow'>
                         <p><span className="text-marron">✓ </span><span className='font-SFBold'>Programme personnalisé</span> après analyse approfondie de vos problématiques</p>
                         <p><span className="text-marron">✓ </span><span className='font-SFBold'>Demi-journée ou journée complète</span> avec alternance conférence, ateliers thématiques, cas pratiques sectoriels</p>
-                        <p><span className="text-marron">✓ </span>Kit communication clé en main : 5 posters  impactants pour vos espaces communs + 5 fiches mémo prêtes à diffuser. Tout en format HD, personnalisable à vos couleurs</p>
                         <p><span className="text-marron">✓ </span>Mini-guide PDF récapitulatif</p>
-                        <p><span className="text-marron">✓ </span><span className='font-SFBold'>Webinaire de suivi à J+30</span> offert pour prolonger la dynamique </p>
                         <p><span className="text-marron">✓ </span><span className='font-SFBold'>Mesure d'impact ROI:</span> Questionnaires avant/après pour quantifier les résultats (énergie, concentration, satisfaction) </p>
                         <p className='text-gray-600 font-SF text-xl mt-6 dark:text-gray-300'><span className='font-SFBold'>Pour qui : </span>Entreprises qui veulent un impact durable et un ROI justifiable sur leur budget QVCT/RSE</p>
                     </div>
