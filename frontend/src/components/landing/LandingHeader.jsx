@@ -9,7 +9,7 @@ function LandingHeader() {
         <p className="font-SFBold text-marron mb-2 text-2xl">la nutriton pour performer</p>
         <h1 className="text-black font-SFBold text-4xl md:text-6xl mb-8 dark:text-white">Réduisez l’absentéisme et boostez la performance de vos équipes grâce à la <span className="text-marron">nutrition.</span>
         </h1>
-        <p className="font-SFBold text-gray-600 text-2xl md:text-4xl dark:text-gray-300">Des conférences inspirantes et basées sur la science pour aider vos équipes à mieux manger, gagner en énergie et concentration, avec des résultats mesurables dès 3 mois.</p>
+        <p className="font-SFBold text-gray-600 text-2xl md:text-4xl dark:text-gray-300">Des conférences dynamiques et fondées sur la science, pour transformer l’alimentation en véritable levier d’énergie, d’engagement et de performance au travail.</p>
         <div className="flex flex-row gap-4">
             <button onClick={() => {
                 const element = document.getElementById('contact-form');
