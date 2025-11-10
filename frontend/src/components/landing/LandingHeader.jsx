@@ -45,7 +45,7 @@ function LandingHeader() {
                 <p className="font-SF text-white text-center text-xl">De productivité</p>
             </div>
             <div className="p-5">
-                <h2 className="font-SFBold text-white text-2xl md:text-4xl text-center">4,9/5</h2>
+                <h2 className="font-SFBold text-white text-2xl md:text-4xl text-center">5/5</h2>
                 <p className="font-SF text-white text-center text-xl">Satisfaction moyenne</p>
             </div>
             <div className="p-5 border-l-1 border-white">
