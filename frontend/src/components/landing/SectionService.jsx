@@ -210,7 +210,7 @@ function SectionService() {
                         <h3 className="font-SFBold text-2xl md:text-3xl text-marron md:order-1">Prise de conscience immédiate</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
-                        <p className="font-SF text-white md:text-right text-lg md:text-xl">La conférence révèle comment l’alimentation impacte énergie, concentration et sommeil → vos équipes identifient les freins à leur performance></p>
+                        <p className="font-SF text-white md:text-right text-lg md:text-xl">La conférence révèle comment l’alimentation impacte énergie, concentration et sommeil → vos équipes identifient les freins à leur performance</p>
                     </div>
                 </div>
             </div>
