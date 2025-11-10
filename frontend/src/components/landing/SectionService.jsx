@@ -270,7 +270,7 @@ function SectionService() {
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
                 }
-            }} className="text-lg font-SFBold rounded-full text-white px-4 md:px-8 mx-auto block py-2 bg-gradient-to-tr shadow-2xl from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-2xl">Decouvrir l'accompagnement</button>
+            }} className="text-lg font-SFBold rounded-full text-white px-4 md:px-8 mx-auto block py-2 bg-gradient-to-tr shadow-2xl from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-2xl">Échanger sur mon projet</button>
     
 
 </div>
