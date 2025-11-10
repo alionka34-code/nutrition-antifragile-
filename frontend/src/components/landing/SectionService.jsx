@@ -13,8 +13,8 @@ import {FreeMode, Scrollbar, Mousewheel, Autoplay} from 'swiper/modules';
 function SectionService() {
     return (
         <section className="mx-4 md:mx-40 mt-10">
-    <h2 className="text-center font-SFBold text-4xl">Remettez l’énergie et la sérénité au <br/><span className="text-marron">cœur de vos équipes.</span></h2>
-    <p className="font-SF text-center text-xl md:text-2xl mt-4 mb-10 dark:text-white">Et si la vraie cause du désengagement n'était pas le management… mais la nutrition ?</p>
+    <h2 className="text-center font-SFBold text-4xl">Et si la vraie cause du désengagement n'était pas le management… <br/><span className="text-marron">mais la nutrition ?</span></h2>
+    <p className="font-SF text-center text-xl md:text-2xl mt-4 mb-10 dark:text-white">Vous reconnaissez votre entreprise ?</p>
 <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-6 gap-4 mt-10 max-w-5xl mx-auto">
     <div className="col-span-1 md:col-span-2 row-span-1 md:row-span-2 flex flex-col items-center justify-center p-8 rounded-4xl gap-4 bg-degrade">
         <div >
@@ -195,7 +195,7 @@ function SectionService() {
     </div>
 </div>*/}
 <div className="mt-20">
-    <h2 className="font-SFBold text-4xl text-center">Ce que vos collaborateurs vont <br/><span className='text-marron'>ressentir au quotidien</span></h2>
+    <h2 className="font-SFBold text-4xl text-center"> Impact concret et mesurable<br/><span className='text-marron'>sur vos équipes</span></h2>
     
         <div className="max-w-5xl mx-auto mt-10 relative">
         {/* Barre verticale continue en arrière-plan - cachée sur mobile */}
@@ -207,10 +207,10 @@ function SectionService() {
                 <div className="max-w-md md:text-right">
                     <div className="flex items-center md:justify-end mb-4">
                         <div className="w-10 h-10 bg-marron text-white rounded-full flex items-center justify-center font-SFBold text-base mr-3 md:order-2 md:mr-0 md:ml-3">1</div>
-                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron md:order-1">Moins de fatigue, plus d'énergie</h3>
+                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron md:order-1">Prise de conscience immédiate</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
-                        <p className="font-SF text-white md:text-right text-lg md:text-xl">Des habitudes simples qui redonnent vitalité et concentration</p>
+                        <p className="font-SF text-white md:text-right text-lg md:text-xl">La conférence révèle comment l’alimentation impacte énergie, concentration et sommeil → vos équipes identifient les freins à leur performance></p>
                     </div>
                 </div>
             </div>
@@ -224,10 +224,10 @@ function SectionService() {
                 <div className="max-w-md">
                     <div className="flex items-center mb-4">
                         <div className="w-10 h-10 bg-marron text-white rounded-full flex items-center justify-center font-SFBold text-base mr-3">2</div>
-                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron">Meilleure humeur au quotidien</h3>
+                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron">Actions concrètes dès demain</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
-                        <p className="font-SF text-white text-lg md:text-xl">Fini les coups de stress et l'irritabilité entre collègues</p>
+                        <p className="font-SF text-white text-lg md:text-xl">Clés simples, pratiques, adaptées au quotidien professionnel → impact direct sur le fonctionnement des équipes.</p>
                     </div>
                 </div>
             </div>
@@ -239,10 +239,10 @@ function SectionService() {
                 <div className="max-w-md md:text-right">
                     <div className="flex items-center md:justify-end mb-4">
                         <div className="w-10 h-10 bg-marron text-white rounded-full flex items-center justify-center font-SFBold text-base mr-3 md:order-2 md:mr-0 md:ml-3">3</div>
-                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron md:order-1">Concentration retrouvée</h3>
+                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron md:order-1">Résultats visibles et mesurables</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
-                        <p className="font-SF text-white md:text-right text-lg md:text-xl">Des réunions plus productives et moins d'erreurs d'inattention</p>
+                        <p className="font-SF text-white md:text-right text-lg md:text-xl">Plus d’énergie, concentration accrue, collaboration améliorée → ROI tangible</p>
                     </div>
                 </div>
             </div>
@@ -256,10 +256,10 @@ function SectionService() {
                 <div className="max-w-md">
                     <div className="flex items-center mb-4">
                         <div className="w-10 h-10 bg-marron text-white rounded-full flex items-center justify-center font-SFBold text-base mr-3">4</div>
-                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron">Sommeil de qualité</h3>
+                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron">Expérience interactive et engageante</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
-                        <p className="font-SF text-white text-lg md:text-xl">Un réveil plus facile et une récupération optimisée</p>
+                        <p className="font-SF text-white text-lg md:text-xl">Les équipes retiennent les messages et appliquent immédiatement les actions.</p>
                     </div>
                 </div>
             </div>
