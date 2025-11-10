@@ -34,9 +34,10 @@ function ContactForm() {
         <meta name="description" content="Contactez l'équipe de Nutrition Antifragile pour toute question ou suggestion sur la nutrition et le bien-être. Nous sommes là pour vous accompagner et échanger avec vous." />
     </Helmet>
     <header>
-        <div className="flex flex-col mx-auto max-w-4xl"><h1 className="md:text-6xl text-4xl text-center text-marron font-SFBold">CONTACTEZ-NOUS</h1>
-        <p className="md:text-xl text-center font-SF text-gray-600 m-2 dark:text-white">Que vous ayez des questions sur le livre, que vous souhaitiez partager votre expérience ou que vous cherchiez des conseils personnalisés, n'hésitez pas à nous écrire.</p></div>
-       
+        <div className="flex flex-col mx-auto max-w-4xl">
+          <h1 className="md:text-6xl text-4xl text-center text-marron font-SFBold">CONTACTEZ-NOUS</h1>
+        <p className="md:text-xl text-center font-SF text-gray-600 m-2 dark:text-white">Que vous ayez des questions sur le livre, que vous souhaitiez partager votre expérience ou que vous cherchiez des conseils personnalisés, n'hésitez pas à nous écrire.</p>
+        </div>
     </header>
     <main>
       <div className='flex flex-col md:flex-row justify-center items-center border-3 border-marron rounded-4xl mx-4 md:mx-auto md:max-w-6xl md:px-20 md:py-10 text-center my-10 gap-10  shadow-xl'>
@@ -88,7 +89,7 @@ function ContactForm() {
       {isSubmitSuccessful && (
         <p className="text-green-600 text-center">Message envoyé avec succès !</p>
       )}
-      <h1 className="text-center font-SFBold text-lg dark:text-white">Rejoignez la communauté antifragile sur mes reséaux sociaux qui comptent déjà plus de 60 000 abonnés :</h1>
+      <h3 className="text-center font-SFBold text-lg dark:text-white">Rejoignez la communauté antifragile sur mes reséaux sociaux qui comptent déjà plus de 60 000 abonnés :</h3>
         <div className="flex justify-center">
             <a href="https://www.tiktok.com/@nut_antifragile" target="_blank" rel="noopener noreferrer" className="mx-2">
             <img src={tiktok} alt="TikTok" className="w-10 h-10" />

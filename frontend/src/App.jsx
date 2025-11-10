@@ -8,6 +8,7 @@ import Connexion from './pages/connexion.jsx';
 import ContactForm from './pages/contact.jsx';
 import { AuthProvider } from './contexts/AuthContext';
 import Articles from './pages/articles.jsx';
+import Landing from './pages/Landing.jsx';
 import ArticleDetail from './pages/articleDetail.jsx';
 import VideoDetail from './pages/videoDetail.jsx';  
 import SubscriptionSuccess from './pages/SubscriptionSuccess';
@@ -31,6 +32,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/livre" element={<Livre />} />
               <Route path="/abonnement" element={<Abonnement />} />
+              <Route path="/Landing" element={<Landing />} />
               <Route path="/connexion" element={<Connexion />} />
               <Route path="/contact" element={<ContactForm />} />
               <Route path="/articles" element={<Articles />} />

@@ -127,6 +127,9 @@ function Navbar() {
             <Link to="/abonnement" onClick={toggleMenu}>Abonnement</Link>
           </li>
           <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
+            <Link to="/Landing" onClick={toggleMenu}>Entreprise</Link>
+          </li>
+          <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/contact" onClick={toggleMenu}>Contact</Link>
           </li>
           {username ? (

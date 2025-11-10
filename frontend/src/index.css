@@ -34,7 +34,23 @@
     --color-marron: #b8860b;
     --color-beige1: #f5f1eb;
     --color-beige2: #e8ddd4;
+    --color-degrade: linear-gradient(90deg, rgba(164,115,0,0.15) 0%, rgba(164,115,0,0.10) 50%, rgba(164,115,0,0.20) 100%);
+    --color-degrade-marron: linear-gradient(70deg, rgba(255,149,0,0.69) 0%, rgba(153,89,0,0.69) 100%);
     
+}
+
+/* Classe utilitaire pour utiliser le dégradé */
+.bg-degrade {
+    background: var(--color-degrade);
+}
+
+.bg-degrade-marron {
+    background: var(--color-degrade-marron);
+}
+
+.border-degrade-marron {
+    border-image: var(--color-degrade-marron);
+    border-image-slice: 1;
 }
 
 

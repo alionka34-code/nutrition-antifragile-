@@ -384,7 +384,7 @@ function Connexion() {
                     isRegistering ? 'translate-y-full md:translate-y-0 md:translate-x-full opacity-0 z-0' : 'translate-y-0 md:translate-y-0 md:translate-x-0 opacity-100 z-20'
                 }`}>
                     <form onSubmit={handleLogin} className="flex flex-col items-center justify-center p-8 md:p-12 text-center w-full max-w-md">
-                        <h1 className="font-SFBold text-2xl md:text-3xl mb-6 tracking-tight  dark:text-white">Se connecter</h1>
+                        <h2 className="font-SFBold text-2xl md:text-3xl mb-6 tracking-tight  dark:text-white">Se connecter</h2>
                         <p className="pb-4 font-SF text-lg  dark:text-white">Déjà membre ? Connectez-vous à votre espace</p>
                         
                         {/* Message de succès d'inscription */}
@@ -464,7 +464,7 @@ function Connexion() {
                         <div className={`absolute top-0 left-0 w-1/2 h-full flex flex-col items-center justify-center px-10 text-center text-white transition-transform duration-700 ease-in-out ${
                             isRegistering ? 'translate-x-0' : '-translate-x-5'
                         }`}>
-                            <h1 className="font-SFBold text-4xl mb-4 text-shadow-lg ">Déjà membre ?</h1>
+                            <h2 className="font-SFBold text-4xl mb-4 text-shadow-lg ">Déjà membre ?</h2>
                             <p className="text-lg mb-8 text-shadow-md leading-relaxed">
                                 Connectez-vous avec vos informations personnelles
                             </p>

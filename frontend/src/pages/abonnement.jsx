@@ -88,9 +88,9 @@ function Abonnement() {
         </header>
             <form className="pt-20" onSubmit={handleSubmit}>
             <div className='bg-white  dark:bg-neutral-800   flex flex-col border-4 rounded-4xl shadow-lg shadow-black/50 p-10 mx-4 md:mx-auto md:max-w-4xl border-marron'>
-            <h1 className='font-SFBold text-2xl text-center md:text-4xl text-marron'>Rejoignez plus de 1000 membres antifragiles</h1>
+            <h2 className='font-SFBold text-2xl text-center md:text-4xl text-marron'>Rejoignez plus de 1000 membres antifragiles</h2>
             <p className=" mt-4 text-center font-SF md:text-2xl text-xl  dark:text-white">Qui reprennent le contrôle de leur alimentation, loin des dogmes et des manipulations de l'industrie</p>
-             <h1 className="font-SFBold text-xl md:text-2xl my-8 text-center  dark:text-white">Choisissez votre formule</h1>
+             <h3 className="font-SFBold text-xl md:text-2xl my-8 text-center  dark:text-white">Choisissez votre formule</h3>
              {errorMessage && (
                     <div ref={errorRef} className="mb-6 text-center text-red-700 bg-red-100 border border-red-400 rounded-2xl py-2 px-4 font-SF">
                         {errorMessage}
@@ -130,10 +130,10 @@ function Abonnement() {
                         <div className="relative bottom-7">
                         <span className="font-SFBold text-white border-2 rounded-2xl py-1 px-4 bg-red-400 animate-pulse" >OFFRE DU MOMENT</span>
                     </div>
-                    <h1 className="font-SFBold text-2xl  dark:text-white">Abonnement annuel</h1>
-                    <h2 className="font-SFBold text-2xl text-marron my-2">
+                    <h4 className="font-SFBold text-2xl  dark:text-white">Abonnement annuel</h4>
+                    <h5 className="font-SFBold text-2xl text-marron my-2">
                         100€<span className="text-xl font-SF text-gray-500">/an</span>
-                        </h2>
+                        </h5>
                     
                     <div className="font-SF md:text-lg text-marron border-2 rounded-4xl py-1 px-2 md:w-80">Économisez 17% (soit 2 mois gratuits !)</div>
                 </div>
@@ -166,15 +166,15 @@ function Abonnement() {
                             </svg>
                           </span>
                         )}
-                    <h1 className="font-SFBold text-2xl  dark:text-white">Abonnement mensuel</h1>
-                    <h2 className="font-SFBold text-2xl text-marron my-2">10€<span className='text-xl font-SF text-gray-500'>/mois</span></h2>
+                    <h4 className="font-SFBold text-2xl  dark:text-white">Abonnement mensuel</h4>
+                    <h5 className="font-SFBold text-2xl text-marron my-2">10€<span className='text-xl font-SF text-gray-500'>/mois</span></h5>
                     <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">Flexibilité maximale</span>
                 </div>
                 </label>
             </div>      
             </div>
             <div className='mt-10 border-2 border-marron rounded-2xl p-4 shadow-lg shadow-black/50'>
-            <h1 className='font-SFBold text-center  text-2xl md:text-4xl mb-4  dark:text-white'>Ce que vous obtenez</h1>
+            <h3 className='font-SFBold text-center  text-2xl md:text-4xl mb-4  dark:text-white'>Ce que vous obtenez</h3>
             <ul className='pl-6 text-lg md:text-xl font-SF mr-4'>
                 <li className='mb-6'>
                     <strong className='text-marron font-SFBold'>✓ Accès illimité</strong>
