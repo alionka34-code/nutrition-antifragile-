@@ -39,16 +39,17 @@ function LandingHeader() {
     </div>
     </div>
     <div className="bg-degrade-marron mt-20">
-        <div className="flex flex-row  item-center justify-center md:gap-10 py-5">
-            <div className="border-r-1 border-white p-5">
-                <h2 className="font-SFBold text-white  text-2xl md:text-4xl text-center">+10%</h2>
+        <div className="flex flex-row items-center justify-center gap-6 md:gap-20 py-5 px-4 md:px-10 max-w-4xl mx-auto">
+            <div className="flex-1 text-center">
+                <h2 className="font-SFBold text-white text-2xl md:text-4xl text-center">+10%</h2>
                 <p className="font-SF text-white text-center text-xl">De productivité</p>
             </div>
             <div className="p-5">
-                <h2 className="font-SFBold text-white text-2xl md:text-4xl text-center">5/5</h2>
+                <h2 className="font-SFBold text-white text-2xl md:text-4xl text-center">4,9/5</h2>
                 <p className="font-SF text-white text-center text-xl">Satisfaction moyenne</p>
             </div>
-            <div className="p-5 border-l-1 border-white">
+            <div className="hidden md:block w-px h-16 bg-white"></div>
+            <div className="flex-1 text-center">
                 <h2 className="font-SFBold text-white text-2xl md:text-4xl text-center">-25%</h2>
                 <p className="font-SF text-white text-center text-xl">D'absentéisme en moyenne</p>
             </div>

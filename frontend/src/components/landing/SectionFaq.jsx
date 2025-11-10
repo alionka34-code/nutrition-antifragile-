@@ -68,7 +68,7 @@ export default function SectionFaq() {
             <div
               className={`px-6 pb-4 text-gray-600 dark:text-white transition-all duration-300 ease-in-out ${
                 openIndex === index
-                  ? "max-h-40 opacity-100"
+                  ? "h-full opacity-100"
                   : "max-h-0 opacity-0 overflow-hidden"
               }`}
             >

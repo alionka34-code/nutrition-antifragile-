@@ -129,9 +129,9 @@ function SectionService() {
         </div>
         <h3 className="font-SFBold text-center text-xl text-gray-600 dark:text-white">Votre politique QVCT manque d’actions concrètes et mesurables</h3>
     </div>
-    <div className="col-span-1 md:col-span-4 row-span-1 md:row-span-2 md:row-start-5 flex item-center justify-center flex-col p-8 gap-5 rounded-4xl bg-degrade-marron">
+    <div className="col-span-1 md:col-span-4 row-span-1 md:row-span-2 md:row-start-5 flex item-center justify-center flex-col p-5 gap-5 rounded-4xl bg-peach">
         <h3 className="text-center font-SFBold text-xl md:text-2xl text-white">Le coût réel du <span className="text-2xl md:text-4xl text-marron">"on verra plus tard"</span></h3>
-        <div className="flex flex-row justify-center gap-5 md:gap-10">
+        <div className="flex flex-row justify-center gap-1 md:gap-10">
             <div>
                 <h3 className="text-center font-SFBold text-2xl md:text-4xl text-marron">20%</h3>
                 <p className="text-center font-SFBold text-xl md:text-2xl text-gray-600 dark:text-white">De productivité perdues</p>
@@ -173,18 +173,18 @@ function SectionService() {
             }}
             modules={[FreeMode, Scrollbar, Mousewheel, Autoplay]}
             className="mySwiper"
-            style={{ height: '500px' }}>
-            <SwiperSlide className="flex flex-col justify-center bg-degrade rounded-2xl p-4" style={{ height: '350px' }}>
+            style={{ height: '600px' }}>
+            <SwiperSlide className="flex flex-col justify-center bg-degrade rounded-2xl p-4" style={{ height: '400px' }}>
                 <h3 className="font-SFBold text-lg mb-3 text-marron">Productivité en baisse<br/><span className="text-black dark:text-white">Vous multipliez les réunions pour "remobiliser" vos équipes.</span></h3>
                 <p className="font-SF text-gray-600 text-base mb-3 dark:text-gray-300">Résultat: plus de fatigue, moins d'attention, toujours pas d'efficacité.</p>
                 <p className="font-SF text-base"><span className='font-SFBold'>👉 Ma solution : </span>rétablir l'énergie au cœur de la journée grâce à une nutrition adaptée, pour des collaborateurs plus concentrés et performants.</p>
             </SwiperSlide>
-            <SwiperSlide className="flex flex-col justify-center bg-degrade rounded-2xl p-4" style={{ height: '350px' }}>
+            <SwiperSlide className="flex flex-col justify-center bg-degrade rounded-2xl p-4" style={{ height: '400px' }}>
                 <h3 className="font-SFBold text-lg mb-3 text-marron">Tension et stress constant<br/><span className="text-black dark:text-white">Baisse de productivité dans vos équipes</span></h3>
                 <p className="font-SF text-gray-600 text-base mb-3 dark:text-gray-300">Résultat : le stress revient dès le lendemain, les causes restent intactes.</p>
                 <p className="font-SF text-base"><span className="font-SFBold">👉Ma solution: </span>agir sur la base biologique du stress : alimentation, glycémie, sommeil et énergie. Des résultats concrets dès la première semaine.</p>
             </SwiperSlide>
-            <SwiperSlide className="flex flex-col justify-center bg-degrade rounded-2xl p-4" style={{ height: '350px' }}>
+            <SwiperSlide className="flex flex-col justify-center bg-degrade rounded-2xl p-4" style={{ height: '400px' }}>
                 <h3 className="font-SFBold text-lg mb-3 text-marron">Erreurs, oublis, perte de concentration.<br/><span className="text-black dark:text-white">Vous pensez que c'est un problème de motivation.</span></h3>
                 <p className="font-SF text-gray-600 dark:text-gray-300 text-base mb-3">Résultat : les mêmes erreurs se répètent.</p>
                 <p className="font-SF text-base"><span className="font-SFBold">👉 Ma solution:</span> créer un environnement où vos collaborateurs se sentent bien physiquement et mentalement grâce à une approche nutrition + bien-être.</p>

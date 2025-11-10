@@ -36,6 +36,7 @@
     --color-beige2: #e8ddd4;
     --color-degrade: linear-gradient(90deg, rgba(164,115,0,0.15) 0%, rgba(164,115,0,0.10) 50%, rgba(164,115,0,0.20) 100%);
     --color-degrade-marron: linear-gradient(70deg, rgba(255,149,0,0.69) 0%, rgba(153,89,0,0.69) 100%);
+    --color-peach: rgba(255,149,0,0.69);
     
 }
 
