@@ -20,12 +20,12 @@ const faqs = [
   {
     question: "Fournissez-vous des supports après la conférence ?",
     answer:
-      "Oui. Chaque participant repart avec un mini-guide PDF récapitulatif des points clés. Pour les programmes sur mesure, nous proposons aussi posters, fiches pratiques et webinaires de suivi à J+30 pour ancrer les réflexes.",
+      "Oui. Chaque participant repart avec un mini-guide PDF récapitulatif des points clés.",
   },
   {
     question: "Quel est le délai pour organiser une intervention ?",
     answer:
-      "I3 à 4 semaines pour un format personnalisé (contenu, logistique, communication interne). Des interventions plus rapides sont possibles selon mes disponibilités.",
+      "3 à 4 semaines pour un format personnalisé (contenu, logistique, communication interne). Des interventions plus rapides sont possibles selon mes disponibilités.",
   },
   {
     question: "Quels résultats peut-on attendre concrètement ?",
