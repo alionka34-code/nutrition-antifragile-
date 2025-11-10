@@ -259,7 +259,7 @@ function SectionService() {
                         <h3 className="font-SFBold text-2xl md:text-3xl text-marron">Expérience interactive et engageante</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
-                        <p className="font-SF text-white text-lg md:text-xl">Les équipes retiennent les messages et appliquent immédiatement les actions.</p>
+                        <p className="font-SF text-white text-lg md:text-xl">Un moment vivant, stimulant et fédérateur, où les équipes s’impliquent et repartent soudées autour d’un même déclic.</p>
                     </div>
                 </div>
             </div>
