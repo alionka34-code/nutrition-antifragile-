@@ -5,32 +5,32 @@ const faqs = [
   {
     question: "Intervenez-vous uniquement en présentiel ?",
     answer:
-      "Non, j'interviens aussi bien en présentiel (partout en France) qu'en visioconférence. Le format visio fonctionne très bien pour les conférences et même pour les ateliers, grâce à des outils interactifs en ligne (quiz, sondages, partages d'écran). Le présentiel reste plus impactant pour les formats longs, mais la visio offre flexibilité et économies logistiques.",
+      "Les deux ! Le présentiel maximise l’impact émotionnel. La visio permet une diffusion rapide sur plusieurs sites. Les formats hybrides sont possibles selon vos contraintes logistiques.",
   },
   {
-    question: "La conférence est-elle adaptée à tous les secteurs d'activité ?",
+    question: "Est-ce vraiment adapté à un public d’entreprise ?",
     answer:
-      "Absolument. Que vous soyez dans le tertiaire, l'industrie, la santé, le retail ou tout autre secteur, les principes de nutrition et performance s'appliquent universellement. Je personnalise toujours mes exemples et cas pratiques selon votre secteur et vos enjeux spécifiques (travail posté, sédentarité, stress, etc.).",
+      "Absolument. Chaque intervention est conçue pour des collaborateurs et managers, quel que soit le secteur. Les exemples, messages et supports sont contextualisés à vos enjeux : énergie, concentration, stress, rythme de travail, postures de performance.",
   },
   {
-    question: "Combien de participants peuvent assister à une conférence ?",
+    question: "Combien de personnes peuvent participer ?",
     answer:
-      "La conférence seule peut accueillir de 10 à 200 participants. Pour les ateliers interactifs, je recommande des groupes de 15 à 50 personnes maximum pour garantir la qualité des échanges et l'engagement de chacun. Au-delà, nous pouvons organiser plusieurs sessions ou un format conférence plénière.",
+      "Conférence seule : 20 à 300 participants (présentiel ou visio)/ Ateliers interactifs : 15 à 50 personnes pour favoriser la participation. Pour de grands effectifs, plusieurs sessions ou un format plénière peuvent être organisés.",
   },
   {
     question: "Fournissez-vous des supports après la conférence ?",
     answer:
-      "Oui, systématiquement. Chaque participant reçoit un document de synthèse PDF avec les points clés. Pour les séminaires sur mesure, je crée des supports 100% personnalisés à vos couleurs et enjeux.",
+      "Oui. Chaque participant repart avec un mini-guide PDF récapitulatif des points clés. Pour les programmes sur mesure, nous proposons aussi posters, fiches pratiques et webinaires de suivi à J+30 pour ancrer les réflexes.",
   },
   {
     question: "Quel est le délai pour organiser une intervention ?",
     answer:
-      "Idéalement, comptez 3 à 4 semaines pour organiser sereinement l'événement (logistique, communication interne, personnalisation du contenu). Cela dit, selon mes disponibilités, des interventions plus rapides peuvent être envisagées. Contactez-moi pour vérifier mes créneaux disponibles.",
+      "I3 à 4 semaines pour un format personnalisé (contenu, logistique, communication interne). Des interventions plus rapides sont possibles selon mes disponibilités.",
   },
   {
-    question: "Proposez-vous un suivi après l'intervention ?",
+    question: "Quels résultats peut-on attendre concrètement ?",
     answer:
-      "Pour les ateliers & formats séminaire sur mesure, oui. Je propose un suivi à J+30 (webinaire de rappel, session Q&R, nouveau contenu) pour ancrer les changements dans la durée. Pour les conférences uniques, le suivi n'est pas inclus par défaut mais peut être ajouté sur demande.",
+      "Un vrai déclic collectif dès la conférence : vos équipes comprennent ce qui freine leur énergie et leur concentration. Dans les semaines suivantes :  plus d’énergie, moins de coups de fatigue ; réunions plus efficaces, climat apaisé & engagement et performance en hausse",
   },
     
     
@@ -46,7 +46,7 @@ export default function SectionFaq() {
   return (
     <section className="mx-4 md:max-w-5xl md:mx-auto py-16 px-6" id="faq">
       <h2 className="text-3xl font-bold text-center mb-10">
-        Vos questions (légitimes) 🤔
+      Questions fréquentes (FAQ)
       </h2>
       <div className="space-y-8 font-SFBold">
         {faqs.map((faq, index) => (
