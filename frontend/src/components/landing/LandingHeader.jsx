@@ -7,7 +7,7 @@ function LandingHeader() {
     <div className="flex flex-col md:flex-row mx-4 md:mx-40 mt-10 gap-10">
         <div className=" mx-4 md:max-w-4xl md:mx-auto">
       <h1 className="text-black font-SFBold text-4xl md:text-6xl mb-8 dark:text-white">
-  <span className="text-marron">Le pouvoir de l'Assiette:</span><br/>L'intervention qui transforme l'énergie et la performance de vos équipes</h1>
+  <span className="text-marron">Le pouvoir de l'Assiette :</span><br/>L'intervention qui transforme l'énergie et la performance de vos équipes</h1>
         <p className="font-SFBold text-gray-600 text-2xl md:text-4xl dark:text-gray-300">Une expérience collective immersive qui transforme l'alimentation en levier stratégique de performance.</p>
         <div className="flex flex-row gap-4">
             <button onClick={() => {
