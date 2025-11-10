@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "Intervenez-vous uniquement en présentiel ?",
+    question: "Présentiel ou distanciel ?",
     answer:
       "Les deux ! Le présentiel maximise l’impact émotionnel. La visio permet une diffusion rapide sur plusieurs sites. Les formats hybrides sont possibles selon vos contraintes logistiques.",
   },
