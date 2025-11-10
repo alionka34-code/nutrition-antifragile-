@@ -10,8 +10,10 @@ function Home() {
     return (
         <>
         <Helmet>
-            <title> Entreprise | Nutrition Antifragile | Santé durable & bien-être</title>
+            <title> Accueil | Nutrition Antifragile | Santé durable & bien-être</title>
             <meta name="description" content="Découvrez Nutrition Antifragile : des conseils et ressources pour une santé durable et un corps antifragile." />
+            <link rel="canonical" href="https://alionka-houl.eo.symbiose-audiovisuelle.fr/" />
+
         </Helmet>
         <main>
         <HomeHeader />
