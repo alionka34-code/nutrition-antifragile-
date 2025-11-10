@@ -195,7 +195,7 @@ function SectionService() {
     </div>
 </div>*/}
 <div className="mt-20">
-    <h2 className="font-SFBold text-4xl text-center"> Impact concret et mesurable<br/><span className='text-marron'>sur vos équipes</span></h2>
+    <h2 className="font-SFBold text-4xl text-center"> Ce que vos équipes<br/><span className='text-marron'>concrètement</span></h2>
     
         <div className="max-w-5xl mx-auto mt-10 relative">
         {/* Barre verticale continue en arrière-plan - cachée sur mobile */}
@@ -207,10 +207,10 @@ function SectionService() {
                 <div className="max-w-md md:text-right">
                     <div className="flex items-center md:justify-end mb-4">
                         <div className="w-10 h-10 bg-marron text-white rounded-full flex items-center justify-center font-SFBold text-base mr-3 md:order-2 md:mr-0 md:ml-3">1</div>
-                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron md:order-1">Prise de conscience immédiate</h3>
+                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron md:order-1">Prise de conscience collective</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
-                        <p className="font-SF text-white md:text-right text-lg md:text-xl">La conférence révèle comment l’alimentation impacte énergie, concentration et sommeil → vos équipes identifient les freins à leur performance</p>
+                        <p className="font-SF text-white md:text-right text-lg md:text-xl">Vos équipes comprennent pourquoi elles sont fatiguées et comment y remédier. Le déclic est immédiat.</p>
                     </div>
                 </div>
             </div>
@@ -224,7 +224,7 @@ function SectionService() {
                 <div className="max-w-md">
                     <div className="flex items-center mb-4">
                         <div className="w-10 h-10 bg-marron text-white rounded-full flex items-center justify-center font-SFBold text-base mr-3">2</div>
-                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron">Actions concrètes dès demain</h3>
+                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron">Solutions applicables dès demain</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
                         <p className="font-SF text-white text-lg md:text-xl">Clés simples, pratiques, adaptées au quotidien professionnel → impact direct sur le fonctionnement des équipes.</p>
@@ -239,10 +239,10 @@ function SectionService() {
                 <div className="max-w-md md:text-right">
                     <div className="flex items-center md:justify-end mb-4">
                         <div className="w-10 h-10 bg-marron text-white rounded-full flex items-center justify-center font-SFBold text-base mr-3 md:order-2 md:mr-0 md:ml-3">3</div>
-                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron md:order-1">Résultats visibles et mesurables</h3>
+                        <h3 className="font-SFBold text-2xl md:text-3xl text-marron md:order-1">Résultats mesurables rapidement</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
-                        <p className="font-SF text-white md:text-right text-lg md:text-xl">Plus d’énergie, concentration accrue, collaboration améliorée → ROI tangible</p>
+                        <p className="font-SF text-white md:text-right text-lg md:text-xl">Plus d’énergie, concentration accrue, collaboration améliorée → ROI visible en 4 semaines</p>
                     </div>
                 </div>
             </div>
@@ -259,7 +259,7 @@ function SectionService() {
                         <h3 className="font-SFBold text-2xl md:text-3xl text-marron">Expérience interactive et engageante</h3>
                     </div>
                     <div className="p-6 bg-degrade-marron rounded-2xl">
-                        <p className="font-SF text-white text-lg md:text-xl">Un moment vivant, stimulant et fédérateur, où les équipes s’impliquent et repartent soudées autour d’un même déclic.</p>
+                        <p className="font-SF text-white text-lg md:text-xl">L'expérience soude vos équipes autour d'une même révélation. Effet rallye garanti.</p>
                     </div>
                 </div>
             </div>
