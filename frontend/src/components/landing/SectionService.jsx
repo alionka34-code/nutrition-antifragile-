@@ -147,6 +147,7 @@ function SectionService() {
         </div>
     </div>
 </div>
+{/*
 <div className="mt-20 max-w-5xl mx-auto">
     <div className='flex flex-col gap-5 md:flex-row'>
         <div className='md:max-w-md flex'>
@@ -192,7 +193,7 @@ function SectionService() {
             </Swiper>
         </div>
     </div>
-</div>
+</div>*/}
 <div className="mt-20">
     <h2 className="font-SFBold text-4xl text-center">Ce que vos collaborateurs vont <br/><span className='text-marron'>ressentir au quotidien</span></h2>
     
