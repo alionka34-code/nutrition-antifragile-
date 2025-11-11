@@ -13,8 +13,7 @@ import {FreeMode, Scrollbar, Mousewheel, Autoplay} from 'swiper/modules';
 function SectionService() {
     return (
         <section className="mx-4 md:mx-40 mt-10">
-    <h2 className="text-center font-SFBold text-4xl">Et si la vraie cause du désengagement n'était pas le management… <br/><span className="text-marron">mais la nutrition ?</span></h2>
-    <p className="font-SF text-center text-xl md:text-2xl mt-4 mb-10 dark:text-white">Vous reconnaissez votre entreprise ?</p>
+    <h2 className="text-center font-SFBold text-4xl">Vous reconnaissez votre entreprise ?</h2>
 <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-6 gap-4 mt-10 max-w-5xl mx-auto">
     <div className="col-span-1 md:col-span-2 row-span-1 md:row-span-2 flex flex-col items-center justify-center p-8 rounded-4xl gap-4 bg-degrade">
         <div >
