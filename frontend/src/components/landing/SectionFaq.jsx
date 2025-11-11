@@ -30,7 +30,7 @@ const faqs = [
   {
     question: "Quels résultats peut-on attendre concrètement ?",
     answer:
-      "Un vrai déclic collectif dès la conférence : vos équipes comprennent ce qui freine leur énergie et leur concentration. Dans les semaines suivantes :  plus d’énergie, moins de coups de fatigue ; réunions plus efficaces, climat apaisé & engagement et performance en hausse",
+      "L'intervention provoque une prise de conscience collective et donne des clés d'action immédiates. Sous un mois : énergie retrouvée, concentration boostée, tensions réduites, performance et engagement en hausse mesurable.",
   },
     
     
