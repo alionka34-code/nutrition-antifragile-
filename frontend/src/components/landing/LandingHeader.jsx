@@ -45,7 +45,7 @@ function LandingHeader() {
             </div>
             <div className="p-5">
                 <h2 className="font-SFBold text-white text-2xl md:text-4xl text-center">5/5</h2>
-                <p className="font-SF text-white text-center text-xl">Satisfaction moyenne</p>
+                <p className="font-SF text-white text-center text-xl">Satisfaction</p>
             </div>
             <div className="hidden md:block w-px h-16 bg-white"></div>
             <div className="flex-1 text-center">
