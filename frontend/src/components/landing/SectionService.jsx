@@ -195,7 +195,7 @@ function SectionService() {
     </div>
 </div>*/}
 <div className="mt-20">
-    <h2 className="font-SFBold text-4xl text-center"> Ce que vos équipes<br/><span className='text-marron'>concrètement</span></h2>
+    <h2 className="font-SFBold text-4xl text-center"> Ce que vos équipes<br/><span className='text-marron'>gagnent</span></h2>
     
         <div className="max-w-5xl mx-auto mt-10 relative">
         {/* Barre verticale continue en arrière-plan - cachée sur mobile */}
