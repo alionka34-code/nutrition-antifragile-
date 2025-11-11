@@ -24,8 +24,8 @@ function SectionForm() {
   };
     return (
         <section id="contact-form" className="mt-40 bg-degrade-marron py-10">
-            <h2 className='text-center font-SFBold text-4xl text-white'>Prêt à faire de la nutrition votre levier de performance ?</h2>
-            <p className='text-center font-SF text-2xl mt-4 text-white'>Échangeons sur vos enjeux et trouvons le format idéal pour vos équipes.e</p>
+            <h2 className='text-center font-SFBold text-4xl text-white'>Prêt à donner un nouvel élan à vos équipes ?</h2>
+            <p className='text-center font-SF text-2xl mt-4 text-white'>Échangeons sur vos enjeux. Je vous explique comment l'expérience s'adapte à vos équipes.</p>
             <div className="mt-10 max-w-4xl mx-auto">
                 <form className=" bg-white dark:bg-neutral-900 p-10 font-SF rounded-3xl shadow-lg mx-4" onSubmit={handleSubmit(onSubmit)}>
                     <label>Votre prenom</label>
