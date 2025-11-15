@@ -17,8 +17,8 @@ function Home() {
         </Helmet>
         <main>
         <HomeHeader />
-        <BookSection />
         <ProfilSection />
+        <BookSection />
         <MemberSection />
         </main>
         
