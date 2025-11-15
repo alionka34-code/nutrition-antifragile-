@@ -10,13 +10,13 @@ function ProfilSection() {
 
     return (
         <section className ="mt-20">
-            <h2 className='text-center font-SFBold text-4xl md:text-8xl dark:text-white'>L'AUTEURE</h2>
+            <h1 className='text-center font-SFBold text-4xl md:text-8xl dark:text-white'>L'AUTEURE</h1>
         
             <div className='flex flex-col mx-auto md:gap-30 justify-center md:flex-row'>
                 <div className="text-center mt-8 mx-4 md:mt-10  md:max-w-xl ">
                 <img src= {alionka} alt="Alionka Houl" className="mx-auto h-auto mt-4 md:w-full shadow-xl/50 rounded-4xl"/>
                 <h3 className="font-SFBold mt-4 text-marron text-xl md:text-2xl">Alionka</h3>
-                <p className="p-4 font-SF text-lg md:text-xl border-l-4 border-marron rounded-4xl shadow-lg  dark:text-white">Auteure<br/>Rédactrice scientifique specialisée en nutrition</p>
+                <p className="p-4 font-SF text-lg md:text-xl border-l-4 border-marron rounded-4xl shadow-lg  dark:text-white">Auteure & Conférencière</p>
                 </div>
                 <div className='max-w-2xl mx-4 mt-8'>
                     <p className="text-center font-SFBoltItalic text-xl mt-4 mx-4 md:text-2xl border-b-2 border-marron  dark:text-white">J'ai quitté les laboratoires de l'agro-industrie pour réapprendre à me nourrir comme un être humain.</p>
@@ -24,7 +24,6 @@ function ProfilSection() {
                 <p className="text-center mt-6 mx-4 font-SF text-lg bg-gradient-to-tr from-yellow-700 to-marron text-white rounded-4xl p-4 md:text-xl">Je suis partie plusieurs mois dans les campagnes cambodgiennes, et me suis nourrie d'une simplicité déconcertante : riz, poisson séché, eau de coco, jus de canne, fruits gorgés de soleil. J'y ai puisé une énergie illimitée, une clarté mentale et un calme intérieur profond.</p>
                 <p className="text-center mt-6 mx-4 font-SF text-lg md:text-xl  dark:text-white"> <span className ="font-SFBold dark:text-white">J'ai compris la manipulation :</span> L'industrie a détruit notre attirance instinctive pour les produits bruts. Elle exploite nos circuits de récompense avec du faux sucre, du faux gras, du faux goût. Le corps crie alors famine en stockant des calories vides.</p>
                 <p className="text-center mt-6 mx-4 font-SFBold text-lg rounded-4xl p-4 border-2 border-marron md:text-xl  dark:text-white">Aujourd'hui, animée par une soif de vérité et de transmission, je vous guide vers une alimentation qui nourrit le corps et l'esprit, loin des dogmes et des vices industriels.</p>
-                <button className=" mt-8 block mx-auto md:text-2xl font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300" onClick={handleLoginClick}>REJOIGNEZ LA COMMUNAUTE ANTIFRAGILE</button>
             </div>
                 
                 
