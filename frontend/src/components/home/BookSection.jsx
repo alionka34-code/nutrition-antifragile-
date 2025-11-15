@@ -34,7 +34,13 @@ function BookSection() {
             <h2 className='mt-10 md:mt-20 text-center font-SFBold text-2xl text-marron md:mx-auto md:max-w-5xl md:text-4xl mx-4'>
                 De chasseur-cueilleur a victime de l'industrie: il est temps de reprendre le controle.
             </h2>
+
             
+            <div className='flex flex-row  mx-auto justify-center gap-5'><button onClick = {() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">ACHETER LE LIVRE</button>
+                        <button onClick={() => window.location.href="/Extrait.pdf"} className="mt-8 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">LIRE UN EXTRAIT</button></div>
+                    </div> 
+
+        
             <div className="mt-20 py-10 bg-gradient-to-tr from-yellow-700 to-marron">
                 <h3 className="text-center font-SFBold text-white md:text-4xl text-2xl mx-4">Deux parties pour tout comprendre</h3>
                 <div className='flex flex-col md:flex-row justify-center gap-20 mt-10 max-w-6xl md:mx-auto mx-4'>
@@ -191,12 +197,7 @@ function BookSection() {
                 </Swiper>
             </div>
             
-            <button 
-                onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} 
-                className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-2xl"
-            >
-                ACHETER LE LIVRE
-            </button>
+     
         </section>
     );
 }
