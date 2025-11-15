@@ -15,7 +15,8 @@ function MentionLegale() {
             <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Mentions Légales</h1>
         </header>
         <div className="md:mx-40 mx-4 py-8  dark:text-white">
-            <h1 className="text-2xl font-SFBold mb-4 ">Responsable éditoriral et artistique</h1>
+            <p className="font-SF mb-4">Titre de la publication : Alionka HOUL - Nourrir avec l'instinct</p>
+            <h1 className="text-2xl font-SFBold mb-4 ">Responsable éditoriale et artistique</h1>
             <p className="font-SF mb-4">Alionka HOUL (texte, œuvre, image) Artiste auteure contemporaine, scénariste, réalisatrice et écrivaine<br/>ISNI : 0000 0005 1675 5683<br/>Siège professionnel : Montpellier, France.Ce site présente les œuvres, publications et actualités professionnelles d’Alionka HOUL
             <br/>Identifiant ARK : ark:/76272/eo-ankh/site-pro/2025</p>
             <h1 className="text-2xl font-SFBold mb-4 ">Gestion administrative et financière</h1>
