@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeHeader from '../components/home/HomeHeader';
-import BookSection from '../components/home/BookSection';
 import ProfilSection from '../components/home/ProfilSection'; 
+import BookSection from '../components/home/BookSection';
 import MemberSection from '../components/home/MemberSection'; 
 import{ Helmet } from "react-helmet";
 
