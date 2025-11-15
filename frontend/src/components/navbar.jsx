@@ -39,6 +39,7 @@ function Navbar() {
   }, []);
 
   return (
+    <>
     <nav className="w-full top-0 left-0 z-50 mx-auto">
       <div className="flex md:mr-10 justify-between items-center md:mx-20 px-6 py-4">
         {/* Logo ou titre */}
@@ -95,13 +96,13 @@ function Navbar() {
               )}
             </div>
           )}
-          
-          
-          
-          
+        </div>
+        
+        {/* Titre */}
+        <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2">
+          <h1 className="font-SF text-gray-600 dark:text-white text-sm md:text-2xl">ALIONKA HOUL - NOURRIR AVEC L'INSTINCT</h1>
         </div>
        
-
         <div className="flex items-center gap-4">
           <DarkModeSwitch portal={false} />
           {/* Burger toujours visible */}
@@ -144,6 +145,8 @@ function Navbar() {
         </ul>
       )}
     </nav>
+    </>
+    
   );
 }
 

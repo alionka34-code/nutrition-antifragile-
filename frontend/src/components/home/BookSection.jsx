@@ -11,7 +11,7 @@ function BookSection() {
         <section className="mt-10 md:mt-20">
             <div className='flex flex-col md:flex-row md:gap-30 justify-center text-center'>
                 <div>
-                    <img src={livre} alt="Livre Nutrition Antifragile" className="w-80 md:w-100 h-auto shadow-xl/50 mx-auto hidden md:block" />
+                    <img src={livre} alt="Livre Nutrition Antifragile" className="w-80 md:w-100 h-auto shadow-xl/50 mx-auto md:block" />
                 </div>
                 <div className='md:max-w-2xl mx-4 py-10'>
                     <h2 className='font-SFBold text-marron text-2xl md:text-4xl'>La pilule rouge de l'alimentation</h2>
@@ -36,27 +36,28 @@ function BookSection() {
             </h2>
 
             
-            <div className='flex flex-row  mx-auto justify-center gap-5'><button onClick = {() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">ACHETER LE LIVRE</button>
-                        <button onClick={() => window.location.href="/Extrait.pdf"} className="mt-8 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">LIRE UN EXTRAIT</button></div>
-                    </div> 
+            <div className='flex flex-row mx-auto justify-center gap-5'>
+                <button onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 text-lg font-SFBold rounded-full text-white px-4 md:px-8 md:py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">ACHETER LE LIVRE</button>
+                <button onClick={() => window.location.href="/Extrait.pdf"} className="mt-8 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">LIRE UN EXTRAIT</button>
+            </div> 
 
         
-            <div className="mt-20 py-10 bg-gradient-to-tr from-yellow-700 to-marron">
+            <div className="mt-20 py-10 bg-degrade-marron">
                 <h3 className="text-center font-SFBold text-white md:text-4xl text-2xl mx-4">Deux parties pour tout comprendre</h3>
                 <div className='flex flex-col md:flex-row justify-center gap-20 mt-10 max-w-6xl md:mx-auto mx-4'>
                     <div className='border-4 border-marron p-10 rounded-4xl flex-1'>
                         <h4 className="font-SFBold text-yellow-300 text-xl md:text-2xl">PARTIE 1: CE QUI VOUS REND FAIBLE</h4>
                         <p className="font-SF text-white text-lg md:text-xl mt-4">Découvrez l'évolution alimentaire, les mensonges de l'industrie et les 11 aliments "santé" à éviter</p>
                         <div className="flex flex-col gap-6 mt-6">
-                            <div className='border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50'>
+                            <div className='border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50'>
                                 <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 1: Evolution de l'alimentation</h5>
                                 <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">De chasseurs-cueilleurs à victimes de l'industrie : comment nous avons perdu notre instinct alimentaire.</p>
                             </div>
-                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50">
+                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
                                 <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 2: On vous ment depuis le début</h5>
                                 <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">Programmation dès 6 ans, supermarché, petit-déjeuner "essentiel", greenwashing : décryptage des manipulations quotidiennes de l'industrie.</p>
                             </div>
-                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50">
+                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
                                 <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 3: Aliments à éviter</h5>
                                 <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">Pain moderne, steaks végétaux, huiles de graines (...) : ce que l'industrie vous cache vraiment sur ces poisons.</p>
                             </div>
@@ -67,15 +68,15 @@ function BookSection() {
                         <h4 className="font-SFBold text-yellow-300 text-xl md:text-2xl">PARTIE 2: CE QUI VOUS REND FORT</h4>
                         <p className="font-SF text-white text-lg md:text-xl mt-4">Redécouvrez les fondements d'une alimentation antifragile et naturelle</p>
                         <div className='flex flex-col gap-6 mt-6'>
-                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50">
+                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
                                 <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 4 : Comprendre pour mieux choisir</h5>
                                 <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">Corps-Esprit-Énergie : les fondements oubliés d'une alimentation antifragile et naturelle.</p>
                             </div>
-                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50">
+                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
                                 <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 5 : Aliments à privilégier</h5>
                                 <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">redécouvrir les vrais aliments diabolisés par l'industrie.</p>
                             </div>
-                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-marron flex-1 shadow-lg shadow-black/50">
+                            <div className="border-yellow-500 border-l-4 rounded-4xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
                                 <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 6 : Le jeûne, l'art de se soigner à travers les siècles</h5>
                                 <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">Découvrez cette pratique millénaire pour retrouver votre force naturelle.</p>
                             </div>
