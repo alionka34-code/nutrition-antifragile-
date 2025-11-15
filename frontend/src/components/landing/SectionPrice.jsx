@@ -43,7 +43,6 @@ function SectionPrice() {
                         <p><span className="text-marron">✓ </span><span className="font-SFBold">1h de conférence interactive</span></p>
                         <p><span className="text-marron">✓ </span>Q&R incluse</p>
                         <p><span className="text-marron">✓ </span>Mini-guide PDF récapitulatif</p>
-                         <p><span className="text-marron">✓ </span>Présentiel ou visio (partout en France)</p>
 
                         <p className='text-gray-600 font-SF text-xl mt-6 dark:text-gray-300'><span className='font-SFBold'>Idéal pour: </span>Initier rapidement une démarche QVCT et améliorer engagement, énergie et performance des équipes</p>
                           <p className='text-gray-600 font-SF text-xl mt-6 dark:text-gray-300'><span className='font-SFBold'>Bénéfice clé: </span>prise de conscience + premières actions faciles à mettre en place</p>
