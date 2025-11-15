@@ -42,8 +42,7 @@ function Navbar() {
     <>
     <nav className="w-full top-0 left-0 z-50 mx-auto">
       <div className="flex md:mr-10 justify-between items-center md:mx-20 px-6 py-4">
-        {/* Logo ou titre */}
-        <div className="text-2xl font-bold font-SF relative" ref={userMenuRef}>
+        <div className="text-2xl font-bold font-SF relative hidden md:block" ref={userMenuRef}>
           {username ? (
             <span 
               className="cursor-pointer hover:text-yellow-600 flex items-center gap-2 dark:text-gray-300" 
@@ -99,8 +98,8 @@ function Navbar() {
         </div>
         
         {/* Titre */}
-        <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2">
-          <h1 className="font-SF text-gray-600 dark:text-white text-sm md:text-2xl">ALIONKA HOUL - NOURRIR AVEC L'INSTINCT</h1>
+        <div className="absolute left-1/2 transform -translate-x-1/2 md:left-1/2 md:transform md:-translate-x-1/2">
+          <h1 className="font-SF text-gray-600 dark:text-white text-sm md:text-2xl whitespace-nowrap">ALIONKA HOUL - NOURRIR AVEC L'INSTINCT</h1>
         </div>
        
         <div className="flex items-center gap-4">
@@ -117,6 +116,53 @@ function Navbar() {
       {/* Menu déroulant commun mobile + desktop */}
       {isOpen && (
         <ul className="flex flex-col items-start justify-center md:items-center md:flex-row md:gap-15 gap-4 px-6 pb-6  dark:text-white">
+          {/* Section utilisateur mobile uniquement */}
+          {username && (
+            <li className="md:hidden text-lg font-SF mb-4 pb-4 border-b border-gray-300 dark:border-gray-600 w-full">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-yellow-600 font-bold">{username} 👋</span>
+                {isAdmin ? (
+                  <span className="px-2 py-1 text-xs rounded-full font-SFBold bg-red-500 text-white">
+                    ADMIN
+                  </span>
+                ) : (
+                  <span className={`px-2 py-1 text-xs rounded-full font-SFBold ${isSubscribed ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
+                    {isSubscribed ? 'PREMIUM' : 'FREE'}
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-col gap-2 text-sm">
+                {isSubscribed ? (
+                  <a
+                    href="https://billing.stripe.com/p/login/7sYaEW2Rx2AQd0h5QQbZe00"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-yellow-600"
+                  >
+                    Gérer mon abonnement
+                  </a>
+                ) : (
+                  <Link
+                    to="/abonnement"
+                    className="hover:text-yellow-600"
+                    onClick={toggleMenu}
+                  >
+                    S'abonner
+                  </Link>
+                )}
+                {isAdmin && (
+                  <a
+                    href="https://web-production-a7977.up.railway.app/admin/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-yellow-600"
+                  >
+                    Espace admin
+                  </a>
+                )}
+              </div>
+            </li>
+          )}
           <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/" onClick={toggleMenu}>Accueil</Link>
           </li>
