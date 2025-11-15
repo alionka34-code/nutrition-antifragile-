@@ -10,7 +10,7 @@ function ProfilSection() {
 
     return (
         <section className ="mt-20">
-            <h1 className='text-center font-SFBold text-4xl md:text-8xl dark:text-white'>L'AUTEURE</h1>
+        
         
             <div className='flex flex-col mx-auto md:gap-30 justify-center md:flex-row'>
                 <div className="text-center mt-8 mx-4 md:mt-10  md:max-w-xl ">
