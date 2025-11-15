@@ -104,7 +104,6 @@ function Navbar() {
         </div>
        
         <div className="flex items-center gap-4">
-          <DarkModeSwitch portal={false} />
           {/* Burger toujours visible */}
           <button
             onClick={toggleMenu}
@@ -133,6 +132,7 @@ function Navbar() {
           <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/contact" onClick={toggleMenu}>Contact</Link>
           </li>
+          
           {username ? (
             <li className="text-lg md:text-2xl font-SF hover:text-yellow-600 cursor-pointer" onClick={() => { toggleMenu(); handleLogout(); }}>
               Déconnexion
@@ -142,6 +142,9 @@ function Navbar() {
               <Link to="/connexion" onClick={toggleMenu}>Connexion</Link>
             </li>
           )}
+          <li className="flex items-center gap-2 text-lg md:text-2xl font-SF">
+            <DarkModeSwitch portal={false} />
+          </li>
         </ul>
       )}
     </nav>
