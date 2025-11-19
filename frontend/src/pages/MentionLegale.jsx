@@ -44,9 +44,9 @@ function MentionLegale() {
             <h1 className="text-2xl font-SFBold mb-4 ">Crédits</h1>
             <p className="font-SF mb-4">Conception graphique, direction artistique et contenus : <strong>Alionka HOUL</strong><br/>ISNI : 0000 0005 1675 5683</p>
             <br/>
-            <p>Gestion éditoriale et technique : <strong>Symbiose Audiovisuelle</strong></p>
+            <p>Gestion éditoriale et technique : <strong>Éditions Œuvres — Symbiose Audiovisuelle</strong></p>
             <br/>
-            <p>© 2025 <strong>Alionka HOUL</strong> – Tous droits réservés</p>
+            <p>© 2025 <strong>Alionka HOUL</strong> — Tous droits réservés</p>
         </div>
 
         
