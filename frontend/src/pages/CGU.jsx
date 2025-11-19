@@ -15,7 +15,7 @@ function CGU(){
         
         <div className="md:mx-40 mx-4 py-8  dark:text-white">
         <h1 className="text-2xl font-SFBold mb-4">Article 1: Objet</h1>
-        <p className="font-SF mb-4">Les présentes CGU ont pour objet de définir les modalités d’accès et d’utilisation du site https://alionka-houl.eo.symbiose-audiovisuelle.fr.</p>
+        <p className="font-SF mb-4">Les présentes CGU ont pour objet de définir les modalités d’accès et d’utilisation du site https://alionka-houl.eo.symbiose-audiovisuelle.fr</p>
         <h1 className="text-2xl font-SFBold mb-4">Article 2: Acces au site</h1>
         <p className="font-SF mb-4">L’accès au site est libre. Certaines parties du site (blog premium) sont réservées aux abonnés disposant d’un compte actif.</p>
         <h1 className="text-2xl font-SFBold mb-4">Article 3: Compte utilisateur</h1>
