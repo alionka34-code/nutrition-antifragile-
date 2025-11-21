@@ -14,9 +14,12 @@ function MentionLegale() {
         <header>
             <h1 className="text-center text-4xl md:text-6xl font-SFBold pt-10  dark:text-white">Mentions Légales</h1>
         </header>
+            <div className="md:mx-40 mx-4 py-8  dark:text-white">
+            <h1 className="text-2xl font-SFBold mb-4 ">Titre de la publication</h1>
+        <p className="font-SF mb-4">ALIONKA HOUL - NOURRIR AVEC L'INSTINCT<br/>ISSN : 3098-7113</p>
         <div className="md:mx-40 mx-4 py-8  dark:text-white">
             <h1 className="text-2xl font-SFBold mb-4 ">Responsable éditoriale et artistique</h1>
-            <p className="font-SF mb-4">Alionka HOUL (texte, œuvre, image) Artiste auteure contemporaine, scénariste, réalisatrice et écrivaine<br/>ISNI : 0000 0005 1675 5683<br/>Siège professionnel : Montpellier, France.<br/>Ce site présente les œuvres, publications et actualités professionnelles d’Alionka HOUL
+            <p className="font-SF mb-4">Alionka HOUL : auteure de texte, œuvre & image<br/>ISNI : 0000 0005 1675 5683<br/>Siège professionnel : Montpellier, France.<br/>Ce site présente les œuvres, publications et actualités professionnelles d’Alionka HOUL
             <br/>Identifiant ARK : ark:/76272/eo-alionka-nourrir-avec-l-instinct/2025</p>
             <h1 className="text-2xl font-SFBold mb-4 ">Gestion administrative et financière</h1>
             <p className="font-SF mb-4">Les transactions (abonnements, ventes d’ouvrages, dons et services)<br/><br/> Symbiose Audiovisuelle <br/>Association loi 1901 – RNA : W343028438 – SIREN : 891 180 093 <br/>Siège social : Montpellier, France. <br/>Site et contact : https://www.symbiose-audiovisuelle.fr/ <br/><br/>Symbiose Audiovisuelle agit en qualité de structure de gestion, de diffusion et de perception des droits d’auteurs, dans le cadre de conventions et partenariats établis conformément à la législation en vigueur.</p>
