@@ -15,7 +15,7 @@ function Footer() {
           <Link to="/cgu" className="ml-4 text-gray-600  dark:text-white hover:text-yellow-600 font-SF text-lg">CGU</Link>
           <Link to="/rgpd" className="ml-4 text-gray-600  dark:text-white hover:text-yellow-600 font-SF text-lg">RGPD</Link>
         </div>
-         <p className='text-white font-SF text-lg mt-5 hover:text-marron'><a href='https://isni.oclc.org/cbs/DB=1.2/SET=1/TTL=1/CMD?ACT=SRCH&IKT=8006&SRT=LST_nd&TRM=houl+alionka'>Site professionnel - N° ISNI : 0000 0005 1675 5683</a></p>
+         <p className='text-white font-SF text-lg mt-5 hover:text-marron'><a href='https://isni.oclc.org/cbs/DB=1.2/SET=1/TTL=1/CMD?ACT=SRCH&IKT=8006&SRT=LST_nd&TRM=houl+alionka'>Site professionnel - ISNI 0000 0005 1675 5683</a></p>
       </div>
     </footer>
   );
