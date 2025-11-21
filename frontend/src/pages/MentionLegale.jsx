@@ -17,7 +17,7 @@ function MentionLegale() {
         <div className="md:mx-40 mx-4 py-8  dark:text-white">
                 <h1 className="text-2xl font-SFBold mb-4 ">Titre de la publication</h1>
                 <p className="font-SF mb-4">ALIONKA HOUL - NOURRIR AVEC L'INSTINCT<br/>ISSN : 3098-7113</p>
-                
+            </div>
         <div className="md:mx-40 mx-4 py-8  dark:text-white">
             <h1 className="text-2xl font-SFBold mb-4 ">Responsable éditoriale et artistique</h1>
             <p className="font-SF mb-4">Alionka HOUL : auteure de texte, œuvre & image<br/>ISNI : 0000 0005 1675 5683<br/>Siège professionnel : Montpellier, France.<br/>Ce site présente les œuvres, publications et actualités professionnelles d’Alionka HOUL
