@@ -16,6 +16,7 @@ import SubscriptionCancel from './pages/SubscriptionCancel';
 import PasswordLost from './pages/PasswordLost.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
 import MentionLegale  from './pages/MentionLegale.jsx';
+import ExtraitPage from './pages/ExtraitPage.jsx';
 import CGV from './pages/CGV.jsx';
 import CGU from './pages/CGU.jsx';
 import RGPD from './pages/RGPD.jsx';
@@ -31,6 +32,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/livre" element={<Livre />} />
+              <Route path="/extrait" element={<ExtraitPage />} />
               <Route path="/abonnement" element={<Abonnement />} />
               <Route path="/Landing" element={<Landing />} />
               <Route path="/connexion" element={<Connexion />} />

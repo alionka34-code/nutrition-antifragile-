@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import livre from '../../assets/images/livre.png';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Grid } from "swiper/modules";
@@ -7,6 +8,8 @@ import "swiper/css/pagination";
 import "../../styles/swiper-custom.css";
 
 function BookSection() {
+    const navigate = useNavigate();
+    
     return (
         <section className="mt-10 md:mt-20">
             <div className='flex flex-col md:flex-row md:gap-30 justify-center text-center'>
@@ -38,7 +41,7 @@ function BookSection() {
             
             <div className='flex flex-row mx-auto justify-center gap-5'>
                 <button onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 text-lg font-SFBold rounded-full text-white px-4 md:px-8 md:py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">ACHETER LE LIVRE</button>
-                <button onClick={() => window.location.href="/Extrait.pdf"} className="mt-8 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">LIRE UN EXTRAIT</button>
+                <button onClick={() => navigate("/Extrait")} className="mt-8 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-3xl">LIRE UN EXTRAIT</button>
             </div> 
 
         
