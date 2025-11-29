@@ -10,9 +10,9 @@ function ExtraitPage() {
         <link rel="canonical" href="https://alionka-houl.eo.symbiose-audiovisuelle.fr/extrait" />
       </Helmet>
 
-      <main className="min-h-screen bg-white dark:bg-gray-900">
+      <main className="min-h-screen bg-white dark:bg-neutral-900 ">
         {/* Hero Section */}
-        <section className="pt-20 pb-12 px-6 md:px-20 text-center bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+        <section className="pt-20 pb-12 px-6 md:px-20 text-center bg-white dark:bg-neutral-900">
           <h1 className="font-SF font-bold text-3xl md:text-5xl text-gray-900 dark:text-white mb-4">
             NUTRITION ANTIFRAGILE
           </h1>

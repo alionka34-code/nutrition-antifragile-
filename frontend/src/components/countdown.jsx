@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function Countdown() {
-  const targetDate = new Date("2025-09-25T23:59:59").getTime();
+  const targetDate = new Date("2025-12-06T23:59:59").getTime();
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining());
   const [pulse, setPulse] = useState(false);
 
@@ -44,7 +44,7 @@ function Countdown() {
   return (
     <div className="flex flex-col items-center bg-gradient-to-tr from-yellow-500 to-yellow-700 p-6 rounded-xl shadow-lg mt-4">
       <div className="md:text-2xl text-xl  font-SFBold text-yellow-300 mb-4">
-        OFFRE LIMITÉE - Se termine dans :
+       Utilisez le code promo pendant :
       </div>
 
       {timeLeft ? (
