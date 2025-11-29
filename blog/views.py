@@ -244,6 +244,7 @@ class CreateCheckoutSession(APIView):
                 cancel_url=f"{base_url}subscription/cancel",
                 customer=customer_id,
                 client_reference_id=str(user.id),
+                allow_promotion_codes=True,
             )
             return Response({"checkout_url": checkout_session.url})
         except Exception as e:
