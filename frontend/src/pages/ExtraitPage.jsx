@@ -87,7 +87,7 @@ function ExtraitPage() {
             {/* Copyright */}
             <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center space-y-2">
               <p className="font-SF text-xs text-gray-600 dark:text-gray-400">
-                © 2025 Éditions Œuvres — Symbiose Audiovisuelle — Tous droits réservés.
+                © 2025 Editions Oeuvres — Symbiose Audiovisuelle — Tous droits réservés.
               </p>
               <a 
                 href="https://www.eo.symbiose-audiovisuelle.fr/"
@@ -95,7 +95,7 @@ function ExtraitPage() {
                 rel="noopener noreferrer"
                 className="font-SF text-xs text-yellow-600 dark:text-yellow-400 hover:underline"
               >
-                Éditions Œuvres — https://www.eo.symbiose-audiovisuelle.fr/
+                Editions Oeuvres — https://www.eo.symbiose-audiovisuelle.fr/
               </a>
             </div>
           </div>
