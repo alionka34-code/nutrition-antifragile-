@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import livre from '../assets/images/livre.png';
 
 function ExtraitPage() {
   return (
@@ -54,6 +55,9 @@ function ExtraitPage() {
               <p className="font-SF text-center text-gray-600 dark:text-gray-400 text-sm">
                 ……….Fin de l'extrait
               </p>
+            </div>
+            <div>
+            <img src={livre} alt="Livre Nutrition Antifragile" className="w-80 md:w-100 h-auto shadow-xl/50 mx-auto md:block" />
             </div>
           </article>
 
