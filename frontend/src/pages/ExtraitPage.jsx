@@ -78,6 +78,7 @@ function ExtraitPage() {
                 Cliquez-ici
               </a>
             </div>
+            </div>
         </section>
       </main>
     </>
