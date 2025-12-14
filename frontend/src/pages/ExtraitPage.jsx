@@ -60,7 +60,7 @@ function ExtraitPage() {
           {/* Publication Info */}
           <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 space-y-4">
             <p className="font-SF text-sm text-gray-700 dark:text-gray-300">
-              © 2025 Editions Oeuvres — Symbiose Audiovisuelle — Tous droits réservés.<br />Editions Oeuvres — https://www.eo.symbiose-audiovisuelle.fr/
+              © 2025 Editions Oeuvres — Symbiose Audiovisuelle — Tous droits réservés.<br />Editions Oeuvres — https://www.eo.symbiose-audiovisuelle.fr
             </p>
           
 
