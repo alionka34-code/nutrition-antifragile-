@@ -60,14 +60,9 @@ function ExtraitPage() {
           {/* Publication Info */}
           <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 space-y-4">
             <p className="font-SF text-sm text-gray-700 dark:text-gray-300">
-              Publication en ligne sur le site de :
+              © 2025 Editions Oeuvres — Symbiose Audiovisuelle — Tous droits réservés.<br />Editions Oeuvres — https://www.eo.symbiose-audiovisuelle.fr/
             </p>
-            <p className="font-SF text-lg font-bold text-gray-900 dark:text-white">
-              ALIONKA HOUL – NOURRIR AVEC L'INSTINCT
-            </p>
-            <p className="font-SF text-sm text-gray-600 dark:text-gray-400">
-              ISSN 3098-7113
-            </p>
+          
 
             {/* CTA */}
             <div className="mt-8 p-6 bg-yellow-50 dark:bg-gray-800 rounded-lg border border-yellow-200 dark:border-gray-700">
@@ -83,22 +78,6 @@ function ExtraitPage() {
                 Cliquez-ici
               </a>
             </div>
-
-            {/* Copyright */}
-            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center space-y-2">
-              <p className="font-SF text-xs text-gray-600 dark:text-gray-400">
-                © 2025 Editions Oeuvres — Symbiose Audiovisuelle — Tous droits réservés.
-              </p>
-              <a 
-                href="https://www.eo.symbiose-audiovisuelle.fr/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-SF text-xs text-yellow-600 dark:text-yellow-400 hover:underline"
-              >
-                Editions Oeuvres — https://www.eo.symbiose-audiovisuelle.fr/
-              </a>
-            </div>
-          </div>
         </section>
       </main>
     </>
