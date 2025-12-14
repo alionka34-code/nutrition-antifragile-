@@ -51,13 +51,14 @@ function ExtraitPage() {
               Quel en est l'impact ? Un futur adulte moins éveillé, moins apte à comprendre les enjeux sociaux, environnementaux et politiques qui façonnent son monde. Un citoyen plus facilement manipulable, qui confond confort immédiat et véritable liberté. Un individu qui consomme sans questionner, obéit sans résister, et s'éloigne peu à peu de toute pensée critique. Ce manque de clarté mentale découle directement d'une alimentation déséquilibrée, saturée de calories vides. Ces calories remplissent l'estomac, mais sont dépourvues des nutriments essentiels nécessaires à un équilibre physique et mental optimal. <span className="text-2xl text-yellow-600 dark:text-yellow-400 font-bold">(…)</span>
             </p>
 
+            <div>
+            <img src={livre} alt="Livre Nutrition Antifragile" className="w-80 md:w-100 h-auto shadow-xl/50 mx-auto md:block" />
+            </div>
+
             <div className="py-4">
               <p className="font-SF text-center text-gray-600 dark:text-gray-400 text-sm">
                 ……….Fin de l'extrait
               </p>
-            </div>
-            <div>
-            <img src={livre} alt="Livre Nutrition Antifragile" className="w-80 md:w-100 h-auto shadow-xl/50 mx-auto md:block" />
             </div>
           </article>
 
