@@ -52,7 +52,7 @@ function ExtraitPage() {
             </p>
 
             <div>
-            <img src={livre} alt="Livre Nutrition Antifragile" className="w-80 md:w-100 h-auto shadow-xl/50 mx-auto md:block" />
+            <img src={livre} alt="Livre Nutrition Antifragile" className="w-72 md:w-80 h-auto shadow-xl/50 mx-auto md:block" />
             </div>
 
             <div className="py-4">
