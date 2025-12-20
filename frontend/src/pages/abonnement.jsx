@@ -21,7 +21,7 @@ import avis12 from  '../assets/images/avis12.jpg'
 import avis13 from  '../assets/images/avis13.jpg'
 import avis14 from  '../assets/images/avis14.jpg'
 import avis15 from  '../assets/images/avis15.jpg'
-import Countdown from '../components/countdown';
+
 
   
 
@@ -129,15 +129,15 @@ function Abonnement() {
                           </span>
                         )}
                         <div className="relative bottom-7">
-                        <span className="font-SFBold text-white border-2 rounded-2xl py-1 px-4 bg-red-400 animate-pulse" >OFFRE BLACK FRIDAY</span>
+                        <span className="font-SFBold text-white border-2 rounded-2xl py-1 px-4 bg-red-400 animate-pulse" >OFFRE POPULAIRE</span>
                     </div>
                     <h4 className="font-SFBold text-2xl  dark:text-white">Abonnement annuel</h4>
                     <h5 className="font-SFBold text-2xl text-marron my-2">
                         100€<span className="text-xl font-SF text-gray-500">/an</span>
                         </h5>
                     
-                    <div className="font-SF md:text-lg text-marron border-2 rounded-4xl py-1 px-2 md:w-70">-30% avec code ANTIFRAGILE</div>
-                    <Countdown />
+                    <div className="font-SF md:text-lg text-marron border-2 rounded-4xl py-1 px-2 md:w-70">Economisez 2 mois d'abonnement</div>
+                    
                 </div>
                 </label>
             </div>
