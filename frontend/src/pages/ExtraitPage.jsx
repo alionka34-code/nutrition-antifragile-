@@ -64,9 +64,19 @@ function ExtraitPage() {
 
           {/* Publication Info */}
           <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 space-y-4">
-            <p className="font-SF text-sm text-gray-700 dark:text-gray-300">
-              © 2025 Editions Oeuvres — Symbiose Audiovisuelle — Tous droits réservés.<br />Editions Oeuvres — https://www.eo.symbiose-audiovisuelle.fr
-            </p>
+           <p className="font-SF text-sm text-gray-700 dark:text-gray-300">
+  © 2025 Editions Oeuvres — Symbiose Audiovisuelle — Tous droits réservés.
+  <br />
+  Editions Oeuvres —{" "}
+  <a
+    href="https://www.eo.symbiose-audiovisuelle.fr"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="underline hover:text-gray-900 dark:hover:text-gray-100"
+  >
+    https://www.eo.symbiose-audiovisuelle.fr
+  </a>
+</p>
           
 
             {/* CTA */}
