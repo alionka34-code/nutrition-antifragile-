@@ -167,7 +167,7 @@ function Navbar() {
             <Link to="/" onClick={toggleMenu}>Accueil</Link>
           </li>
           <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
-            <Link to="/articles" onClick={toggleMenu}>Articles</Link>
+            <Link to="/articles" onClick={toggleMenu}>Analyses</Link>
           </li>
           <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/abonnement" onClick={toggleMenu}>Abonnement</Link>
