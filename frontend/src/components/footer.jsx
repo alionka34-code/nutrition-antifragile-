@@ -7,7 +7,7 @@ function Footer() {
     <footer className="bg-black py-6 mt-20">
 
       <div className="px-4 text-center">
-        <p className="text-white font-SF text-lg"> Site crée par Nozomi — © 2025 Alionka HOUL - Tous droits réservés</p>
+        <p className="text-white font-SF text-lg"> Site crée par Nozomi — © 2025-2026 Alionka HOUL - Tous droits réservés</p>
        
         <div className="mt-4">
           <Link to="/mentions-legales" className="text-gray-600  dark:text-white hover:text-yellow-600 font-SF text-lg">Mentions légales</Link>
