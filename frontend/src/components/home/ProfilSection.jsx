@@ -16,7 +16,7 @@ function ProfilSection() {
                 <div className="text-center mt-8 mx-4 md:mt-10  md:max-w-xl ">
                 <img src= {alionka} alt="Alionka Houl" className="mx-auto h-auto mt-4 md:w-full shadow-xl/50 rounded-4xl"/>
                 <h3 className="font-SFBold mt-4 text-marron text-xl md:text-2xl">Alionka</h3>
-                <p className="p-4 font-SF text-lg md:text-xl border-l-4 border-marron rounded-4xl shadow-lg  dark:text-white">Auteure & Conférencière</p>
+                <p className="p-4 font-SF text-lg md:text-xl border-l-4 border-marron rounded-4xl shadow-lg  dark:text-white">Nutritionniste & Auteure</p>
                 </div>
                 <div className='max-w-2xl mx-4 mt-8'>
                     <p className="text-center font-SFBoltItalic text-xl mt-4 mx-4 md:text-2xl border-b-2 border-marron  dark:text-white">J'ai quitté les laboratoires de l'agro-industrie pour réapprendre à me nourrir comme un être humain.</p>
