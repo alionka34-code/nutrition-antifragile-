@@ -1,21 +1,12 @@
-const API_URL = import.meta.env.VITE_API_URL || 'https://web-production-a7977.up.railway.app/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
-async function parseJsonOrThrow(res) {
-  const contentType = res.headers.get('content-type') || '';
-  if (!contentType.includes('application/json')) {
-    const body = await res.text();
-    const snippet = body ? body.slice(0, 200).replace(/\s+/g, ' ') : '';
-    throw new Error(`Expected JSON response but got "${contentType}". Response starts with: ${snippet}`);
-  }
-  return res.json();
-}
 
 export async function fetchCombinedContent() {
   const res = await fetch(`${API_URL}/content/`);
   if (!res.ok) {
     throw new Error(`Erreur ${res.status}`);
   }
-  return await parseJsonOrThrow(res);
+  return await res.json();
 }
 
 export async function fetchArticles() {
@@ -23,7 +14,7 @@ export async function fetchArticles() {
   if (!res.ok) {
     throw new Error(`Erreur ${res.status}`);
   }
-  return await parseJsonOrThrow(res);
+  return await res.json();
 }
 
 export async function fetchVideos() {
@@ -31,7 +22,7 @@ export async function fetchVideos() {
   if (!res.ok) {
     throw new Error(`Erreur lors du chargement des videos ${res.status}`);
   }
-  return await parseJsonOrThrow(res);
+  return await res.json();
 }
 
 export async function fetchArticleDetail(slug, token = null) {
@@ -45,7 +36,8 @@ export async function fetchArticleDetail(slug, token = null) {
   if (!response.ok) {
     throw new Error("Article non trouvé");
   }
-  return await parseJsonOrThrow(response);
+
+  return await response.json();
 }
 
 export async function fetchVideoDetail(slug, token = null) {
@@ -59,7 +51,7 @@ export async function fetchVideoDetail(slug, token = null) {
   if (!response.ok) {
     throw new Error("Vidéo non trouvée");
   }
-  return await parseJsonOrThrow(response);
+  return await response.json();
   
 }
 
@@ -67,7 +59,7 @@ export async function fetchComments(articleId) {
   try {
     const res = await fetch(`${API_URL}/articles/${articleId}/comments/`);
     if (!res.ok) throw new Error("Erreur lors du chargement des commentaires");
-    return await parseJsonOrThrow(res);
+    return await res.json();
   } catch (err) {
     console.error(err);
     return [];
@@ -86,7 +78,7 @@ export async function postComment(articleId, content, token) {
       body: JSON.stringify({ content, article: articleId }),
     });
     if (!res.ok) throw new Error("Erreur lors de l’envoi du commentaire");
-    return await parseJsonOrThrow(res);
+    return await res.json();
   } catch (err) {
     console.error(err);
     return null;
@@ -105,7 +97,7 @@ export async function postReply(articleId, parentCommentId, content, token) {
       body: JSON.stringify({ content, article: articleId, parent_comment: parentCommentId }),
     });
     if (!res.ok) throw new Error("Erreur lors de l'envoi de la réponse");
-    return await parseJsonOrThrow(res);
+    return await res.json();
   } catch (err) {
     console.error(err);
     return null;
@@ -142,7 +134,7 @@ export async function createCheckoutSession(plan, token) {
         throw new Error(`Erreur ${res.status} : ${res.statusText}`);
     }
 
-    return await parseJsonOrThrow(res);
+    return res.json();
 }
 
 // =============================
@@ -152,7 +144,7 @@ export async function fetchVideoComments(videoId) {
   try {
     const res = await fetch(`${API_URL}/videos/${videoId}/comments/`);
     if (!res.ok) throw new Error("Erreur lors du chargement des commentaires");
-    return await parseJsonOrThrow(res);
+    return await res.json();
   } catch (err) {
     console.error(err);
     return [];
@@ -160,7 +152,7 @@ export async function fetchVideoComments(videoId) {
 }
 
 export async function postVideoComment(videoId, content, token) {
-    try {
+  try {
     const res = await fetch(`${API_URL}/videos/${videoId}/comments/`, {
       method: "POST",
       headers: {
@@ -170,7 +162,7 @@ export async function postVideoComment(videoId, content, token) {
       body: JSON.stringify({ content, video: videoId }),
     });
     if (!res.ok) throw new Error("Erreur lors de l'envoi du commentaire");
-    return await parseJsonOrThrow(res);
+    return await res.json();
   } catch (err) {
     console.error(err);
     return null;
@@ -178,7 +170,7 @@ export async function postVideoComment(videoId, content, token) {
 }
 
 export async function postVideoReply(videoId, parentCommentId, content, token) {
-    try {
+  try {
     const res = await fetch(`${API_URL}/videos/${videoId}/comments/${parentCommentId}/reply/`, {
       method: "POST",
       headers: {
@@ -188,7 +180,7 @@ export async function postVideoReply(videoId, parentCommentId, content, token) {
       body: JSON.stringify({ content }),
     });
     if (!res.ok) throw new Error("Erreur lors de l'envoi de la réponse");
-    return await parseJsonOrThrow(res);
+    return await res.json();
   } catch (err) {
     console.error(err);
     return null;
@@ -196,7 +188,7 @@ export async function postVideoReply(videoId, parentCommentId, content, token) {
 }
 
 export async function deleteVideoComment(commentId, token) {
-    try {
+  try {
     const res = await fetch(`${API_URL}/video-comments/${commentId}/delete/`, {
       method: "DELETE",
       headers: {
