@@ -1,9 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL || 'https://web-production-a7977.up.railway.app/api';
 
-
-
 export async function fetchCombinedContent() {
-  const res = await fetch(`${API_URL}/content/`);
+  const res = await fetch(`${API_URL}/content`);
   if (!res.ok) {
     throw new Error(`Erreur ${res.status}`);
   }
@@ -11,7 +9,7 @@ export async function fetchCombinedContent() {
 }
 
 export async function fetchArticles() {
-  const res = await fetch(`${API_URL}/articles/`);
+  const res = await fetch(`${API_URL}/articles`);
   if (!res.ok) {
     throw new Error(`Erreur ${res.status}`);
   }
@@ -19,7 +17,7 @@ export async function fetchArticles() {
 }
 
 export async function fetchVideos() {
-  const res = await fetch(`${API_URL}/videos/`);
+  const res = await fetch(`${API_URL}/videos`);
   if (!res.ok) {
     throw new Error(`Erreur lors du chargement des videos ${res.status}`);
   }
@@ -27,7 +25,7 @@ export async function fetchVideos() {
 }
 
 export async function fetchArticleDetail(slug, token = null) {
-  const response = await fetch(`${API_URL}/articles/${slug}/`, {
+  const response = await fetch(`${API_URL}/articles/${slug}`, {
     headers: {
       "Content-Type": "application/json",
       ...(token && { Authorization: `Bearer ${token}` }),
@@ -42,7 +40,7 @@ export async function fetchArticleDetail(slug, token = null) {
 }
 
 export async function fetchVideoDetail(slug, token = null) {
-  const response = await fetch(`${API_URL}/video/${slug}/`, {
+  const response = await fetch(`${API_URL}/video/${slug}`, {
     headers: {
       "Content-Type": "application/json",
       ...(token && { Authorization: `Bearer ${token}` }),
@@ -58,7 +56,7 @@ export async function fetchVideoDetail(slug, token = null) {
 
 export async function fetchComments(articleId) {
   try {
-    const res = await fetch(`${API_URL}/articles/${articleId}/comments/`);
+    const res = await fetch(`${API_URL}/articles/${articleId}/comments`);
     if (!res.ok) throw new Error("Erreur lors du chargement des commentaires");
     return await res.json();
   } catch (err) {
@@ -70,7 +68,7 @@ export async function fetchComments(articleId) {
 // Poster un commentaire
 export async function postComment(articleId, content, token) {
   try {
-    const res = await fetch(`${API_URL}/articles/${articleId}/comments/`, {
+    const res = await fetch(`${API_URL}/articles/${articleId}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +76,7 @@ export async function postComment(articleId, content, token) {
       },
       body: JSON.stringify({ content, article: articleId }),
     });
-    if (!res.ok) throw new Error("Erreur lors de l’envoi du commentaire");
+    if (!res.ok) throw new Error("Erreur lors de l'envoi du commentaire");
     return await res.json();
   } catch (err) {
     console.error(err);
@@ -89,7 +87,7 @@ export async function postComment(articleId, content, token) {
 // Ajouter: Poster une réponse à un commentaire (admins et utilisateurs inscrits)
 export async function postReply(articleId, parentCommentId, content, token) {
   try {
-    const res = await fetch(`${API_URL}/articles/${articleId}/comments/${parentCommentId}/reply/`, {
+    const res = await fetch(`${API_URL}/articles/${articleId}/comments/${parentCommentId}/reply`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +106,7 @@ export async function postReply(articleId, parentCommentId, content, token) {
 // Supprimer un commentaire
 export async function deleteComment(commentId, token) {
   try {
-    const res = await fetch(`${API_URL}/comments/${commentId}/delete/`, {
+    const res = await fetch(`${API_URL}/comments/${commentId}/delete`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -122,7 +120,7 @@ export async function deleteComment(commentId, token) {
 }
 
 export async function createCheckoutSession(plan, token) {
-    const res = await fetch(`${API_URL}/create-checkout-session/`, {
+    const res = await fetch(`${API_URL}/create-checkout-session`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -143,7 +141,7 @@ export async function createCheckoutSession(plan, token) {
 // =============================
 export async function fetchVideoComments(videoId) {
   try {
-    const res = await fetch(`${API_URL}/videos/${videoId}/comments/`);
+    const res = await fetch(`${API_URL}/videos/${videoId}/comments`);
     if (!res.ok) throw new Error("Erreur lors du chargement des commentaires");
     return await res.json();
   } catch (err) {
@@ -154,7 +152,7 @@ export async function fetchVideoComments(videoId) {
 
 export async function postVideoComment(videoId, content, token) {
   try {
-    const res = await fetch(`${API_URL}/videos/${videoId}/comments/`, {
+    const res = await fetch(`${API_URL}/videos/${videoId}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -172,7 +170,7 @@ export async function postVideoComment(videoId, content, token) {
 
 export async function postVideoReply(videoId, parentCommentId, content, token) {
   try {
-    const res = await fetch(`${API_URL}/videos/${videoId}/comments/${parentCommentId}/reply/`, {
+    const res = await fetch(`${API_URL}/videos/${videoId}/comments/${parentCommentId}/reply`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -190,7 +188,7 @@ export async function postVideoReply(videoId, parentCommentId, content, token) {
 
 export async function deleteVideoComment(commentId, token) {
   try {
-    const res = await fetch(`${API_URL}/video-comments/${commentId}/delete/`, {
+    const res = await fetch(`${API_URL}/video-comments/${commentId}/delete`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -204,4 +202,3 @@ export async function deleteVideoComment(commentId, token) {
 }
 
 export default API_URL
-
