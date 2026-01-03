@@ -10,19 +10,12 @@ import cloudinary.api
 
 load_dotenv()
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dev-key')
-
-# ⚡ DEBUG en prod doit être False
-DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() == 'true'
-
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '.railway.app',  # tout sous-domaine Railway
-    'alionka-houl.eo.symbiose-audiovisuelle.fr'
-]
+DEBUG = True
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-production-a7977.up.railway.app', 'alionka-houl.eo.symbiose-audiovisuelle.fr']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,7 +34,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     'blog',
-    'import_export',
+    'import_export'  
 ]
 
 MIDDLEWARE = [
@@ -56,16 +49,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS
 CORS_ALLOWED_ORIGINS = [
     "https://alionka-houl.eo.symbiose-audiovisuelle.fr",
     "http://localhost:3000",
-    "http://localhost:5173",
+    "http://localhost:5173",  # Vite dev server
+    "http://localhost:5174",  # Vite dev server alt
+    "http://localhost:5175",  # Vite dev server alt 2
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
+    "http://127.0.0.1:5175",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
+# Headers autorisés pour vos requêtes
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -78,6 +75,7 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
+# Méthodes HTTP autorisées
 CORS_ALLOWED_METHODS = [
     'DELETE',
     'GET',
@@ -89,11 +87,10 @@ CORS_ALLOWED_METHODS = [
 
 ROOT_URLCONF = 'backend.urls'
 
-# Templates pour React build
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'frontend' / 'build'],  # <-- ton build React
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,7 +104,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-# Database
 if os.getenv('DATABASE_URL'):
     DATABASES = {
         'default': dj_database_url.config(
@@ -127,7 +123,6 @@ else:
 logger = logging.getLogger(__name__)
 logger.warning(f"Database config: {DATABASES}")
 
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -135,25 +130,22 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
 LANGUAGE_CODE = 'fr-FR'
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (React build)
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'frontend' / 'build' / 'static',
-]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Media & Cloudinary
+# ==== CLOUDINARY ====
+
 cloudinary.config(secure=True)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# CKEditor
+# Config manuelle pour cloudinary.uploader
+
+# CKEditor : utiliser Cloudinary pour les images
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
@@ -161,11 +153,14 @@ CKEDITOR_CONFIGS = {
         'height': 1000,
         'width': '150%',
         'extraPlugins': ','.join(['uploadimage']),
-        'filebrowserUploadUrl': '/api/ckeditor/upload/',
+        'filebrowserUploadUrl': '/api/upload-image/',
+          # utilise notre route
+# ou autre skin
+
+      
     },
 }
 
-# REST Framework + JWT
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -179,36 +174,44 @@ SIMPLE_JWT = {
     'TOKEN_OBTAIN_SERIALIZER': 'blog.serializers.CustomTokenObtainPairSerializer',
 }
 
-# CSRF
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-a7977.up.railway.app",
     "https://alionka-houl.eo.symbiose-audiovisuelle.fr",
 ]
 
-# Stripe
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
-# Brevo / Sendinblue
-BREVO_API_KEY = os.getenv('BREVO_API_KEY', '').strip().lstrip('= ')
+# Brevo (Sendinblue) API key, safe getter and small cleanup to avoid AttributeError
+_raw_brevo = os.getenv('BREVO_API_KEY')
+BREVO_API_KEY = (_raw_brevo.strip().lstrip('= ') if isinstance(_raw_brevo, str) else None)
 
-# Bunny video
+# Bunny.net security key for video tokens
 BUNNY_SECURITY_KEY = os.getenv('BUNNY_SECURITY_KEY', 'bunny-video-security-key-2024')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 
-# Frontend URL pour fetch
+# Configuration du site pour les sitemaps
+SITE_ID = 1
+
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173/")
 
-# Email (Gmail)
+
+# Configuration email Gmail (plus fiable que OVH)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = os.getenv('GMAIL_EMAIL')
-EMAIL_HOST_PASSWORD = os.getenv('GMAIL_APP_PASSWORD')
-DEFAULT_FROM_EMAIL = 'alionka@symbiose-audiovisuelle.fr'
+EMAIL_HOST_USER = os.getenv('GMAIL_EMAIL')  # Votre email Gmail
+EMAIL_HOST_PASSWORD = os.getenv('GMAIL_APP_PASSWORD')  # Mot de passe d'application Gmail
+DEFAULT_FROM_EMAIL = 'alionka@symbiose-audiovisuelle.fr'  # Email expéditeur Brevo
+
+# Pour debug : afficher aussi dans la console en mode développement
+if DEBUG:
+    import logging
+    logging.basicConfig(level=logging.INFO)
+
