@@ -79,7 +79,7 @@ function Articles() {
     {/* Section Articles */}
     <div className="mx-4 md:mx-20 py-10">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-SFBold text-marron">Articles</h2>
+        <h2 className="text-3xl font-SFBold text-marron">Analyses</h2>
         <div className="flex gap-2">
           <button 
             onClick={prevArticles}
