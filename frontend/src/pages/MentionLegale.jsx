@@ -28,7 +28,7 @@ function MentionLegale() {
             <p className="font-SF mb-4"> Suthany HOUL (diffusion, gestion ou la conformité légale)</p>
             <h1 className="text-2xl font-SFBold mb-4 ">Status de référence</h1>
             <p className="font-SF mb-4">Les statuts applicables sont ceux de l’association Symbiose Audiovisuelle.</p>
-            <p className="font-SF mb-2">👉 Ils sont consultables sur le site officiel de Symbiose Audiovisuelle</p>
+            <p className="font-SF mb-2">👉 Ils sont consultables sur le site officiel de <a href= "https://www.symbiose-audiovisuelle.fr/mentions-l%C3%A9gales" className="text-blue-400">Symbiose Audiovisuelle</a></p>
             <h1 className="text-2xl font-SFBold mb-4">Gestion, diffusion et distribution</h1>
             <p className="font-SF mb-4">La gestion administrative, la diffusion et la distribution des œuvres de l’auteure sont assurées, sous mandat exclusif, par Editions Oeuvres — Symbiose Audiovisuelle, dans le cadre de ses statuts et de ses accords de gestion des droits d’auteur.<br/><br/>
             Ce mandat exclusif n’emporte aucune cession de droits : l’auteure demeure seule titulaire et responsable de ses créations et de ses droits.</p>
