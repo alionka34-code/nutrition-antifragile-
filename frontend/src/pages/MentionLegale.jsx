@@ -27,12 +27,8 @@ function MentionLegale() {
            <h1 className="text-2xl font-SFBold mb-4 ">Directrice de la publication</h1>
             <p className="font-SF mb-4"> Suthany HOUL (diffusion, gestion ou la conformité légale)</p>
             <h1 className="text-2xl font-SFBold mb-4 ">Status de référence</h1>
-            <p className="font-SF mb-4">Conformément aux dispositions légales et statutaires applicables, l’association Symbiose Audiovisuelle précise que :</p>
-            <li className="font-SF mb-2">Les seuls statuts opposables sont ceux adoptés par l’Assemblée Générale du 19 septembre 2025.</li>
-            <li className="font-SF mb-2">Toute version antérieure est réputée caduque, non opposable et sans effet juridique, et doit être retirée de toute publication ou diffusion en ligne par les tiers qui en auraient la charge.</li>
-            <li className="font-SF mb-2">En cas de non-respect de cette règle statutaire, toute utilisation de versions obsolètes sera considérée comme non conforme aux statuts en vigueur et pourra engager la responsabilité de leur diffuseur.</li>
-            <h1 className="text-2xl font-SFBold mb-4 ">Propriété intellectuelle</h1>
-            <p className="font-SF mb-4">L’ensemble des contenus de ce site (textes, images, vidéos, extraits d’œuvres, publications) relève de la propriété exclusive de l’auteure, sauf mention contraire.<br/> Toute reproduction, représentation, adaptation ou diffusion, intégrale ou partielle, sans autorisation écrite préalable, est interdite conformément aux articles L.111-1 et s. du Code de la propriété intellectuelle.</p>
+            <p className="font-SF mb-4">Les statuts applicables sont ceux de l’association Symbiose Audiovisuelle.</p>
+            <p className="font-SF mb-2">👉 Ils sont consultables sur le site officiel de Symbiose Audiovisuelle</p>
             <h1 className="text-2xl font-SFBold mb-4">Gestion, diffusion et distribution</h1>
             <p className="font-SF mb-4">La gestion administrative, la diffusion et la distribution des œuvres de l’auteure sont assurées, sous mandat exclusif, par Editions Oeuvres — Symbiose Audiovisuelle, dans le cadre de ses statuts et de ses accords de gestion des droits d’auteur.<br/><br/>
             Ce mandat exclusif n’emporte aucune cession de droits : l’auteure demeure seule titulaire et responsable de ses créations et de ses droits.</p>
