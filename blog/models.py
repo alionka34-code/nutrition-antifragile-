@@ -114,3 +114,53 @@ class VideoComment(models.Model):
 
     def __str__(self):
         return f"Commentaire de {self.user.username} sur {self.video.title}"
+
+
+class Theme(models.Model):
+    title = models.CharField(max_length=255)
+    description = RichTextUploadingField(help_text="Description du thème", blank=True, null=True)
+    image = CloudinaryField('image', null=True, blank=True)
+    duration = models.PositiveIntegerField(default=0, help_text="Durée en minutes")
+    slug = models.SlugField(max_length=201, unique=True, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        # Normaliser/valider le slug fourni ou générer à partir du titre
+        if self.slug:
+            candidate = slugify(self.slug)[:200]
+        elif self.title:
+            candidate = slugify(self.title)[:200]
+        else:
+            candidate = None
+
+        if candidate:
+            slug_base = candidate
+            slug = slug_base
+            counter = 1
+            # Exclure l'instance courante lors de la vérification d'unicité
+            while Theme.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                # Réduire slug_base si nécessaire pour ajouter le suffixe
+                max_base_len = 200 - (len(str(counter)) + 1)
+                slug = f"{slug_base[:max_base_len]}-{counter}"
+                counter += 1
+            self.slug = slug
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+    
+class Chapter(models.Model):
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='chapters')
+    title = models.CharField(max_length=255)
+    content = RichTextUploadingField(help_text="Contenu du chapitre")
+    video = models.ForeignKey(Video, on_delete=models.SET_NULL, null=True, blank=True, help_text="Vidéo associée au chapitre")
+    order = models.PositiveIntegerField(help_text="Ordre du chapitre dans le thème")
+
+    class Meta:
+        unique_together = ('theme', 'order')
+        ordering = ['order']
+
+    def __str__(self):
+        return f"{self.title} (Thème: {self.theme.title})"

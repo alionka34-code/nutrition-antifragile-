@@ -24,6 +24,14 @@ export async function fetchVideos() {
   return await res.json();
 }
 
+export async function fetchThemes() {
+  const res = await fetch(`${API_URL}/themes/`);
+  if (!res.ok) {
+    throw new Error(`Erreur ${res.status}`);
+  }
+  return await res.json();
+}
+
 export async function fetchArticleDetail(slug, token = null) {
   const response = await fetch(`${API_URL}/articles/${slug}/`, {
     headers: {

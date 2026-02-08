@@ -17,6 +17,8 @@ import PasswordLost from './pages/PasswordLost.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
 import MentionLegale  from './pages/MentionLegale.jsx';
 import ExtraitPage from './pages/ExtraitPage.jsx';
+import DashboardAdmin from './pages/DashboardAdmin.jsx';
+import Themes from './pages/Themes.jsx';
 import CGV from './pages/CGV.jsx';
 import CGU from './pages/CGU.jsx';
 import RGPD from './pages/RGPD.jsx';
@@ -48,6 +50,9 @@ function App() {
               <Route path="/cgv" element={<CGV />} />
               <Route path="/cgu" element={<CGU />} />
               <Route path="/rgpd" element={<RGPD />} />
+              <Route path="/dashboard" element={<DashboardAdmin />} />
+              <Route path="/themes" element={<Themes />} /> 
+              
               
             </Routes>
           </div>

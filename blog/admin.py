@@ -3,6 +3,7 @@ from .models import Article
 from .models import Profile
 from .models import StripeWebhookLog
 from .models import Video
+from .models import Chapter, Theme
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from import_export import resources
@@ -36,6 +37,19 @@ class VideoAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_premium', 'bunny_id', 'published_at')
     list_filter = ('is_premium', 'published_at')
     search_fields = ('title', 'bunny_id')
+
+@admin.register(Theme)
+class ThemeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'duration', 'slug', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('title', 'slug')
+    readonly_fields = ('slug', 'created_at', 'updated_at')
+
+@admin.register(Chapter)
+class ChapterAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'theme', 'video', 'order')
+    list_filter = ('theme',)
+    search_fields = ('title',)
     
 
 class ProfileInline(admin.StackedInline):

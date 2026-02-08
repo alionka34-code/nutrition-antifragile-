@@ -3,7 +3,7 @@ from .models import Article
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Comment, Video, VideoComment
+from .models import Comment, Video, VideoComment, Theme, Chapter
 
 class ArticleSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField()
@@ -208,3 +208,30 @@ class VideoCommentSerializer(serializers.ModelSerializer):
         if obj.replies.exists():
             return VideoCommentSerializer(obj.replies.all(), many=True).data
         return []
+
+class ThemeSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Theme
+        fields = ['id', 'title', 'description', 'image', 'image_url', 'duration', 'slug', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at', 'slug']
+
+    def get_image_url(self, obj):
+        if obj.image:
+            return obj.image.url
+        return None
+
+class ChapterSerializer(serializers.ModelSerializer):
+    video_bunny = serializers.CharField(source='video.bunny_id', read_only=True)
+
+    class Meta:
+        model = Chapter
+        fields = ['id', 'theme', 'title', 'content', 'video', 'video_bunny', 'order']
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        # Include video details if available
+        if instance.video:
+            ret['video_title'] = instance.video.title
+        return ret

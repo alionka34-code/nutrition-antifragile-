@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from .views import ArticleList, RegisterView
 from .views import CreateSubscriptionView
 from .views import CreateCheckoutSession
@@ -21,10 +22,19 @@ from .views import VerifyCheckoutSessionView
 from .views import VideoListView, VideoDetailView
 from .views import VideoCommentListCreateView, VideoCommentReplyCreateView, VideoCommentDeleteView
 from .views import combined_content_list
+from .views import ThemeViewSet, ChapterViewSet
+
+# Router for ViewSets
+router = DefaultRouter()
+router.register(r'themes', ThemeViewSet, basename='theme')
+router.register(r'chapters', ChapterViewSet, basename='chapter')
 
 
 
 urlpatterns = [
+    # Include router URLs
+    path('', include(router.urls)),
+
     path('content/', combined_content_list, name='combined-content-list'),
     path('articles/', ArticleList.as_view(), name='article-list'),
     path('register/', RegisterView.as_view(), name='register'),

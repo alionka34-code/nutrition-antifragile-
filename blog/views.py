@@ -22,7 +22,7 @@ except ImportError:
     print("⚠️ Warning: sib_api_v3_sdk not available in views.py")
     BREVO_SDK_AVAILABLE = False
 
-from rest_framework import generics, permissions, status
+from rest_framework import generics, permissions, status, viewsets
 from rest_framework.decorators import api_view, permission_classes
 
 from rest_framework.generics import RetrieveAPIView
@@ -41,7 +41,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 
-from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment
+from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment, Theme, Chapter
 from .serializers import (
     ArticleSerializer,
     CommentSerializer,
@@ -49,6 +49,8 @@ from .serializers import (
     CustomTokenObtainPairSerializer,
     VideoSerializer,
     VideoCommentSerializer,
+    ThemeSerializer,
+    ChapterSerializer,
 )
 
 logger = logging.getLogger(__name__)
@@ -1020,5 +1022,30 @@ def validate_video_token(request):
         
     except Exception as e:
         logger.error(f"Error validating video token: {str(e)}")
-        return Response({'valid': False, 'error': 'Erreur de validation'}, 
+        return Response({'valid': False, 'error': 'Erreur de validation'},
                       status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+# =============================
+# Themes and Chapters ViewSets
+# =============================
+class ThemeViewSet(viewsets.ModelViewSet):
+    queryset = Theme.objects.all().order_by('-created_at')
+    serializer_class = ThemeSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_permissions(self):
+        """Only admins can create, update, or delete themes"""
+        if self.action in ['create', 'update', 'partial_update', 'destroy']:
+            return [IsAdminUser()]
+        return [AllowAny()]
+
+class ChapterViewSet(viewsets.ModelViewSet):
+    queryset = Chapter.objects.all().order_by('theme', 'order')
+    serializer_class = ChapterSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_permissions(self):
+        """Only admins can create, update, or delete chapters"""
+        if self.action in ['create', 'update', 'partial_update', 'destroy']:
+            return [IsAdminUser()]
+        return [AllowAny()]
