@@ -55,10 +55,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vite dev server
     "http://localhost:5174",  # Vite dev server alt
     "http://localhost:5175",  # Vite dev server alt 2
+    "http://localhost:5176",  # Vite dev server alt 3
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
     "http://127.0.0.1:5175",
+    "http://127.0.0.1:5176",
 ]
 CORS_ALLOW_CREDENTIALS = True
 

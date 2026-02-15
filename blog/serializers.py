@@ -3,7 +3,7 @@ from .models import Article
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Comment, Video, VideoComment, Theme, Chapter
+from .models import Comment, Video, VideoComment, Theme, Chapter, ChapterComment
 
 class ArticleSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField()
@@ -235,3 +235,22 @@ class ChapterSerializer(serializers.ModelSerializer):
         if instance.video:
             ret['video_title'] = instance.video.title
         return ret
+
+class ChapterCommentSerializer(serializers.ModelSerializer):
+    user_username = serializers.ReadOnlyField(source='user.username')
+    replies = serializers.SerializerMethodField()
+    parent_comment_username = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ChapterComment
+        fields = ['id', 'content', 'published_at', 'user_username', 'parent_comment', 'parent_comment_username', 'replies']
+
+    def get_replies(self, obj):
+        if obj.replies.exists():
+            return ChapterCommentSerializer(obj.replies.all(), many=True).data
+        return []
+
+    def get_parent_comment_username(self, obj):
+        if obj.parent_comment:
+            return obj.parent_comment.user.username
+        return None

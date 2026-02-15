@@ -41,7 +41,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 
-from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment, Theme, Chapter
+from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment, Theme, Chapter, ChapterComment
 from .serializers import (
     ArticleSerializer,
     CommentSerializer,
@@ -51,6 +51,7 @@ from .serializers import (
     VideoCommentSerializer,
     ThemeSerializer,
     ChapterSerializer,
+    ChapterCommentSerializer,
 )
 
 logger = logging.getLogger(__name__)
@@ -1033,6 +1034,17 @@ class ThemeViewSet(viewsets.ModelViewSet):
     serializer_class = ThemeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+    def get_object(self):
+        """Accepte l'ID numérique ou le slug dans l'URL"""
+        queryset = self.get_queryset()
+        lookup = self.kwargs.get('pk')
+        if str(lookup).isdigit():
+            obj = get_object_or_404(queryset, pk=lookup)
+        else:
+            obj = get_object_or_404(queryset, slug=lookup)
+        self.check_object_permissions(self.request, obj)
+        return obj
+
     def get_permissions(self):
         """Only admins can create, update, or delete themes"""
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
@@ -1040,12 +1052,60 @@ class ThemeViewSet(viewsets.ModelViewSet):
         return [AllowAny()]
 
 class ChapterViewSet(viewsets.ModelViewSet):
-    queryset = Chapter.objects.all().order_by('theme', 'order')
     serializer_class = ChapterSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        queryset = Chapter.objects.all().order_by('theme', 'order')
+        theme_id = self.request.query_params.get('theme')
+        if theme_id:
+            queryset = queryset.filter(theme_id=theme_id)
+        return queryset
 
     def get_permissions(self):
         """Only admins can create, update, or delete chapters"""
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             return [IsAdminUser()]
         return [AllowAny()]
+
+# =============================
+# Chapter Comments
+# =============================
+class ChapterCommentListCreateView(generics.ListCreateAPIView):
+    serializer_class = ChapterCommentSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        chapter_id = self.kwargs["chapter_id"]
+        return ChapterComment.objects.filter(
+            chapter_id=chapter_id, parent_comment__isnull=True
+        ).order_by("published_at")
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user, chapter_id=self.kwargs["chapter_id"])
+
+
+class ChapterCommentReplyCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, chapter_id, comment_id):
+        content = request.data.get("content")
+        if not content or not str(content).strip():
+            return Response({"detail": "Contenu requis"}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            parent = ChapterComment.objects.get(id=comment_id, chapter_id=chapter_id)
+        except ChapterComment.DoesNotExist:
+            return Response({"detail": "Commentaire parent introuvable"}, status=status.HTTP_404_NOT_FOUND)
+        reply = ChapterComment.objects.create(
+            chapter_id=chapter_id,
+            user=request.user,
+            content=content,
+            parent_comment=parent,
+        )
+        return Response(ChapterCommentSerializer(reply).data, status=status.HTTP_201_CREATED)
+
+
+class ChapterCommentDeleteView(generics.DestroyAPIView):
+    queryset = ChapterComment.objects.all()
+    serializer_class = ChapterCommentSerializer
+    permission_classes = [IsAdminUser]

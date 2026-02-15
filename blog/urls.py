@@ -23,6 +23,7 @@ from .views import VideoListView, VideoDetailView
 from .views import VideoCommentListCreateView, VideoCommentReplyCreateView, VideoCommentDeleteView
 from .views import combined_content_list
 from .views import ThemeViewSet, ChapterViewSet
+from .views import ChapterCommentListCreateView, ChapterCommentReplyCreateView, ChapterCommentDeleteView
 
 # Router for ViewSets
 router = DefaultRouter()
@@ -48,6 +49,11 @@ urlpatterns = [
     path('articles/<int:article_id>/comments/<int:comment_id>/reply/', CommentReplyCreateView.as_view(), name='comment-reply'),
     path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
     
+    # Chapter Comments
+    path('chapters/<int:chapter_id>/comments/', ChapterCommentListCreateView.as_view(), name='chapter-comment-list-create'),
+    path('chapters/<int:chapter_id>/comments/<int:comment_id>/reply/', ChapterCommentReplyCreateView.as_view(), name='chapter-comment-reply'),
+    path('chapter-comments/<int:pk>/delete/', ChapterCommentDeleteView.as_view(), name='chapter-comment-delete'),
+
     # Video Comments
     path('videos/<int:video_id>/comments/', VideoCommentListCreateView.as_view(), name='video-comment-list-create'),
     path('videos/<int:video_id>/comments/<int:comment_id>/reply/', VideoCommentReplyCreateView.as_view(), name='video-comment-reply'),

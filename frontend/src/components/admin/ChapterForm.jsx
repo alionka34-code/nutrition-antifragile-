@@ -19,6 +19,11 @@ export default function ChapterForm() {
   const [videos, setVideos] = useState([]);
   const [videoMap, setVideoMap] = useState({});
   const [localIsAdmin, setLocalIsAdmin] = useState(isAdmin || false);
+  const [expanded, setExpanded] = useState({});
+
+  function toggleExpanded(id) {
+    setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
+  }
 
   useEffect(() => {
     fetchThemes();
@@ -209,7 +214,14 @@ export default function ChapterForm() {
               <div className="font-semibold">{c.title}</div>
               <div className="text-sm text-gray-600">Thème: {themes.find((t) => t.id === c.theme)?.title || c.theme}</div>
               <div className="text-sm text-gray-600">Ordre: {c.order}</div>
-              <div className="mt-2 text-sm text-gray-700">{truncate(stripHtml(c.content), 200)}</div>
+              {expanded[c.id] ? (
+                <div className="mt-2 text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: c.content }} />
+              ) : (
+                <div className="mt-2 text-sm text-gray-700">{truncate(stripHtml(c.content), 200)}</div>
+              )}
+              <button type="button" onClick={() => toggleExpanded(c.id)} className="text-blue-600 text-sm mt-1">
+                {expanded[c.id] ? 'Voir moins' : 'Voir plus'}
+              </button>
                   <div className="mt-2 flex items-center gap-4">
                     {(() => {
                       // prefer video thumbnail from fetched videos

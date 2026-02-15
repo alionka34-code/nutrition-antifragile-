@@ -40,7 +40,7 @@ function Themes() {
             {themes.map((theme) => (
                 <Link
                     key={theme.id}
-                    to={`/themes/${theme.slug}`}
+                    to={`/themes/${theme.slug || theme.id}`}
                     className="bg-white shadow-lg rounded-4xl border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 h-full flex flex-col"
                 >
                     { (theme.image_url || theme.image) && (

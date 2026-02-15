@@ -10,6 +10,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import Articles from './pages/articles.jsx';
 import Landing from './pages/Landing.jsx';
 import ArticleDetail from './pages/articleDetail.jsx';
+import ThemeDetail from './pages/ThemesDetail.jsx';
 import VideoDetail from './pages/videoDetail.jsx';  
 import SubscriptionSuccess from './pages/SubscriptionSuccess';
 import SubscriptionCancel from './pages/SubscriptionCancel';
@@ -41,6 +42,7 @@ function App() {
               <Route path="/contact" element={<ContactForm />} />
               <Route path="/articles" element={<Articles />} />
               <Route path="/articles/:slug" element={<ArticleDetail />} />
+              <Route path="/themes/:slug" element={<ThemeDetail />} />
               <Route path="/videos/:slug" element={<VideoDetail />} />
               <Route path="/subscription/success" element={<SubscriptionSuccess />} />
               <Route path="/subscription/cancel" element={<SubscriptionCancel />} />

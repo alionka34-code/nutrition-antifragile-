@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { fetchComments, postComment, deleteComment, postReply } from '../utils/api';
 
-const CommentSection = ({ token, isAdmin, articleId }) => {
+const CommentSection = ({
+  token,
+  isAdmin,
+  articleId,
+  fetchCommentsFn,
+  postCommentFn,
+  deleteCommentFn,
+  postReplyFn,
+}) => {
+  const _fetchComments = fetchCommentsFn || ((id) => fetchComments(id));
+  const _postComment = postCommentFn || ((id, content, tok) => postComment(id, content, tok));
+  const _deleteComment = deleteCommentFn || ((id, tok) => deleteComment(id, tok));
+  const _postReply = postReplyFn || ((id, parentId, content, tok) => postReply(id, parentId, content, tok));
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [loading, setLoading] = useState(true);
@@ -16,7 +28,7 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
     async function loadComments() {
       setLoading(true);
       try {
-        const data = await fetchComments(articleId);
+        const data = await _fetchComments(articleId);
         setComments(data);
       } catch (err) {
         setError(err.message);
@@ -25,6 +37,7 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
       }
     }
     loadComments();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articleId]);
 
   // Publication d'un nouveau commentaire
@@ -33,7 +46,7 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
     if (!newComment.trim()) return;
 
     try {
-      const addedComment = await postComment(articleId, newComment, token);
+      const addedComment = await _postComment(articleId, newComment, token);
       if (!addedComment) throw new Error("Erreur lors de l'envoi du commentaire");
       setComments([...comments, addedComment]);
       setNewComment('');
@@ -45,7 +58,7 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
   // Suppression d'un commentaire (supporte les réponses imbriquées)
   const handleDelete = async (commentId) => {
     if (!window.confirm("Supprimer ce commentaire ?")) return;
-    const success = await deleteComment(commentId, token);
+    const success = await _deleteComment(commentId, token);
     if (success) {
       setComments((prev) => {
         const topFiltered = prev.filter((c) => c.id !== commentId);
@@ -127,7 +140,7 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
     setReplyingTo(null);
 
     try {
-      const created = await postReply(articleId, parentCommentId, optimisticReply.content, token);
+      const created = await _postReply(articleId, parentCommentId, optimisticReply.content, token);
       if (!created) throw new Error("Erreur lors de l'envoi de la réponse");
       // Remplacer le noeud temporaire par la vraie réponse
       setComments((prev) => replaceNode(prev, tempId, created));
@@ -144,7 +157,7 @@ const CommentSection = ({ token, isAdmin, articleId }) => {
 
   // Élément de réponse récursif (multi-niveau)
   const ReplyItem = ({ reply, depth = 1 }) => (
-    <div className={`mt-3 p-3 rounded-4xl border-l-4 border-marron bg-gray-50 dark:bg-neutral-700 ${depth > 0 ? 'ml-8' : ''}`}>
+    <div className={`mt-3 p-3 rounded-2xl border-l-4 border-marron bg-gray-50 dark:bg-neutral-700 ${depth > 0 ? 'ml-8' : ''}`}>
       <div className="flex justify-between">
         <p className="font-SFBold text-marron text-lg">
           {reply.user_username}

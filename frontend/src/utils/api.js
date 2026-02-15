@@ -32,6 +32,28 @@ export async function fetchThemes() {
   return await res.json();
 }
 
+export async function fetchThemeDetail(slug, token = null) {
+  const response = await fetch(`${API_URL}/themes/${slug}/`, {
+    headers: {
+      "Content-Type": "application/json",
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Thème non trouvé");
+  }
+  return await response.json();
+}
+
+export async function fetchChaptersByTheme(themeId) {
+  const res = await fetch(`${API_URL}/chapters/?theme=${themeId}`);
+  if (!res.ok) {
+    throw new Error(`Erreur ${res.status}`);
+  }
+  return await res.json();
+}
+
 export async function fetchArticleDetail(slug, token = null) {
   const response = await fetch(`${API_URL}/articles/${slug}/`, {
     headers: {
@@ -119,6 +141,63 @@ export async function deleteComment(commentId, token) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+    });
+    return res.ok;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+}
+
+// =============================
+// Chapter Comments
+// =============================
+export async function fetchChapterComments(chapterId) {
+  try {
+    const res = await fetch(`${API_URL}/chapters/${chapterId}/comments/`);
+    if (!res.ok) throw new Error("Erreur lors du chargement des commentaires");
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+}
+
+export async function postChapterComment(chapterId, content, token) {
+  try {
+    const res = await fetch(`${API_URL}/chapters/${chapterId}/comments/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ content }),
+    });
+    if (!res.ok) throw new Error("Erreur lors de l'envoi du commentaire");
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
+export async function postChapterReply(chapterId, parentCommentId, content, token) {
+  try {
+    const res = await fetch(`${API_URL}/chapters/${chapterId}/comments/${parentCommentId}/reply/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ content }),
+    });
+    if (!res.ok) throw new Error("Erreur lors de l'envoi de la réponse");
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
+export async function deleteChapterComment(commentId, token) {
+  try {
+    const res = await fetch(`${API_URL}/chapter-comments/${commentId}/delete/`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
     });
     return res.ok;
   } catch (err) {
