@@ -136,6 +136,9 @@ function Articles() {
     </div>
 
     {/* Section Vidéos */}
+
+    {/*
+    
     <div className="mx-4 md:mx-20 py-10">
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-3xl font-SFBold text-marron">Vidéos</h2>
@@ -145,20 +148,20 @@ function Articles() {
             className="bg-marron text-white px-3 py-2 rounded-lg hover:bg-opacity-80 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={videosCurrentIndex === 0}
           >
-            ←
+            
           </button>
           <button 
             onClick={nextVideos}
             className="bg-marron text-white px-3 py-2 rounded-lg hover:bg-opacity-80 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={videosCurrentIndex + (getItemsPerView() * 2) >= videos.length}
           >
-            →
+            
           </button>
         </div>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {/* Première ligne */}
+        
         <div className="contents">
           {videos.slice(videosCurrentIndex, videosCurrentIndex + getItemsPerView()).map((video) => (
             <Link 
@@ -175,14 +178,13 @@ function Articles() {
           ))}
         </div>
         
-        {/* Deuxième ligne */}
+        
         <div className="contents">
           {videos.slice(videosCurrentIndex + getItemsPerView(), videosCurrentIndex + (getItemsPerView() * 2)).map((video) => (
             <Link 
               key={`row2-${video.id}`} 
               to={`/videos/${video.slug}`} 
-              className="bg-white shadow-lg rounded-4xl overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 w-full block"
-            >
+              className="bg-white shadow-lg rounded-4xl overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 w-full block">
               <img src={video.image} alt={video.title} className="w-full h-48 md:h-60 object-cover" />
               <div className="p-4">
                 <h3 className="text-lg font-SFBold dark:text-marron">{video.title}</h3>
@@ -193,6 +195,7 @@ function Articles() {
         </div>
       </div>
     </div>
+    */}
     </>
   );
 }
