@@ -8,7 +8,6 @@ import Connexion from './pages/connexion.jsx';
 import ContactForm from './pages/contact.jsx';
 import { AuthProvider } from './contexts/AuthContext';
 import Articles from './pages/articles.jsx';
-import Landing from './pages/Landing.jsx';
 import ArticleDetail from './pages/articleDetail.jsx';
 import ThemeDetail from './pages/ThemesDetail.jsx';
 import VideoDetail from './pages/videoDetail.jsx';  
@@ -20,10 +19,12 @@ import MentionLegale  from './pages/MentionLegale.jsx';
 import ExtraitPage from './pages/ExtraitPage.jsx';
 import DashboardAdmin from './pages/DashboardAdmin.jsx';
 import Themes from './pages/Themes.jsx';
+import Annexes from './pages/Annexes.jsx';
+import Community from './pages/Community.jsx';
 import CGV from './pages/CGV.jsx';
 import CGU from './pages/CGU.jsx';
 import RGPD from './pages/RGPD.jsx';
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -37,12 +38,12 @@ function App() {
               <Route path="/livre" element={<Livre />} />
               <Route path="/extrait" element={<ExtraitPage />} />
               <Route path="/abonnement" element={<Abonnement />} />
-              <Route path="/Landing" element={<Landing />} />
               <Route path="/connexion" element={<Connexion />} />
               <Route path="/contact" element={<ContactForm />} />
               <Route path="/articles" element={<Articles />} />
               <Route path="/articles/:slug" element={<ArticleDetail />} />
               <Route path="/themes/:slug" element={<ThemeDetail />} />
+              <Route path="/annexes" element={<Annexes />} />
               <Route path="/videos/:slug" element={<VideoDetail />} />
               <Route path="/subscription/success" element={<SubscriptionSuccess />} />
               <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
@@ -54,6 +55,7 @@ function App() {
               <Route path="/rgpd" element={<RGPD />} />
               <Route path="/dashboard" element={<DashboardAdmin />} />
               <Route path="/themes" element={<Themes />} /> 
+              <Route path="/community" element={<Community />} />
               
               
             </Routes>
