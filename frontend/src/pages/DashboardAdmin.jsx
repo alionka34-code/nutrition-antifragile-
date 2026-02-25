@@ -1,6 +1,7 @@
 import React from "react";
 import ThemeForm from "../components/admin/ThemeForm.jsx";
 import ChapterForm from "../components/admin/ChapterForm.jsx";
+import AnnexeForm from "../components/admin/AnnexeForm.jsx";
 
 function DashboardAdmin() {
   return (
@@ -12,6 +13,10 @@ function DashboardAdmin() {
     <div className="mt-8">
       <h2 className="text-xl font-semibold">Chapitres</h2>
       <ChapterForm />
+    </div>
+    <div className="mt-8">
+      <h2 className="text-xl font-semibold">Annexes</h2>
+      <AnnexeForm />
     </div>
     </>
     

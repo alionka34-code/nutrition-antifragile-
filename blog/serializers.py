@@ -3,7 +3,7 @@ from .models import Article
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Comment, Video, VideoComment, Theme, Chapter, ChapterComment
+from .models import Comment, Video, VideoComment, Theme, Chapter, ChapterComment, Annexe
 
 class ArticleSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField()
@@ -235,6 +235,31 @@ class ChapterSerializer(serializers.ModelSerializer):
         if instance.video:
             ret['video_title'] = instance.video.title
         return ret
+
+class AnnexeSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+    fichier_pdf_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Annexe
+        fields = ['id', 'title', 'description', 'image', 'image_url', 'duration', 'fichier_pdf', 'fichier_pdf_url', 'slug', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at', 'slug', 'fichier_pdf']
+
+    def get_image_url(self, obj):
+        if obj.image:
+            return obj.image.url
+        return None
+
+    def get_fichier_pdf_url(self, obj):
+        if obj.fichier_pdf:
+            import cloudinary.utils
+            url, _ = cloudinary.utils.cloudinary_url(
+                obj.fichier_pdf,
+                resource_type='raw',
+            )
+            return url
+        return None
+
 
 class ChapterCommentSerializer(serializers.ModelSerializer):
     user_username = serializers.ReadOnlyField(source='user.username')

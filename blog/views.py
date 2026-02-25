@@ -41,7 +41,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 
-from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment, Theme, Chapter, ChapterComment
+from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment, Theme, Chapter, ChapterComment, Annexe
 from .serializers import (
     ArticleSerializer,
     CommentSerializer,
@@ -52,6 +52,7 @@ from .serializers import (
     ThemeSerializer,
     ChapterSerializer,
     ChapterCommentSerializer,
+    AnnexeSerializer,
 )
 
 logger = logging.getLogger(__name__)
@@ -1109,3 +1110,57 @@ class ChapterCommentDeleteView(generics.DestroyAPIView):
     queryset = ChapterComment.objects.all()
     serializer_class = ChapterCommentSerializer
     permission_classes = [IsAdminUser]
+
+
+# =============================
+# Annexes ViewSet
+# =============================
+class AnnexeViewSet(viewsets.ModelViewSet):
+    queryset = Annexe.objects.all().order_by('-created_at')
+    serializer_class = AnnexeSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        lookup = self.kwargs.get('pk')
+        if str(lookup).isdigit():
+            obj = get_object_or_404(queryset, pk=lookup)
+        else:
+            obj = get_object_or_404(queryset, slug=lookup)
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+    def get_permissions(self):
+        if self.action in ['create', 'update', 'partial_update', 'destroy']:
+            return [IsAdminUser()]
+        return [AllowAny()]
+
+    def _upload_pdf(self, request):
+        """Upload le fichier PDF sur Cloudinary et retourne le public_id."""
+        pdf_file = request.FILES.get('fichier_pdf')
+        if pdf_file:
+            result = cloudinary.uploader.upload(
+                pdf_file,
+                resource_type='raw',
+                folder='annexes_pdf',
+                use_filename=True,
+                unique_filename=True,
+            )
+            return result.get('public_id')
+        return None
+
+    def perform_create(self, serializer):
+        pdf_url = self._upload_pdf(self.request)
+        if pdf_url:
+            serializer.save(fichier_pdf=pdf_url)
+        else:
+            serializer.save()
+
+    def perform_update(self, serializer):
+        pdf_url = self._upload_pdf(self.request)
+        if pdf_url:
+            serializer.save(fichier_pdf=pdf_url)
+        else:
+            serializer.save()
+
+

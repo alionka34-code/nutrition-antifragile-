@@ -51,20 +51,28 @@ function ThemeDetail() {
             <div className="text-left mx-4 md:mx-auto md:max-w-6xl">
                 <h1 className="text-4xl font-SFBold mb-4 text-marron">{theme.title}</h1>
                 <div className="article-content font-SF text-xl" dangerouslySetInnerHTML={{ __html: theme.description }} />
-                <button className="my-8 border-1 rounded-xl p-4 font-SFBold">COMMENCER</button>
+                <button
+                    onClick={() => document.getElementById('chapitres-section')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="my-8 border-1 border-marron rounded-xl p-4 font-SFBold flex items-center gap-2 hover:bg-marron hover:text-white transition-colors"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                    </svg>
+                    COMMENCER
+                </button>
             </div>
         </header>
-        <main className="mt-10 flex md:flex-rows md:gap-60 mx-4 md:mx-auto md:max-w-6xl">
+        <main id="chapitres-section" className="mt-10 flex flex-col md:flex-rows md:gap-40 mx-4 md:mx-auto md:max-w-6xl">
                 <div className="w-full md:w-1/3">
                     <h2 className="text-marron text-4xl font-SFBold mb-4">Chapitres</h2>
-                    <div className="border-1 rounded-2xl">
-                        <ul className>
+                    <div className="border-1 border-marron rounded-2xl mb-8">
+                        <ul>
                             {chapters.length === 0 && <p className="text-gray-500">Aucun chapitre disponible.</p>}
                             {chapters.map((chapter) => (
                                 <li
                                     key={chapter.id}
                                     onClick={() => setSelectedChapter(chapter)}
-                                    className={`font-SF flex items-center gap-3 p-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer ${selectedChapter?.id === chapter.id ? "bg-gray-300 dark:bg-neutral-700" : ""}`}
+                                    className={`font-SF flex items-center gap-3 p-3 rounded-2xl hover:bg-marron hover:text-white ${selectedChapter?.id === chapter.id ? "bg-marron text-white dark:bg-neutral-700" : ""}`}
                                 >
                                     <span className="text-marron font-SFBold">{chapter.order}-</span>
                                     <span className="font-SF text-xl">{chapter.title}</span>

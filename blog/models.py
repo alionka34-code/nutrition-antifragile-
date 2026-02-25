@@ -165,6 +165,40 @@ class Chapter(models.Model):
     def __str__(self):
         return f"{self.title} (Thème: {self.theme.title})"
 
+class Annexe(models.Model):
+    title = models.CharField(max_length=255)
+    description = RichTextUploadingField(help_text="Description de la fiche annexe", blank=True, null=True)
+    image = CloudinaryField('image', null=True, blank=True)
+    duration = models.PositiveIntegerField(default=0, help_text="Durée de lecture en minutes")
+    fichier_pdf = models.CharField(max_length=500, blank=True, null=True, help_text="Public ID du fichier PDF sur Cloudinary")
+    slug = models.SlugField(max_length=201, unique=True, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.slug:
+            candidate = slugify(self.slug)[:200]
+        elif self.title:
+            candidate = slugify(self.title)[:200]
+        else:
+            candidate = None
+
+        if candidate:
+            slug_base = candidate
+            slug = slug_base
+            counter = 1
+            while Annexe.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                max_base_len = 200 - (len(str(counter)) + 1)
+                slug = f"{slug_base[:max_base_len]}-{counter}"
+                counter += 1
+            self.slug = slug
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+
 class ChapterComment(models.Model):
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)

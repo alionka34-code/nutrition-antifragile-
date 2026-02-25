@@ -32,6 +32,14 @@ export async function fetchThemes() {
   return await res.json();
 }
 
+export async function fetchAnnexes() {
+  const res = await fetch(`${API_URL}/annexes/`);
+  if (!res.ok) {
+    throw new Error(`Erreur ${res.status}`);
+  }
+  return await res.json();
+}
+
 export async function fetchThemeDetail(slug, token = null) {
   const response = await fetch(`${API_URL}/themes/${slug}/`, {
     headers: {
