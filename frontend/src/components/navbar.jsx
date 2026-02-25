@@ -99,7 +99,7 @@ function Navbar() {
         
         {/* Titre */}
         <div className="absolute left-1/2 transform -translate-x-1/2 md:left-1/2 md:transform md:-translate-x-1/2">
-          <h1 className="font-SF text-gray-600 dark:text-white text-sm md:text-2xl whitespace-nowrap">ALIONKA HOUL - NOURRIR AVEC L'INSTINCT</h1><p className="font-SF text-gray-600 dark:text-white text-xs md:text-md whitespace-nowrap text-center">ISSN 3098-7113</p>
+          <Link to="/"><h1 className="font-SF text-gray-600 dark:text-white text-sm md:text-2xl whitespace-nowrap">ALIONKA HOUL - NOURRIR AVEC L'INSTINCT</h1><p className="font-SF text-gray-600 dark:text-white text-xs md:text-md whitespace-nowrap text-center">ISSN 3098-7113</p></Link>
         </div>
        
         <div className="flex items-center gap-4">
@@ -171,9 +171,6 @@ function Navbar() {
           </li>
           <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/abonnement" onClick={toggleMenu}>Abonnement</Link>
-          </li>
-          <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
-            <Link to="/Landing" onClick={toggleMenu}>Entreprise</Link>
           </li>
           <li className="text-lg md:text-2xl font-SF hover:text-yellow-600">
             <Link to="/contact" onClick={toggleMenu}>Contact</Link>
