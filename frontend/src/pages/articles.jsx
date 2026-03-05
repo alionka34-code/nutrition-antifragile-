@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchArticles, fetchVideos } from '../utils/api';
 import { Helmet } from 'react-helmet';
+import NavCommunity from '../components/NavCommunity';
 
 function Articles() {
     const [articles, setArticles] = useState([]);
@@ -71,9 +72,10 @@ function Articles() {
         <title>Articles Nutrition Antifragile | Santé durable & alimentation consciente</title>
         <meta name="description" content="Découvrez des articles approfondis sur la nutrition antifragile, la santé durable et l'alimentation consciente. Des conseils pratiques pour renforcer votre bien-être et comprendre les enjeux alimentaires." />
     </Helmet>
+    <NavCommunity />
     <header className=" text-center pt-10">
       <h1 className='font-SFBold text-marron text-2xl md:text-4xl'>Ici, la nutrition prend tout son sens.</h1> 
-      <p className="font-SF md:text-2xl text-lg mx-4 md:mx-auto md:max-w-5xl  dark:text-white">Loin des fausses promesses et des étiquettes trompeuses, entrez dans le cercle de ceux qui  veulent comprendre, pas juste consommer.</p>
+      <p className="font-SF md:text-2xl text-lg mx-4 md:mx-auto md:max-w-5xl dark:text-white">Loin des fausses promesses et des étiquettes trompeuses, entrez dans le cercle de ceux qui  veulent comprendre, pas juste consommer.</p>
     </header>
 
     {/* Section Articles */}
@@ -105,7 +107,7 @@ function Articles() {
             <Link 
               key={`row1-${article.id}`} 
               to={`/articles/${article.slug}`} 
-              className="bg-white shadow-lg rounded-4xl border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 w-full block"
+              className="bg-white shadow-lg rounded-lg border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 w-full block"
             >
               <img src={article.image} alt={article.title} className="w-full h-48 md:h-60 object-cover" />
               <div className="p-4">
@@ -122,7 +124,7 @@ function Articles() {
             <Link 
               key={`row2-${article.id}`} 
               to={`/articles/${article.slug}`} 
-              className="bg-white shadow-lg rounded-4xl border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 w-full block"
+              className="bg-white shadow-lg rounded-lg border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 w-full block"
             >
               <img src={article.image} alt={article.title} className="w-full h-48 md:h-60 object-cover" />
               <div className="p-4">

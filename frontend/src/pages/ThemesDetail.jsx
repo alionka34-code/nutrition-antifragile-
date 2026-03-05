@@ -4,6 +4,8 @@ import { fetchThemeDetail, fetchChaptersByTheme, fetchChapterComments, postChapt
 import  "../styles/ckText.css";
 import { Helmet } from "react-helmet";
 import CommentSection from "../components/CommentSection";
+import NavCommunity from "../components/NavCommunity";
+import PremiumOverlay from "../components/PremiumOverlay";
 
 function ThemeDetail() {
     const { slug } = useParams();
@@ -47,9 +49,11 @@ function ThemeDetail() {
 
     return (
         <>
+        <NavCommunity />
+        <PremiumOverlay>
         <header className="pt-10 border-b-1 border-gray-300 dark:border-neutral-700">
             <div className="text-left mx-4 md:mx-auto md:max-w-6xl">
-                <h1 className="text-4xl font-SFBold mb-4 text-marron">{theme.title}</h1>
+                <h1 className="text-2xl md:text-4xl font-SFBold mb-4 text-marron">{theme.title}</h1>
                 <div className="article-content font-SF text-xl" dangerouslySetInnerHTML={{ __html: theme.description }} />
                 <button
                     onClick={() => document.getElementById('chapitres-section')?.scrollIntoView({ behavior: 'smooth' })}
@@ -62,17 +66,17 @@ function ThemeDetail() {
                 </button>
             </div>
         </header>
-        <main id="chapitres-section" className="mt-10 flex flex-col md:flex-rows md:gap-40 mx-4 md:mx-auto md:max-w-6xl">
+        <main id="chapitres-section" className="mt-10 flex flex-col md:flex-row md:gap-40 mx-4 md:mx-auto md:max-w-6xl">
                 <div className="w-full md:w-1/3">
-                    <h2 className="text-marron text-4xl font-SFBold mb-4">Chapitres</h2>
-                    <div className="border-1 border-marron rounded-2xl mb-8">
+                    <h2 className="text-marron md:text-4xl text-2xl font-SFBold mb-4">Chapitres</h2>
+                    <div className="border-1 border-marron rounded-lg mb-8">
                         <ul>
                             {chapters.length === 0 && <p className="text-gray-500">Aucun chapitre disponible.</p>}
                             {chapters.map((chapter) => (
                                 <li
                                     key={chapter.id}
                                     onClick={() => setSelectedChapter(chapter)}
-                                    className={`font-SF flex items-center gap-3 p-3 rounded-2xl hover:bg-marron hover:text-white ${selectedChapter?.id === chapter.id ? "bg-marron text-white dark:bg-neutral-700" : ""}`}
+                                    className={`font-SF flex items-center gap-3 p-3 rounded-lg hover:bg-marron hover:text-white ${selectedChapter?.id === chapter.id ? "bg-marron text-white dark:bg-neutral-700" : ""}`}
                                 >
                                     <span className="text-marron font-SFBold">{chapter.order}-</span>
                                     <span className="font-SF text-xl">{chapter.title}</span>
@@ -83,11 +87,11 @@ function ThemeDetail() {
 
                 </div>
                 <div className="w-full">
-                    <h2 className="text-marron text-4xl font-SFBold">{selectedChapter?.title || "Présentation"}</h2>
+                    <h2 className="text-marron text-2xl md:text-4xl font-SFBold">{selectedChapter?.title || "Présentation"}</h2>
                     {selectedChapter ? (
                         <div className="mt-4">
                             {selectedChapter.video_bunny && (
-                                <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg">
+                                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
                                     <iframe
                                         src={`https://iframe.mediadelivery.net/embed/515846/${selectedChapter.video_bunny}`}
                                         className="absolute inset-0 w-full h-full"
@@ -114,6 +118,7 @@ function ThemeDetail() {
             deleteCommentFn={(id, tok) => deleteChapterComment(id, tok)}
             postReplyFn={(id, parentId, content, tok) => postChapterReply(id, parentId, content, tok)}
         />
+        </PremiumOverlay>
         </>
     );
 }

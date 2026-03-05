@@ -50,11 +50,11 @@ function Navbar() {
             >
               {username} 👋
               {isAdmin ? (
-                <span className="px-2 py-1 text-xs rounded-full font-SFBold bg-red-500 text-white">
+                <span className="px-2 py-1 text-xs rounded-lg font-SFBold bg-red-500 text-white">
                   ADMIN
                 </span>
               ) : (
-                <span className={`px-2 py-1  text-xs rounded-full font-SFBold ${isSubscribed ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
+                <span className={`px-2 py-1  text-xs rounded-lg font-SFBold ${isSubscribed ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
                   {isSubscribed ? 'PREMIUM' : 'FREE'}
                 </span>
               )}
@@ -65,18 +65,23 @@ function Navbar() {
           {userMenuOpen && username && (
             <div className="absolute mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200">
               {isSubscribed ? (
-                <a
-                  href="https://billing.stripe.com/p/login/7sYaEW2Rx2AQd0h5QQbZe00"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block px-4 py-2 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm dark:text-black"
-                >
-                  Gerer mon abonnement
-                </a>
+                <>
+                  <a
+                    href="https://billing.stripe.com/p/login/7sYaEW2Rx2AQd0h5QQbZe00"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-2 hover:text-marron rounded-lg font-SF  text-sm dark:text-black"
+                  >
+                    Gerer mon abonnement
+                  </a>
+                  <Link to='/community' className="block px-4 py-2 hover:text-marron rounded-lg font-SF  text-sm dark:text-black" onClick={() => setUserMenuOpen(false)}>
+                    Communauté
+                  </Link>
+                </>
               ) : (
                 <Link
                   to="/abonnement"
-                  className="block px-4 py-2 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm  dark:text-black"
+                  className="block px-4 py-2 hover:text-marron rounded-lg font-SF text-sm  dark:text-black"
                   onClick={() => setUserMenuOpen(false)}
                 >
                   S'abonner
@@ -88,10 +93,19 @@ function Navbar() {
                   href="https://web-production-a7977.up.railway.app/admin/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-4 py-2 mt-1 hover:text-marron rounded-xl font-SF bg-gray-100 text-sm dark:text-black"
+                  className="block px-4 py-2 mt-1 hover:text-marron rounded-xl font-SF text-sm dark:text-black"
                 >
                   Espace admin
                 </a>
+              )}
+              {isAdmin && (
+                <Link
+                  to="/dashboard"
+                  className="block px-4 py-2 hover:text-marron rounded-xl font-SF text-sm dark:text-black"
+                  onClick={() => setUserMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
               )}
             </div>
           )}
@@ -159,6 +173,15 @@ function Navbar() {
                   >
                     Espace admin
                   </a>
+                )}
+                {isAdmin && (
+                  <Link
+                    to="/dashboard"
+                    className="hover:text-yellow-600"
+                    onClick={toggleMenu}
+                  >
+                    Dashboard
+                  </Link>
                 )}
               </div>
             </li>

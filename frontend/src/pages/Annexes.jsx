@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { fetchAnnexes } from '../utils/api';
 import { Helmet } from 'react-helmet';
+import NavCommunity from '../components/NavCommunity';
+import PremiumOverlay from '../components/PremiumOverlay';
 
 function Annexes() {
     const [annexes, setAnnexes] = useState([]);
@@ -26,6 +28,8 @@ function Annexes() {
                 <title>Fiches Annexes | Nutrition Antifragile</title>
                 <meta name="description" content="Téléchargez nos fiches annexes pratiques sur la nutrition et la santé durable." />
             </Helmet>
+            <NavCommunity />
+            <PremiumOverlay>
             <div>
                 <header className="text-center pt-8">
                     <h1 className="font SF-Bold text-marron text-2xl md:text-4xl my-4">Fiches Annexes</h1>
@@ -35,7 +39,7 @@ function Annexes() {
                 {annexes.map((annexe) => (
                     <div
                         key={annexe.id}
-                        className="bg-white shadow-lg rounded-4xl border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 h-full flex flex-col"
+                        className="bg-white shadow-lg rounded-lg border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 h-full flex flex-col"
                     >
                         {(annexe.image_url || annexe.image) && (
                             <img
@@ -67,7 +71,7 @@ function Annexes() {
                                         href={annexe.fichier_pdf_url}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="text-white bg-marron hover:bg-opacity-80 font-SFBold rounded-full px-4 py-2 text-sm transition-colors"
+                                        className="text-white bg-marron hover:bg-opacity-80 font-SFBold rounded-xl px-4 py-2 text-sm transition-colors"
                                     >
                                         Télécharger PDF
                                     </a>
@@ -77,6 +81,7 @@ function Annexes() {
                     </div>
                 ))}
             </div>
+            </PremiumOverlay>
         </>
     );
 }

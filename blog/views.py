@@ -160,6 +160,7 @@ class CreateSubscriptionView(APIView):
             items = [
                 {"price": "price_1SBM9uBthRAmBImUcQ2fcEOb"},  # launch
                 {"price": "price_1RqfRUBthRAmBImU3VDSFmui"},  # monthly
+                {"price":"price_1T7fz7BthRAmBImU73CguDkR"} #Community
             ]
 
             subscription = stripe.Subscription.create(
@@ -197,6 +198,7 @@ class CreateCheckoutSession(APIView):
         price_map = {
             "monthly": "price_1RqfRUBthRAmBImU3VDSFmui",
             "launch": "price_1SBM9uBthRAmBImUcQ2fcEOb",
+            "community": "price_1T7fz7BthRAmBImU73CguDkR"
         }
 
         try:

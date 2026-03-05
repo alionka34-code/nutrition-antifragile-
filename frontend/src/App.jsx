@@ -30,7 +30,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-  <div className="relative flex flex-col min-h-screen bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100">
+  <div className="relative flex flex-col min-h-screen bg-chalkwhite dark:bg-neutral-900 text-gray-900 dark:text-gray-100">
           <Navbar />
           <div className="flex-grow">
             <Routes>

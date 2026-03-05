@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Helmet } from "react-helmet";
-import { createCheckoutSession } from '../utils/api'; 
+import { createCheckoutSession } from '../utils/api';
+import { AuthContext } from "../contexts/AuthContextDefinition";
+import ConnexionForm from '../components/connexion/ConnexionForm';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Grid } from "swiper/modules";
 import "swiper/css";
@@ -21,16 +23,20 @@ import avis12 from  '../assets/images/avis12.jpg'
 import avis13 from  '../assets/images/avis13.jpg'
 import avis14 from  '../assets/images/avis14.jpg'
 import avis15 from  '../assets/images/avis15.jpg'
+import miniature from '../assets/images/miniature.png';
 
 
   
 
 function Abonnement() {
+    const { username } = useContext(AuthContext);
     const [selectedPlan, setSelectedPlan] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    
+    const [showLoginForm, setShowLoginForm] = useState(false);
+
     const errorRef = useRef(null);
+    const loginFormRef = useRef(null);
 
     // Quand errorMessage change et n'est pas vide, on scroll vers lui
     useEffect(() => {
@@ -84,127 +90,72 @@ function Abonnement() {
             <meta name="description" content="Rejoignez la communauté Nutrition Antifragile et accédez à des contenus exclusifs pour améliorer votre santé durable et maîtriser votre alimentation au quotidien." />
         </Helmet>
         <header >
-            <h1 className="text-center text-6xl font-SFBold text-marron pt-10 ">Choisissez votre abonnement</h1>
-            <p className="text-center text-lg text-gray-600 mt-2  dark:text-white">Accédez à tout le contenu premium</p>
+            <h1 className="text-center mx-4 text-2xl md:text-5xl font-SFBold text-marron pt-10 ">Rejoignez la Communauté Antifragile !</h1>
+            <p className="text-center text-lg md:text-xl text-gray-600 mt-2  dark:text-white">Accédez à tout le contenu premium</p>
         </header>
-            <form className="pt-20" onSubmit={handleSubmit}>
-            <div className='bg-white  dark:bg-neutral-800   flex flex-col border-4 rounded-4xl shadow-lg shadow-black/50 p-10 mx-4 md:mx-auto md:max-w-4xl border-marron'>
-            <h2 className='font-SFBold text-2xl text-center md:text-4xl text-marron'>Rejoignez plus de 1000 membres antifragiles</h2>
-            <p className=" mt-4 text-center font-SF md:text-2xl text-xl  dark:text-white">Qui reprennent le contrôle de leur alimentation, loin des dogmes et des manipulations de l'industrie</p>
-             <h3 className="font-SFBold text-xl md:text-2xl my-8 text-center  dark:text-white">Choisissez votre formule</h3>
-             {errorMessage && (
-                    <div ref={errorRef} className="mb-6 text-center text-red-700 bg-red-100 border border-red-400 rounded-2xl py-2 px-4 font-SF">
-                        {errorMessage}
-                    </div>
-                )}
-
-             
-             
-            <div className='flex flex-col gap-10'>
-               
-                <div>
-                    <input 
-                    type="radio" 
-                    id="launch" 
-                    name="plan" 
-                    value="launch" 
-                    className="hidden"
-                    onChange={(e) => setSelectedPlan(e.target.value)}
-                />
-                <label htmlFor="launch" className="block">
-                     <div className={`border-2 border-solid rounded-2xl p-4 mt-4 shadow-lg relative cursor-pointer transition-all duration-300 ${
-                         selectedPlan === 'launch' 
-                         ? 'border-marron shadow-marron/30 bg-marron/5 scale-105 shadow-2xl' 
-                         : 'border-gray-200 shadow-black/50 hover:border-marron/70 hover:scale-102'
-                     }`}>
-                        {/* Check badge when selected */}
-                        {selectedPlan === 'launch' && (
-                          <span
-                            className="absolute top-3 right-3 w-6 h-6 md:w-7 md:h-7 rounded-full bg-marron text-white flex items-center justify-center shadow"
-                            aria-label="Plan sélectionné"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.5 7.5a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L8.5 12.086l6.793-6.793a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
-                          </span>
-                        )}
-                        <div className="relative bottom-7">
-                        <span className="font-SFBold text-white border-2 rounded-2xl py-1 px-4 bg-red-400 animate-pulse" >OFFRE POPULAIRE</span>
-                    </div>
-                    <h4 className="font-SFBold text-2xl  dark:text-white">Abonnement annuel</h4>
-                    <h5 className="font-SFBold text-2xl text-marron my-2">
-                        100€<span className="text-xl font-SF text-gray-500">/an</span>
-                        </h5>
-                    
-                    <div className="font-SF md:text-lg text-marron border-2 rounded-4xl py-1 px-2 md:w-70">Economisez 2 mois d'abonnement</div>
-                    
-                </div>
-                </label>
+            <form className="pt-8" onSubmit={handleSubmit}>
+            <div className='bg-white  dark:bg-neutral-800 flex flex-col border-2 rounded-lg shadow-lg shadow-black/50 p-10 mx-2 md:mx-auto md:max-w-4xl border-marron'>
+            <iframe className="w-full h-64 md:h-112 rounded-xl" src="https://www.youtube.com/embed/Gu-g8FRG4Zs" title="Vidéo de présentation de l'abonnement" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            <div className='flex flex-row md:gap-4 gap-1 mt-6 overflow-x-auto snap-x snap-mandatory md:overflow-visible'>
+                <img src={miniature} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start" />
+                <img src={miniature} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start" />
+                <img src={miniature} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start" />
             </div>
-            
             <div>
-                 <input 
-                    type="radio" 
-                    id="monthly" 
-                    name="plan" 
-                    value="monthly" 
-                    className="hidden"
-                    onChange={(e) => setSelectedPlan(e.target.value)}
-                />
-                <label htmlFor="monthly" className="block">
-                     <div className={`border-2 border-solid rounded-2xl p-4 mt-4 shadow-lg relative cursor-pointer transition-all duration-300 ${
-                         selectedPlan === 'monthly' 
-                         ? 'border-marron shadow-marron/30 bg-marron/5 scale-105 shadow-2xl' 
-                         : 'border-gray-200 shadow-black/50 hover:border-marron/70 hover:scale-102'
-                     }`}>
-                        {/* Check badge when selected */}
-                        {selectedPlan === 'monthly' && (
-                          <span
-                            className="absolute top-3 right-3 w-6 h-6 md:w-7 md:h-7 rounded-full bg-marron text-white flex items-center justify-center shadow"
-                            aria-label="Plan sélectionné"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.5 7.5a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L8.5 12.086l6.793-6.793a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
-                          </span>
-                        )}
-                    <h4 className="font-SFBold text-2xl  dark:text-white">Abonnement mensuel</h4>
-                    <h5 className="font-SFBold text-2xl text-marron my-2">10€<span className='text-xl font-SF text-gray-500'>/mois</span></h5>
-                    <span className="font-SF md:text-lg text-marron border-2 rounded-2xl py-1 px-2">Flexibilité maximale</span>
-                </div>
-                </label>
-            </div>      
+                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Pourquoi s'abonner ?</h2>
+                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>En vous abonnant, vous soutenez notre mission de fournir des contenus de qualité, indépendants et rigoureux sur la nutrition et la santé. Vous accédez à une mine d'informations exclusives, basées sur les dernières recherches scientifiques, pour vous aider à faire des choix éclairés et améliorer votre bien-être au quotidien.</p>
+                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Ce que tu vas trouver dans la communauté</h2>
+                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>En rejoignant la communauté Nutrition Antifragile, tu auras accès à :</p>
+                <ul className='list-disc pl-6 text-lg md:text-xl font-SF text-gray-600  dark:text-white'>
+                    <li>Des articles et vidéos exclusifs, basés sur les dernières recherches scientifiques.</li>
+                    <li>Une communauté engagée pour échanger, poser tes questions et partager tes expériences.</li>
+                    <li>Des ressources pratiques pour t'aider à appliquer les conseils dans ta vie quotidienne.</li>
+                </ul>
+                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Mon objectif</h2>
+                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Mon objectif est de créer une communauté de personnes passionnées par la nutrition et la santé, qui veulent reprendre le contrôle de leur bien-être. En partageant des contenus rigoureux, indépendants et accessibles, je veux t'aider à faire des choix éclairés et à améliorer ta santé durablement.</p>
+                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Rejoins la Communauté</h2>
+                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>En t'abonnant, tu soutiens notre mission et tu accèdes à une mine d'informations exclusives pour améliorer ta santé et ton bien-être. Rejoins la communauté Nutrition Antifragile dès aujourd'hui et commence ton voyage vers une vie plus saine et plus consciente !</p>
             </div>
-            <div className='mt-10 border-2 border-marron rounded-2xl p-4 shadow-lg shadow-black/50'>
-            <h3 className='font-SFBold text-center  text-2xl md:text-4xl mb-4  dark:text-white'>Ce que vous obtenez</h3>
-            <ul className='pl-6 text-lg md:text-xl font-SF mr-4'>
-                <li className='mb-6'>
-                    <strong className='text-marron font-SFBold'>✓ Accès illimité</strong>
-                    <br/><span className='dark:text-white'>Consultez l’ensemble des articles et vidéos, passés et à venir, sans aucune restriction tant que vous êtes membre.</span>
-                </li>
-                <li className='mb-6'>
-                    <strong className='text-marron font-SFBold'>✓ Analyses indépendantes et sourcées</strong>
-                    <br/><span className='dark:text-white'>Des contenus rigoureux, sans filtre ni influence commerciale, pour comprendre les enjeux réels de l’alimentation et de la santé moderne.</span>
-                </li>
-                <li className='mb-6'>
-                    <strong className='text-marron font-SFBold'>✓ Communauté privée</strong>
-                    <br/><span className='dark:text-white'>Rejoignez un cercle de lecteurs engagés qui veulent reprendre le contrôle de leur santé, échanger, et approfondir leurs connaissances.</span>
-                </li>
-            </ul>
-        </div>
-        <button 
-            className="mt-8 block mx-auto text-lg font-SFBold rounded-full text-white px-6 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl" 
-            type="submit"
-            disabled={loading}
-        >
-            {loading ? "Redirection en cours..." : "COMMENCER MON ABONNEMENT"}
-        </button>
-        <p className='mt-10 font-SF md:text-xl text-center dark:text-white'> ✅ Paiement sécurisé • ✅ Accès immédiat • ✅ Résiliation à tout moment</p>
-
-        </div>
-        
-        </form>
-         <div className=" mx-4 md:max-w-7xl md:mx-auto" >
+            {errorMessage && (
+                <div ref={errorRef} className="mt-6 text-center text-red-700 bg-red-100 border border-red-400 rounded-2xl py-2 px-4 font-SF">
+                    {errorMessage}
+                </div>
+            )}
+            <div className="text-center mt-8">
+                <button
+                    type="button"
+                    disabled={loading}
+                    onClick={async () => {
+                        if (!username) {
+                            setShowLoginForm(true);
+                            setErrorMessage("");
+                            setTimeout(() => {
+                                loginFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                            }, 100);
+                            return;
+                        }
+                        const token = sessionStorage.getItem("access_token");
+                        try {
+                            setLoading(true);
+                            const data = await createCheckoutSession("community", token);
+                            if (data.checkout_url) {
+                                window.location.href = data.checkout_url;
+                            } else {
+                                throw new Error("URL de checkout non reçue");
+                            }
+                        } catch (err) {
+                            console.error("Erreur complète:", err);
+                            alert(`Erreur lors de la création de la session de paiement: ${err.message}`);
+                        } finally {
+                            setLoading(false);
+                        }
+                    }}
+                    className="mt-4 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-peach to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300"
+                >
+                    {loading ? "Redirection en cours..." : "S'abonner 37\u20AC/mois"}
+                </button>
+            </div>
+            <div className=" mx-4 md:max-w-3xl" >
             <Swiper
         rewind={true}
         slidesPerView={1}
@@ -229,40 +180,60 @@ function Abonnement() {
         modules={[Grid, Pagination, Autoplay]}
         className="mySwiper mt-10"
       >
-        <SwiperSlide><img src={avis1} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis2} className="rounded-2xl" /></SwiperSlide>
-        <SwiperSlide><img src={avis3} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis4} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis5} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis6} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis7} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis8} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis9} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis10} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis11} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis12} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis13} className="rounded-2xl"/></SwiperSlide>
-         <SwiperSlide><img src={avis14} className="rounded-2xl"/></SwiperSlide>
-          <SwiperSlide><img src={avis15} className="rounded-2xl"/></SwiperSlide>
-         <SwiperSlide><img src={avis1} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis2} className="rounded-2xl" /></SwiperSlide>
-        <SwiperSlide><img src={avis3} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis4} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis5} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis6} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis7} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis8} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis9} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis10} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis11} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis12} className="rounded-2xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis13} className="rounded-2xl"/></SwiperSlide>
-         <SwiperSlide><img src={avis14} className="rounded-2xl"/></SwiperSlide>
-          <SwiperSlide><img src={avis15} className="rounded-2xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis1} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis2} className="rounded-xl" /></SwiperSlide>
+        <SwiperSlide><img src={avis3} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis4} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis5} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis6} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis7} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis8} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis9} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis10} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis11} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis12} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis13} className="rounded-xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis14} className="rounded-xl"/></SwiperSlide>
+          <SwiperSlide><img src={avis15} className="rounded-xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis1} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis2} className="rounded-xl" /></SwiperSlide>
+        <SwiperSlide><img src={avis3} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis4} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis5} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis6} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis7} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis8} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis9} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis10} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis11} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis12} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis13} className="rounded-xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis14} className="rounded-xl"/></SwiperSlide>
+          <SwiperSlide><img src={avis15} className="rounded-xl"/></SwiperSlide>
         
       
       </Swiper>
-      </div>
+      </div>       
+
+        </div>
+        
+        </form>
+        {showLoginForm && !username && (
+            <>
+            <div className="fixed inset-0 bg-black/50 z-40" onClick={() => setShowLoginForm(false)} />
+            <div ref={loginFormRef} className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto">
+                    <button
+                        onClick={() => setShowLoginForm(false)}
+                        className="absolute top-4 right-4 z-60 bg-white dark:bg-neutral-700 rounded-full w-8 h-8 flex items-center justify-center shadow-lg text-gray-600 dark:text-white hover:text-black"
+                    >
+                        &times;
+                    </button>
+                    <ConnexionForm onLoginSuccess={() => setShowLoginForm(false)} />
+                </div>
+            </div>
+            </>
+        )}
         </>
     );
 

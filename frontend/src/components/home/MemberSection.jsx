@@ -45,7 +45,7 @@ function MemberSection() {
         <section className="mt-20">
             <h2 className="text-center mt-10 font-SFBold text-4xl md:text-8xl  dark:text-white">DEVENIR MEMBRE</h2>
             <p className='text-center font-SFBold md:text-2xl text-xl text-marron mt-4'>La vérité sur ton assiette</p>
-            <p className="text-center  font-SFBold md:text-lg text-marron border-2 rounded-4xl mx-4  md:max-w-100 md:block md:mx-auto">DEJA + DE 1000 MEMBRES ANTIFRAGILES</p>
+            <p className="text-center  font-SFBold md:text-lg text-marron border-2 rounded-xl mx-4  md:max-w-100 md:block md:mx-auto">DEJA + DE 1000 MEMBRES ANTIFRAGILES</p>
             <h3 className="text-center font-SFBold
             text-marron mt-8 text-lg md:text-xl">0 FILTRE . 0 DOGME. 0 BULLSHIT</h3>
                    <div id="article" className="mx-4 mt-4 md:mx-40">
@@ -69,7 +69,7 @@ function MemberSection() {
           <SwiperSlide key={article.id}>
             <Link
               to={`/articles/${article.slug}`}
-              className="bg-white shadow-lg rounded-4xl border border-gray-300 overflow-hidden hover:shadow-xl transition-shadow block my-10 dark:bg-neutral-800 dark:border-neutral-500"
+              className="bg-white shadow-lg rounded-lg border border-gray-300 overflow-hidden hover:shadow-xl transition-shadow block my-10 dark:bg-neutral-800 dark:border-neutral-500"
             >
               <img
                 src={article.image}
@@ -115,36 +115,36 @@ function MemberSection() {
         modules={[Grid, Pagination, Autoplay]}
         className="mySwiper mt-10"
       >
-        <SwiperSlide><img src={avis1} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis2} className="rounded-4xl" /></SwiperSlide>
-        <SwiperSlide><img src={avis3} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis4} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis5} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis6} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis7} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis8} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis9} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis10} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis11} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis12} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis13} className="rounded-4xl"/></SwiperSlide>
-         <SwiperSlide><img src={avis14} className="rounded-4xl"/></SwiperSlide>
-          <SwiperSlide><img src={avis15} className="rounded-4xl"/></SwiperSlide>
-         <SwiperSlide><img src={avis1} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis2} className="rounded-4xl" /></SwiperSlide>
-        <SwiperSlide><img src={avis3} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis4} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis5} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis6} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis7} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis8} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis9} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis10} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis11} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis12} className="rounded-4xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis13} className="rounded-4xl"/></SwiperSlide>
-         <SwiperSlide><img src={avis14} className="rounded-4xl"/></SwiperSlide>
-          <SwiperSlide><img src={avis15} className="rounded-4xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis1} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis2} className="rounded-xl" /></SwiperSlide>
+        <SwiperSlide><img src={avis3} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis4} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis5} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis6} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis7} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis8} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis9} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis10} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis11} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis12} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis13} className="rounded-xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis14} className="rounded-xl"/></SwiperSlide>
+          <SwiperSlide><img src={avis15} className="rounded-xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis1} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis2} className="rounded-xl" /></SwiperSlide>
+        <SwiperSlide><img src={avis3} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis4} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis5} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis6} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis7} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis8} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis9} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis10} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis11} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis12} className="rounded-xl"/></SwiperSlide>
+        <SwiperSlide><img src={avis13} className="rounded-xl"/></SwiperSlide>
+         <SwiperSlide><img src={avis14} className="rounded-xl"/></SwiperSlide>
+          <SwiperSlide><img src={avis15} className="rounded-xl"/></SwiperSlide>
         
       
       </Swiper>

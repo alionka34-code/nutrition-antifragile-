@@ -5,6 +5,7 @@ import CommentSection  from "../components/CommentSection";
 import { fetchArticleDetail } from "../utils/api";
 import  "../styles/ckText.css";
 import { Helmet } from "react-helmet";
+import NavCommunity from "../components/NavCommunity";
 
 
 function ArticleDetail() {
@@ -122,7 +123,7 @@ function ArticleDetail() {
   <meta property="og:url" content={`https://alionka-houl.eo.symbiose-audiovisuelle.fr/articles/${article.slug}`} />
   <meta property="og:image" content={article.image || "https://alionka-houl.eo.symbiose-audiovisuelle.fr/images/default.jpg"} />
 </Helmet>
-
+    <NavCommunity />
     <header className="text-center pt-10">
        <h1 className=" text-3xl mx-4 md:text-6xl md:mx-auto md:max-w-6xl font-SFBold mb-4 text-marron">{article.title}</h1>
       <p className="text-m text-gray-500 mb-6 font-SF dark:text-white">

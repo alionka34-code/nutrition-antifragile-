@@ -157,7 +157,7 @@ const CommentSection = ({
 
   // Élément de réponse récursif (multi-niveau)
   const ReplyItem = ({ reply, depth = 1 }) => (
-    <div className={`mt-3 p-3 rounded-2xl border-l-4 border-marron bg-gray-50 dark:bg-neutral-700 ${depth > 0 ? 'ml-8' : ''}`}>
+    <div className={`mt-3 p-3 rounded-lg border-l-4 border-marron bg-gray-50 dark:bg-neutral-700 ${depth > 0 ? 'ml-8' : ''}`}>
       <div className="flex justify-between">
         <p className="font-SFBold text-marron text-lg">
           {reply.user_username}
@@ -235,7 +235,7 @@ const CommentSection = ({
         <>
           <ul className="mb-4 space-y-5">
             {comments.map((comment) => (
-              <li key={comment.id} className="bg-gray-100 font-SF text-xl p-5 rounded-4xl shadow-lg dark:bg-neutral-800 dark:border-neutral-500">
+              <li key={comment.id} className="bg-gray-100 font-SF text-xl p-5 rounded-lg shadow-lg dark:bg-neutral-800 dark:border-neutral-500">
                 <div className="flex justify-between">
                   <p className="font-SFBold text-marron text-2xl">{comment.user_username}</p>
                   <div className="flex gap-2">
@@ -303,7 +303,7 @@ const CommentSection = ({
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Écrivez un commentaire..."
-                className="w-full border rounded-4xl p-2  dark:text-white"
+                className="w-full border rounded-lg p-2  dark:text-white"
                 rows="3"
               />
               <button
