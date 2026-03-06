@@ -113,7 +113,7 @@ function Abonnement() {
 
 🗂 <strong>S'élever<strong>L'assiette c'est la base, mais pas l’unique pilier. Mouvement, soleil, jeûne, mode de vie. Résultat : une santé intestinale solide, un mental stable, une énergie constante. Tout est interconnecté.<br/>
 
-Et aussi : 📄 Fiches listes de courses et guides PDF 🍽 Des recettes 💬 Un groupe Telegram pour me tes questions, partage d’adresses et recettes.<br/>
+Et aussi : 📄 Fiches listes de courses et guides PDF<br/>🍽 Des recettes<br/>💬 Un groupe Telegram pour me tes questions.<br/>
 
 Nouveau contenu chaque mois.</p>
         
