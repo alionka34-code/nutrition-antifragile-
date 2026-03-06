@@ -32,7 +32,7 @@ function Annexes() {
             <PremiumOverlay>
             <div>
                 <header className="text-center pt-8">
-                    <h1 className="font SF-Bold text-marron text-2xl md:text-4xl my-4">Fiches Annexes</h1>
+                    <h1 className="font SF-Bold text-marron text-2xl md:text-4xl my-4">Guides</h1>
                 </header>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch mx-4 md:mx-20">
