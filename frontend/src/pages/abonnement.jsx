@@ -91,7 +91,7 @@ function Abonnement() {
         </Helmet>
         <header >
             <h1 className="text-center mx-4 text-2xl md:text-5xl font-SFBold text-marron pt-10 ">Rejoignez la Communauté Antifragile !</h1>
-            <p className="text-center text-lg md:text-xl text-gray-600 mt-2  dark:text-white">Accédez à tout le contenu premium</p>
+    
         </header>
             <form className="pt-8" onSubmit={handleSubmit}>
             <div className='bg-white  dark:bg-neutral-800 flex flex-col border-2 rounded-lg shadow-lg shadow-black/50 p-10 mx-2 md:mx-auto md:max-w-4xl border-marron'>
