@@ -484,7 +484,7 @@ function Connexion() {
                         <div className={`absolute top-0 right-0 w-1/2 h-full flex flex-col items-center text-center justify-center px-10  text-white transition-transform duration-700 ease-in-out ${
                             isRegistering ? 'translate-x-5' : 'translate-x-0'
                         }`}>
-                            <h1 className="font-SFBold text-4xl mb-4 text-shadow-lg">S'inscire</h1>
+                            <h1 className="font-SFBold text-4xl mb-4 text-shadow-lg">S'inscrire</h1>
                             <p className="text-center font-SF text-lg mb-4 text-shadow-md leading-relaxed">
                                  Créez votre compte pour accéder à la communauté.            
                             </p>
