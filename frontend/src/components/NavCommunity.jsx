@@ -4,9 +4,10 @@ import { NavLink } from 'react-router-dom';
 function NavCommunity() {
     const links = [
         { to: '/community', label: 'Communauté' },
-        { to: '/themes', label: 'Thèmes' },
+        { to: '/themes', label: 'Dossiers' },
+        { to: '/annexes', label: 'Guides' },
         { to: '/articles', label: 'Analyses' },
-        { to: '/annexes', label: 'Annexes' },
+
     ];
 
     return (
