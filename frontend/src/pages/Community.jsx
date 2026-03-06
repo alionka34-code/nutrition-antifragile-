@@ -15,7 +15,7 @@ function Community() {
         <PremiumOverlay>
         <main className='pt-8 flex flex-col md:flex-row gap-10 mx-4 md:mx-auto md:max-w-6xl'>
         <div className='text-white p-4 border-1 border-gray-300 rounded-lg bg-degrade-marron shadow-lg dark:bg-neutral-800 dark:border-neutral-500'>
-            <h1 className='font-SFBold text-2xl'>🔥 Bienvenue dans la Communauté Antifragile !</h1>
+            <h1 className='font-SFBold text-2xl'>Bienvenue dans la Communauté Antifragile !</h1>
             <p className='font-SF text-xl mt-8'>Tu es au bon endroit. Voilà comment naviguer :<br/>
 🗂 Les dossiers vidéos : commence par là<br/>
 📄 Les guides : fiches PDF pratiques<br/>
