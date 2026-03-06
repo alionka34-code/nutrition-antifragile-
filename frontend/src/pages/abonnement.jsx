@@ -107,13 +107,13 @@ function Abonnement() {
                 <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Ce que tu vas trouver dans la communauté</h2>
                 <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Trois dossiers. Tout ce qu’il faut, au même endroit.<br/>
 
-🗂 <strong>Déconstruire</strong>Tous les mythes démontés un par un. Tu comprends pourquoi avant de passer à l'action. Fini les règles qu'on applique sans savoir pourquoi.<br/>
+🗂 <strong>Déconstruire :</strong> Tous les mythes démontés un par un. Tu comprends pourquoi avant de passer à l'action. Fini les règles qu'on applique sans savoir pourquoi.<br/>
 
-🗂 <strong>Construire</strong>Quoi acheter, où, pourquoi, en quelle quantité. Les réponses concrètes à toutes les questions que tu te poses depuis des années. Résultat : tu sais exactement quoi mettre dans ton caddie, sans te poser mille questions.<br/>
+🗂 <strong>Construire :</strong> Quoi acheter, où, pourquoi, en quelle quantité. Les réponses concrètes à toutes les questions que tu te poses depuis des années. Résultat : tu sais exactement quoi mettre dans ton caddie, sans te poser mille questions.<br/>
 
-🗂 <strong>S'élever</strong>L'assiette c'est la base, mais pas l’unique pilier. Mouvement, soleil, jeûne, mode de vie. Résultat : une santé intestinale solide, un mental stable, une énergie constante. Tout est interconnecté.<br/>
+🗂 <strong>S'élever :</strong> L'assiette c'est la base, mais pas l’unique pilier. Mouvement, soleil, jeûne, mode de vie. Résultat : une santé intestinale solide, un mental stable, une énergie constante. Tout est interconnecté.<br/>
 
-Et aussi : 📄 Fiches listes de courses et guides PDF<br/>🍽 Des recettes<br/>💬 Un groupe Telegram pour me tes questions.<br/>
+Et aussi :<br/> 📄 Fiches listes de courses et guides PDF<br/>🍽 Des recettes<br/>💬 Un groupe Telegram pour me tes questions.<br/>
 
 Nouveau contenu chaque mois.</p>
         
