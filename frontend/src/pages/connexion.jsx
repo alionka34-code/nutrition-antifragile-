@@ -484,29 +484,12 @@ function Connexion() {
                         <div className={`absolute top-0 right-0 w-1/2 h-full flex flex-col items-center text-center justify-center px-10  text-white transition-transform duration-700 ease-in-out ${
                             isRegistering ? 'translate-x-5' : 'translate-x-0'
                         }`}>
-                            <h1 className="font-SFBold text-4xl mb-4 text-shadow-lg">Inscription gratuite</h1>
+                            <h1 className="font-SFBold text-4xl mb-4 text-shadow-lg">S'inscire</h1>
                             <p className="text-center font-SF text-lg mb-4 text-shadow-md leading-relaxed">
-                                Rejoignez notre communauté et découvrez un aperçu de nos contenus exclusifs.              
+                                 Créez votre compte pour accéder à la communauté.            
                             </p>
-                            <p className="font-SF mb-2"><span className="text-green-600 text-xl">✓ </span>Accédez aux extraits de tous les articles</p>
-                            <p className="font-SF my-2"><span className="text-green-600 text-xl">✓ </span>Participez aux commentaires et échangez avec d’autres lecteurs engagés</p>
-                            <p className="flex items-center font-SFBoltItalic my-8"><span><svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="size-8 text-black">
-                                <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-    </svg> </span>L’accès intégral aux articles et aux vidéos est réservé aux membres Premium.
-
-Après votre inscription, vous aurez accès à votre espace membre où vous pourrez découvrir les offres Premium.</p>
-        
-
-
+                          
+       
                             <button 
                                 onClick={() => {
                                     setIsRegistering(true);
