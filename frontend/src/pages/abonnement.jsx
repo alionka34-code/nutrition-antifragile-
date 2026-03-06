@@ -102,19 +102,22 @@ function Abonnement() {
                 <img src={miniature} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start" />
             </div>
             <div>
-                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Pourquoi s'abonner ?</h2>
-                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>En vous abonnant, vous soutenez notre mission de fournir des contenus de qualité, indépendants et rigoureux sur la nutrition et la santé. Vous accédez à une mine d'informations exclusives, basées sur les dernières recherches scientifiques, pour vous aider à faire des choix éclairés et améliorer votre bien-être au quotidien.</p>
+                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Pour qui ?</h2>
+                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Pour ceux qui en ont marre d'entendre tout et son contraire.<br/>Pour ceux qui veulent comprendre, pas juste appliquer bêtement.<br/>Pour ceux qui veulent (vraiment) prendre leur santé en main et devenir acteurs de leur vie.</p>
                 <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Ce que tu vas trouver dans la communauté</h2>
-                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>En rejoignant la communauté Nutrition Antifragile, tu auras accès à :</p>
-                <ul className='list-disc pl-6 text-lg md:text-xl font-SF text-gray-600  dark:text-white'>
-                    <li>Des articles et vidéos exclusifs, basés sur les dernières recherches scientifiques.</li>
-                    <li>Une communauté engagée pour échanger, poser tes questions et partager tes expériences.</li>
-                    <li>Des ressources pratiques pour t'aider à appliquer les conseils dans ta vie quotidienne.</li>
-                </ul>
-                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Mon objectif</h2>
-                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Mon objectif est de créer une communauté de personnes passionnées par la nutrition et la santé, qui veulent reprendre le contrôle de leur bien-être. En partageant des contenus rigoureux, indépendants et accessibles, je veux t'aider à faire des choix éclairés et à améliorer ta santé durablement.</p>
-                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Rejoins la Communauté</h2>
-                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>En t'abonnant, tu soutiens notre mission et tu accèdes à une mine d'informations exclusives pour améliorer ta santé et ton bien-être. Rejoins la communauté Nutrition Antifragile dès aujourd'hui et commence ton voyage vers une vie plus saine et plus consciente !</p>
+                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Trois dossiers. Tout ce qu’il faut, au même endroit.<br/>P
+
+🗂 <strong>Déconstruire<strong>Tous les mythes démontés un par un. Tu comprends pourquoi avant de passer à l'action. Fini les règles qu'on applique sans savoir pourquoi.<br/>
+
+🗂 <strong>Construire<strong>Quoi acheter, où, pourquoi, en quelle quantité. Les réponses concrètes à toutes les questions que tu te poses depuis des années. Résultat : tu sais exactement quoi mettre dans ton caddie, sans te poser mille questions.<br/>
+
+🗂 <strong>S'élever<strong>L'assiette c'est la base, mais pas l’unique pilier. Mouvement, soleil, jeûne, mode de vie. Résultat : une santé intestinale solide, un mental stable, une énergie constante. Tout est interconnecté.<br/>
+
+Et aussi : 📄 Fiches listes de courses et guides PDF 🍽 Des recettes 💬 Un groupe Telegram pour me tes questions, partage d’adresses et recettes.<br/>
+
+Nouveau contenu chaque mois.</p>
+        
+
             </div>
             {errorMessage && (
                 <div ref={errorRef} className="mt-6 text-center text-red-700 bg-red-100 border border-red-400 rounded-2xl py-2 px-4 font-SF">
