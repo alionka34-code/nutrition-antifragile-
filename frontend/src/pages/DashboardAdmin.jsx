@@ -13,19 +13,21 @@ function DashboardAdmin() {
   const [active, setActive] = useState("themes");
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-beige1 dark:bg-neutral-950">
       {/* Sidebar */}
-      <aside className="w-64 bg-neutral-900 text-white flex flex-col shrink-0">
-        <h1 className="text-xl font-SFBold p-6 border-b border-neutral-700">Dashboard Admin</h1>
-        <nav className="flex-1 py-4">
+      <aside className="w-64 bg-white dark:bg-neutral-900 border-r-2 border-beige2 dark:border-neutral-700 flex flex-col shrink-0 shadow-sm">
+        <div className="p-6 border-b-2 border-beige2 dark:border-neutral-700">
+          <h1 className="font-SFBold text-marron text-lg">Dashboard Admin</h1>
+        </div>
+        <nav className="flex-1 py-4 flex flex-col gap-1 px-3">
           {sections.map((s) => (
             <button
               key={s.key}
               onClick={() => setActive(s.key)}
-              className={`w-full flex items-center gap-3 px-6 py-3 text-left font-SF transition-colors ${
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-SF transition-colors ${
                 active === s.key
-                  ? "bg-marron text-white"
-                  : "text-neutral-300 hover:bg-neutral-800 hover:text-white"
+                  ? "bg-gradient-to-tr from-peach to-yellow-700 text-white font-SFBold shadow-md"
+                  : "text-gray-600 dark:text-neutral-300 hover:bg-beige1 dark:hover:bg-neutral-800"
               }`}
             >
               <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -38,8 +40,8 @@ function DashboardAdmin() {
       </aside>
 
       {/* Content */}
-      <main className="flex-1 p-8 dark:bg-neutral-900 overflow-y-auto">
-        <h2 className="text-2xl font-SFBold mb-6">
+      <main className="flex-1 p-8 overflow-y-auto">
+        <h2 className="font-SFBold text-2xl text-marron mb-6">
           {sections.find((s) => s.key === active)?.label}
         </h2>
         {active === "themes" && <ThemeForm />}

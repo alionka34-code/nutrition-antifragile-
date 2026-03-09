@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContextDefinition';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import BunnyPlayer from '../BunnyPlayer';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
 
@@ -167,122 +166,117 @@ export default function ChapterForm() {
     }
   }
 
+  const inputCls = "w-full p-3 border border-beige2 rounded-xl font-SF dark:bg-neutral-700 dark:border-neutral-600 dark:text-white focus:outline-none focus:border-marron transition-colors";
+  const selectCls = "w-full p-3 border border-beige2 rounded-xl font-SF dark:bg-neutral-700 dark:border-neutral-600 dark:text-white focus:outline-none focus:border-marron transition-colors";
+
   return (
     <div className="space-y-6">
-      <form onSubmit={handleSubmit} className="p-4 border rounded">
-        <div className="flex flex-col gap-2">
-          <label>Thème</label>
-          <select value={themeId || ''} onChange={(e) => setThemeId(Number(e.target.value))} className="border p-2">
-            {themes.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.title}
-              </option>
-            ))}
-          </select>
+      {/* Formulaire */}
+      <div className="bg-white dark:bg-neutral-800 border-2 border-beige2 dark:border-neutral-700 rounded-2xl p-6 shadow-sm">
+        <h3 className="font-SFBold text-marron text-lg mb-5">{editingId ? "Modifier le chapitre" : "Ajouter un chapitre"}</h3>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <label className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
+            Thème
+            <select value={themeId || ''} onChange={(e) => setThemeId(Number(e.target.value))} className={selectCls}>
+              {themes.map((t) => (
+                <option key={t.id} value={t.id}>{t.title}</option>
+              ))}
+            </select>
+          </label>
 
-          <label>Titre du chapitre</label>
-          <input value={title} onChange={(e) => setTitle(e.target.value)} className="border p-2" />
+          <label className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
+            Titre du chapitre
+            <input value={title} onChange={(e) => setTitle(e.target.value)} className={inputCls} />
+          </label>
 
-          <label>Contenu</label>
-          <CKEditor editor={ClassicEditor} data={content} onChange={(event, editor) => setContent(editor.getData())} />
+          <label className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
+            Contenu
+            <CKEditor editor={ClassicEditor} data={content} onChange={(_, editor) => setContent(editor.getData())} />
+          </label>
 
-          <label>Vidéo associée (optionnel)</label>
-          <select value={videoId || ''} onChange={(e) => setVideoId(e.target.value ? Number(e.target.value) : null)} className="border p-2">
-            <option value="">-- Aucun --</option>
-            {videos.map((v) => (
-              <option key={v.id} value={v.id}>
-                {v.title} ({v.bunny_id})
-              </option>
-            ))}
-          </select>
+          <label className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
+            Vidéo associée (optionnel)
+            <select value={videoId || ''} onChange={(e) => setVideoId(e.target.value ? Number(e.target.value) : null)} className={selectCls}>
+              <option value="">-- Aucune --</option>
+              {videos.map((v) => (
+                <option key={v.id} value={v.id}>{v.title} ({v.bunny_id})</option>
+              ))}
+            </select>
+          </label>
 
-          <label>Ordre</label>
-          <input type="number" value={order} onChange={(e) => setOrder(e.target.value)} className="border p-2" />
+          <label className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
+            Ordre
+            <input type="number" value={order} onChange={(e) => setOrder(e.target.value)} className={inputCls} />
+          </label>
 
-          <div className="pt-2">
-            <button type="submit" className="btn">Ajouter le chapitre</button>
-            <button type="button" onClick={resetForm} className="ml-2 btn-secondary">Annuler</button>
+          <div className="flex gap-3 pt-2">
+            <button type="submit" className="font-SFBold text-white text-sm px-6 py-2.5 rounded-full bg-gradient-to-tr from-peach to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 shadow-md">
+              {editingId ? "Mettre à jour" : "Ajouter le chapitre"}
+            </button>
+            <button type="button" onClick={resetForm} className="font-SF text-sm px-6 py-2.5 rounded-full border-2 border-beige2 dark:border-neutral-600 text-gray-600 dark:text-white hover:border-marron transition-colors">
+              Annuler
+            </button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
 
-      <div>
-        <h3 className="text-lg font-bold">Chapitres existants</h3>
+      {/* Liste */}
+      <div className="bg-white dark:bg-neutral-800 border-2 border-beige2 dark:border-neutral-700 rounded-2xl p-6 shadow-sm">
+        <h3 className="font-SFBold text-marron text-lg mb-4">Chapitres existants</h3>
         <ul className="space-y-3">
           {chapters.map((c) => (
-            <li key={c.id} className="p-3 border rounded">
-              <div className="font-semibold">{c.title}</div>
-              <div className="text-sm text-gray-600">Thème: {themes.find((t) => t.id === c.theme)?.title || c.theme}</div>
-              <div className="text-sm text-gray-600">Ordre: {c.order}</div>
-              {expanded[c.id] ? (
-                <div className="mt-2 text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: c.content }} />
-              ) : (
-                <div className="mt-2 text-sm text-gray-700">{truncate(stripHtml(c.content), 200)}</div>
-              )}
-              <button type="button" onClick={() => toggleExpanded(c.id)} className="text-blue-600 text-sm mt-1">
-                {expanded[c.id] ? 'Voir moins' : 'Voir plus'}
-              </button>
-                  <div className="mt-2 flex items-center gap-4">
+            <li key={c.id} className="p-4 border border-beige2 dark:border-neutral-600 rounded-xl">
+              <div className="flex justify-between items-start gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="font-SFBold text-gray-800 dark:text-white">{c.title}</div>
+                  <div className="font-SF text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                    Thème : {themes.find((t) => t.id === c.theme)?.title || c.theme} · Ordre : {c.order}
+                  </div>
+                  <div className="mt-2 text-sm text-gray-600 dark:text-gray-300 font-SF">
+                    {expanded[c.id] ? (
+                      <div dangerouslySetInnerHTML={{ __html: c.content }} />
+                    ) : (
+                      <div>{truncate(stripHtml(c.content), 200)}</div>
+                    )}
+                    <button type="button" onClick={() => toggleExpanded(c.id)} className="font-SF text-marron text-xs mt-1 hover:underline">
+                      {expanded[c.id] ? 'Voir moins' : 'Voir plus'}
+                    </button>
+                  </div>
+                  <div className="mt-3">
                     {(() => {
-                      // prefer video thumbnail from fetched videos
                       const mapped = c.video && videoMap[c.video] ? videoMap[c.video] : null;
                       if (mapped) {
-                        const src = mapped.thumbnail || `https://vz-9c188f1c-f51.b-cdn.net/${mapped.bunny_id}/thumbnail.jpg`;
-                        // prefer direct `image` like in article.jsx, fallback to thumbnail or Bunny CDN
                         const directSrc = mapped.image || mapped.thumbnail || `https://vz-9c188f1c-f51.b-cdn.net/${mapped.bunny_id}/thumbnail.jpg`;
                         return (
-                          <div className="flex flex-col">
-                            <img
-                              src={directSrc}
-                              alt={`thumb-${c.id}`}
-                              className="h-24 object-cover rounded"
-                              width={320}
-                              height={180}
-                              loading="lazy"
-                              onError={(e) => {
-                                // no further fallback available here
-                                e.target.onerror = null;
-                              }}
-                            />
-                            <a href={directSrc} target="_blank" rel="noreferrer" className="text-xs break-words text-blue-600 mt-1">{directSrc}</a>
+                          <div className="flex flex-col gap-1">
+                            <img src={directSrc} alt={`thumb-${c.id}`} className="h-20 object-cover rounded-lg" width={320} height={180} loading="lazy" onError={(e) => { e.target.onerror = null; }} />
+                            <a href={directSrc} target="_blank" rel="noreferrer" className="font-SF text-xs text-marron hover:underline break-words">{directSrc}</a>
                           </div>
                         );
                       }
-
-                      // fallback: try to find a video by bunny_id returned on chapter
                       if (c.video_bunny) {
                         const found = videos.find((v) => v.bunny_id === c.video_bunny);
-                      if (found) {
-                        const src = found.thumbnail || `https://vz-9c188f1c-f51.b-cdn.net/${found.bunny_id}/thumbnail.jpg`;
-                        const directSrc = found.image || found.thumbnail || `https://vz-9c188f1c-f51.b-cdn.net/${found.bunny_id}/thumbnail.jpg`;
-                        return (
-                          <div className="flex flex-col">
-                          <img
-                            src={directSrc}
-                              alt={`thumb-${c.id}`}
-                              className="h-24 object-cover rounded"
-                              width={320}
-                              height={180}
-                              loading="lazy"
-                              onError={(e) => {
-                                e.target.onerror = null;
-                              }}
-                            />
-                          <a href={directSrc} target="_blank" rel="noreferrer" className="text-xs break-words text-blue-600 mt-1">{directSrc}</a>
-                          </div>
-                        );
+                        if (found) {
+                          const directSrc = found.image || found.thumbnail || `https://vz-9c188f1c-f51.b-cdn.net/${found.bunny_id}/thumbnail.jpg`;
+                          return (
+                            <div className="flex flex-col gap-1">
+                              <img src={directSrc} alt={`thumb-${c.id}`} className="h-20 object-cover rounded-lg" width={320} height={180} loading="lazy" onError={(e) => { e.target.onerror = null; }} />
+                              <a href={directSrc} target="_blank" rel="noreferrer" className="font-SF text-xs text-marron hover:underline break-words">{directSrc}</a>
+                            </div>
+                          );
+                        }
                       }
-                      }
-
-                      return <div className="text-sm text-gray-500">Aucune vidéo associée</div>;
+                      return <span className="font-SF text-xs text-gray-400">Aucune vidéo associée</span>;
                     })()}
                   </div>
-                  <div className="mt-2 flex gap-2">
-                    <button onClick={() => startEdit(c)} className="btn small">Éditer</button>
-                    {localIsAdmin && (
-                      <button onClick={() => handleDelete(c.id)} className="btn-danger small">Supprimer</button>
-                    )}
-                  </div>
+                </div>
+                <div className="flex gap-2 shrink-0">
+                  <button onClick={() => startEdit(c)} className="font-SF text-xs px-4 py-1.5 rounded-full border-2 border-marron text-marron hover:bg-marron hover:text-white transition-colors">Éditer</button>
+                  {localIsAdmin && (
+                    <button onClick={() => handleDelete(c.id)} className="font-SF text-xs px-4 py-1.5 rounded-full border-2 border-red-400 text-red-500 hover:bg-red-500 hover:text-white transition-colors">Supprimer</button>
+                  )}
+                </div>
+              </div>
             </li>
           ))}
         </ul>
