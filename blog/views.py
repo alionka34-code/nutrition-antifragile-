@@ -41,7 +41,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 
-from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment, Theme, Chapter, ChapterComment, Annexe
+from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment, Theme, Chapter, ChapterComment, Annexe, AbonnementSettings
 from .serializers import (
     ArticleSerializer,
     CommentSerializer,
@@ -1164,5 +1164,15 @@ class AnnexeViewSet(viewsets.ModelViewSet):
             serializer.save(fichier_pdf=pdf_url)
         else:
             serializer.save()
+
+
+class AbonnementSettingsView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        settings_obj = AbonnementSettings.objects.first()
+        if settings_obj:
+            return Response({"bunny_video_id": settings_obj.bunny_video_id})
+        return Response({"bunny_video_id": None})
 
 

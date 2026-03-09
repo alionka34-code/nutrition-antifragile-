@@ -4,6 +4,7 @@ from .models import Profile
 from .models import StripeWebhookLog
 from .models import Video
 from .models import Chapter, Theme
+from .models import AbonnementSettings
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from import_export import resources
@@ -51,6 +52,11 @@ class ChapterAdmin(admin.ModelAdmin):
     list_filter = ('theme',)
     search_fields = ('title',)
     
+
+@admin.register(AbonnementSettings)
+class AbonnementSettingsAdmin(admin.ModelAdmin):
+    list_display = ('bunny_video_id',)
+
 
 class ProfileInline(admin.StackedInline):
     model = Profile

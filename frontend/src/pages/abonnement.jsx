@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Helmet } from "react-helmet";
-import { createCheckoutSession } from '../utils/api';
+import { createCheckoutSession, fetchAbonnementSettings } from '../utils/api';
 import { AuthContext } from "../contexts/AuthContextDefinition";
 import ConnexionForm from '../components/connexion/ConnexionForm';
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -26,7 +26,7 @@ import avis15 from  '../assets/images/avis15.jpg'
 import miniature from '../assets/images/miniature.png';
 import miniature2 from '../assets/images/miniature2.png';
 import miniature3 from '../assets/images/miniature3.png';
-import videoAbo from '../assets/video/video abo.mp4';
+
 
 
   
@@ -39,8 +39,15 @@ function Abonnement() {
     const [showLoginForm, setShowLoginForm] = useState(false);
 
     const [zoomedImg, setZoomedImg] = useState(null);
+    const [bunnyVideoId, setBunnyVideoId] = useState('d0b4ce3c-9cda-4de6-9d93-85af56700cfe');
     const errorRef = useRef(null);
     const loginFormRef = useRef(null);
+
+    useEffect(() => {
+        fetchAbonnementSettings().then(data => {
+            if (data.bunny_video_id) setBunnyVideoId(data.bunny_video_id);
+        }).catch(() => {});
+    }, []);
 
     // Quand errorMessage change et n'est pas vide, on scroll vers lui
     useEffect(() => {
@@ -99,9 +106,13 @@ function Abonnement() {
         </header>
             <form className="pt-8" onSubmit={handleSubmit}>
             <div className='bg-white  dark:bg-neutral-800 flex flex-col border-2 rounded-lg shadow-lg shadow-black/50 p-10 mx-2 md:mx-auto md:max-w-4xl border-marron'>
-            <video className="w-full rounded-xl" controls  >
-                <source src={videoAbo} type="video/mp4" />
-            </video>
+            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                    src={`https://iframe.mediadelivery.net/embed/515846/${bunnyVideoId}`}
+                    className="absolute inset-0 w-full h-full" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture"
+                    allowFullScreen
+                />
+            </div>
             <div className='flex flex-row md:gap-4 gap-1 mt-6 overflow-x-auto snap-x snap-mandatory md:overflow-visible'>
                 <img src={miniature} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setZoomedImg(miniature)} />
                 <img src={miniature2} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setZoomedImg(miniature2)} />

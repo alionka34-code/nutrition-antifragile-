@@ -24,6 +24,7 @@ from .views import VideoCommentListCreateView, VideoCommentReplyCreateView, Vide
 from .views import combined_content_list
 from .views import ThemeViewSet, ChapterViewSet, AnnexeViewSet
 from .views import ChapterCommentListCreateView, ChapterCommentReplyCreateView, ChapterCommentDeleteView
+from .views import AbonnementSettingsView
 
 # Router for ViewSets
 router = DefaultRouter()
@@ -70,4 +71,5 @@ urlpatterns = [
     path('videos/', views.VideoListView.as_view(), name='video-list'),
     path('video/<slug:slug>/', VideoDetailView.as_view(), name="video-detail"),  # Liste des vidéos
     path('validate-video-token/', views.validate_video_token, name='validate-video-token'),  # Validation des tokens vidéo
+    path('abonnement-settings/', AbonnementSettingsView.as_view(), name='abonnement-settings'),
 ]

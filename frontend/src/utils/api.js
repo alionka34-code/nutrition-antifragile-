@@ -296,4 +296,10 @@ export async function deleteVideoComment(commentId, token) {
   }
 }
 
+export async function fetchAbonnementSettings() {
+  const res = await fetch(`${API_URL}/abonnement-settings/`);
+  if (!res.ok) throw new Error(`Erreur ${res.status}`);
+  return await res.json();
+}
+
 export default API_URL

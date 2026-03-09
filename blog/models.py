@@ -199,6 +199,17 @@ class Annexe(models.Model):
         return self.title
 
 
+class AbonnementSettings(models.Model):
+    bunny_video_id = models.CharField(max_length=255, help_text="ID de la vidéo Bunny.net à afficher sur la page d'abonnement")
+
+    class Meta:
+        verbose_name = "Paramètres Abonnement"
+        verbose_name_plural = "Paramètres Abonnement"
+
+    def __str__(self):
+        return f"Paramètres Abonnement (video: {self.bunny_video_id})"
+
+
 class ChapterComment(models.Model):
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
