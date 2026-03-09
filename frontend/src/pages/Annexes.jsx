@@ -64,14 +64,13 @@ function Annexes() {
                                     {stripHtml(annexe.description)}
                                 </p>
                             </div>
-                            <div className="flex items-center justify-between pt-4">
-                                <p className="font-SF">{annexe.duration} min de lecture</p>
+                            <div className="flex items-center justify-end pt-4">
                                 {annexe.fichier_pdf_url && (
                                     <a
                                         href={annexe.fichier_pdf_url}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="text-white bg-marron hover:bg-opacity-80 font-SFBold rounded-xl px-4 py-2 text-sm transition-colors"
+                                        className="text-white bg-marron hover:bg-opacity-80 font-SFBold rounded-full px-4 py-2 text-sm transition-colors"
                                     >
                                         Télécharger PDF
                                     </a>

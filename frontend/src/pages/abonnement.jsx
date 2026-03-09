@@ -24,6 +24,9 @@ import avis13 from  '../assets/images/avis13.jpg'
 import avis14 from  '../assets/images/avis14.jpg'
 import avis15 from  '../assets/images/avis15.jpg'
 import miniature from '../assets/images/miniature.png';
+import miniature2 from '../assets/images/miniature2.png';
+import miniature3 from '../assets/images/miniature3.png';
+import videoAbo from '../assets/video/video abo.mp4';
 
 
   
@@ -35,6 +38,7 @@ function Abonnement() {
     const [errorMessage, setErrorMessage] = useState('');
     const [showLoginForm, setShowLoginForm] = useState(false);
 
+    const [zoomedImg, setZoomedImg] = useState(null);
     const errorRef = useRef(null);
     const loginFormRef = useRef(null);
 
@@ -95,12 +99,19 @@ function Abonnement() {
         </header>
             <form className="pt-8" onSubmit={handleSubmit}>
             <div className='bg-white  dark:bg-neutral-800 flex flex-col border-2 rounded-lg shadow-lg shadow-black/50 p-10 mx-2 md:mx-auto md:max-w-4xl border-marron'>
-            <iframe className="w-full h-64 md:h-112 rounded-xl" src="https://www.youtube.com/embed/Gu-g8FRG4Zs" title="Vidéo de présentation de l'abonnement" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            <video className="w-full rounded-xl" controls  >
+                <source src={videoAbo} type="video/mp4" />
+            </video>
             <div className='flex flex-row md:gap-4 gap-1 mt-6 overflow-x-auto snap-x snap-mandatory md:overflow-visible'>
-                <img src={miniature} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start" />
-                <img src={miniature} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start" />
-                <img src={miniature} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start" />
+                <img src={miniature} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setZoomedImg(miniature)} />
+                <img src={miniature2} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setZoomedImg(miniature2)} />
+                <img src={miniature3} alt="Miniature de la vidéo" className="min-w-[70%] md:min-w-0 md:w-60 h-25 md:h-40 rounded-xl object-cover snap-start cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setZoomedImg(miniature3)} />
             </div>
+            {zoomedImg && (
+                <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setZoomedImg(null)}>
+                    <img src={zoomedImg} alt="Zoom" className="max-w-full max-h-full rounded-xl shadow-2xl" />
+                </div>
+            )}
             <div>
                 <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Pour qui ?</h2>
                 <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Pour ceux qui en ont marre d'entendre tout et son contraire.<br/>Pour ceux qui veulent comprendre, pas juste appliquer bêtement.<br/>Pour ceux qui veulent (vraiment) prendre leur santé en main et devenir acteurs de leur vie.</p>
