@@ -109,7 +109,7 @@ export default function SubscriptionSuccess() {
 
           {/* Description */}
           <p className="font-SF text-gray-600 dark:text-white text-base md:text-lg mb-8">
-            Tu peux dès maintenant explorer l'ensemble des contenus exclusif.
+            Tu peux dès maintenant explorer l'ensemble des contenus exclusifs.
           </p>
 
           {/* CTA */}
