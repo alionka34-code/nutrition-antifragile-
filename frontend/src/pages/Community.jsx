@@ -50,9 +50,9 @@ function Community() {
             <div className='bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-600 rounded-2xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center'>
                 <img src={livre} alt="Livre Nutrition Antifragile" className='w-48 md:w-56 rounded-xl shadow-md flex-shrink-0' />
                 <div className='flex flex-col gap-4'>
-                    <h2 className='font-SFBold text-2xl dark:text-white'>Mon livre — disponible sur Amazon</h2>
+                    <h2 className='font-SFBold text-2xl dark:text-white'>Mon livre</h2>
                     <p className='font-SF text-lg text-gray-600 dark:text-gray-300'>
-                        Une plongée lucide dans les coulisses du « bien manger » moderne.
+                        Une plongée lucide dans les coulisses du « bien manger » moderne.<br/>
 
 Et si votre intuition nutritionnelle avait été reconditionnée depuis l’enfance ? Ce que vous mettez dans votre assiette influence bien plus que votre corps : il façonne votre mental, vos habitudes et même vos envies.
 
