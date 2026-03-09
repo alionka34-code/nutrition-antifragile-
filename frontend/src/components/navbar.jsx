@@ -116,7 +116,7 @@ function Navbar() {
         <div className="absolute left-1/2 -translate-x-1/2">
           <Link to="/" className="flex flex-col items-center">
             <span className="font-SFBold text-marron text-md md:text-xl whitespace-nowrap tracking-wide">ALIONKA HOUL — NOURRIR AVEC L'INSTINCT</span>
-            <span className="font-SF text-gray-400 dark:text-gray-500 text-xs whitespace-nowrap">ISSN 3098-7113</span>
+            <span className="font-SF text-gray-400 dark:text-gray-500 text-xs whitespace-nowrap">ISNI 0000 0005 1675 5683</span>
           </Link>
         </div>
 
