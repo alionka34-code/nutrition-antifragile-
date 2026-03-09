@@ -1,8 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from .models import Profile
-from .models import Article
+from .models import Profile, Article, Comment, VideoComment, ChapterComment, Notification
 from django.conf import settings
 from django.core.mail import send_mail
 from .utils.brevo_email import send_brevo_email
@@ -83,3 +82,64 @@ def add_user_to_brevo(sender, instance, created, **kwargs):
         print(f"⚠️ Erreur lors de l'ajout à Brevo pour {instance.email}: {e}")
     except Exception as e:
         print(f"❌ Erreur inattendue lors de l'ajout à Brevo: {e}")
+
+
+def _create_comment_notifications(instance, comment_type, content_title, content_slug):
+    """Create notifications for a new comment or reply."""
+    preview = instance.content[:150]
+
+    if instance.parent_comment is not None:
+        # It's a reply — notify the parent comment author if admin or subscribed
+        parent_author = instance.parent_comment.user
+        # Don't notify yourself
+        if parent_author == instance.user:
+            return
+        # Only notify admin or subscribed users
+        is_admin = parent_author.is_staff
+        is_subscribed = hasattr(parent_author, 'profile') and parent_author.profile.is_subscribed
+        if is_admin or is_subscribed:
+            Notification.objects.create(
+                recipient=parent_author,
+                notification_type='reply',
+                comment_type=comment_type,
+                actor_username=instance.user.username,
+                content_preview=preview,
+                content_title=content_title,
+                content_slug=content_slug,
+            )
+    else:
+        # It's a top-level comment — notify all admin users
+        admin_users = User.objects.filter(is_staff=True).exclude(pk=instance.user.pk)
+        notifications = [
+            Notification(
+                recipient=admin,
+                notification_type='new_comment',
+                comment_type=comment_type,
+                actor_username=instance.user.username,
+                content_preview=preview,
+                content_title=content_title,
+                content_slug=content_slug,
+            )
+            for admin in admin_users
+        ]
+        if notifications:
+            Notification.objects.bulk_create(notifications)
+
+
+@receiver(post_save, sender=Comment)
+def notify_article_comment(sender, instance, created, **kwargs):
+    if created:
+        _create_comment_notifications(instance, 'article', instance.article.title, instance.article.slug or '')
+
+
+@receiver(post_save, sender=VideoComment)
+def notify_video_comment(sender, instance, created, **kwargs):
+    if created:
+        _create_comment_notifications(instance, 'video', instance.video.title, instance.video.slug or '')
+
+
+@receiver(post_save, sender=ChapterComment)
+def notify_chapter_comment(sender, instance, created, **kwargs):
+    if created:
+        theme_slug = instance.chapter.theme.slug or '' if instance.chapter.theme else ''
+        _create_comment_notifications(instance, 'chapter', instance.chapter.title, theme_slug)

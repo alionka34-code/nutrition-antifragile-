@@ -25,6 +25,7 @@ from .views import combined_content_list
 from .views import ThemeViewSet, ChapterViewSet, AnnexeViewSet
 from .views import ChapterCommentListCreateView, ChapterCommentReplyCreateView, ChapterCommentDeleteView
 from .views import AbonnementSettingsView
+from .views import NotificationListView, NotificationMarkReadView
 
 # Router for ViewSets
 router = DefaultRouter()
@@ -72,4 +73,8 @@ urlpatterns = [
     path('video/<slug:slug>/', VideoDetailView.as_view(), name="video-detail"),  # Liste des vidéos
     path('validate-video-token/', views.validate_video_token, name='validate-video-token'),  # Validation des tokens vidéo
     path('abonnement-settings/', AbonnementSettingsView.as_view(), name='abonnement-settings'),
+
+    # Notifications
+    path('notifications/', NotificationListView.as_view(), name='notifications'),
+    path('notifications/mark-read/', NotificationMarkReadView.as_view(), name='notifications-mark-read'),
 ]

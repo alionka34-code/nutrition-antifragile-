@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import DarkModeSwitch from './DarkModeSwitch.jsx';
 import { AuthContext } from "../contexts/AuthContextDefinition";
 import { useRef, useEffect } from "react";
+import NotificationBell from './NotificationBell.jsx';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,21 +45,25 @@ function Navbar() {
       <div className="flex md:mr-10 justify-between items-center md:mx-20 px-6 py-4">
         <div className="text-2xl font-bold font-SF relative hidden md:block" ref={userMenuRef}>
           {username ? (
-            <span 
-              className="cursor-pointer hover:text-yellow-600 flex items-center gap-2 dark:text-gray-300" 
-              onClick={toggleUserMenu}
-            >
-              {username} 👋
-              {isAdmin ? (
-                <span className="px-2 py-1 text-xs rounded-lg font-SFBold bg-red-500 text-white">
-                  ADMIN
-                </span>
-              ) : (
-                <span className={`px-2 py-1  text-xs rounded-lg font-SFBold ${isSubscribed ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
-                  {isSubscribed ? 'PREMIUM' : 'FREE'}
-                </span>
-              )}
-            </span>
+            <div className="flex items-center gap-3">
+              <span
+                className="cursor-pointer hover:text-yellow-600 flex items-center gap-2 dark:text-gray-300"
+                onClick={toggleUserMenu}
+              >
+                {username} 👋
+                {isAdmin ? (
+                  <span className="px-2 py-1 text-xs rounded-lg font-SFBold bg-red-500 text-white">
+                    ADMIN
+                  </span>
+                ) : (
+                  <span className={`px-2 py-1  text-xs rounded-lg font-SFBold ${isSubscribed ? 'bg-yellow-400 text-black' : 'bg-gray-400 text-white'}`}>
+                    {isSubscribed ? 'PREMIUM' : 'FREE'}
+                  </span>
+                )}
+              </span>
+              {isAdmin && <NotificationBell />}
+              {!isAdmin && isSubscribed && <NotificationBell filterType="reply" />}
+            </div>
           ) : (
             <Link to="/connexion"></Link>
           )}
@@ -133,7 +138,7 @@ function Navbar() {
           {/* Section utilisateur mobile uniquement */}
           {username && (
             <li className="md:hidden text-lg font-SF mb-4 pb-4 border-b border-gray-300 dark:border-gray-600 w-full">
-              <div className="flex items-center gap-2 mb-3">
+              <div className="flex items-center gap-2 mb-3 flex-wrap">
                 <span className="text-yellow-600 font-bold">{username} 👋</span>
                 {isAdmin ? (
                   <span className="px-2 py-1 text-xs rounded-full font-SFBold bg-red-500 text-white">
@@ -144,6 +149,8 @@ function Navbar() {
                     {isSubscribed ? 'PREMIUM' : 'FREE'}
                   </span>
                 )}
+                {isAdmin && <NotificationBell />}
+                {!isAdmin && isSubscribed && <NotificationBell filterType="reply" />}
               </div>
               <div className="flex flex-col gap-2 text-sm">
                 {isSubscribed ? (
@@ -162,6 +169,15 @@ function Navbar() {
                     onClick={toggleMenu}
                   >
                     S'abonner
+                  </Link>
+                )}
+                {(isAdmin || isSubscribed) && (
+                  <Link
+                    to="/community"
+                    className="hover:text-yellow-600"
+                    onClick={toggleMenu}
+                  >
+                    Communauté
                   </Link>
                 )}
                 {isAdmin && (

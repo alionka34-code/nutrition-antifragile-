@@ -16,12 +16,12 @@ function ContactForm() {
 
   const onSubmit = (data) => {
     emailjs.send(
-      'service_3481wnr', // ID EmailJS
-      'template_ndgo59d', // Template ID
+      'service_3481wnr',
+      'template_ndgo59d',
       data,
-      '83hSlOwetgdnqPlXK' // Public Key EmailJS
+      '83hSlOwetgdnqPlXK'
     ).then(() => {
-      reset(); // Réinitialise le formulaire
+      reset();
     }).catch((error) => {
       console.error('Erreur envoi:', error);
     });
@@ -29,98 +29,115 @@ function ContactForm() {
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Contactez-nous | Nutrition Antifragile - Nutrition et Bien-être</title>
         <meta name="description" content="Contactez l'équipe de Nutrition Antifragile pour toute question ou suggestion sur la nutrition et le bien-être. Nous sommes là pour vous accompagner et échanger avec vous." />
-    </Helmet>
-    <header>
-        <div className="flex flex-col mx-auto max-w-4xl">
-          <h1 className="md:text-6xl text-4xl text-center text-marron font-SFBold">CONTACTEZ-NOUS</h1>
-        <p className="md:text-xl text-center font-SF text-gray-600 m-2 dark:text-white">Que vous ayez des questions sur le livre, que vous souhaitiez partager votre expérience ou que vous cherchiez des conseils personnalisés, n'hésitez pas à nous écrire.</p>
+      </Helmet>
+
+      <header>
+        <div className="flex flex-col mx-auto max-w-4xl px-4 pt-10">
+          <h1 className="md:text-6xl text-4xl text-center text-marron font-SFBold">Contactez-nous</h1>
+          <p className="md:text-xl text-center font-SF text-gray-600 dark:text-white mt-3">
+            Que vous ayez des questions, souhaitiez partager votre expérience ou cherchiez des conseils, n'hésitez pas à nous écrire.
+          </p>
         </div>
-    </header>
-    <main>
-      <div className='flex flex-col md:flex-row justify-center items-center border-3 border-marron rounded-4xl mx-4 md:mx-auto md:max-w-6xl md:px-20 md:py-10 text-center my-10 gap-10  shadow-xl'>
-        <form onSubmit={handleSubmit(onSubmit)} className="mx-4 p-6 font-SFBold  space-y-10  ">
-      <h2 className="text-4xl font-SFBold text-center text-marron">Envoyez nous un message</h2>
+      </header>
 
+      <main className="px-4 py-10">
+        <div className="bg-white dark:bg-neutral-800 border-2 border-marron rounded-2xl shadow-lg shadow-black/30 mx-auto max-w-5xl p-8 md:p-12 flex flex-col md:flex-row gap-10">
 
-      <label className='font-SFBold text-lg dark:text-white'>Votre nom 
-        <input
-        type="text"
-        placeholder="Entrez votre nom"
-        {...register('name', { required: true })}
-        className="w-full p-3 mb-6 border rounded-2xl font-SF"
-      /> {errors.name && <p className="text-red-500">Ce champ est requis</p>}
-     </label>
+          {/* Formulaire */}
+          <form onSubmit={handleSubmit(onSubmit)} className="flex-1 flex flex-col gap-6">
+            <h2 className="text-2xl md:text-3xl font-SFBold text-marron">Envoyez-nous un message</h2>
 
-     <label className='font-SFBold text-lg dark:text-white'>Votre email
-      <input
-        type="email"
-        placeholder="votre@email.com"
-        {...register('email', { required: true })}
-        className="w-full p-3 mb-6 border rounded-2xl font-SF"
-      />
-      {errors.email && <p className="text-red-500">Ce champ est requis</p>}
-     </label>
+            <label className="flex flex-col gap-1 font-SFBold text-base dark:text-white">
+              Votre nom
+              <input
+                type="text"
+                placeholder="Entrez votre nom"
+                {...register('name', { required: true })}
+                className="w-full p-3 border border-beige2 rounded-xl font-SF dark:bg-neutral-700 dark:border-neutral-600 dark:text-white focus:outline-none focus:border-marron transition-colors"
+              />
+              {errors.name && <p className="text-red-500 text-sm font-SF">Ce champ est requis</p>}
+            </label>
 
-     <label className='font-SFBold text-lg dark:text-white'>Sujet  
-      <input 
-        type="text"
-        placeholder="Objet du message"
-        {...register('objet', { required: true})}
-        className="w-full p-3 mb-6 border rounded-2xl font-SF"/>
-        {errors.objet && <p className="text-red-500">Ce champ est requis</p>}
-     </label>   
+            <label className="flex flex-col gap-1 font-SFBold text-base dark:text-white">
+              Votre email
+              <input
+                type="email"
+                placeholder="votre@email.com"
+                {...register('email', { required: true })}
+                className="w-full p-3 border border-beige2 rounded-xl font-SF dark:bg-neutral-700 dark:border-neutral-600 dark:text-white focus:outline-none focus:border-marron transition-colors"
+              />
+              {errors.email && <p className="text-red-500 text-sm font-SF">Ce champ est requis</p>}
+            </label>
 
-     <label className='font-SFBold text-lg dark:text-white'>Votre message
-      <textarea
-        placeholder="De quoi souhaitez-vous parler ?"
-        {...register('message', { required: true })}
-        className="w-full p-3 border mb-6 rounded-2xl font-SF h-32"
-      ></textarea>
-      {errors.message && <p className="text-red-500">Ce champ est requis</p>}
-      </label>
+            <label className="flex flex-col gap-1 font-SFBold text-base dark:text-white">
+              Sujet
+              <input
+                type="text"
+                placeholder="Objet du message"
+                {...register('objet', { required: true })}
+                className="w-full p-3 border border-beige2 rounded-xl font-SF dark:bg-neutral-700 dark:border-neutral-600 dark:text-white focus:outline-none focus:border-marron transition-colors"
+              />
+              {errors.objet && <p className="text-red-500 text-sm font-SF">Ce champ est requis</p>}
+            </label>
 
-      <button type="submit" className="bg-marron text-white text-xl px-6 py-2 rounded-xl hover:bg-yellow-600 transition block mx-auto font-SFBold">
-        ENVOYER
-      </button>
+            <label className="flex flex-col gap-1 font-SFBold text-base dark:text-white">
+              Votre message
+              <textarea
+                placeholder="De quoi souhaitez-vous parler ?"
+                {...register('message', { required: true })}
+                className="w-full p-3 border border-beige2 rounded-xl font-SF h-36 resize-none dark:bg-neutral-700 dark:border-neutral-600 dark:text-white focus:outline-none focus:border-marron transition-colors"
+              />
+              {errors.message && <p className="text-red-500 text-sm font-SF">Ce champ est requis</p>}
+            </label>
 
-      {isSubmitSuccessful && (
-        <p className="text-green-600 text-center">Message envoyé avec succès !</p>
-      )}
-      <h3 className="text-center font-SFBold text-lg dark:text-white">Rejoignez la communauté antifragile sur mes reséaux sociaux qui comptent déjà plus de 60 000 abonnés :</h3>
-        <div className="flex justify-center">
-            <a href="https://www.tiktok.com/@nut_antifragile" target="_blank" rel="noopener noreferrer" className="mx-2">
-            <img src={tiktok} alt="TikTok" className="w-10 h-10" />
-            </a>
-            <a href="https://www.instagram.com/nutrition_antifragile/" target="_blank" rel="noopener noreferrer" className="mx-2">
-            <img src={instagram} alt="Instagram" className="w-10 h-10" />
-            </a>
-        </div>    
-        
-    </form>
-  <div className='border-0 md:border-3 md:border-marron rounded-4xl p-6 max-w-sm h-fit mx-10 md:mx-auto md:shadow-xl mb-10'>
-      <script async
+            <button
+              type="submit"
+              className="self-start font-SFBold text-white text-base px-8 py-3 rounded-full bg-gradient-to-tr from-peach to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 shadow-md"
+            >
+              Envoyer
+            </button>
 
-src="https://js.stripe.com/v3/buy-button.js">
+            {isSubmitSuccessful && (
+              <div className="inline-flex items-center gap-2 bg-green-50 dark:bg-green-900/30 border border-green-300 dark:border-green-600 rounded-full px-4 py-2 self-start">
+                <span className="w-2 h-2 rounded-full bg-green-500 inline-block" />
+                <span className="font-SF text-green-700 dark:text-green-400 text-sm">Message envoyé avec succès !</span>
+              </div>
+            )}
 
-</script>
+            {/* Réseaux sociaux */}
+            <div className="border-t border-beige2 dark:border-neutral-600 pt-6 mt-2">
+              <p className="font-SFBold text-sm dark:text-white mb-4">
+                Rejoignez la communauté antifragile sur les réseaux sociaux — plus de 60 000 abonnés :
+              </p>
+              <div className="flex gap-4">
+                <a href="https://www.tiktok.com/@nut_antifragile" target="_blank" rel="noopener noreferrer">
+                  <img src={tiktok} alt="TikTok" className="w-10 h-10 hover:opacity-75 transition-opacity" />
+                </a>
+                <a href="https://www.instagram.com/nutrition_antifragile/" target="_blank" rel="noopener noreferrer">
+                  <img src={instagram} alt="Instagram" className="w-10 h-10 hover:opacity-75 transition-opacity" />
+                </a>
+              </div>
+            </div>
+          </form>
 
-<stripe-buy-button
+          {/* Séparateur vertical */}
+          <div className="hidden md:block w-px bg-beige2 dark:bg-neutral-600" />
 
-buy-button-id="buy_btn_1S1n1ABthRAmBImUOeE0dzv0"
+          {/* Bouton Stripe */}
+          <div className="flex flex-col items-center justify-center md:w-72">
+            <h2 className="text-xl md:text-2xl font-SFBold text-marron mb-6 text-center">Rejoindre la communauté</h2>
+            <script async src="https://js.stripe.com/v3/buy-button.js" />
+            <stripe-buy-button
+              buy-button-id="buy_btn_1S1n1ABthRAmBImUOeE0dzv0"
+              publishable-key="pk_live_51RqKy7BthRAmBImU2KV37i8gu6iRV9wk44IqENdZcsC28HIwGrRm0L4K4QvrD76a2AyHC19bs76hcEY5tij2Iosf00M86EKP4s"
+            />
+          </div>
 
-publishable-key="pk_live_51RqKy7BthRAmBImU2KV37i8gu6iRV9wk44IqENdZcsC28HIwGrRm0L4K4QvrD76a2AyHC19bs76hcEY5tij2Iosf00M86EKP4s"
-
->
-
-</stripe-buy-button>
-    </div>
-      </div>
-      
-   
-    </main>
+        </div>
+      </main>
     </>
   );
 }

@@ -36,7 +36,7 @@ function Community() {
                 <div className='border-t border-white/30 pt-6'>
                     <p className='font-SF text-lg mb-4 opacity-90'>Une question ? Une adresse à partager ? Une recette ?</p>
                     <a
-                        href="https://t.me/joinchat/AAAAAEj8n9sXoQy7l3c5w"
+                        href="https://t.me/+V9qod5xicHM1ZDg0"
                         target="_blank"
                         rel="noopener noreferrer"
                         className='inline-block bg-white text-marron font-SFBold px-6 py-3 rounded-full transition-all duration-200 hover:bg-peach hover:text-white hover:scale-105 active:scale-95'

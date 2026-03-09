@@ -52,18 +52,9 @@ function ThemeDetail() {
         <NavCommunity />
         <PremiumOverlay>
         <header className="pt-10 border-b-1 border-gray-300 dark:border-neutral-700">
-            <div className="text-left mx-4 md:mx-auto md:max-w-6xl">
+            <div className="text-left mx-4 md:mx-auto md:max-w-6xl mb-8 ">
                 <h1 className="text-2xl md:text-4xl font-SFBold mb-4 text-marron">{theme.title}</h1>
-                <div className="article-content font-SF text-xl" dangerouslySetInnerHTML={{ __html: theme.description }} />
-                <button
-                    onClick={() => document.getElementById('chapitres-section')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="my-8 border-1 border-marron rounded-xl p-4 font-SFBold flex items-center gap-2 hover:bg-marron hover:text-white transition-colors"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                    </svg>
-                    COMMENCER
-                </button>
+                <div className="article-content font-SF text-xl" dangerouslySetInnerHTML={{ __html: theme.description }} /> 
             </div>
         </header>
         <main id="chapitres-section" className="mt-10 flex flex-col md:flex-row md:gap-40 mx-4 md:mx-auto md:max-w-6xl">

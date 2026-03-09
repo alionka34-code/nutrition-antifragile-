@@ -41,7 +41,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 
-from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment, Theme, Chapter, ChapterComment, Annexe, AbonnementSettings
+from .models import Article, Profile, Comment, StripeWebhookLog, Video, VideoComment, Theme, Chapter, ChapterComment, Annexe, AbonnementSettings, Notification
 from .serializers import (
     ArticleSerializer,
     CommentSerializer,
@@ -1175,5 +1175,41 @@ class AbonnementSettingsView(APIView):
         if settings_obj:
             return Response({"bunny_video_id": settings_obj.bunny_video_id})
         return Response({"bunny_video_id": None})
+
+
+# =============================
+# Notifications
+# =============================
+class NotificationListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        notifications = Notification.objects.filter(recipient=request.user, is_read=False)
+        data = [
+            {
+                "id": n.id,
+                "notification_type": n.notification_type,
+                "comment_type": n.comment_type,
+                "actor_username": n.actor_username,
+                "content_preview": n.content_preview,
+                "content_title": n.content_title,
+                "content_slug": n.content_slug,
+                "created_at": n.created_at.isoformat(),
+            }
+            for n in notifications
+        ]
+        return Response({"count": len(data), "notifications": data})
+
+
+class NotificationMarkReadView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        ids = request.data.get("ids")
+        qs = Notification.objects.filter(recipient=request.user, is_read=False)
+        if ids:
+            qs = qs.filter(id__in=ids)
+        qs.update(is_read=True)
+        return Response({"status": "ok"})
 
 
