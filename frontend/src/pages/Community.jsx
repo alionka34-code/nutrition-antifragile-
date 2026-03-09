@@ -56,7 +56,7 @@ function Community() {
 
 Et si votre intuition nutritionnelle avait été reconditionnée depuis l’enfance ? Ce que vous mettez dans votre assiette influence bien plus que votre corps : il façonne votre mental, vos habitudes et même vos envies.
 
-Nutrition Antifragile dévoile les dérives de l’alimentation moderne, les manipulations de l’industrie et les mythes qui ont transformé le “manger sain” en machine à sous.
+Nutrition Antifragile dévoile les dérives de l’alimentation moderne, les manipulations de l’industrie et les mythes qui ont transformé le « manger sain » en machine à sous.
 
 
                     </p>
