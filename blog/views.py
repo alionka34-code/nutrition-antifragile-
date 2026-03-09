@@ -1033,7 +1033,7 @@ def validate_video_token(request):
 # Themes and Chapters ViewSets
 # =============================
 class ThemeViewSet(viewsets.ModelViewSet):
-    queryset = Theme.objects.all().order_by('-created_at')
+    queryset = Theme.objects.all().order_by('created_at')
     serializer_class = ThemeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 

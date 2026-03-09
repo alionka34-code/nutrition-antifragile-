@@ -16,14 +16,19 @@ function Home() {
 
         </Helmet>
         <div className="relative">
-            <div className="blur-sm pointer-events-none select-none">
-                <main>
+               <main>
                 <HomeHeader />
                 <ProfilSection />
                 <BookSection />
                 <MemberSection />
-                </main>
+                </main> 
+            {/* Effet de flou pour les sections en dessous du header 
+            <div className="blur-sm pointer-events-none select-none">
+             
             </div>
+            */}
+            
+            {/* Overlay de maintenance - à activer en cas de besoin 
             <div className="fixed inset-0 flex items-start justify-center pt-20 bg-white/60 dark:bg-neutral-900/70 z-[100]">
                 <div className="text-center p-8 md:p-12 bg-white rounded-2xl shadow-2xl max-w-lg mx-4 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700">
                     <svg className="w-16 h-16 text-marron mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -35,6 +40,8 @@ function Home() {
                     </p>
                 </div>
             </div>
+            */}
+            
         </div>
     </>
     );
