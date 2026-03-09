@@ -248,7 +248,7 @@ function Connexion() {
             <meta name="description" content="Connectez-vous à votre compte Nutrition Antifragile pour accéder à vos articles exclusifs, ressources et avantages réservés aux membres.." />
         </Helmet>
         <header>
-            <h1 className="text-center text-4xl md:text-6xl font-SFBold text-marron">CONNEXION</h1>
+            <h1 className="text-center mt-8 text-4xl md:text-6xl font-SFBold text-marron">CONNEXION</h1>
             <p className="text-center text-lg md:text-xl text-gray-500 mt-2 font-SF mx-4 dark:text-white">Accédez à votre espace personnel et découvrez les secrets d'une nutrition antifragile</p>
         </header>
         
