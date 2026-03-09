@@ -52,10 +52,16 @@ function Community() {
                 <div className='flex flex-col gap-4'>
                     <h2 className='font-SFBold text-2xl dark:text-white'>Mon livre — disponible sur Amazon</h2>
                     <p className='font-SF text-lg text-gray-600 dark:text-gray-300'>
-                        Un guide complet pour comprendre les bases de la nutrition intelligente et mettre en place une alimentation qui te rendra plus fort, plus résilient et plus performant au quotidien.
+                        Une plongée lucide dans les coulisses du « bien manger » moderne.
+
+Et si votre intuition nutritionnelle avait été reconditionnée depuis l’enfance ? Ce que vous mettez dans votre assiette influence bien plus que votre corps : il façonne votre mental, vos habitudes et même vos envies.
+
+Nutrition Antifragile dévoile les dérives de l’alimentation moderne, les manipulations de l’industrie et les mythes qui ont transformé le “manger sain” en machine à sous.
+
+
                     </p>
                     <p className='font-SF text-lg text-gray-600 dark:text-gray-300'>
-                        Des explications claires, des conseils pratiques et des stratégies concrètes pour devenir plus résilient face aux défis nutritionnels du quotidien.
+                        Reprenez le contrôle et transformez votre quotidien, un repas à la fois.
                     </p>
                     <button
                         onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"}
