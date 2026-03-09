@@ -915,7 +915,8 @@ class PasswordResetRequestView(APIView):
             logger.info(f"Password reset email sent to {email} via Brevo: {email_sent}")
             return Response(
                 {
-                    "message": "Si cette adresse email existe, vous recevrez un email de réinitialisation."
+                    "message": "Si cette adresse email existe, vous recevrez un email de réinitialisation.",
+                    "username": user.username,
                 },
                 status=status.HTTP_200_OK,
             )

@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 function PasswordLost() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [message, setMessage] = useState('');
+  const [username, setUsername] = useState('');
 
   const onSubmit = async (data) => {
     try { 
@@ -21,6 +22,7 @@ function PasswordLost() {
       
       if (response.ok) {
         setMessage(json.message);
+        if (json.username) setUsername(json.username);
       } else {
         setMessage(json.error || 'Une erreur est survenue.');
       }
@@ -57,6 +59,7 @@ function PasswordLost() {
         <button type="submit" className='font-SFBold rounded-full text-white w-40 py-3 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:px-6'>Envoyer</button>
       </form>
        {message && <p className="mt-4 text-center">{message}</p>}
+       {username && <p className="mt-2 text-center font-SF dark:text-white">Nom d'utilisateur : <span className="font-SFBold">{username}</span></p>}
 
       
     </div>

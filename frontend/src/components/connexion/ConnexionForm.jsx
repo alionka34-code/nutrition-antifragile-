@@ -247,23 +247,7 @@ function ConnexionForm({ onLoginSuccess }) {
     return (
         <>
 
-        {/* Info block for mobile (shown above the auth container) */}
-        <div className="md:hidden mx-4 mt-6 text-center">
-           
-            <p className="text-center font-SF text-base mb-2 dark:text-white">
-                Rejoignez notre communauté et découvrez un aperçu de nos contenus exclusifs.
-            </p>
-            <p className="font-SF  dark:text-white"><span className="text-green-600 text-lg">✓ </span>Accédez aux extraits de tous les articles</p>
-            <p className="font-SF  dark:text-white"><span className="text-green-600 text-lg">✓ </span>Participez aux commentaires et échangez avec d’autres lecteurs engagés</p>
-            <p className="flex items-center justify-center font-SFBoltItalic mt-4 text-sm text-marron">
-                <span className="mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 text-black  dark:text-white">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-                    </svg>
-                </span>
-                L’accès intégral aux articles et aux vidéos est réservé aux membres Premium. Après votre inscription, vous aurez accès à votre espace membre où vous pourrez découvrir les offres Premium.
-            </p>
-        </div>
+        
 
         <div className="flex items-center justify-center p-4 pt-10">
             <div className="bg-white  dark:bg-neutral-800 rounded-4xl shadow-2xl relative overflow-hidden w-full max-w-6xl min-h-[600px] flex flex-col md:flex-row border-1 border-marron">
@@ -481,25 +465,9 @@ function ConnexionForm({ onLoginSuccess }) {
                         }`}>
                             <h1 className="font-SFBold text-4xl mb-4 text-shadow-lg">Inscription gratuite</h1>
                             <p className="text-center font-SF text-lg mb-4 text-shadow-md leading-relaxed">
-                                Rejoignez notre communauté et découvrez un aperçu de nos contenus exclusifs.              
+                                 Créez votre compte pour accéder à la communauté.            
                             </p>
-                            <p className="font-SF mb-2"><span className="text-green-600 text-xl">✓ </span>Accédez aux extraits de tous les articles</p>
-                            <p className="font-SF my-2"><span className="text-green-600 text-xl">✓ </span>Participez aux commentaires et échangez avec d’autres lecteurs engagés</p>
-                            <p className="flex items-center font-SFBoltItalic my-8"><span><svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="size-8 text-black">
-                                <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-    </svg> </span>L’accès intégral aux articles et aux vidéos est réservé aux membres Premium.
-
-Après votre inscription, vous aurez accès à votre espace membre où vous pourrez découvrir les offres Premium.</p>
-        
+                            
 
 
                             <button 
