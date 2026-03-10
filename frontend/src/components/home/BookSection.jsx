@@ -1,207 +1,147 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import livre from '../../assets/images/livre.png';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Grid } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "../../styles/swiper-custom.css";
 
+const StarRating = () => (
+    <div className="flex justify-center gap-0.5 py-4">
+        {[...Array(5)].map((_, i) => (
+            <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-yellow-400">
+                <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
+            </svg>
+        ))}
+    </div>
+);
+
+const reviews = [
+    "Nutrition Antifragile est un livre à la fois complet, accessible et passionnant. Il réussit le pari de mêler rigueur scientifique et clarté, sans jamais devenir trop technique. Les encadrés scientifiques rythment la lecture de manière intelligente, apportant des éclairages utiles sans alourdir le propos. La partie sur les aliments à privilégier est particulièrement intéressante : on y découvre des produits souvent oubliés ou mal compris, comme le kombucha, le riz noir, le pain au levain ou encore le bouillon d'os. C'est un ouvrage cohérent, bien ancré dans les préoccupations actuelles autour de l'alimentation, que je recommande sans hésiter.",
+    "Des révélations qui ont enfin mis de la clarté sur tous mes échecs alimentaires passés. Je cherchais des solutions sans voir le vrai problème. « Je portais des œillères », comme le dit si justement l'auteure. Ce livre m'a offert une vraie prise de conscience. Merci.",
+    "Avant de penser régime ou végétarisme, il faut remonter à la source de cette grande mascarade alimentaire. Ce livre révèle des vérités que beaucoup ignorent, non pas par négligence, mais parce qu'on les a soigneusement passées sous silence.",
+    "Un déclic immédiat. Ce livre ne donne pas des conseils en plus, il change complètement la façon de voir l'alimentation.",
+    "Nutrition Antifragile est un livre vraiment complet, accessible et passionnant. Je l'ai dévoré en 2 jours. Une mine d'or d'infos sans filtre, que je recommande sans hésiter.",
+];
+
 function BookSection() {
     const navigate = useNavigate();
-    
+
     return (
-        <section className="mt-10 md:mt-20">
-            <div className='flex flex-col md:flex-row md:gap-30 justify-center text-center'>
-                <div>
-                    <img src={livre} alt="Livre Nutrition Antifragile" className="w-80 md:w-100 h-auto shadow-xl/50 mx-auto md:block" />
+        <section className="mt-16 md:mt-24">
+
+            {/* Livre + présentation */}
+            <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-10 md:gap-16 items-center justify-center">
+                <div className="shrink-0">
+                    <img src={livre} alt="Livre Nutrition Antifragile" className="w-64 md:w-80 h-auto shadow-xl mx-auto rounded-xl" />
                 </div>
-                <div className='md:max-w-2xl mx-4 py-10'>
-                    <h2 className='font-SFBold text-marron text-2xl md:text-4xl'>La pilule rouge de l'alimentation</h2>
-                    <h3 className="mt-4 font-SF text-lg md:text-2xl mx-4 dark:text-white">Le seul livre qui dévoile comment l'industrie alimentaire a reprogrammé votre rapport à la nourriture, pour faire de vous un consommateur dépendant.</h3>
-                    <p className="mt-4 font-SF text-lg mb-2 md:text-xl dark:text-white">Vous decouvrirez:</p>
-                    <div className="flex flex-col justify-center gap-8 mx-4 md:mx-auto">
-                        <div className="border-2 border-solid border-marron rounded-xl flex-1 shadow-lg shadow-black/50">
-                            <p className="font-SFBold p-4 text-lg justify-center md:text-2xl dark:text-white">Pourquoi les aliments "healthy" vous maintiennent faible</p>
-                        </div>
-                        <div className="border-2 border-solid border-marron rounded-xl flex-1 shadow-lg shadow-black/50">
-                            <p className="font-SFBold p-4 text-lg md:text-2xl dark:text-white">Les pièges mentaux intégrés dès l'enfance</p>
-                        </div>
-                        <div className="border-2 border-solid border-marron rounded-xl flex-1 shadow-lg shadow-black/50">
-                            <p className="font-SFBold p-4 text-lg md:text-2xl dark:text-white">Retrouver votre instinct le plus primaire</p>
-                        </div>
+                <div className="flex-1 text-center md:text-left">
+                    <h2 className="font-SFBold text-marron text-2xl md:text-4xl">La pilule rouge de l'alimentation</h2>
+                    <p className="mt-4 font-SF text-lg md:text-xl text-gray-600 dark:text-white">
+                        Le seul livre qui dévoile comment l'industrie alimentaire a reprogrammé votre rapport à la nourriture, pour faire de vous un consommateur dépendant.
+                    </p>
+                    <p className="mt-5 font-SFBold text-base text-gray-700 dark:text-white">Vous découvrirez :</p>
+                    <div className="flex flex-col gap-3 mt-3">
+                        {[
+                            "Pourquoi les aliments « healthy » vous maintiennent faible",
+                            "Les pièges mentaux intégrés dès l'enfance",
+                            "Retrouver votre instinct le plus primaire",
+                        ].map((text, i) => (
+                            <div key={i} className="flex items-start gap-3 bg-beige1 dark:bg-neutral-800 border border-beige2 dark:border-neutral-600 rounded-xl px-4 py-3">
+                                <span className="text-marron font-SFBold mt-0.5">→</span>
+                                <p className="font-SF text-base md:text-lg text-gray-700 dark:text-white text-left">{text}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-8">
+                        <button
+                            onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"}
+                            className="font-SFBold text-white text-base md:text-lg px-8 py-3 rounded-full bg-gradient-to-tr from-peach to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 shadow-md"
+                        >
+                            Acheter le livre
+                        </button>
+                        <button
+                            onClick={() => navigate("/Extrait")}
+                            className="font-SFBold text-marron text-base md:text-lg px-8 py-3 rounded-full border-2 border-marron hover:bg-marron hover:text-white transition-colors duration-300"
+                        >
+                            Lire un extrait
+                        </button>
                     </div>
                 </div>
             </div>
-            
-            <h2 className='mt-10 md:mt-20 text-center font-SFBold text-2xl text-marron md:mx-auto md:max-w-5xl md:text-4xl mx-4'>
-                De chasseur-cueilleur a victime de l'industrie: il est temps de reprendre le controle.
-            </h2>
 
-            
-            <div className='flex flex-row mx-auto justify-center gap-5'>
-                <button onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"} className="mt-8 text-lg font-SFBold rounded-full text-white px-4 md:px-8 md:py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">ACHETER LE LIVRE</button>
-                <button onClick={() => navigate("/Extrait")} className="mt-8 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 md:text-xl">LIRE UN EXTRAIT</button>
-            </div> 
+            {/* Citation centrale */}
+            <div className="mt-16 mx-4 md:mx-auto md:max-w-4xl text-center">
+                <p className="font-SFBold text-marron text-2xl md:text-4xl">
+                    De chasseur-cueilleur à victime de l'industrie : il est temps de reprendre le contrôle.
+                </p>
+            </div>
 
-        
-            <div className="mt-20 py-10 bg-degrade-marron">
-                <h3 className="text-center font-SFBold text-white md:text-4xl text-2xl mx-4">Deux parties pour tout comprendre</h3>
-                <div className='flex flex-col md:flex-row justify-center gap-20 mt-10 max-w-6xl md:mx-auto mx-4'>
-                    <div className='border-4 border-marron p-10 rounded-lg flex-1'>
-                        <h4 className="font-SFBold text-yellow-300 text-xl md:text-2xl">PARTIE 1: CE QUI VOUS REND FAIBLE</h4>
-                        <p className="font-SF text-white text-lg md:text-xl mt-4">Découvrez l'évolution alimentaire, les mensonges de l'industrie et les 11 aliments "santé" à éviter</p>
-                        <div className="flex flex-col gap-6 mt-6">
-                            <div className='border-yellow-500 border-l-4 rounded-xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50'>
-                                <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 1: Evolution de l'alimentation</h5>
-                                <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">De chasseurs-cueilleurs à victimes de l'industrie : comment nous avons perdu notre instinct alimentaire.</p>
-                            </div>
-                            <div className="border-yellow-500 border-l-4 rounded-xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
-                                <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 2: On vous ment depuis le début</h5>
-                                <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">Programmation dès 6 ans, supermarché, petit-déjeuner "essentiel", greenwashing : décryptage des manipulations quotidiennes de l'industrie.</p>
-                            </div>
-                            <div className="border-yellow-500 border-l-4 rounded-xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
-                                <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 3: Aliments à éviter</h5>
-                                <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">Pain moderne, steaks végétaux, huiles de graines (...) : ce que l'industrie vous cache vraiment sur ces poisons.</p>
+            {/* Deux parties */}
+            <div className="mt-16 bg-gradient-to-tr from-peach to-yellow-700 py-12 px-4">
+                <h3 className="text-center font-SFBold text-white text-2xl md:text-4xl mb-10">Deux parties pour tout comprendre</h3>
+                <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
+                    {[
+                        {
+                            title: "PARTIE 1 : CE QUI VOUS REND FAIBLE",
+                            subtitle: "Découvrez l'évolution alimentaire, les mensonges de l'industrie et les 11 aliments « santé » à éviter",
+                            chapters: [
+                                { title: "Chapitre 1 : Évolution de l'alimentation", desc: "De chasseurs-cueilleurs à victimes de l'industrie : comment nous avons perdu notre instinct alimentaire." },
+                                { title: "Chapitre 2 : On vous ment depuis le début", desc: "Programmation dès 6 ans, supermarché, petit-déjeuner « essentiel », greenwashing : décryptage des manipulations quotidiennes." },
+                                { title: "Chapitre 3 : Aliments à éviter", desc: "Pain moderne, steaks végétaux, huiles de graines… : ce que l'industrie vous cache vraiment sur ces poisons." },
+                            ],
+                        },
+                        {
+                            title: "PARTIE 2 : CE QUI VOUS REND FORT",
+                            subtitle: "Redécouvrez les fondements d'une alimentation antifragile et naturelle",
+                            chapters: [
+                                { title: "Chapitre 4 : Comprendre pour mieux choisir", desc: "Corps-Esprit-Énergie : les fondements oubliés d'une alimentation antifragile et naturelle." },
+                                { title: "Chapitre 5 : Aliments à privilégier", desc: "Redécouvrir les vrais aliments diabolisés par l'industrie." },
+                                { title: "Chapitre 6 : Le jeûne, l'art de se soigner à travers les siècles", desc: "Découvrez cette pratique millénaire pour retrouver votre force naturelle." },
+                            ],
+                        },
+                    ].map((part, pi) => (
+                        <div key={pi} className="flex-1 bg-white/10 border border-white/30 rounded-2xl p-6 backdrop-blur-sm">
+                            <h4 className="font-SFBold text-yellow-200 text-lg md:text-xl mb-1">{part.title}</h4>
+                            <p className="font-SF text-white/80 text-sm mb-5">{part.subtitle}</p>
+                            <div className="flex flex-col gap-3">
+                                {part.chapters.map((ch, ci) => (
+                                    <div key={ci} className="bg-white/10 border-l-4 border-yellow-300 rounded-xl p-4">
+                                        <h5 className="font-SFBold text-white text-base">{ch.title}</h5>
+                                        <p className="mt-1 font-SF text-white/80 text-sm">{ch.desc}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                    </div>
-                    
-                    <div className='border-4 border-marron p-10 rounded-lg flex-1'>
-                        <h4 className="font-SFBold text-yellow-300 text-xl md:text-2xl">PARTIE 2: CE QUI VOUS REND FORT</h4>
-                        <p className="font-SF text-white text-lg md:text-xl mt-4">Redécouvrez les fondements d'une alimentation antifragile et naturelle</p>
-                        <div className='flex flex-col gap-6 mt-6'>
-                            <div className="border-yellow-500 border-l-4 rounded-xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
-                                <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 4 : Comprendre pour mieux choisir</h5>
-                                <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">Corps-Esprit-Énergie : les fondements oubliés d'une alimentation antifragile et naturelle.</p>
-                            </div>
-                            <div className="border-yellow-500 border-l-4 rounded-xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
-                                <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 5 : Aliments à privilégier</h5>
-                                <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">redécouvrir les vrais aliments diabolisés par l'industrie.</p>
-                            </div>
-                            <div className="border-yellow-500 border-l-4 rounded-xl p-4 opacity-100 bg-peach flex-1 shadow-lg shadow-black/50">
-                                <h5 className="font-SFBold text-white text-lg md:text-xl">Chapitre 6 : Le jeûne, l'art de se soigner à travers les siècles</h5>
-                                <p className="mt-2 font-SF text-gray-200 text-base md:text-lg">Découvrez cette pratique millénaire pour retrouver votre force naturelle.</p>
-                            </div>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
-            
-            <div className='mt-10 md:mx-40'>
+
+            {/* Avis lecteurs */}
+            <div className="mt-16 px-4 md:px-20">
+                <h3 className="text-center font-SFBold text-marron text-2xl md:text-3xl mb-8">Ce qu'en pensent les lecteurs</h3>
                 <Swiper
                     rewind={true}
                     centeredSlides={true}
                     slidesPerView={1}
                     autoHeight={true}
-                    autoplay={{
-                        delay: 10000,
-                        disableOnInteraction: false,
-                    }}
-                    pagination={{
-                        clickable: true,
-                        dynamicBullets: true,
-                    }}
-                    breakpoints={{
-                        768: {
-                            slidesPerView: 3,
-                            spaceBetween: 20, // Tablette et grands écrans
-                        }
-                    }}
+                    autoplay={{ delay: 8000, disableOnInteraction: false }}
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    breakpoints={{ 768: { slidesPerView: 3, spaceBetween: 20 } }}
                     modules={[Autoplay, Pagination]}
-                    className="mySwiper"
+                    className="mySwiper pb-10"
                 >
-                    <SwiperSlide className='flex justify-center items-center'>
-                        <div className='bg-gray-200 rounded-xl dark:bg-neutral-800 mx-4'>
-                            <p className='text-center font-SF text-lg p-5 dark:text-white'>
-                                Nutrition Antifragile est un livre à la fois complet, accessible et passionnant, il réussit le pari de mêler rigueur scientifique et clarté, sans jamais devenir trop technique. Les encadrés scientifiques rythment la lecture de manière intelligente, apportant des éclairages utiles sans alourdir le propos.<br/>
-                                La partie sur les aliments à privilégier est particulièrement intéressante: on y découvre des produits souvent oubliés ou mal compris, comme le kombucha, le riz noir, le pain au levain ou encore le bouillon d'os.<br/> 
-                                L'analyse est solide, bien documentée, et offre des recommandations à la fois concrètes, critiques et très pertinentes.<br/>
-                                C'est un ouvrage cohérent, bien ancré dans les préoccupations acctuelles autour de l'alimentation, que je recommande sans hésiter.
-                            </p>
-                            <div className="grid place-items-center py-5">
-                                <div className="inline-flex items-center">
-                                    {[...Array(5)].map((_, i) => (
-                                        <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-yellow-300">
-                                            <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                                        </svg>
-                                    ))}
-                                </div>
+                    {reviews.map((text, i) => (
+                        <SwiperSlide key={i} className="flex justify-center items-center">
+                            <div className="bg-beige1 dark:bg-neutral-800 border border-beige2 dark:border-neutral-600 rounded-2xl mx-2 px-5 pt-5">
+                                <p className="font-SF text-base text-gray-700 dark:text-white text-center">{text}</p>
+                                <StarRating />
                             </div>
-                        </div>
-                    </SwiperSlide>
-                    
-                    <SwiperSlide className='flex justify-center items-center'>
-                        <div className='bg-gray-200 rounded-xl dark:bg-neutral-800 mx-4'>
-                            <p className='text-center font-SF text-lg p-5 dark:text-white'>
-                                Des révélations qui ont enfin mis de la clarté sur tous mes échecs alimentaires passés. Je cherchais des solutions sans voir le vrai problème. " Je portais des œillères", comme le dit si justement l'auteure. Ce livre m'a offert une vraie prise de conscience. Merci
-                            </p>
-                            <div className="grid place-items-center py-5">
-                                <div className="inline-flex items-center">
-                                    {[...Array(5)].map((_, i) => (
-                                        <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-yellow-300">
-                                            <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                                        </svg>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                    
-                    <SwiperSlide className='flex justify-center items-center'>
-                        <div className='bg-gray-200 rounded-xl dark:bg-neutral-800 mx-4'>
-                            <p className='text-center font-SF text-lg p-5 dark:text-white'>
-                                Avant de penser régime ou végétarisme, il faut remonter à la source de cette grande mascarade alimentaire. Le vrai commencement. Un point de départ fondamental dont personne ne parle, et pourtant indispensable pour tout comprendre. Ce livre révèle des vérités que beaucoup ignorent, non pas par négligence, mais parce qu'on les a soigneusement passées sous silence.
-                            </p>
-                            <div className="grid place-items-center py-5">
-                                <div className="inline-flex items-center">
-                                    {[...Array(5)].map((_, i) => (
-                                        <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-yellow-300">
-                                            <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                                        </svg>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                    
-                    <SwiperSlide className='flex justify-center items-center'>
-                        <div className='bg-gray-200 rounded-xl dark:bg-neutral-800 mx-4'>
-                            <p className='text-center font-SF text-lg p-5 dark:text-white'>
-                                Un déclic immédiat. Ce livre ne donne pas des conseils en plus, il change complètement la façon de voir l'alimentation.
-                            </p>
-                            <div className="grid place-items-center py-5">
-                                <div className="inline-flex items-center">
-                                    {[...Array(5)].map((_, i) => (
-                                        <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-yellow-300">
-                                            <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                                        </svg>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                    
-                    <SwiperSlide className='flex justify-center items-center'>
-                        <div className='bg-gray-200 rounded-xl dark:bg-neutral-800 mx-4'>
-                            <p className='text-center font-SF text-lg p-5 dark:text-white'>
-                                Nutrition Antifragile est un livre vraiment complet, accessible et passionnant. Je l'ai dévoré en 2 jours. Les encadrés scientifiques permettent de creuser sans jamais devenir trop technique. J'ai découvert des produits souvent oubliés comme le bouillon d'os. Une mine d'or d'infos sans filtre, que je recommande sans hésiter.
-                            </p>
-                            <div className="grid place-items-center py-5">
-                                <div className="inline-flex items-center">
-                                    {[...Array(5)].map((_, i) => (
-                                        <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-yellow-300">
-                                            <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                                        </svg>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </SwiperSlide>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
-            
-     
+
         </section>
     );
 }
