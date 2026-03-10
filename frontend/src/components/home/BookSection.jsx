@@ -103,12 +103,12 @@ function BookSection() {
                     ].map((part, pi) => (
                         <div key={pi} className="flex-1 bg-white/10 border border-white/30 rounded-2xl p-6 backdrop-blur-sm">
                             <h4 className="font-SFBold text-yellow-200 text-lg md:text-xl mb-1">{part.title}</h4>
-                            <p className="font-SF text-white/80 text-sm mb-5">{part.subtitle}</p>
+                            <p className="font-SF text-white/80 text-sm md:text-base mb-5">{part.subtitle}</p>
                             <div className="flex flex-col gap-3">
                                 {part.chapters.map((ch, ci) => (
                                     <div key={ci} className="bg-white/10 border-l-4 border-yellow-300 rounded-xl p-4">
                                         <h5 className="font-SFBold text-white text-base">{ch.title}</h5>
-                                        <p className="mt-1 font-SF text-white/80 text-sm">{ch.desc}</p>
+                                        <p className="mt-1 font-SF text-white/80 text-sm md:text-base">{ch.desc}</p>
                                     </div>
                                 ))}
                             </div>

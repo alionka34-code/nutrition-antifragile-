@@ -115,7 +115,7 @@ function MemberSection() {
                 >
                     {avisImages.map((src, i) => (
                         <SwiperSlide key={i}>
-                            <img src={src} alt={`avis-${i + 1}`} className="rounded-xl w-full object-cover" />
+                            <img src={src} alt={`avis-${i + 1}`} className="rounded-xl w-full  object-cover mx-auto" />
                         </SwiperSlide>
                     ))}
                 </Swiper>
