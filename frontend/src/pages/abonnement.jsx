@@ -179,6 +179,7 @@ Nouveau contenu chaque mois.</p>
                 >
                     {loading ? "Redirection en cours..." : "S'abonner 37\u20AC/mois"}
                 </button>
+                <p className='mt-2 font-SF text-sm text-gray-600 '>Résiliable à tout moment</p>
             </div>
             <div className=" mx-4 md:max-w-3xl" >
             <Swiper
