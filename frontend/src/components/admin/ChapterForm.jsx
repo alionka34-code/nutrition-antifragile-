@@ -189,10 +189,10 @@ export default function ChapterForm() {
             <input value={title} onChange={(e) => setTitle(e.target.value)} className={inputCls} />
           </label>
 
-          <label className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
+          <div className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
             Contenu
             <CKEditor editor={ClassicEditor} data={content} onChange={(_, editor) => setContent(editor.getData())} />
-          </label>
+          </div>
 
           <label className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
             Vidéo associée (optionnel)

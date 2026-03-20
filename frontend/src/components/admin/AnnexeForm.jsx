@@ -150,14 +150,14 @@ function AnnexeForm() {
             <input value={title} onChange={(e) => setTitle(e.target.value)} className={inputCls} />
           </label>
 
-          <label className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
+          <div className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
             Description
             <CKEditor
               editor={ClassicEditor}
               data={description}
               onChange={(_, editor) => setDescription(editor.getData())}
             />
-          </label>
+          </div>
 
           <label className="flex flex-col gap-1 font-SFBold text-sm dark:text-white">
             Image
