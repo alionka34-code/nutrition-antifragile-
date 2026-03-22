@@ -37,9 +37,9 @@ function MentionLegale() {
             <p className="font-SF mb-2">Ils sont consultables sur le site officiel de <a href= "https://www.symbiose-audiovisuelle.fr/mentions-l%C3%A9gales" className="text-blue-400">Symbiose Audiovisuelle</a></p>
     
             <h1 className="text-2xl font-SFBold mb-4 ">Hébergement</h1>
-            <p className="font-SF mb-4">Le site est hébergé par Vercel Inc.<br/> 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis.<br/> Site : https://vercel.com<br/>
+            <p className="font-SF mb-4">Le site est hébergé par Vercel Inc.<br/> 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis.<br/> Site : <a href="https://vercel.com" target="_blank" className="underline">https://vercel.com</a><br/>
 
-Pour toute information relative aux données techniques traitées dans le cadre de l'hébergement, il convient de consulter la politique de confidentialité de Vercel Inc. :<br/>  https://vercel.com/legal/privacy-policy</p>
+Pour toute information relative aux données techniques traitées dans le cadre de l'hébergement, il convient de consulter la politique de confidentialité de Vercel Inc. :<br/><a href="https://vercel.com/legal/privacy-policy" target="_blank" className="underline">https://vercel.com/legal/privacy-policy</a></p>
             <h1 className="text-2xl font-SFBold mb-4 ">Données personnelles - RGPD</h1>
             <p className="font-SF mb-4">Aucune donnée personnelle n’est collectée sans consentement explicite.<br/>Les informations recueillies par formulaire (contact, commande, abonnement) sont destinées uniquement à la gestion des échanges et transactions.
             <br/>    
