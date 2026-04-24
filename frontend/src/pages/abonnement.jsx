@@ -101,7 +101,7 @@ function Abonnement() {
             <meta name="description" content="Rejoignez la communauté Nutrition Antifragile et accédez à des contenus exclusifs pour améliorer votre santé durable et maîtriser votre alimentation au quotidien." />
         </Helmet>
         <header >
-            <h1 className="text-center mx-4 text-2xl md:text-5xl font-SFBold text-marron pt-10 ">Rejoignez la Communauté Antifragile !</h1>
+            <h1 className="text-center mx-4 text-2xl md:text-5xl font-SFBold text-marron pt-10 ">Rejoins la Communauté Antifragile !</h1>
     
         </header>
             <form className="pt-8" onSubmit={handleSubmit}>
@@ -124,18 +124,15 @@ function Abonnement() {
                 </div>
             )}
             <div>
-                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Pour qui ?</h2>
-                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Pour ceux qui en ont marre d'entendre tout et son contraire.<br/>Pour ceux qui veulent comprendre, pas juste appliquer bêtement.<br/>Pour ceux qui veulent (vraiment) prendre leur santé en main et devenir acteurs de leur vie.</p>
+                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Tu en as marre de chercher et de ne pas savoir à qui faire confiance ?</h2>
+                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Tu suis des comptes, tu lis des articles, tu regardes des reels. Et plus tu cherches, moins tu sais. Le gluten, le jeûne, les calories, le microbiote... une vérité différente à chaque scroll.<br/>
+                  Ce n'est pas que tu n'es pas capable de comprendre. C'est que personne n'a encore pris le temps de faire le tri pour toi. Sérieusement, honnêtement, sans te vendre un régime.<br/><br/>
+                C'est exactement ce que j'ai construit ici. Un endroit où on arrête de se faire balader. Où tu comprends le pourquoi derrière ce que tu manges, et où tu repars avec des réponses claires, pas de nouvelles questions.</p>
                 <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Ce que tu vas trouver dans la communauté</h2>
-                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Trois dossiers. Tout ce qu’il faut, au même endroit.<br/>
+                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>- Les mythes démontés, l'alimentation reconstruite, le mode de vie décrypté.<br/>
 
-🗂 <strong>Déconstruire :</strong> Tous les mythes démontés un par un. Tu comprends pourquoi avant de passer à l'action. Fini les règles qu'on applique sans savoir pourquoi.<br/>
-
-🗂 <strong>Construire :</strong> Quoi acheter, où, pourquoi, en quelle quantité. Les réponses concrètes à toutes les questions que tu te poses depuis des années. Résultat : tu sais exactement quoi mettre dans ton caddie, sans te poser mille questions.<br/>
-
-🗂 <strong>S'élever :</strong> L'assiette c'est la base, mais pas l’unique pilier. Mouvement, soleil, jeûne, mode de vie. Résultat : une santé intestinale solide, un mental stable, une énergie constante. Tout est interconnecté.<br/>
-
-Et aussi :<br/> 📄 Fiches listes de courses et guides PDF<br/>🍽 Des recettes<br/>💬 Un groupe Telegram pour me poser tes questions.<br/><br/>
+- Fiches PDF et listes de courses prêtes à l'emploi.<br/>
+- Groupe Telegram : tu poses tes questions, je réponds.<br/><br/>
 
 Nouveau contenu chaque mois.</p>
         
