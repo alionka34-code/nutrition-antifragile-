@@ -124,17 +124,38 @@ function Abonnement() {
                 </div>
             )}
             <div>
-                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Tu en as marre de chercher et de ne pas savoir à qui faire confiance ?</h2>
-                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>Tu suis des comptes, tu lis des articles, tu regardes des reels. Et plus tu cherches, moins tu sais. Le gluten, le jeûne, les calories, le microbiote... une vérité différente à chaque scroll.<br/>
-                  Ce n'est pas que tu n'es pas capable de comprendre. C'est que personne n'a encore pris le temps de faire le tri pour toi. Sérieusement, honnêtement, sans te vendre un régime.<br/><br/>
-                C'est exactement ce que j'ai construit ici. Un endroit où on arrête de se faire balader. Où tu comprends le pourquoi derrière ce que tu manges, et où tu repars avec des réponses claires, pas de nouvelles questions.</p>
-                <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4  dark:text-white'>Ce que tu vas trouver dans la communauté</h2>
-                <p className='font-SF text-lg md:text-xl text-gray-600  dark:text-white'>- Les mythes démontés, l'alimentation reconstruite, le mode de vie décrypté.<br/>
+          <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4 dark:text-white'>
+  Aujourd’hui, l’alimentation est devenue une source de confusion permanente.
+</h2>
 
-- Fiches PDF et listes de courses prêtes à l'emploi.<br/>
-- Groupe Telegram : tu poses tes questions, je réponds.<br/><br/>
+<p className='font-SF text-lg md:text-xl text-gray-600 dark:text-white'>
+  Le gluten serait inflammatoire. Le sucre toxique. Le gras dangereux. Les légumes indispensables.<br/>
+  Une vérité différente à chaque scroll.<br/><br/>
 
-Nouveau contenu chaque mois.</p>
+  Résultat : tu ne sais plus quoi manger sans culpabiliser ni te prendre la tête.<br/><br/>
+
+  Le problème, ce n’est pas ton manque de volonté.<br/>
+  Le problème, c’est qu’on t’a appris à voir la santé à travers des dogmes, du marketing et des solutions simplistes.<br/><br/>
+
+  C’est exactement pour ça que j’ai créé la Communauté Antifragile : un espace pour enfin comprendre comment fonctionne réellement le corps humain et arrêter de te faire balader par les tendances nutritionnelles du moment.
+</p>
+
+<h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4 dark:text-white'>
+  Ce que tu vas trouver dans la communauté
+</h2>
+
+<p className='font-SF text-lg md:text-xl text-gray-600 dark:text-white'>
+  - Des vidéos exclusives et analyses approfondies.<br/>
+  - Des croyances nutritionnelles déconstruites avec logique, nuance et physiologie.<br/>
+  - Des études de cas réels pour comprendre les causes profondes des symptômes.<br/>
+  - Des ressources concrètes pour retrouver une alimentation plus simple, cohérente et adaptée au vivant.<br/>
+  - Un groupe Telegram où tu peux poser tes questions directement.<br/><br/>
+
+  Nouveau contenu chaque mois.<br/><br/>
+
+  Le but n’est pas de te rendre dépendant d’un protocole.<br/>
+  Le but, c’est que tu comprennes enfin ton corps pour retrouver une vraie autonomie alimentaire.
+</p>
         
 
             </div>
