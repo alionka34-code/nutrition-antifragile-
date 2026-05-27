@@ -151,7 +151,6 @@ function Abonnement() {
   - Des ressources concrètes pour retrouver une alimentation plus simple, cohérente et adaptée au vivant.<br/>
   - Un groupe Telegram où tu peux poser tes questions directement.<br/><br/>
 
-  Nouveau contenu chaque mois.<br/><br/>
 
   Le but n’est pas de te rendre dépendant d’un protocole.<br/>
   Le but, c’est que tu comprennes enfin ton corps pour retrouver une vraie autonomie alimentaire.
