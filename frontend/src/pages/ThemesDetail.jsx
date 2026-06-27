@@ -53,24 +53,24 @@ function ThemeDetail() {
         <PremiumOverlay>
         <header className="pt-10 border-b-1 border-gray-300 dark:border-neutral-700">
             <div className="text-left mx-4 md:mx-auto md:max-w-6xl mb-8 ">
-                <h1 className="text-2xl md:text-4xl font-SFBold mb-4 text-marron">{theme.title}</h1>
+                <h1 className="text-3xl md:text-5xl font-SFBold mb-4 text-gray-900 dark:text-white tracking-tight">{theme.title}</h1>
                 <div className="article-content font-SF text-xl" dangerouslySetInnerHTML={{ __html: theme.description }} /> 
             </div>
         </header>
         <main id="chapitres-section" className="mt-10 flex flex-col md:flex-row md:gap-40 mx-4 md:mx-auto md:max-w-6xl">
                 <div className="w-full md:w-1/3">
                     <h2 className="text-marron md:text-4xl text-2xl font-SFBold mb-4">Chapitres</h2>
-                    <div className="border-1 border-marron rounded-lg mb-8">
-                        <ul>
-                            {chapters.length === 0 && <p className="text-gray-500">Aucun chapitre disponible.</p>}
+                    <div className="rounded-2xl border border-white/40 dark:border-white/15 bg-white/20 dark:bg-white/10 backdrop-blur-xl ring-1 ring-black/5 shadow-lg overflow-hidden mb-8 p-1.5">
+                        <ul className="flex flex-col gap-1">
+                            {chapters.length === 0 && <p className="text-gray-500 dark:text-gray-400 p-3">Aucun chapitre disponible.</p>}
                             {chapters.map((chapter) => (
                                 <li
                                     key={chapter.id}
                                     onClick={() => setSelectedChapter(chapter)}
-                                    className={`font-SF flex items-center gap-3 p-3 rounded-lg hover:bg-marron hover:text-white ${selectedChapter?.id === chapter.id ? "bg-marron text-white dark:bg-neutral-700" : ""}`}
+                                    className={`font-SF flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-colors ${selectedChapter?.id === chapter.id ? "bg-marron text-white" : "hover:bg-marron/10 text-gray-700 dark:text-gray-200"}`}
                                 >
-                                    <span className="text-marron font-SFBold">{chapter.order}-</span>
-                                    <span className="font-SF text-xl">{chapter.title}</span>
+                                    <span className={`font-SFBold ${selectedChapter?.id === chapter.id ? "text-white/80" : "text-marron"}`}>{chapter.order}-</span>
+                                    <span className="font-SF text-lg">{chapter.title}</span>
                                 </li>
                             ))}
                         </ul>

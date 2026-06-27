@@ -1,0 +1,130 @@
+/* --- Fond de toute la page : dégradé ancré au scroll (clair / sombre) --- */
+.page-bg {
+    background:
+        radial-gradient(120% 85% at 50% -10%, rgba(255, 170, 120, 0.30) 0%, rgba(255, 210, 180, 0.12) 38%, transparent 64%),
+        radial-gradient(80% 60% at 88% 110%, rgba(255, 150, 90, 0.14) 0%, transparent 56%),
+        linear-gradient(180deg, #ffffff 0%, #fff7f1 52%, #ffeede 100%);
+    background-attachment: fixed;
+}
+
+.dark .page-bg {
+    background:
+        radial-gradient(95% 60% at 50% -15%, rgba(255, 130, 70, 0.08) 0%, transparent 45%),
+        radial-gradient(60% 45% at 92% 116%, rgba(255, 115, 55, 0.06) 0%, transparent 45%),
+        linear-gradient(180deg, #000000 0%, #050402 70%, #0c0703 100%);
+    background-attachment: fixed;
+}
+
+/* --- Fond du hero : dégradé clair (blanc → pêche), variante sombre (noir → pêche) --- */
+.hero-bg {
+    background:
+        radial-gradient(120% 85% at 50% -10%, rgba(255, 170, 120, 0.30) 0%, rgba(255, 210, 180, 0.12) 38%, transparent 64%),
+        radial-gradient(80% 60% at 88% 110%, rgba(255, 150, 90, 0.14) 0%, transparent 56%),
+        linear-gradient(180deg, #ffffff 0%, #fff7f1 52%, #ffeede 100%);
+}
+
+.dark .hero-bg {
+    background:
+        radial-gradient(95% 60% at 50% -15%, rgba(255, 130, 70, 0.08) 0%, transparent 45%),
+        radial-gradient(60% 45% at 92% 116%, rgba(255, 115, 55, 0.06) 0%, transparent 45%),
+        linear-gradient(180deg, #000000 0%, #050402 70%, #0c0703 100%);
+}
+
+/* --- Mouvement de fond du hero : orbes floutées qui dérivent lentement --- */
+
+.hero-motion {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    will-change: transform;
+    opacity: 0.7;
+}
+
+.dark .hero-orb {
+    opacity: 0.15;
+}
+
+.hero-orb--1 {
+    width: 38rem;
+    height: 38rem;
+    top: -12rem;
+    left: -8rem;
+    background: radial-gradient(circle, rgba(255, 170, 110, 0.55) 0%, transparent 70%);
+    animation: heroDrift1 22s ease-in-out infinite;
+}
+
+.hero-orb--2 {
+    width: 30rem;
+    height: 30rem;
+    top: 20%;
+    right: -10rem;
+    background: radial-gradient(circle, rgba(255, 200, 150, 0.5) 0%, transparent 70%);
+    animation: heroDrift2 26s ease-in-out infinite;
+}
+
+.hero-orb--3 {
+    width: 26rem;
+    height: 26rem;
+    bottom: -10rem;
+    left: 25%;
+    background: radial-gradient(circle, rgba(214, 184, 151, 0.5) 0%, transparent 70%);
+    animation: heroDrift3 30s ease-in-out infinite;
+}
+
+@keyframes heroDrift1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.12); }
+}
+
+@keyframes heroDrift2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-50px, 50px) scale(1.08); }
+}
+
+@keyframes heroDrift3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -50px) scale(1.15); }
+}
+
+/* --- Révélation des textes à l'apparition (fondu + glissé) --- */
+@keyframes heroReveal {
+    from {
+        opacity: 0;
+        transform: translateY(26px);
+        filter: blur(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.hero-reveal {
+    opacity: 0;
+    animation: heroReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-reveal-1 { animation-delay: 0.08s; }
+.hero-reveal-2 { animation-delay: 0.2s; }
+.hero-reveal-3 { animation-delay: 0.32s; }
+.hero-reveal-4 { animation-delay: 0.46s; }
+.hero-reveal-5 { animation-delay: 0.6s; }
+.hero-reveal-6 { animation-delay: 0.74s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-orb {
+        animation: none !important;
+    }
+    .hero-reveal {
+        animation: none !important;
+        opacity: 1;
+    }
+}

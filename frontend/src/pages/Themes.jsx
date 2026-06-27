@@ -35,17 +35,16 @@ function Themes() {
         </Helmet>
         <NavCommunity />
         <PremiumOverlay>
-        <div>
-            <header className="text-center pt-8">
-                <h1 className="font SF-Bold text-marron text-2xl md:text-4xl my-4">Dossiers</h1>
-            </header>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch mx-4 md:mx-20">
+        <header className="text-center pt-12 px-4">
+            <p className="font-SFBold text-marron tracking-[0.25em] text-sm md:text-base mb-3">COMMUNAUTÉ</p>
+            <h1 className="font-SFBold text-3xl md:text-5xl text-gray-900 dark:text-white tracking-tight">Dossiers</h1>
+        </header>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch max-w-6xl mx-auto px-4 mt-12">
             {themes.map((theme) => (
                 <Link
                     key={theme.id}
                     to={`/themes/${theme.slug || theme.id}`}
-                    className="bg-white shadow-lg rounded-lg border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 h-full flex flex-col"
+                    className="group rounded-2xl overflow-hidden border border-white/40 dark:border-white/15 bg-white/20 dark:bg-white/10 backdrop-blur-xl ring-1 ring-black/5 shadow-lg hover:shadow-xl hover:border-marron/60 transition-all h-full flex flex-col"
                 >
                     { (theme.image_url || theme.image) && (
                         <img
@@ -56,9 +55,9 @@ function Themes() {
                     )}
                     <div className="p-4 flex-1 flex flex-col justify-between">
                       <div>
-                        <h2 className="text-2xl font-SFBold dark:text-marron">{theme.title}</h2>
+                        <h2 className="text-2xl font-SFBold text-gray-900 dark:text-white group-hover:text-marron transition-colors">{theme.title}</h2>
                         <p
-                            className="text-gray-600 font-SF text-xl mt-2"
+                            className="text-gray-600 dark:text-gray-300 font-SF text-lg mt-2"
                             style={{
                                 display: '-webkit-box',
                                 WebkitLineClamp: 2,
@@ -70,7 +69,7 @@ function Themes() {
                             {stripHtml(theme.description)}
                         </p>
                       </div>
-                      <p className='pt-4 text-right font-SF'>{theme.duration} min</p>
+                      <p className='pt-4 text-right font-SF text-sm text-marron'>{theme.duration} min</p>
                     </div>
                 </Link>
             ))}

@@ -1,33 +1,14 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Grid } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "../../styles/swiper-custom.css";
+import { PlayCircle, Brain, Leaf, MessagesSquare } from 'lucide-react';
 import { fetchArticles } from '../../utils/api';
-import avis1 from  '../../assets/images/avis1.jpg';
-import avis2 from  '../../assets/images/avis2.jpg';
-import avis3 from  '../../assets/images/avis3.jpg';
-import avis4 from  '../../assets/images/avis4.jpg';
-import avis5 from  '../../assets/images/avis5.jpg';
-import avis6 from  '../../assets/images/avis6.jpg';
-import avis7 from  '../../assets/images/avis7.jpg';
-import avis8 from  '../../assets/images/avis8.jpg';
-import avis9 from  '../../assets/images/avis9.jpg';
-import avis10 from  '../../assets/images/avis10.jpg';
-import avis11 from  '../../assets/images/avis11.jpg';
-import avis12 from  '../../assets/images/avis12.jpg';
-import avis13 from  '../../assets/images/avis13.jpg';
-import avis14 from  '../../assets/images/avis14.jpg';
-import avis15 from  '../../assets/images/avis15.jpg';
-
-const avisImages = [
-    avis1, avis2, avis3, avis4, avis5, avis6, avis7, avis8,
-    avis9, avis10, avis11, avis12, avis13, avis14, avis15,
-    avis1, avis2, avis3, avis4, avis5, avis6, avis7, avis8,
-    avis9, avis10, avis11, avis12, avis13, avis14, avis15,
-];
+import TestimonialStack from '../landing/TestimonialStack';
+import testimonials from '../../data/testimonials';
 
 function MemberSection() {
     const navigate = useNavigate();
@@ -40,16 +21,53 @@ function MemberSection() {
     return (
         <section className="mt-24">
 
-            {/* Header */}
-            <div className="text-center px-4">
-                <h2 className="font-SFBold text-4xl md:text-7xl dark:text-white">DEVENIR MEMBRE</h2>
-                <p className="font-SFBold text-xl md:text-2xl text-marron mt-3">La vérité sur ton assiette</p>
-                <p className="font-SFBold text-marron mt-2 text-base md:text-lg tracking-widest">0 FILTRE · 0 DOGME · 0 BULLSHIT</p>
+            {/* En-tête de section */}
+            <div className="text-center max-w-3xl mx-auto px-4">
+                <p className="font-SFBold text-marron tracking-[0.25em] text-sm md:text-base mb-3">L'ABONNEMENT</p>
+                <h2 className="font-SFBold text-3xl md:text-5xl text-gray-900 dark:text-white leading-tight">
+                    Rejoins la communauté <span className="text-marron">Antifragile</span>.
+                </h2>
+                <p className="font-SFBold text-marron mt-4 text-base md:text-lg tracking-widest">0 FILTRE · 0 DOGME · 0 BULLSHIT</p>
+            </div>
+
+            {/* Ce que comprend l'abonnement */}
+            <div className="max-w-4xl mx-auto px-4 mt-14">
+                <div className="rounded-3xl border border-white/40 dark:border-white/15 bg-white/20 dark:bg-white/10 backdrop-blur-xl ring-1 ring-black/5 shadow-lg p-8 md:p-10">
+                    <h3 className="font-SFBold text-xl md:text-2xl text-gray-900 dark:text-white text-center md:text-left mb-8">
+                        Ce que comprend l'abonnement
+                    </h3>
+                    <div className="grid sm:grid-cols-2 gap-x-8 gap-y-7">
+                        {[
+                            { icon: PlayCircle, title: "Vidéos exclusives", desc: "Des analyses approfondies et des contenus réservés aux membres." },
+                            { icon: Brain, title: "Croyances déconstruites", desc: "Les mythes nutritionnels passés au crible de la physiologie." },
+                            { icon: Leaf, title: "Ressources concrètes", desc: "Pour une alimentation simple, cohérente et adaptée au vivant." },
+                            { icon: MessagesSquare, title: "Groupe Telegram", desc: "Pose tes questions et échange directement avec la communauté." },
+                        ].map((f, i) => (
+                            <div key={i} className="flex items-start gap-4">
+                                <span className="shrink-0 w-10 h-10 rounded-xl bg-marron/10 text-marron flex items-center justify-center">
+                                    <f.icon size={20} strokeWidth={2} />
+                                </span>
+                                <div>
+                                    <p className="font-SFBold text-gray-900 dark:text-white">{f.title}</p>
+                                    <p className="font-SF text-sm text-gray-600 dark:text-gray-300 mt-0.5 leading-relaxed">{f.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="mt-9 flex justify-center md:justify-start">
+                        <button
+                            onClick={() => navigate('/abonnement')}
+                            className="font-SFBold text-white dark:text-[#6e4f24] text-base md:text-lg px-8 py-3.5 rounded-full bg-[#6e4f24] dark:bg-beige1 hover:bg-[#5a4020] dark:hover:bg-white transition-colors duration-300 shadow-md"
+                        >
+                            Découvrir l'abonnement
+                        </button>
+                    </div>
+                </div>
             </div>
 
             {/* Articles */}
             {articles.length > 0 && (
-                <div className="mx-4 md:mx-20 mt-10">
+                <div className="max-w-6xl mx-auto px-4 mt-12">
                     <Swiper
                         modules={[Pagination, Autoplay]}
                         spaceBetween={24}
@@ -91,34 +109,17 @@ function MemberSection() {
             <div className="text-center mt-8 px-4">
                 <button
                     onClick={() => navigate('/abonnement')}
-                    className="font-SFBold text-white text-base md:text-xl px-10 py-4 rounded-full bg-gradient-to-tr from-peach to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 shadow-md"
+                    className="font-SFBold text-white dark:text-[#6e4f24] text-base md:text-lg px-8 py-3.5 rounded-full bg-[#6e4f24] dark:bg-beige1 hover:bg-[#5a4020] dark:hover:bg-white transition-colors duration-300 shadow-md"
                 >
                     DEVENIR MEMBRE ANTIFRAGILE
                 </button>
             </div>
 
-            {/* Avis photos */}
-            <div className="mx-4 md:mx-20 mt-14">
-                <h3 className="text-center font-SFBold text-marron text-2xl md:text-3xl mb-8">Ils ont rejoint la communauté</h3>
-                <Swiper
-                    rewind={true}
-                    slidesPerView={1}
-                    grid={{ rows: 2 }}
-                    spaceBetween={16}
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    autoplay={{ delay: 5000, disableOnInteraction: false }}
-                    breakpoints={{
-                        768: { slidesPerView: 3, spaceBetween: 16 },
-                    }}
-                    modules={[Grid, Pagination, Autoplay]}
-                    className="mySwiper pb-10"
-                >
-                    {avisImages.map((src, i) => (
-                        <SwiperSlide key={i}>
-                            <img src={src} alt={`avis-${i + 1}`} className="rounded-xl w-full  object-cover mx-auto" />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+            {/* Avis de la communauté */}
+            <div className="mx-4 md:mx-auto md:max-w-4xl mt-20">
+                <h3 className="text-center font-SFBold text-marron text-2xl md:text-3xl mb-3">Ils ont rejoint la communauté</h3>
+                <p className="text-center font-SF text-gray-500 dark:text-gray-400 mb-10">Glisse les cartes pour parcourir leurs messages</p>
+                <TestimonialStack testimonials={testimonials} maxWidth="56rem" />
             </div>
 
         </section>

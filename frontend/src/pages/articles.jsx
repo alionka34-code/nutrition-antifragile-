@@ -73,9 +73,10 @@ function Articles() {
         <meta name="description" content="Découvrez des articles approfondis sur la nutrition antifragile, la santé durable et l'alimentation consciente. Des conseils pratiques pour renforcer votre bien-être et comprendre les enjeux alimentaires." />
     </Helmet>
     <NavCommunity />
-    <header className=" text-center pt-10">
-      <h1 className='font-SFBold text-marron text-2xl md:text-4xl'>Ici, la nutrition prend tout son sens.</h1> 
-      <p className="font-SF md:text-2xl text-lg mx-4 md:mx-auto md:max-w-5xl dark:text-white">Loin des fausses promesses et des étiquettes trompeuses, entrez dans le cercle de ceux qui  veulent comprendre, pas juste consommer.</p>
+    <header className="text-center pt-12 px-4 max-w-3xl mx-auto">
+      <p className="font-SFBold text-marron tracking-[0.25em] text-sm md:text-base mb-3">ANALYSES</p>
+      <h1 className="font-SFBold text-3xl md:text-5xl text-gray-900 dark:text-white tracking-tight leading-[1.1]">Ici, la nutrition prend tout son sens.</h1>
+      <p className="mt-5 font-SF text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">Loin des fausses promesses et des étiquettes trompeuses, entrez dans le cercle de ceux qui veulent comprendre, pas juste consommer.</p>
     </header>
 
     {/* Section Articles */}
@@ -85,14 +86,14 @@ function Articles() {
         <div className="flex gap-2">
           <button 
             onClick={prevArticles}
-            className="bg-marron text-white px-3 py-2 rounded-lg hover:bg-opacity-80 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-[#6e4f24] dark:bg-beige1 text-white dark:text-[#6e4f24] px-3.5 py-2 rounded-full hover:bg-[#5a4020] dark:hover:bg-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
             disabled={articlesCurrentIndex === 0}
           >
             ←
           </button>
           <button 
             onClick={nextArticles}
-            className="bg-marron text-white px-3 py-2 rounded-lg hover:bg-opacity-80 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-[#6e4f24] dark:bg-beige1 text-white dark:text-[#6e4f24] px-3.5 py-2 rounded-full hover:bg-[#5a4020] dark:hover:bg-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
             disabled={articlesCurrentIndex + (getItemsPerView() * 2) >= articles.length}
           >
             →
@@ -107,12 +108,12 @@ function Articles() {
             <Link 
               key={`row1-${article.id}`} 
               to={`/articles/${article.slug}`} 
-              className="bg-white shadow-lg rounded-lg border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 w-full block"
+              className="group rounded-2xl overflow-hidden border border-white/40 dark:border-white/15 bg-white/20 dark:bg-white/10 backdrop-blur-xl ring-1 ring-black/5 shadow-lg hover:shadow-xl hover:border-marron/60 transition-all w-full block"
             >
               <img src={article.image} alt={article.title} className="w-full h-48 md:h-60 object-cover" />
               <div className="p-4">
-                <h3 className="text-lg font-SFBold dark:text-marron">{article.title}</h3>
-                <p className='font-SF text-gray-600 dark:text-white'>{new Date(article.published_at).toLocaleDateString("fr-FR")}</p>
+                <h3 className="text-lg font-SFBold text-gray-900 dark:text-white group-hover:text-marron transition-colors">{article.title}</h3>
+                <p className='font-SF text-sm text-gray-500 dark:text-gray-400 mt-1'>{new Date(article.published_at).toLocaleDateString("fr-FR")}</p>
               </div>
             </Link>
           ))}
@@ -124,12 +125,12 @@ function Articles() {
             <Link 
               key={`row2-${article.id}`} 
               to={`/articles/${article.slug}`} 
-              className="bg-white shadow-lg rounded-lg border-1 border-gray-400 overflow-hidden hover:shadow-xl transition-shadow dark:bg-neutral-800 dark:border-neutral-500 w-full block"
+              className="group rounded-2xl overflow-hidden border border-white/40 dark:border-white/15 bg-white/20 dark:bg-white/10 backdrop-blur-xl ring-1 ring-black/5 shadow-lg hover:shadow-xl hover:border-marron/60 transition-all w-full block"
             >
               <img src={article.image} alt={article.title} className="w-full h-48 md:h-60 object-cover" />
               <div className="p-4">
-                <h3 className="text-lg font-SFBold dark:text-marron">{article.title}</h3>
-                <p className='font-SF text-gray-600 dark:text-white'>{new Date(article.published_at).toLocaleDateString("fr-FR")}</p>
+                <h3 className="text-lg font-SFBold text-gray-900 dark:text-white group-hover:text-marron transition-colors">{article.title}</h3>
+                <p className='font-SF text-sm text-gray-500 dark:text-gray-400 mt-1'>{new Date(article.published_at).toLocaleDateString("fr-FR")}</p>
               </div>
             </Link>
           ))}
@@ -147,14 +148,14 @@ function Articles() {
         <div className="flex gap-2">
           <button 
             onClick={prevVideos}
-            className="bg-marron text-white px-3 py-2 rounded-lg hover:bg-opacity-80 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-[#6e4f24] dark:bg-beige1 text-white dark:text-[#6e4f24] px-3.5 py-2 rounded-full hover:bg-[#5a4020] dark:hover:bg-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
             disabled={videosCurrentIndex === 0}
           >
             
           </button>
           <button 
             onClick={nextVideos}
-            className="bg-marron text-white px-3 py-2 rounded-lg hover:bg-opacity-80 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-[#6e4f24] dark:bg-beige1 text-white dark:text-[#6e4f24] px-3.5 py-2 rounded-full hover:bg-[#5a4020] dark:hover:bg-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
             disabled={videosCurrentIndex + (getItemsPerView() * 2) >= videos.length}
           >
             

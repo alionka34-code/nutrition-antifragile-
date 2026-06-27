@@ -30,39 +30,63 @@ function BookSection() {
     return (
         <section className="mt-16 md:mt-24">
 
+            {/* En-tête de section */}
+            <div className="text-center max-w-4xl mx-auto mb-16 px-6">
+                <p className="font-SFBold text-marron tracking-[0.25em] text-sm md:text-base mb-3">LE LIVRE</p>
+                <h2 className="font-SFBold text-3xl md:text-5xl text-gray-900 dark:text-white leading-[1.1] tracking-tight md:whitespace-nowrap">
+                    Comprendre votre assiette,
+                    <br /> une bonne fois pour <span className="text-marron">toutes</span>.
+                </h2>
+            </div>
+
             {/* Livre + présentation */}
-            <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-10 md:gap-16 items-center justify-center">
-                <div className="shrink-0">
-                    <img src={livre} alt="Livre Nutrition Antifragile" className="w-64 md:w-80 h-auto shadow-xl mx-auto rounded-xl" />
+            <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-14 md:gap-24 items-start">
+                <div className="md:col-span-5">
+                    <div className="md:sticky md:top-24">
+                        <div className="w-2/3 mx-auto md:w-4/5 rounded-2xl border border-white/40 dark:border-white/15 bg-white/20 dark:bg-white/10 backdrop-blur-xl ring-1 ring-black/5 p-6 shadow-lg">
+                            <img
+                                src={livre}
+                                alt="Livre Nutrition Antifragile"
+                                className="w-full h-auto object-contain drop-shadow-xl"
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="flex-1 text-center md:text-left">
-                    <h2 className="font-SFBold text-marron text-2xl md:text-4xl">La pilule rouge de l'alimentation</h2>
-                    <p className="mt-4 font-SF text-lg md:text-xl text-gray-600 dark:text-white">
+
+                <div className="md:col-span-7 space-y-8 text-center md:text-left">
+                    <h3 className="font-SFBold text-2xl md:text-3xl text-gray-900 dark:text-white tracking-tight leading-snug">
+                        La pilule rouge de l'alimentation
+                    </h3>
+                    <p className="font-SF text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                         Le seul livre qui dévoile comment l'industrie alimentaire a reprogrammé votre rapport à la nourriture, pour faire de vous un consommateur dépendant.
                     </p>
-                    <p className="mt-5 font-SFBold text-base text-gray-700 dark:text-white">Vous découvrirez :</p>
-                    <div className="flex flex-col gap-3 mt-3">
-                        {[
-                            "Pourquoi les aliments « healthy » vous maintiennent faible",
-                            "Les pièges mentaux intégrés dès l'enfance",
-                            "Retrouver votre instinct le plus primaire",
-                        ].map((text, i) => (
-                            <div key={i} className="flex items-start gap-3 bg-beige1 dark:bg-neutral-800 border border-beige2 dark:border-neutral-600 rounded-xl px-4 py-3">
-                                <span className="text-marron font-SFBold mt-0.5">→</span>
-                                <p className="font-SF text-base md:text-lg text-gray-700 dark:text-white text-left">{text}</p>
-                            </div>
-                        ))}
+
+                    <div>
+                        <p className="font-SFBold text-gray-900 dark:text-white mb-4">Vous découvrirez :</p>
+                        <ul className="space-y-4">
+                            {[
+                                "Pourquoi les aliments « healthy » vous maintiennent faible",
+                                "Les pièges mentaux intégrés dès l'enfance",
+                                "Retrouver votre instinct le plus primaire",
+                            ].map((text, i) => (
+                                <li key={i} className="flex items-start gap-3 justify-center md:justify-start">
+                                    <span className="text-marron mt-1 shrink-0">→</span>
+                                    <span className="font-SF text-lg text-gray-600 dark:text-gray-300 text-left">{text}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                    <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-8">
+
+                    <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
                         <button
                             onClick={() => window.location.href = "https://amzn.eu/d/2ZR5MMo"}
-                            className="font-SFBold text-white text-base md:text-lg px-8 py-3 rounded-full bg-gradient-to-tr from-peach to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300 shadow-md"
+                            className="font-SFBold text-white dark:text-[#6e4f24] text-base md:text-lg px-8 py-3.5 rounded-full bg-[#6e4f24] dark:bg-beige1 hover:bg-[#5a4020] dark:hover:bg-white transition-colors duration-300 shadow-md"
                         >
                             Acheter le livre
                         </button>
                         <button
                             onClick={() => navigate("/Extrait")}
-                            className="font-SFBold text-marron text-base md:text-lg px-8 py-3 rounded-full border-2 border-marron hover:bg-marron hover:text-white transition-colors duration-300"
+                            className="font-SFBold text-[#6e4f24] dark:text-beige1 text-base md:text-lg px-8 py-3.5 rounded-full border-2 border-[#6e4f24] dark:border-beige1 hover:bg-[#6e4f24] hover:text-white dark:hover:bg-beige1 dark:hover:text-[#6e4f24] transition-colors duration-300"
                         >
                             Lire un extrait
                         </button>
@@ -78,9 +102,12 @@ function BookSection() {
             </div>
 
             {/* Deux parties */}
-            <div className="mt-16 bg-gradient-to-tr from-peach to-yellow-700 py-12 px-4">
-                <h3 className="text-center font-SFBold text-white text-2xl md:text-4xl mb-10">Deux parties pour tout comprendre</h3>
-                <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
+            <div className="mt-24 max-w-6xl mx-auto px-6">
+                <div className="text-center max-w-3xl mx-auto mb-14">
+                    <p className="font-SFBold text-marron tracking-[0.25em] text-sm md:text-base mb-3">LE CONTENU</p>
+                    <h3 className="font-SFBold text-3xl md:text-4xl text-gray-900 dark:text-white tracking-tight leading-[1.1]">Deux parties pour tout comprendre</h3>
+                </div>
+                <div className="grid md:grid-cols-2 gap-12 md:gap-20">
                     {[
                         {
                             title: "PARTIE 1 : CE QUI VOUS REND FAIBLE",
@@ -101,14 +128,16 @@ function BookSection() {
                             ],
                         },
                     ].map((part, pi) => (
-                        <div key={pi} className="flex-1 bg-white/10 border border-white/30 rounded-2xl p-6 backdrop-blur-sm">
-                            <h4 className="font-SFBold text-yellow-200 text-lg md:text-xl mb-1">{part.title}</h4>
-                            <p className="font-SF text-white/80 text-sm md:text-base mb-5">{part.subtitle}</p>
-                            <div className="flex flex-col gap-3">
+                        <div key={pi} className="space-y-6">
+                            <div>
+                                <h4 className="font-SFBold text-marron text-lg md:text-xl">{part.title}</h4>
+                                <p className="mt-2 font-SF text-gray-600 dark:text-gray-300 leading-relaxed">{part.subtitle}</p>
+                            </div>
+                            <div className="space-y-5">
                                 {part.chapters.map((ch, ci) => (
-                                    <div key={ci} className="bg-white/10 border-l-4 border-yellow-300 rounded-xl p-4">
-                                        <h5 className="font-SFBold text-white text-base">{ch.title}</h5>
-                                        <p className="mt-1 font-SF text-white/80 text-sm md:text-base">{ch.desc}</p>
+                                    <div key={ci} className="border-l-2 border-marron/50 pl-5">
+                                        <h5 className="font-SFBold text-gray-900 dark:text-white">{ch.title}</h5>
+                                        <p className="mt-1 font-SF text-gray-600 dark:text-gray-300 leading-relaxed">{ch.desc}</p>
                                     </div>
                                 ))}
                             </div>
@@ -118,8 +147,11 @@ function BookSection() {
             </div>
 
             {/* Avis lecteurs */}
-            <div className="mt-16 px-4 md:px-20">
-                <h3 className="text-center font-SFBold text-marron text-2xl md:text-3xl mb-8">Ce qu'en pensent les lecteurs</h3>
+            <div className="mt-24 px-4 max-w-6xl mx-auto">
+                <div className="text-center max-w-3xl mx-auto mb-14">
+                    <p className="font-SFBold text-marron tracking-[0.25em] text-sm md:text-base mb-3">LES AVIS</p>
+                    <h3 className="font-SFBold text-3xl md:text-4xl text-gray-900 dark:text-white tracking-tight leading-[1.1]">Ce qu'en pensent les lecteurs</h3>
+                </div>
                 <Swiper
                     rewind={true}
                     centeredSlides={true}
@@ -133,8 +165,8 @@ function BookSection() {
                 >
                     {reviews.map((text, i) => (
                         <SwiperSlide key={i} className="flex justify-center items-center">
-                            <div className="bg-beige1 dark:bg-neutral-800 border border-beige2 dark:border-neutral-600 rounded-2xl mx-2 px-5 pt-5">
-                                <p className="font-SF text-base text-gray-700 dark:text-white text-center">{text}</p>
+                            <div className="bg-white/20 dark:bg-white/10 backdrop-blur-xl border border-white/40 dark:border-white/15 ring-1 ring-black/5 rounded-2xl mx-2 px-6 pt-6 shadow-lg">
+                                <p className="font-SF text-base text-gray-700 dark:text-gray-200 text-center leading-relaxed">{text}</p>
                                 <StarRating />
                             </div>
                         </SwiperSlide>

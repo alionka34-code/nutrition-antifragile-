@@ -3,26 +3,8 @@ import { Helmet } from "react-helmet";
 import { createCheckoutSession, fetchAbonnementSettings } from '../utils/api';
 import { AuthContext } from "../contexts/AuthContextDefinition";
 import ConnexionForm from '../components/connexion/ConnexionForm';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Grid } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "../styles/swiper-custom.css";
-import avis1 from  '../assets/images/avis1.jpg'
-import avis2 from  '../assets/images/avis2.jpg'
-import avis3 from  '../assets/images/avis3.jpg'
-import avis4 from  '../assets/images/avis4.jpg'
-import avis5 from  '../assets/images/avis5.jpg'
-import avis6 from  '../assets/images/avis6.jpg'
-import avis7 from  '../assets/images/avis7.jpg'
-import avis8 from  '../assets/images/avis8.jpg'
-import avis9 from  '../assets/images/avis9.jpg'
-import avis10 from  '../assets/images/avis10.jpg'
-import avis11 from  '../assets/images/avis11.jpg'
-import avis12 from  '../assets/images/avis12.jpg'
-import avis13 from  '../assets/images/avis13.jpg'
-import avis14 from  '../assets/images/avis14.jpg'
-import avis15 from  '../assets/images/avis15.jpg'
+import TestimonialStack from '../components/landing/TestimonialStack';
+import testimonials from '../data/testimonials';
 import miniature from '../assets/images/miniature.png';
 import miniature2 from '../assets/images/miniature2.png';
 import miniature3 from '../assets/images/miniature3.png';
@@ -100,12 +82,16 @@ function Abonnement() {
             <title>Abonnement Nutrition Antifragile | Santé durable & alimentation pratique</title>
             <meta name="description" content="Rejoignez la communauté Nutrition Antifragile et accédez à des contenus exclusifs pour améliorer votre santé durable et maîtriser votre alimentation au quotidien." />
         </Helmet>
-        <header >
-            <h1 className="text-center mx-4 text-2xl md:text-5xl font-SFBold text-marron pt-10 ">Rejoins la Communauté Antifragile !</h1>
-    
+        <header className="pt-16 px-4">
+            <div className="text-center max-w-2xl mx-auto">
+                <p className="font-SFBold text-marron tracking-[0.25em] text-sm md:text-base mb-3">L'ABONNEMENT</p>
+                <h1 className="font-SFBold text-3xl md:text-5xl text-gray-900 dark:text-white tracking-tight leading-[1.1]">
+                    Rejoins la communauté <span className="text-marron">Antifragile</span>.
+                </h1>
+            </div>
         </header>
-            <form className="pt-8" onSubmit={handleSubmit}>
-            <div className='bg-white  dark:bg-neutral-800 flex flex-col border-2 rounded-lg shadow-lg shadow-black/50 p-10 mx-2 md:mx-auto md:max-w-4xl border-marron'>
+            <form className="pt-12" onSubmit={handleSubmit}>
+            <div className='flex flex-col rounded-3xl border border-white/40 dark:border-white/15 bg-white/20 dark:bg-white/10 backdrop-blur-xl ring-1 ring-black/5 shadow-lg p-8 md:p-10 mx-2 md:mx-auto md:max-w-4xl'>
             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
                 <iframe
                     src={`https://iframe.mediadelivery.net/embed/515846/${bunnyVideoId}`}
@@ -124,11 +110,11 @@ function Abonnement() {
                 </div>
             )}
             <div>
-          <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4 dark:text-white'>
+          <h2 className='font-SFBold text-xl md:text-2xl mt-8 mb-4 text-gray-900 dark:text-white tracking-tight'>
   Aujourd’hui, l’alimentation est devenue une source de confusion permanente.
 </h2>
 
-<p className='font-SF text-lg md:text-xl text-gray-600 dark:text-white'>
+<p className='font-SF text-lg md:text-xl text-gray-600 dark:text-gray-300'>
   Le gluten serait inflammatoire. Le sucre toxique. Le gras dangereux. Les légumes indispensables.<br/>
   Une vérité différente à chaque scroll.<br/><br/>
 
@@ -144,7 +130,7 @@ function Abonnement() {
   Ce que tu vas trouver dans la communauté
 </h2>
 
-<p className='font-SF text-lg md:text-xl text-gray-600 dark:text-white'>
+<p className='font-SF text-lg md:text-xl text-gray-600 dark:text-gray-300'>
   - Des vidéos exclusives et analyses approfondies.<br/>
   - Des croyances nutritionnelles déconstruites avec logique, nuance et physiologie.<br/>
   - Des études de cas réels pour comprendre les causes profondes des symptômes.<br/>
@@ -192,74 +178,22 @@ function Abonnement() {
                             setLoading(false);
                         }
                     }}
-                    className="mt-4 text-lg font-SFBold rounded-full text-white px-8 py-4 bg-gradient-to-tr from-peach to-yellow-700 hover:from-yellow-600 hover:to-black transition-colors duration-300"
+                    className="mt-4 text-base md:text-lg font-SFBold rounded-full text-white dark:text-[#6e4f24] px-8 py-3.5 bg-[#6e4f24] dark:bg-beige1 hover:bg-[#5a4020] dark:hover:bg-white transition-colors duration-300 shadow-md"
                 >
                     {loading ? "Redirection en cours..." : "S'abonner 37\u20AC/mois"}
                 </button>
                 <p className='mt-2 font-SF text-sm text-gray-600 '>Résiliable à tout moment</p>
             </div>
-            <div className=" mx-4 md:max-w-3xl" >
-            <Swiper
-        rewind={true}
-        slidesPerView={1}
-        grid={{
-          rows: 2,
-        }}
-        spaceBetween={40}
-        pagination={{
-          clickable: true,
-          dynamicBullets: true,
-        }}
-         autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        breakpoints={{
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 20, // Tablette et grands écrans
-            }
-        }}
-        modules={[Grid, Pagination, Autoplay]}
-        className="mySwiper mt-10"
-      >
-        <SwiperSlide><img src={avis1} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis2} className="rounded-xl" /></SwiperSlide>
-        <SwiperSlide><img src={avis3} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis4} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis5} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis6} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis7} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis8} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis9} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis10} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis11} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis12} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis13} className="rounded-xl"/></SwiperSlide>
-         <SwiperSlide><img src={avis14} className="rounded-xl"/></SwiperSlide>
-          <SwiperSlide><img src={avis15} className="rounded-xl"/></SwiperSlide>
-         <SwiperSlide><img src={avis1} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis2} className="rounded-xl" /></SwiperSlide>
-        <SwiperSlide><img src={avis3} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis4} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis5} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis6} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis7} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis8} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis9} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis10} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis11} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis12} className="rounded-xl"/></SwiperSlide>
-        <SwiperSlide><img src={avis13} className="rounded-xl"/></SwiperSlide>
-         <SwiperSlide><img src={avis14} className="rounded-xl"/></SwiperSlide>
-          <SwiperSlide><img src={avis15} className="rounded-xl"/></SwiperSlide>
-        
-      
-      </Swiper>
-      </div>       
 
         </div>
-        
+
+        <div className="mx-4 md:mx-auto md:max-w-6xl mt-24 mb-10">
+          <p className="text-center font-SFBold text-marron tracking-[0.25em] text-sm md:text-base mb-3">LES AVIS</p>
+          <h3 className="text-center font-SFBold text-3xl md:text-4xl text-gray-900 dark:text-white tracking-tight mb-3">Ils en parlent mieux que nous</h3>
+          <p className="text-center font-SF text-gray-500 dark:text-gray-400 mb-10">Glisse les cartes pour parcourir leurs messages</p>
+          <TestimonialStack testimonials={testimonials} maxWidth="52rem" />
+        </div>
+
         </form>
         {showLoginForm && !username && (
             <>
