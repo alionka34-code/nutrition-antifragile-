@@ -16,7 +16,7 @@ function HomeHeader() {
                 className="hero-reveal absolute top-0 left-5 md:left-10 h-16 z-30 flex flex-col justify-center items-start text-left"
             >
                 <span className="font-SFBold text-marron text-xs md:text-base tracking-wide whitespace-nowrap">
-                    ALIONKA HOUL — NOURRIR AVEC L'INSTINCT
+                    Alionka Houl, nourrir avec l'instinct 
                 </span>
                 <span className="font-SF text-gray-400 dark:text-gray-500 text-[10px] md:text-xs whitespace-nowrap">
                     ISSN 3098-7113
