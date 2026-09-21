@@ -29,7 +29,7 @@ function MentionLegale() {
             <p className="font-SF mb-4">Responsable éditoriale et artistique<br/>Auteure de texte, graphiste, illustratrice<br/>ISNI : 0000 0005 1675 5683<br/>Siège professionnel : Montpellier, France.<br/>Site professionnel d’Alionka HOUL
             <br/>Identifiant ARK : ark:/76272/eo-alionka-nourrir-avec-l-instinct/2025</p>
             <h1 className="text-2xl font-SFBold mb-4 ">Crédits</h1>
-            <p className="font-SF mb-4">© Alionka HOUL</p>
+            <p className="font-SF mb-4">© Alionka HOUL<br>Textes, graphiste, illustratrice</p>
              <h1 className="text-2xl font-SFBold mb-4 ">Propriété intellectuelle</h1>
             <p className="font-SF mb-4">L’ensemble des contenus de ce site (textes, images, vidéos, extraits d’œuvres, publications) relève de la propriété exclusive de l’auteure.<br/>Toute reproduction, représentation, adaptation ou diffusion, intégrale ou partielle, sans autorisation écrite préalable, est interdite conformément aux articles L.111-1 et s. du Code de la propriété intellectuelle.</p>
             <h1 className="text-2xl font-SFBold mb-4 ">Gestion administrative et financière</h1>
@@ -52,7 +52,7 @@ Pour toute information relative aux données techniques traitées dans le cadre 
             <p className="font-SF mb-4">Les contenus diffusés sur ce site sont rédigés à titre informatif et ne remplacent pas une consultation individualisée auprès d'un professionnel de santé. <br/>
 Symbiose Audiovisuelle exclut sa responsabilité pour toute erreur, omission ou dommage résultant de la consultation ou de l'utilisation du site, sauf faute lourde ou intentionnelle. </p>
             
-            <p><strong>© Alionka HOUL<br/>Textes, graphiste, illustratrice</strong></p>
+            <p><strong>© 2025-2026 Alionka HOUL — Tous droits réservés</strong></p>
         </div>
 
         
