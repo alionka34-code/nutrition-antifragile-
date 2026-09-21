@@ -29,7 +29,7 @@ function MentionLegale() {
             <p className="font-SF mb-4">Responsable éditoriale et artistique<br/>Auteure de texte, graphiste, illustratrice<br/>ISNI : 0000 0005 1675 5683<br/>Siège professionnel : Montpellier, France.<br/>Site professionnel d’Alionka HOUL
             <br/>Identifiant ARK : ark:/76272/eo-alionka-nourrir-avec-l-instinct/2025</p>
             <h1 className="text-2xl font-SFBold mb-4 ">Crédits</h1>
-            <p className="font-SF mb-4">© Alionka HOUL<br>Textes, graphiste, illustratrice</p>
+            <p className="font-SF mb-4">© Alionka HOUL<br/>Textes, graphiste, illustratrice</p>
              <h1 className="text-2xl font-SFBold mb-4 ">Propriété intellectuelle</h1>
             <p className="font-SF mb-4">L’ensemble des contenus de ce site (textes, images, vidéos, extraits d’œuvres, publications) relève de la propriété exclusive de l’auteure.<br/>Toute reproduction, représentation, adaptation ou diffusion, intégrale ou partielle, sans autorisation écrite préalable, est interdite conformément aux articles L.111-1 et s. du Code de la propriété intellectuelle.</p>
             <h1 className="text-2xl font-SFBold mb-4 ">Gestion administrative et financière</h1>
