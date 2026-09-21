@@ -52,7 +52,7 @@ Pour toute information relative aux données techniques traitées dans le cadre 
             <p className="font-SF mb-4">Les contenus diffusés sur ce site sont rédigés à titre informatif et ne remplacent pas une consultation individualisée auprès d'un professionnel de santé. <br/>
 Symbiose Audiovisuelle exclut sa responsabilité pour toute erreur, omission ou dommage résultant de la consultation ou de l'utilisation du site, sauf faute lourde ou intentionnelle. </p>
             
-            <p><strong>© 2025-2026 Alionka HOUL — Tous droits réservés</strong></p>
+            <p><strong>© Alionka HOUL<br/>Textes, graphiste, illustratrice</strong></p>
         </div>
 
         
